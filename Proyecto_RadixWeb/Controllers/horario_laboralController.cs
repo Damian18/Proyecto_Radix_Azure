@@ -10,7 +10,7 @@ using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
 {
-    public class horario_laboralController : Controller
+    public class Horario_laboralController : Controller
     {
         private radixEntities db = new radixEntities();
 

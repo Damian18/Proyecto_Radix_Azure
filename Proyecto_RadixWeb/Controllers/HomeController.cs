@@ -5,25 +5,18 @@ namespace IdentitySample.Controllers
 {
     public class HomeController : Controller
     {
-
-       radixEntities db = new radixEntities();
+        private radixEntities db = new radixEntities();
 
         public ActionResult Index()
         {
 
-
             if (User.IsInRole("Radix"))
             {
-
-
-                return RedirectToAction("Index", "empresas", new { id = "Radix" });
-                //return View("index","empresas");
+                return RedirectToAction("Index", "Empresas", new { id = "Radix" });
 
             }
             else if (User.IsInRole("Administrador"))
             {
-
-
                 string empresa = HttpContext.Session["Empresa"].ToString();
                 string emp_id = HttpContext.Session["emp_id"].ToString();
                 ViewBag.empresa = empresa;
@@ -37,7 +30,7 @@ namespace IdentitySample.Controllers
 
             return View();
         }
-   
+
         [Authorize]
         public ActionResult About()
         {

@@ -16,13 +16,13 @@ namespace IdentitySample.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        radixEntities db = new radixEntities();
+       private radixEntities db = new radixEntities();
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -73,20 +73,15 @@ namespace IdentitySample.Controllers
                 return View(model);
             }
 
-            // This doen't count login failures towards lockout only two factor authentication
-            // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.objLogin.Email, model.objLogin.Password, model.objLogin.RememberMe, shouldLockout: false);
 
-            var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.objLogin.Email );
+            var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.objLogin.Email);
             var log = db.login.FirstOrDefault(l => l.Id == user.Id);
-            
+
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
 
 
             // El if conciste en buscar la cuenta que corresponde a la empresa
-
-
-            
 
             if (emp.Emp_Nom == model.objEmpresas.Emp_Nom)
             {
@@ -96,17 +91,11 @@ namespace IdentitySample.Controllers
 
                     case SignInStatus.Success:
 
-
-
-                        // var pers = db.Usuario.FirstOrDefault(p => p.usu_rut == login.usu_rut);
-
                         //Crear una variable de session 
                         HttpContext.Session.Add("Rut", log.Per_Rut);
                         HttpContext.Session.Add("Emp_id", emp.Emp_Id);
                         HttpContext.Session.Add("Empresa", emp.Emp_Nom);
                         HttpContext.Session.Add("Correo", log.Id);
-
-
 
                         return RedirectToLocal(returnUrl);
 
@@ -190,7 +179,7 @@ namespace IdentitySample.Controllers
                 if (result.Succeeded)
                 {
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
                     //return View("DisplayEmail");
@@ -212,7 +201,7 @@ namespace IdentitySample.Controllers
 
                 var emp = new empresas
                 {
-                    Emp_Nom= model.objEmpresas.Emp_Nom
+                    Emp_Nom = model.objEmpresas.Emp_Nom
                 };
                 db.empresas.Add(emp);
                 db.SaveChanges();
@@ -223,7 +212,7 @@ namespace IdentitySample.Controllers
                 {
                     Emp_Id = empresa_id,
                     Id = idcuenta
-                   
+
                 };
 
                 db.login.Add(log);
@@ -275,7 +264,7 @@ namespace IdentitySample.Controllers
                 }
 
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");

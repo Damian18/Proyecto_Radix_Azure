@@ -10,7 +10,7 @@ using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
 {
-    public class contratosController : Controller
+    public class ContratosController : Controller
     {
         private radixEntities db = new radixEntities();
 
@@ -27,8 +27,7 @@ namespace Proyecto_RadixWeb.Controllers
 
         public ActionResult RedirecionarPersonas(int? id, string nom)
         {
-
-            return RedirectToAction("Create", "personas", new { id = id, nombre = nom });
+            return RedirectToAction("Create", "Personas", new { id, nombre = nom });
         }
         // GET: contratos/Details/5
         public ActionResult Details(int? id)

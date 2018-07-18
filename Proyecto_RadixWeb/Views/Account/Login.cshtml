@@ -3,8 +3,7 @@
 @{
     ViewBag.Title = "Log in";
 }
-<!-- Custom styles for this template -->
-@*<link href="~/Content/signin.css" rel="stylesheet" />*@
+
 <div class="container">
     <div class="row">
         <div class="" style="width:450px;margin-left: 380px;height: 200px;">
@@ -18,7 +17,7 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="input-group" style="height: 40px;">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            @*@Html.Label("Empresa", new { @class = "col-md-2 control-label " })*@
+                      
                             <div class="col-md-10">
                                 @Html.TextBoxFor(m => m.objEmpresas.Emp_Nom, new { @class = "form-control", placeholder = "Nombre Empresa" })
                                 @Html.ValidationMessageFor(m => m.objEmpresas.Emp_Nom, "", new { @class = "text-danger" })
@@ -26,7 +25,7 @@
                         </div>
                         <div class="input-group" style="height: 40px;">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            @*@Html.Label("Email", new { @class = "col-md-2 control-label" })*@
+                         
                             <div class="col-md-10">
                                 @Html.TextBoxFor(m => m.objLogin.Email, new { @class = "form-control", placeholder = "Email" })
                                 @Html.ValidationMessageFor(m => m.objLogin.Email, "", new { @class = "text-danger" })
@@ -34,7 +33,7 @@
                         </div>
                         <div class="input-group" style="height: 40px;">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            @*@Html.LabelFor(m => m.objLogin.Password, new { @class = "col-md-2 control-label" })*@
+                          
                             <div class="col-md-10">
 
                                 @Html.PasswordFor(m => m.objLogin.Password, new { @class = "form-control", placeholder = "Password" })
@@ -63,11 +62,7 @@
                     }
                 </section>
             </div>
-            @*<div class="col-md-4">
-                    <section id="socialLoginForm">
-                        @Html.Partial("_ExternalLoginsListPartial", new IdentitySample.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                    </section>
-                </div>*@
+        
         </div>
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")

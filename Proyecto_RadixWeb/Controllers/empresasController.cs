@@ -10,7 +10,7 @@ using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
 {
-    public class empresasController : Controller
+    public class EmpresasController : Controller
     {
         private radixEntities db = new radixEntities();
         

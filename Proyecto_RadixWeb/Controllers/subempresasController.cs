@@ -10,7 +10,7 @@ using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
 {
-    public class subempresasController : Controller
+    public class SubEmpresasController : Controller
     {
         private radixEntities db = new radixEntities();
 
@@ -68,7 +68,7 @@ namespace Proyecto_RadixWeb.Controllers
                 subempresas.Emp_Id = emp_id;
                 db.subempresas.Add(subempresas);
                 db.SaveChanges();
-                return RedirectToAction("Index", "subempresas", new { emp_nom = empresa, emp_id = emp_id });
+                return RedirectToAction("Index", "SubEmpresas", new { emp_nom = empresa, emp_id });
             }
 
             //ViewBag.Com_Id = new SelectList(db.comunas, "Com_Id", "Com_Nom", subempresas.Com_Id);

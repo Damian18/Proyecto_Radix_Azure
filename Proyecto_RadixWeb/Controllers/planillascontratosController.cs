@@ -11,7 +11,7 @@ using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
 {
-    public class planillascontratosController : Controller
+    public class PlanillascontratosController : Controller
     {
         private radixEntities db = new radixEntities();
 
