@@ -1,1 +1,0 @@
-# Proyecto_Radix_Azure
