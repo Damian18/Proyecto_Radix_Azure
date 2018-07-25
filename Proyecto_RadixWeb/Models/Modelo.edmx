@@ -80,13 +80,6 @@
           <Property Name="Con_FechaFin" Type="varchar" MaxLength="10" />
           <Property Name="Con_Estado" Type="varchar" MaxLength="15" />
         </EntityType>
-        <EntityType Name="diassemanales">
-          <Key>
-            <PropertyRef Name="Ds_id" />
-          </Key>
-          <Property Name="Ds_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Ds_Nom" Type="varchar" MaxLength="10" />
-        </EntityType>
         <EntityType Name="documentos">
           <Key>
             <PropertyRef Name="Doc_Id" />
@@ -168,9 +161,12 @@
           </Key>
           <Property Name="Hl_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Car_Id" Type="int" />
-          <Property Name="Ds_Id" Type="int" />
-          <Property Name="Hl_Inicio" Type="varchar" MaxLength="10" />
-          <Property Name="Hl_Termino" Type="varchar" MaxLength="10" />
+          <Property Name="Hl_Titulo" Type="varchar" MaxLength="100" />
+          <Property Name="Hl_Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="Hl_Inicio" Type="datetime" Precision="0" />
+          <Property Name="Hl_Termino" Type="datetime" Precision="0" />
+          <Property Name="Hl_ColorTema" Type="varchar" MaxLength="10" />
+          <Property Name="Hl_TodoDia" Type="bit" />
         </EntityType>
         <EntityType Name="jornada">
           <Key>
@@ -548,20 +544,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Horario_Dias">
-          <End Role="diassemanales" Type="Self.diassemanales" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="diassemanales">
-              <PropertyRef Name="Ds_id" />
-            </Principal>
-            <Dependent Role="horario_laboral">
-              <PropertyRef Name="Ds_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Login_CuentaAsp">
           <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -779,7 +761,6 @@
           <EntitySet Name="cargos" EntityType="Self.cargos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="comunas" EntityType="Self.comunas" Schema="radix" store:Type="Tables" />
           <EntitySet Name="contratos" EntityType="Self.contratos" Schema="radix" store:Type="Tables" />
-          <EntitySet Name="diassemanales" EntityType="Self.diassemanales" Schema="radix" store:Type="Tables" />
           <EntitySet Name="documentos" EntityType="Self.documentos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="empresas" EntityType="Self.empresas" Schema="radix" store:Type="Tables" />
           <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" Schema="radix" store:Type="Tables" />
@@ -868,10 +849,6 @@
           </AssociationSet>
           <AssociationSet Name="fk_Horario_Cargo" Association="Self.fk_Horario_Cargo">
             <End Role="cargos" EntitySet="cargos" />
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Horario_Dias" Association="Self.fk_Horario_Dias">
-            <End Role="diassemanales" EntitySet="diassemanales" />
             <End Role="horario_laboral" EntitySet="horario_laboral" />
           </AssociationSet>
           <AssociationSet Name="fk_Login_CuentaAsp" Association="Self.fk_Login_CuentaAsp">
@@ -964,8 +941,8 @@
           </Key>
           <Property Name="Car_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Car_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="horario_laboral" Relationship="radixModel.fk_Horario_Cargo" FromRole="cargos" ToRole="horario_laboral" />
           <NavigationProperty Name="personas" Relationship="radixModel.fk_Personas_cargos1" FromRole="cargos" ToRole="personas" />
+          <NavigationProperty Name="horario_laboral" Relationship="radixModel.fk_Horario_Cargo" FromRole="cargos" ToRole="horario_laboral" />
         </EntityType>
         <EntityType Name="estadosciviles">
           <Key>
@@ -1350,16 +1327,6 @@
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
             <End Role="aspnetroles" EntitySet="aspnetroles" />
           </AssociationSet>
-          <EntitySet Name="diassemanales" EntityType="radixModel.diassemanales" />
-          <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
-          <AssociationSet Name="fk_Horario_Cargo" Association="radixModel.fk_Horario_Cargo">
-            <End Role="cargos" EntitySet="cargos" />
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Horario_Dias" Association="radixModel.fk_Horario_Dias">
-            <End Role="diassemanales" EntitySet="diassemanales" />
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
-          </AssociationSet>
           <EntitySet Name="nacionalidades" EntityType="radixModel.nacionalidades" />
           <EntitySet Name="documentos" EntityType="radixModel.documentos" />
           <EntitySet Name="planillascontratos" EntityType="radixModel.planillascontratos" />
@@ -1417,6 +1384,11 @@
           <AssociationSet Name="fk_personas_tipoimpuesto" Association="radixModel.fk_personas_tipoimpuesto">
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
             <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
+          <AssociationSet Name="fk_Horario_Cargo" Association="radixModel.fk_Horario_Cargo">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="comunas">
@@ -1614,54 +1586,6 @@
             </Principal>
             <Dependent Role="aspnetuserroles">
               <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="diassemanales">
-          <Key>
-            <PropertyRef Name="Ds_id" />
-          </Key>
-          <Property Name="Ds_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ds_Nom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="horario_laboral" Relationship="radixModel.fk_Horario_Dias" FromRole="diassemanales" ToRole="horario_laboral" />
-        </EntityType>
-        <EntityType Name="horario_laboral">
-          <Key>
-            <PropertyRef Name="Hl_Id" />
-          </Key>
-          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Car_Id" Type="Int32" />
-          <Property Name="Ds_Id" Type="Int32" />
-          <Property Name="Hl_Inicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Hl_Termino" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cargos" Relationship="radixModel.fk_Horario_Cargo" FromRole="horario_laboral" ToRole="cargos" />
-          <NavigationProperty Name="diassemanales" Relationship="radixModel.fk_Horario_Dias" FromRole="horario_laboral" ToRole="diassemanales" />
-        </EntityType>
-        <Association Name="fk_Horario_Cargo">
-          <End Type="radixModel.cargos" Role="cargos" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cargos">
-              <PropertyRef Name="Car_Id" />
-            </Principal>
-            <Dependent Role="horario_laboral">
-              <PropertyRef Name="Car_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Horario_Dias">
-          <End Type="radixModel.diassemanales" Role="diassemanales" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="diassemanales">
-              <PropertyRef Name="Ds_id" />
-            </Principal>
-            <Dependent Role="horario_laboral">
-              <PropertyRef Name="Ds_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1928,6 +1852,34 @@
             </Principal>
             <Dependent Role="personas">
               <PropertyRef Name="TImp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="horario_laboral">
+          <Key>
+            <PropertyRef Name="Hl_Id" />
+          </Key>
+          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Car_Id" Type="Int32" />
+          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Hl_Inicio" Type="DateTime" />
+          <Property Name="Hl_Termino" Type="DateTime" />
+          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Hl_TodoDia" Type="Boolean" />
+          <NavigationProperty Name="cargos" Relationship="radixModel.fk_Horario_Cargo" FromRole="horario_laboral" ToRole="cargos" />
+        </EntityType>
+        <Association Name="fk_Horario_Cargo">
+          <End Type="radixModel.cargos" Role="cargos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="horario_laboral">
+              <PropertyRef Name="Car_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2199,25 +2151,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="diassemanales">
-            <EntityTypeMapping TypeName="radixModel.diassemanales">
-              <MappingFragment StoreEntitySet="diassemanales">
-                <ScalarProperty Name="Ds_Nom" ColumnName="Ds_Nom" />
-                <ScalarProperty Name="Ds_id" ColumnName="Ds_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="horario_laboral">
-            <EntityTypeMapping TypeName="radixModel.horario_laboral">
-              <MappingFragment StoreEntitySet="horario_laboral">
-                <ScalarProperty Name="Hl_Termino" ColumnName="Hl_Termino" />
-                <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
-                <ScalarProperty Name="Ds_Id" ColumnName="Ds_Id" />
-                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
-                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="nacionalidades">
             <EntityTypeMapping TypeName="radixModel.nacionalidades">
               <MappingFragment StoreEntitySet="nacionalidades">
@@ -2287,6 +2220,20 @@
                 <ScalarProperty Name="Per_ApePat" ColumnName="Per_ApePat" />
                 <ScalarProperty Name="Per_Nom" ColumnName="Per_Nom" />
                 <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horario_laboral">
+            <EntityTypeMapping TypeName="radixModel.horario_laboral">
+              <MappingFragment StoreEntitySet="horario_laboral">
+                <ScalarProperty Name="Hl_TodoDia" ColumnName="Hl_TodoDia" />
+                <ScalarProperty Name="Hl_ColorTema" ColumnName="Hl_ColorTema" />
+                <ScalarProperty Name="Hl_Termino" ColumnName="Hl_Termino" />
+                <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
+                <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
+                <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,8 +13,8 @@ namespace IdentitySample
                    "~/Content/vendor/font-awesome/css/font-awesome.min.css",
                    "~/Content/vendor/datatables/dataTables.bootstrap4.css",
                    "~/Content/css/sb-admin.css",
-                    "~/Content/estilo.css",
-                      "~/Content/estilosRegistrar.css"
+                   "~/Content/estilo.css",
+                   "~/Content/estilosRegistrar.css"
 
                    ));
 
@@ -29,7 +29,6 @@ namespace IdentitySample
                   "~/Content/js/sb-admin.min.js",
                   "~/Content/js/sb-admin-datatables.min.js",
                   "~/Content/js/sb-admin-charts.min.js"
-
                   ));
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));

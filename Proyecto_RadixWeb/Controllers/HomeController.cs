@@ -12,7 +12,11 @@ namespace IdentitySample.Controllers
 
             if (User.IsInRole("Radix"))
             {
-                return RedirectToAction("Index", "Empresas", new { id = "Radix" });
+                string empresa = HttpContext.Session["Empresa"].ToString();
+                string emp_id = HttpContext.Session["emp_id"].ToString();
+                ViewBag.empresa = empresa;
+
+                return View("DashBoardRadix");
 
             }
             else if (User.IsInRole("Administrador"))
@@ -30,6 +34,8 @@ namespace IdentitySample.Controllers
 
             return View();
         }
+
+        
 
         [Authorize]
         public ActionResult About()

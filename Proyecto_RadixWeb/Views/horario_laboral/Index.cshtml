@@ -4,50 +4,68 @@
     ViewBag.Title = "Index";
 }
 
+<h2>Index</h2>
 
-<div>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Hl_Inicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hl_Termino)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cargos.Car_Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.diassemanales.Ds_Nom)
-            </th>
-            <th></th>
-        </tr>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hl_Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hl_Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hl_Inicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hl_Termino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hl_ColorTema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hl_TodoDia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cargos.Car_Nom)
+        </th>
+      
+        <th></th>
+    </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hl_Inicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hl_Termino)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.diassemanales.Ds_Nom)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Hl_Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Hl_Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Hl_Id })
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hl_Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hl_Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hl_Inicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hl_Termino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hl_ColorTema)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hl_TodoDia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Hl_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Hl_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Hl_Id })
+        </td>
+    </tr>
+}
 
-    </table>
-</div>
+</table>

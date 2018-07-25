@@ -49,10 +49,6 @@
         <AssociationConnector Association="radixModel.FK_subempresas_empresas" />
         <EntityTypeShape EntityType="radixModel.aspnetroles" Width="1.5" PointX="11.625" PointY="1.75" />
         <AssociationConnector Association="radixModel.aspnetuserrolesaspnetroles" />
-        <EntityTypeShape EntityType="radixModel.diassemanales" Width="1.5" PointX="8" PointY="20.125" />
-        <EntityTypeShape EntityType="radixModel.horario_laboral" Width="1.5" PointX="10.25" PointY="11.75" />
-        <AssociationConnector Association="radixModel.fk_Horario_Cargo" />
-        <AssociationConnector Association="radixModel.fk_Horario_Dias" />
         <EntityTypeShape EntityType="radixModel.nacionalidades" Width="1.5" PointX="3.375" PointY="0.875" />
         <EntityTypeShape EntityType="radixModel.documentos" Width="1.5" PointX="7.875" PointY="8.5" />
         <EntityTypeShape EntityType="radixModel.planillascontratos" Width="1.5" PointX="0.75" PointY="0.875" />
@@ -72,6 +68,8 @@
         <AssociationConnector Association="radixModel.fk_personas_nac" />
         <AssociationConnector Association="radixModel.fk_personas_thora" />
         <AssociationConnector Association="radixModel.fk_personas_tipoimpuesto" />
+        <EntityTypeShape EntityType="radixModel.horario_laboral" Width="1.5" PointX="0.875" PointY="11.75" />
+        <AssociationConnector Association="radixModel.fk_Horario_Cargo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

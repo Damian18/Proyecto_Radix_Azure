@@ -266,9 +266,6 @@
     <Compile Include="Models\contratos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\diassemanales.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\documentos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -325,7 +322,6 @@
     <Compile Include="Models\MultipleClassLogin.cs" />
     <Compile Include="Models\MultipleClassRegistrar.cs" />
     <Compile Include="Models\MultipleEmpresa.cs" />
-    <Compile Include="Models\MultipleHorario.cs" />
     <Compile Include="Models\nacionalidades.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -476,6 +472,8 @@
     <Content Include="Content\js\sb-admin.min.js" />
     <Content Include="Content\js\vendor.js" />
     <Content Include="Content\mail\contact_me.php" />
+    <Content Include="Content\schedule\jquery.schedule-demo.css" />
+    <Content Include="Content\schedule\jquery.schedule.css" />
     <Content Include="Content\signin.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
@@ -675,16 +673,20 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Properties\PublishProfiles\ProyectoRadixWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.filedrop.js" />
+    <Content Include="Scripts\jquery.schedule.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locale-all.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -757,12 +759,6 @@
     <Content Include="Views\Cargos\Details.cshtml" />
     <Content Include="Views\Cargos\Edit.cshtml" />
     <Content Include="Views\Cargos\Index.cshtml" />
-    <Content Include="Views\Horario_laboral\Create.cshtml" />
-    <Content Include="Views\Horario_laboral\Delete.cshtml" />
-    <Content Include="Views\Horario_laboral\Details.cshtml" />
-    <Content Include="Views\Horario_laboral\Edit.cshtml" />
-    <Content Include="Views\Horario_laboral\Index.cshtml" />
-    <Content Include="Views\Horario_laboral\HorarioSemanal.cshtml" />
     <Content Include="Views\Shared\_Layout3.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
@@ -791,6 +787,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\DashBoardRadix.cshtml" />
+    <Content Include="Views\Shared\_LayoutRadix.cshtml" />
+    <Content Include="Views\Horario_laboral\Index.cshtml" />
+    <Content Include="Views\Horario_laboral\Horario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

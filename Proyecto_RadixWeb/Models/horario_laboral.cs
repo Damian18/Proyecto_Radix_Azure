@@ -16,11 +16,13 @@ namespace Proyecto_RadixWeb.Models
     {
         public int Hl_Id { get; set; }
         public Nullable<int> Car_Id { get; set; }
-        public Nullable<int> Ds_Id { get; set; }
-        public string Hl_Inicio { get; set; }
-        public string Hl_Termino { get; set; }
+        public string Hl_Titulo { get; set; }
+        public string Hl_Descripcion { get; set; }
+        public Nullable<System.DateTime> Hl_Inicio { get; set; }
+        public Nullable<System.DateTime> Hl_Termino { get; set; }
+        public string Hl_ColorTema { get; set; }
+        public Nullable<bool> Hl_TodoDia { get; set; }
     
         public virtual cargos cargos { get; set; }
-        public virtual diassemanales diassemanales { get; set; }
     }
 }

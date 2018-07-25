@@ -14,143 +14,71 @@ namespace Proyecto_RadixWeb.Controllers
     {
         private radixEntities db = new radixEntities();
 
-
-
-        public ActionResult HorarioSemanal(int? Car_Id)
+        public ActionResult Horario()
         {
-
-            ViewBag.cargo = Car_Id;
-             var diaslista = db.diassemanales.ToList();
-            var horario_laboral = db.horario_laboral.Where(h=>h.Car_Id==Car_Id).ToList();
-
-            var multiple = new MultipleHorario
-            {
-                objDias = diaslista,
-                objHorario = horario_laboral
-            };
-
-
-            return View(multiple);
-        }
-
-
-                // GET: horario_laboral
-        public ActionResult Index()
-        {
-            var horario_laboral = db.horario_laboral.Include(h => h.cargos).Include(h => h.diassemanales);
-            return View(horario_laboral.ToList());
-        }
-
-        // GET: horario_laboral/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            horario_laboral horario_laboral = db.horario_laboral.Find(id);
-            if (horario_laboral == null)
-            {
-                return HttpNotFound();
-            }
-            return View(horario_laboral);
-        }
-
-        // GET: horario_laboral/Create
-        public ActionResult Create()
-        {
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
-            ViewBag.Ds_Id = new SelectList(db.diassemanales, "Ds_id", "Ds_Nom");
             return View();
         }
 
-        // POST: horario_laboral/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        public JsonResult GetEvents()
+        {
+
+            var events = db.horario_laboral.ToList();
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
+
+
+        // GET: Horario_laboral
+        public ActionResult Index()
+        {
+            var horario_laboral = db.horario_laboral.Include(h => h.cargos);
+            return View(horario_laboral.ToList());
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Hl_Id,Car_Id,Ds_Id,Hl_Inicio,Hl_Termino")] horario_laboral horario_laboral)
+        public JsonResult SaveEvent(horario_laboral e)
         {
-            if (ModelState.IsValid)
-            {
-                db.horario_laboral.Add(horario_laboral);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            var status = false;
 
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom", horario_laboral.Car_Id);
-            ViewBag.Ds_Id = new SelectList(db.diassemanales, "Ds_id", "Ds_Nom", horario_laboral.Ds_Id);
-            return View(horario_laboral);
-        }
-
-        // GET: horario_laboral/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            if (e.Hl_Id > 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //Update the event
+                var v = db.horario_laboral.Where(a => a.Hl_Id == e.Hl_Id).FirstOrDefault();
+                if (v != null)
+                {
+                    v.Hl_Titulo = e.Hl_Titulo;
+                    v.Hl_Inicio = e.Hl_Inicio;
+                    v.Hl_Termino = e.Hl_Termino;
+                    v.Hl_Descripcion = e.Hl_Descripcion;
+                    v.Hl_TodoDia = e.Hl_TodoDia;
+                    v.Hl_ColorTema = e.Hl_ColorTema;
+                }
             }
-            horario_laboral horario_laboral = db.horario_laboral.Find(id);
-            if (horario_laboral == null)
+            else
             {
-                return HttpNotFound();
+                db.horario_laboral.Add(e);
             }
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom", horario_laboral.Car_Id);
-            ViewBag.Ds_Id = new SelectList(db.diassemanales, "Ds_id", "Ds_Nom", horario_laboral.Ds_Id);
-            return View(horario_laboral);
-        }
-
-        // POST: horario_laboral/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Hl_Id,Car_Id,Ds_Id,Hl_Inicio,Hl_Termino")] horario_laboral horario_laboral)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(horario_laboral).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom", horario_laboral.Car_Id);
-            ViewBag.Ds_Id = new SelectList(db.diassemanales, "Ds_id", "Ds_Nom", horario_laboral.Ds_Id);
-            return View(horario_laboral);
-        }
-
-        // GET: horario_laboral/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            horario_laboral horario_laboral = db.horario_laboral.Find(id);
-            if (horario_laboral == null)
-            {
-                return HttpNotFound();
-            }
-            return View(horario_laboral);
-        }
-
-        // POST: horario_laboral/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            horario_laboral horario_laboral = db.horario_laboral.Find(id);
-            db.horario_laboral.Remove(horario_laboral);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            status = true;
+
+            return new JsonResult { Data = new { status } };
         }
 
-        protected override void Dispose(bool disposing)
+
+        [HttpPost]
+        public JsonResult DeleteEvent(int? Hl_Id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            var status = false;
+
+            var v = db.horario_laboral.Where(a => a.Hl_Id == Hl_Id).FirstOrDefault();
+          
+                if (v != null)
+                {
+                    db.horario_laboral.Remove(v);
+                    db.SaveChanges();
+                    status = true;
+                }
+           return new JsonResult { Data = new { status } };
         }
     }
 }
