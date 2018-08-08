@@ -100,11 +100,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.tipoimpuestos.TImp_nom)
         </td>
+     
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Per_Rut }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Per_Rut }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Per_Rut })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Per_Rut }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Per_Rut }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Per_Rut })
         </td>
+        
     </tr>
 }
 

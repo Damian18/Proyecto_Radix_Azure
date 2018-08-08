@@ -4,8 +4,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using IdentitySample.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
@@ -15,8 +20,11 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: cargos
-        public ActionResult Index()
+        public ActionResult Index(string emp_nom, string emp_id)
         {
+            ViewBag.emp_id = Convert.ToInt32(emp_id);
+            ViewBag.empresa = emp_nom;
+
             return View(db.cargos.ToList());
         }
 
@@ -46,16 +54,61 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Car_Id,Car_Nom")] cargos cargos)
+        public async Task<ActionResult> Create(MultiplesClases cargos)
         {
             if (ModelState.IsValid)
             {
-                db.cargos.Add(cargos);
-                db.SaveChanges();
+                //Cargos que ingrese tiene que ser diferente a radox
+                if (cargos.objCargos.Car_Nom != "Radix")
+                {
+
+                    var buscarRoles = db.aspnetroles.Count(r => r.Name == cargos.objCargos.Car_Nom);
+                    var buscarCargo = db.cargos.Count(r => r.Car_Nom == cargos.objCargos.Car_Nom);
+
+                    // Si el cargo es diferente a Agricola lo agrega en roles de cuenta, sino solo lo agrega en cargos
+                    if (cargos.objCargos.Car_Nom != "Agricola")
+                    {
+
+                        if (buscarRoles == 0)
+                        {
+                            var role = new IdentityRole(cargos.objCargos.Car_Nom);
+                            var roleresult = await RoleManager.CreateAsync(role);
+                            if (!roleresult.Succeeded)
+                            {
+
+                                ModelState.AddModelError("", roleresult.Errors.First());
+                                return View();
+
+                            }
+                        }
+                    }
+
+                    if (buscarCargo == 0)
+                    {
+                        db.cargos.Add(cargos.objCargos);
+                        db.SaveChanges();
+                    }
+
+                }
+
+
                 return RedirectToAction("Index");
             }
 
             return View(cargos);
+        }
+
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         // GET: cargos/Edit/5

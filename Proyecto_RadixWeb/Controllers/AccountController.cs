@@ -66,7 +66,7 @@ namespace IdentitySample.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(MultipleClassLogin model, string returnUrl)
+        public async Task<ActionResult> Login(MultiplesClases model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace IdentitySample.Controllers
 
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
 
-
+            
             // El if conciste en buscar la cuenta que corresponde a la empresa
 
             if (emp.Emp_Nom == model.objEmpresas.Emp_Nom)
@@ -170,7 +170,7 @@ namespace IdentitySample.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(MultipleClassRegistrar model)
+        public async Task<ActionResult> Register(MultiplesClases model)
         {
             if (ModelState.IsValid)
             {

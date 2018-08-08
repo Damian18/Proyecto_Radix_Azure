@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<!DOCTYPE html>
+
+<div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
 
-<body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Nuevo Cargo", "Create")
     </p>
     <table class="table">
         <tr>
@@ -18,23 +18,25 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Car_Nom)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Car_Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Car_Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Car_Id }) |
-                <a href="@Url.Action("HorarioSemanal", "horario_laboral", new { Car_Id = item.Car_Id })">                 
-                    Sub Empresas
-                </a>
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car_Nom)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Car_Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Car_Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Car_Id }) |
+                    <a href="@Url.Action("HorarioSemanal", "horario_laboral", new { Car_Id = item.Car_Id })">
+                        Sub Empresas
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>

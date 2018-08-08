@@ -17,18 +17,24 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: contratos
         public ActionResult Index(int? Id)
         {
-            var subempresa = db.subempresas.FirstOrDefault(s=>s.Sub_Id== Id);
+            var subempresa = db.subempresas.FirstOrDefault(s => s.Sub_Id == Id);
             ViewBag.subemp_id = Id;
             ViewBag.subemp_nom = subempresa.Sub_Nom;
 
             var contratos = db.contratos.Include(c => c.personas).Include(c => c.planillascontratos).Include(c => c.subempresas).Include(c => c.tiposcontratos);
-            return View(contratos.Where(c=>c.Sub_Id== Id).ToList());
+            return View(contratos.Where(c => c.Sub_Id == Id).ToList());
         }
 
         public ActionResult RedirecionarPersonas(int? id, string nom)
         {
             return RedirectToAction("Create", "Personas", new { id, nombre = nom });
         }
+
+        public ActionResult RedirecionarCuenta(int? subemp_id, string subemp_nom, string per_rut)
+        {
+            return RedirectToAction("CuentaPersonas", "Personas", new { subemp_id, subemp_nom, per_rut });
+        }
+
         // GET: contratos/Details/5
         public ActionResult Details(int? id)
         {
