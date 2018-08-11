@@ -34,21 +34,21 @@
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="@Url.Action("Index", "subempresas", new { emp_nom = ViewBag.empresa, emp_id = ViewBag.emp_id })">
+                    <a class="nav-link" href="@Url.Action("Index", "subempresas")">
                         <span data-feather="home"></span>
                         Sucursales<span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link" href="@Url.Action("Index", "Cargos", new { emp_nom = ViewBag.empresa, emp_id = ViewBag.emp_id })">
+                    <a class="nav-link" href="@Url.Action("Index", "Cargos")">
                         <span data-feather="file"></span>
                         Cargos
                     </a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link" href="@Url.Action("Index", "planillascontratos", new { emp_nom = ViewBag.empresa, emp_id = ViewBag.emp_id })">
+                    <a class="nav-link" href="@Url.Action("Index", "planillascontratos")">
                         <span data-feather="file"></span>
                         Documentos
                     </a>

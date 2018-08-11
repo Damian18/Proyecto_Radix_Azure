@@ -15,24 +15,25 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: contratos
-        public ActionResult Index(int? Id)
+        public ActionResult Index(int? subemp_id)
         {
-            var subempresa = db.subempresas.FirstOrDefault(s => s.Sub_Id == Id);
-            ViewBag.subemp_id = Id;
-            ViewBag.subemp_nom = subempresa.Sub_Nom;
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+            ViewBag.subemp_id = subemp_id;
+            
 
             var contratos = db.contratos.Include(c => c.personas).Include(c => c.planillascontratos).Include(c => c.subempresas).Include(c => c.tiposcontratos);
-            return View(contratos.Where(c => c.Sub_Id == Id).ToList());
+            return View(contratos.Where(c => c.Sub_Id == subemp_id).ToList());
         }
 
-        public ActionResult RedirecionarPersonas(int? id, string nom)
+        public ActionResult RedirecionarPersonas(int? subemp_id)
         {
-            return RedirectToAction("Create", "Personas", new { id, nombre = nom });
+            return RedirectToAction("Create", "Personas", new { subemp_id });
         }
 
-        public ActionResult RedirecionarCuenta(int? subemp_id, string subemp_nom, string per_rut)
+        public ActionResult RedirecionarCuenta(string subemp_id, string per_rut,string car_nom)
         {
-            return RedirectToAction("CuentaPersonas", "Personas", new { subemp_id, subemp_nom, per_rut });
+            return RedirectToAction("CuentaPersonas", "Account", new { subemp_id, per_rut, car_nom });
         }
 
         // GET: contratos/Details/5

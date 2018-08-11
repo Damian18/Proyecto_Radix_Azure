@@ -7,24 +7,22 @@ namespace IdentitySample.Controllers
     {
         private radixEntities db = new radixEntities();
 
+        
+
         public ActionResult Index()
         {
+            
 
             if (User.IsInRole("Radix"))
             {
-                string empresa = HttpContext.Session["Empresa"].ToString();
-                string emp_id = HttpContext.Session["emp_id"].ToString();
-                ViewBag.empresa = empresa;
+                ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
                 return View("DashBoardRadix");
 
             }
             else if (User.IsInRole("Administrador"))
             {
-                string empresa = HttpContext.Session["Empresa"].ToString();
-                string emp_id = HttpContext.Session["emp_id"].ToString();
-                ViewBag.empresa = empresa;
-                ViewBag.emp_id = emp_id;
+                ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
                 //esto es temporal hasta que se logre hacer funcional el dashboard de administrador
                 return View("DashBoardAdmin");
                 //return RedirectToAction("Index", "subempresas", new { emp_nom = empresa, emp_id = emp_id });
@@ -40,6 +38,8 @@ namespace IdentitySample.Controllers
         [Authorize]
         public ActionResult About()
         {
+           ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
             ViewBag.Message = "Your app description page.";
 
             return View();
@@ -47,6 +47,7 @@ namespace IdentitySample.Controllers
 
         public ActionResult Contact()
         {
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
             ViewBag.Message = "Your contact page.";
 
             return View();

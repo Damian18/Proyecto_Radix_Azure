@@ -8,17 +8,19 @@ namespace Proyecto_RadixWeb.Models
     public class MultiplesClases
     {
 
-        public IdentitySample.Models.RegisterViewModel objRegistrar { get; set; }
-        public IdentitySample.Models.RoleViewModel objRoles { get; set; }
-        public IdentitySample.Models.LoginViewModel objLogin { get; set; }
-        public Proyecto_RadixWeb.Models.empresas objEmpresas { get; set; }
-        public Proyecto_RadixWeb.Models.login objLogin_v2 { get; set; }
-        public Proyecto_RadixWeb.Models.subempresas objSubEmpresas { get; set; }
-        public Proyecto_RadixWeb.Models.regiones objRegiones { get; set; }
-        public Proyecto_RadixWeb.Models.provincias objProvincias { get; set; }
-        public Proyecto_RadixWeb.Models.comunas objComunas { get; set; }
-        public Proyecto_RadixWeb.Models.cargos objCargos { get; set; }
-        public Proyecto_RadixWeb.Models.personas objPersonas { get; set; }
+        public IdentitySample.Models.RegisterViewModel ObjRegistrar { get; set; }
+        public IdentitySample.Models.RoleViewModel ObjRoles { get; set; }
+        public IdentitySample.Models.LoginViewModel ObjLogin { get; set; }
+        
+        public Proyecto_RadixWeb.Models.aspnetuserroles ObjAspnetUserRoles { get; set; }
+        public Proyecto_RadixWeb.Models.empresas ObjEmpresas { get; set; }
+        public Proyecto_RadixWeb.Models.login ObjLogin_v2 { get; set; }
+        public Proyecto_RadixWeb.Models.subempresas ObjSubEmpresas { get; set; }
+        public Proyecto_RadixWeb.Models.regiones ObjRegiones { get; set; }
+        public Proyecto_RadixWeb.Models.provincias ObjProvincias { get; set; }
+        public Proyecto_RadixWeb.Models.comunas ObjComunas { get; set; }
+        public Proyecto_RadixWeb.Models.cargos ObjCargos { get; set; }
+        public Proyecto_RadixWeb.Models.personas ObjPersonas { get; set; }
 
 
     }

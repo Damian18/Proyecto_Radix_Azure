@@ -1,6 +1,6 @@
 ﻿@model Proyecto_RadixWeb.Models.MultiplesClases
 @{
-    ViewBag.Title = "Cuenta Persona";
+    ViewBag.Title = "Cuenta Personas";
 }
 <link href="~/Content/estilosRegistrar.css" rel="stylesheet" />
 <div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
@@ -11,7 +11,7 @@
 
             <div class="form-login" style="margin-top: 5%;margin-top: 5%;width: 75%;margin-left: 25%;">
                 <section id="loginForm">
-                    @using (Html.BeginForm("CuentaPersonas", "Personas", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
 
@@ -20,19 +20,19 @@
                         <div class="input-group inputregistrar" style="height: 50px;">
 
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.objRegistrar.Email, new { @class = "form-control", placeholder = "Ingrese Email", @style = "text-align:center" })
+                                @Html.TextBoxFor(m => m.ObjRegistrar.Email, new { @class = "form-control", placeholder = "Ingrese Email", @style = "text-align:center" })
                             </div>
                         </div>
                         <div class="input-group inputregistrar" style="height: 50px;">
 
                             <div class="col-md-10">
-                                @Html.PasswordFor(m => m.objRegistrar.Password, new { @class = "form-control", placeholder = "Ingrese Contraseña", @style = "text-align:center" })
+                                @Html.PasswordFor(m => m.ObjRegistrar.Password, new { @class = "form-control", placeholder = "Ingrese Contraseña", @style = "text-align:center" })
                             </div>
                         </div>
                         <div class="input-group inputregistrar" style="height: 50px;">
 
                             <div class="col-md-10">
-                                @Html.PasswordFor(m => m.objRegistrar.ConfirmPassword, new { @class = "form-control", placeholder = "Confirmar Contraseña", @style = "text-align:center" })
+                                @Html.PasswordFor(m => m.ObjRegistrar.ConfirmPassword, new { @class = "form-control", placeholder = "Confirmar Contraseña", @style = "text-align:center" })
                             </div>
                         </div>
                         <div class="wrapper" style="margin-left: 30%;">
@@ -48,4 +48,8 @@
 
         </div>
     </div>
-    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

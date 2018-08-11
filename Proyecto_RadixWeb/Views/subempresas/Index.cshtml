@@ -6,7 +6,7 @@
 <div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
     <h3>
-        @Html.ActionLink("Nueva Sucursal", "Create", new { emp_id = ViewBag.emp_id, empresa = ViewBag.empresa })
+        @Html.ActionLink("Nueva Sucursal", "Create")
     </h3>
     <table class="table">
         <tr>
@@ -53,7 +53,7 @@
                     @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
                 </td>
                 <td>
-                    <a href="@Url.Action("Index", "Contratos", new { Id = item.Sub_Id })">
+                    <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })">
                         Ver Información
                     </a>|
                     @Html.ActionLink("Detalle", "Details", new { id = item.Sub_Id }) |

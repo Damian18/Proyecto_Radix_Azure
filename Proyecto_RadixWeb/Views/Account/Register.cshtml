@@ -17,26 +17,26 @@
                     <div class="input-group inputregistrar" style="height: 50px;">
               
                         <div class="col-md-10" style="text-align:center">
-                            @Html.EditorFor(model => model.objEmpresas.Emp_Nom, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese Nombre de la Empresa", @style = "text-align:center" } })
-                            @Html.ValidationMessageFor(model => model.objEmpresas.Emp_Nom, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ObjEmpresas.Emp_Nom, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese Nombre de la Empresa", @style = "text-align:center" } })
+                            @Html.ValidationMessageFor(model => model.ObjEmpresas.Emp_Nom, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="input-group inputregistrar" style="height: 50px;">
              
                         <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.objRegistrar.Email, new { @class = "form-control", placeholder = "Ingrese Email", @style = "text-align:center" })
+                            @Html.TextBoxFor(m => m.ObjRegistrar.Email, new { @class = "form-control", placeholder = "Ingrese Email", @style = "text-align:center" })
                         </div>
                     </div>
                     <div class="input-group inputregistrar" style="height: 50px;">
               
                         <div class="col-md-10">
-                            @Html.PasswordFor(m => m.objRegistrar.Password, new { @class = "form-control", placeholder = "Ingrese Contraseña", @style = "text-align:center" })
+                            @Html.PasswordFor(m => m.ObjRegistrar.Password, new { @class = "form-control", placeholder = "Ingrese Contraseña", @style = "text-align:center" })
                         </div>
                     </div>
                     <div class="input-group inputregistrar" style="height: 50px;">
                 
                         <div class="col-md-10">
-                            @Html.PasswordFor(m => m.objRegistrar.ConfirmPassword, new { @class = "form-control", placeholder = "Confirmar Contraseña", @style = "text-align:center" })
+                            @Html.PasswordFor(m => m.ObjRegistrar.ConfirmPassword, new { @class = "form-control", placeholder = "Confirmar Contraseña", @style = "text-align:center" })
                         </div>
                     </div>
                     <div class="wrapper" style="margin-left: 30%;">

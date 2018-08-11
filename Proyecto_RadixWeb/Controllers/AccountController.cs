@@ -73,9 +73,9 @@ namespace IdentitySample.Controllers
                 return View(model);
             }
 
-            var result = await SignInManager.PasswordSignInAsync(model.objLogin.Email, model.objLogin.Password, model.objLogin.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.ObjLogin.Email, model.ObjLogin.Password, model.ObjLogin.RememberMe, shouldLockout: false);
 
-            var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.objLogin.Email);
+            var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
             var log = db.login.FirstOrDefault(l => l.Id == user.Id);
 
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
@@ -83,7 +83,7 @@ namespace IdentitySample.Controllers
             
             // El if conciste en buscar la cuenta que corresponde a la empresa
 
-            if (emp.Emp_Nom == model.objEmpresas.Emp_Nom)
+            if (emp.Emp_Nom == model.ObjEmpresas.Emp_Nom)
             {
 
                 switch (result)
@@ -174,8 +174,8 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.objRegistrar.Email, Email = model.objRegistrar.Email };
-                var result = await UserManager.CreateAsync(user, model.objRegistrar.Password);
+                var user = new ApplicationUser { UserName = model.ObjRegistrar.Email, Email = model.ObjRegistrar.Email };
+                var result = await UserManager.CreateAsync(user, model.ObjRegistrar.Password);
                 if (result.Succeeded)
                 {
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -201,7 +201,7 @@ namespace IdentitySample.Controllers
 
                 var emp = new empresas
                 {
-                    Emp_Nom = model.objEmpresas.Emp_Nom
+                    Emp_Nom = model.ObjEmpresas.Emp_Nom
                 };
                 db.empresas.Add(emp);
                 db.SaveChanges();
@@ -225,6 +225,86 @@ namespace IdentitySample.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
+        [AllowAnonymous]
+        public ActionResult CuentaPersonas(string subemp_id, string per_rut, string car_nom)
+        {
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CuentaPersonas(MultiplesClases model, string subemp_id, string per_rut, string car_nom)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                string empresa = HttpContext.Session["Empresa"].ToString();
+
+                var user = new ApplicationUser { UserName = model.ObjRegistrar.Email, Email = model.ObjRegistrar.Email };
+                var result = await UserManager.CreateAsync(user, model.ObjRegistrar.Password);
+
+                if (result.Succeeded)
+                {
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                }
+                AddErrors(result);
+
+                string idcuenta = user.Id;
+                personas personas = db.personas.FirstOrDefault(p => p.Per_Rut == per_rut);
+                //var cargos = db.cargos.FirstOrDefault(c => c.Car_Id == personas.Car_Id);
+
+
+
+                aspnetroles asprol = db.aspnetroles.FirstOrDefault(r => r.Name == car_nom);
+
+                aspnetuserroles rol = new aspnetuserroles
+                {
+                    UserId = idcuenta,
+                    RoleId = asprol.Id
+                };
+
+
+                db.aspnetuserroles.Add(rol);
+                db.SaveChanges();
+
+
+
+                var empresas = db.empresas.FirstOrDefault(e => e.Emp_Nom == empresa);
+
+                int empresa_id = empresas.Emp_Id;
+
+                login log = new login
+                {
+                    Emp_Id = empresa_id,
+                    Id = idcuenta,
+                    Per_Rut = per_rut
+
+                };
+
+                db.login.Add(log);
+                db.SaveChanges();
+
+                //contratos contratos = db.contratos.FirstOrDefault(c=>c.Per_Rut==per_rut);
+
+                //int subemp_id=contratos.Sub_Id;
+
+                
+                return RedirectToAction("Index", "Contratos", new { subemp_id });
+
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
 
         //
         // GET: /Account/ConfirmEmail

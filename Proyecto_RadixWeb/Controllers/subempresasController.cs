@@ -15,10 +15,14 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: subempresas
-        public ActionResult Index(string emp_nom, string emp_id)
+        public ActionResult Index()
         {
-            ViewBag.emp_id = Convert.ToInt32(emp_id);
+
+            string emp_nom= HttpContext.Session["Empresa"].ToString(); 
+
+            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
             ViewBag.empresa = emp_nom;
+
             var subempresas = db.subempresas.Include(s => s.comunas).Include(s => s.empresas);
             return View(subempresas.Where(s=> s.empresas.Emp_Nom==emp_nom).ToList());
         }
@@ -39,18 +43,17 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         // GET: subempresas/Create
-        public ActionResult Create(int? emp_id, string empresa)
+        public ActionResult Create()
         {
 
             List<regiones> listaregiones = db.regiones.ToList();
             ViewBag.regiones = new SelectList(listaregiones, "Reg_id", "Reg_Nom");
 
 
-
-
             ViewBag.Com_Id = new SelectList(db.comunas, "Com_Id", "Com_Nom");
-            ViewBag.emp_id = emp_id;
-            ViewBag.empresa = empresa;
+
+            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
             //ViewBag.Emp_Id = new SelectList(db.empresas, "Emp_Id", "Emp_Nom");
             return View();
@@ -61,11 +64,14 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Sub_Id,Sub_Nom,Sub_Cant,Sub_Estado,Sub_Dir,Com_Id")] subempresas subempresas, int emp_id, string empresa)
+        public ActionResult Create([Bind(Include = "Sub_Id,Sub_Nom,Sub_Cant,Sub_Estado,Sub_Dir,Com_Id")] subempresas subempresas)
         {
             if (ModelState.IsValid)
             {
-                subempresas.Emp_Id = emp_id;
+                string emp_id = HttpContext.Session["Emp_id"].ToString();
+                string empresa = HttpContext.Session["Empresa"].ToString();
+
+                subempresas.Emp_Id = Convert.ToInt32(emp_id);
                 db.subempresas.Add(subempresas);
                 db.SaveChanges();
                 return RedirectToAction("Index", "SubEmpresas", new { emp_nom = empresa, emp_id });

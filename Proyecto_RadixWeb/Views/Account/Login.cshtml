@@ -19,16 +19,16 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                       
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.objEmpresas.Emp_Nom, new { @class = "form-control", placeholder = "Nombre Empresa" })
-                                @Html.ValidationMessageFor(m => m.objEmpresas.Emp_Nom, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(m => m.ObjEmpresas.Emp_Nom, new { @class = "form-control", placeholder = "Nombre Empresa" })
+                                @Html.ValidationMessageFor(m => m.ObjEmpresas.Emp_Nom, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="input-group" style="height: 40px;">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                          
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.objLogin.Email, new { @class = "form-control", placeholder = "Email" })
-                                @Html.ValidationMessageFor(m => m.objLogin.Email, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(m => m.ObjLogin.Email, new { @class = "form-control", placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.ObjLogin.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="input-group" style="height: 40px;">
@@ -36,15 +36,15 @@
                           
                             <div class="col-md-10">
 
-                                @Html.PasswordFor(m => m.objLogin.Password, new { @class = "form-control", placeholder = "Password" })
-                                @Html.ValidationMessageFor(m => m.objLogin.Password, "", new { @class = "text-danger" })
+                                @Html.PasswordFor(m => m.ObjLogin.Password, new { @class = "form-control", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.ObjLogin.Password, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <div class="checkbox">
-                                    @Html.CheckBoxFor(m => m.objLogin.RememberMe)
-                                    @Html.LabelFor(m => m.objLogin.RememberMe)
+                                    @Html.CheckBoxFor(m => m.ObjLogin.RememberMe)
+                                    @Html.LabelFor(m => m.ObjLogin.RememberMe)
                                 </div>
                             </div>
                         </div>

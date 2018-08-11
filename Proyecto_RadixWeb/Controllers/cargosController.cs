@@ -22,8 +22,10 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: cargos
         public ActionResult Index(string emp_nom, string emp_id)
         {
+
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
             ViewBag.emp_id = Convert.ToInt32(emp_id);
-            ViewBag.empresa = emp_nom;
+           
 
             return View(db.cargos.ToList());
         }
@@ -46,6 +48,7 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: cargos/Create
         public ActionResult Create()
         {
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
             return View();
         }
 
@@ -59,19 +62,19 @@ namespace Proyecto_RadixWeb.Controllers
             if (ModelState.IsValid)
             {
                 //Cargos que ingrese tiene que ser diferente a radox
-                if (cargos.objCargos.Car_Nom != "Radix")
+                if (cargos.ObjCargos.Car_Nom != "Radix")
                 {
 
-                    var buscarRoles = db.aspnetroles.Count(r => r.Name == cargos.objCargos.Car_Nom);
-                    var buscarCargo = db.cargos.Count(r => r.Car_Nom == cargos.objCargos.Car_Nom);
+                    var buscarRoles = db.aspnetroles.Count(r => r.Name == cargos.ObjCargos.Car_Nom);
+                    var buscarCargo = db.cargos.Count(r => r.Car_Nom == cargos.ObjCargos.Car_Nom);
 
                     // Si el cargo es diferente a Agricola lo agrega en roles de cuenta, sino solo lo agrega en cargos
-                    if (cargos.objCargos.Car_Nom != "Agricola")
+                    if (cargos.ObjCargos.Car_Nom != "Agricola")
                     {
 
                         if (buscarRoles == 0)
                         {
-                            var role = new IdentityRole(cargos.objCargos.Car_Nom);
+                            var role = new IdentityRole(cargos.ObjCargos.Car_Nom);
                             var roleresult = await RoleManager.CreateAsync(role);
                             if (!roleresult.Succeeded)
                             {
@@ -85,7 +88,7 @@ namespace Proyecto_RadixWeb.Controllers
 
                     if (buscarCargo == 0)
                     {
-                        db.cargos.Add(cargos.objCargos);
+                        db.cargos.Add(cargos.ObjCargos);
                         db.SaveChanges();
                     }
 

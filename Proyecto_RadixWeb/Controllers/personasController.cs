@@ -11,6 +11,9 @@ using IdentitySample.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Proyecto_RadixWeb.Models;
+using System.Globalization;
+
+
 
 namespace Proyecto_RadixWeb.Controllers
 {
@@ -39,78 +42,10 @@ namespace Proyecto_RadixWeb.Controllers
             }
         }
 
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult CuentaPersonas(int? subemp_id, string subemp_nom, string per_rut)
-        {
-            ViewBag.empresa = subemp_nom;
-            return View();
-        }
 
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CuentaPersonas(MultiplesClases model, string subemp_nom, string per_rut)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.objRegistrar.Email, Email = model.objRegistrar.Email };
-                var result = await UserManager.CreateAsync(user, model.objRegistrar.Password);
-                
-                if (result.Succeeded)
-                {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                  
-                }
-                AddErrors(result);
+       
 
-                string idcuenta = user.Id;
-                personas personas = db.personas.FirstOrDefault(p=>p.Per_Rut==per_rut);
-                cargos cargos = db.cargos.FirstOrDefault(c=>c.Car_Id==personas.Car_Id);
-
-                aspnetroles asprol = db.aspnetroles.FirstOrDefault(r => r.Name == cargos.Car_Nom);
-
-                var rol = new aspnetuserroles
-                {
-                    UserId = idcuenta,
-                    RoleId = asprol.Id
-                };
-
-                db.aspnetuserroles.Add(rol);
-                db.SaveChanges();
-
-                subempresas subempresas  = db.subempresas.FirstOrDefault(e => e.Sub_Nom == subemp_nom);
-
-                int empresa_id = subempresas.Emp_Id;
-
-                var log = new login
-                {
-                    Emp_Id = empresa_id,
-                    Id = idcuenta,
-                    Per_Rut=per_rut
-
-                };
-
-                db.login.Add(log);
-                db.SaveChanges();
-
-                return RedirectToAction("Index", "Home");
-
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
+       
         // GET: personas/Details/5
         public ActionResult Details(string id)
         {
@@ -127,10 +62,10 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         // GET: personas/Create
-        [Authorize]
-        public ActionResult Create(int? id, string nombre)
+        
+        public ActionResult Create(int? subemp_id)
         {
-            ViewBag.empresa = nombre;
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
             ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
             ViewBag.EC_Id = new SelectList(db.estadosciviles, "EC_Id", "EC_Nom");
@@ -147,23 +82,23 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Per_Rut,Per_Nom,Per_ApePat,Per_ApeMat,Per_Dir,Per_Tel,Nac_Id,Gen_Id,EC_Id,Car_Id,Per_Suel,TImp_Id,Per_Des,Desc_Id,THor_Id")] personas personas, contratos contratos,int id)
+        public ActionResult Create([Bind(Include = "Per_Rut,Per_Nom,Per_ApePat,Per_ApeMat,Per_Dir,Per_Tel,Nac_Id,Gen_Id,EC_Id,Car_Id,Per_Suel,TImp_Id,Per_Des,Desc_Id,THor_Id")] personas personas, contratos contratos, int subemp_id)
         {
             if (ModelState.IsValid)
             {
                 db.personas.Add(personas);
                 db.SaveChanges();
-               
+
 
                 contratos.Per_Rut = personas.Per_Rut;
-                contratos.Sub_Id = id;
+                contratos.Sub_Id = subemp_id;
                 contratos.Con_FechaInicio = DateTime.Now.ToShortDateString();
                 contratos.Con_Estado = "Espera";
 
                 db.contratos.Add(contratos);
                 db.SaveChanges();
 
-                return RedirectToAction("Index","Contratos",new { id});
+                return RedirectToAction("Index", "Contratos", new { subemp_id });
             }
 
             ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom", personas.Car_Id);
