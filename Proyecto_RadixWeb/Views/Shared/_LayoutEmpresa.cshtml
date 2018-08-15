@@ -7,113 +7,207 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Radix</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="~/Content/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="~/Content/dashboard.css" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
 </head>
 
 <body>
     @RenderBody()
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Index", "Home")">@ViewBag.empresa</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
-                }
-            </li>
-        </ul>
-    </nav>
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "subempresas")">
-                        <span data-feather="home"></span>
-                        Sucursales<span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
 
-                    <a class="nav-link" href="@Url.Action("Index", "Cargos")">
-                        <span data-feather="file"></span>
-                        Cargos
-                    </a>
-                </li>
-                <li class="nav-item">
 
-                    <a class="nav-link" href="@Url.Action("Index", "planillascontratos")">
-                        <span data-feather="file"></span>
-                        Documentos
-                    </a>
-                </li>
-                @*<li class="nav-item">
-            <a class="nav-link" href="#">
-                <span data-feather="shopping-cart"></span>
-                Envios
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <span data-feather="users"></span>
-                Clientes
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <span data-feather="bar-chart-2"></span>
-                Estadisticas
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <span data-feather="layers"></span>
-                Inventarios
-            </a>
-        </li>*@
-            </ul>
 
-            @*<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Subir Documento</span>
-                <a class="d-flex align-items-center text-muted" href="#">
-                    <span data-feather="plus-circle"></span>
-                </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Current month
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Last quarter
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Social engagement
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Year-end sale
-                    </a>
-                </li>
-            </ul>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand " href="@Url.Action("Index", "Home")">@ViewBag.empresa</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Perfil
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Datos Personales</a>
+
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a>
+                            }
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
         </div>
-    </nav>
+    </div>
+
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark " style="width: 250px;top: 120px; position:  absolute;">
+        <div class="container">
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="acorh">
+                    <li>
+                        <a href="@Url.Action("Index", "subempresas")">Sucursales</a>
+                        <ul id="listaSucursal">
+
+                         
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">RR.HH.</a>
+                        <ul>
+                            <li><a href="#">Lista de Trabajadores</a></li>
+                            <li><a href="@Url.Action("Index", "Planillascontratos")">Documentos</a></li>
+                            <li><a href="@Url.Action("Index", "Cargos")">Cargos</a></li>
+                            <li><a href="#">Asistencia</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Finanzas</a>
+                        <ul>
+                            <li><a href="#">Opción 2.1</a></li>
+                            <li><a href="#">Opción 2.2</a></li>
+                            <li><a href="#">Opción 2.3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Productividad</a>
+                        <ul>
+                            <li><a href="#">Opción 3.1</a></li>
+                            <li><a href="#">Opción 3.2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+
+  
+    <style>
+        ul.acorh,
+        ul.acorh * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        ul.acorh {
+            margin: 10px auto;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+            font-size: 18px;
+        }
+
+            ul.acorh li {
+                list-style: none;
+            }
+
+                ul.acorh li a {
+                    display: block;
+                    padding: 10px 10px 10px 20px;
+                    background: #333;
+                    color: #eee;
+                    border-bottom: 1px solid #000;
+                    border-top: 1px solid #666;
+                    text-decoration: none;
+                    box-sizing: border-box;
+                }
+
+                ul.acorh li ul {
+                    max-height: 0;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    overflow: hidden;
+                    transition: .3s all ease-in;
+                }
+
+                ul.acorh li li a {
+                    padding: 10px 10px 10px 40px;
+                    background: #999;
+                    color: #000;
+                    font-size: 16px;
+                    border: 0;
+                    border-bottom: 1px solid #ccc;
+                    box-sizing: border-box;
+                }
+
+        ul.acorc li li:last-child a {
+            border-bottom: 0;
+        }
+
+        ul.acorh li:hover ul {
+            max-height: 300px;
+            transition: .3s all ease-in;
+        }
+
+        ul.acorh li a:hover {
+            background: #666;
+            color: #fff;
+        }
+    </style>
+
+
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <script>
+
+
+            $(document).ready(function () {
+
+                Cargar();
+
+
+            });
+            function Cargar() {
+
+                $.ajax({
+                    url: '@Url.Action("ObtenerSubEmpresa","Home")',
+                    dataType: 'json',
+                    data: {},
+                    success: function (data) {
+                        var $lista;
+                        $.each(data, function (i, item) {
+
+                            
+                            var row = '<li><a href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
+                            row = row.replace("SubEmp", item.SubEmp);
+
+                            $('#listaSucursal').append(row);
+                         
+                        });
+
+                  
+                    }
+                });
+
+            }
+    </script>
+
     @RenderSection("scripts", required: false)
+
+
+
 </body>
+
 </html>
 

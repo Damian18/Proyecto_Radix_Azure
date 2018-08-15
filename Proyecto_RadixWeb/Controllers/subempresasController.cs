@@ -47,12 +47,12 @@ namespace Proyecto_RadixWeb.Controllers
         {
 
             List<regiones> listaregiones = db.regiones.ToList();
-            ViewBag.regiones = new SelectList(listaregiones, "Reg_id", "Reg_Nom");
+            ViewBag.regiones = new SelectList(listaregiones, "Reg_Id", "Reg_Nom");
 
 
-            ViewBag.Com_Id = new SelectList(db.comunas, "Com_Id", "Com_Nom");
+            //ViewBag.Com_Id = new SelectList(db.comunas, "Com_Id", "Com_Nom");
 
-            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+        
             ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
             //ViewBag.Emp_Id = new SelectList(db.empresas, "Emp_Id", "Emp_Nom");

@@ -14,7 +14,8 @@ namespace IdentitySample
                    "~/Content/vendor/datatables/dataTables.bootstrap4.css",
                    "~/Content/css/sb-admin.css",
                    "~/Content/estilo.css",
-                   "~/Content/estilosRegistrar.css"
+                   "~/Content/estilosRegistrar.css",
+                   "~/Content/font-awesome.css"
 
                    ));
 

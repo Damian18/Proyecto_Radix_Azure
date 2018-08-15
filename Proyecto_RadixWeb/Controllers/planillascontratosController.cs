@@ -15,11 +15,12 @@ namespace Proyecto_RadixWeb.Controllers
     {
         private radixEntities db = new radixEntities();
 
+      
         // GET: planillascontratos
-        public ActionResult Index(string emp_nom, string emp_id)
+        public ActionResult Index(string emp_id)
         {
             ViewBag.emp_id = Convert.ToInt32(emp_id);
-            ViewBag.empresa = emp_nom;
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
             return View(db.planillascontratos.ToList());
         }
@@ -81,19 +82,20 @@ namespace Proyecto_RadixWeb.Controllers
             if (plantilla != null && plantilla.ContentLength > 0)
             {
                 var length = plantilla.InputStream.Length; //Length: 103050706
+             
 
                 byte[] datoplantilla = null;
-                using (var binaryImage = new BinaryReader(plantilla.InputStream))
+                using (var binarydoc = new BinaryReader(plantilla.InputStream))
                 {
-                    datoplantilla = binaryImage.ReadBytes(plantilla.ContentLength);
+                    datoplantilla = binarydoc.ReadBytes(plantilla.ContentLength);
                 }
                 planillascontratos.PC_Binario = datoplantilla;
-
+                planillascontratos.PC_Ext = Path.GetExtension(plantilla.FileName);
             }
 
             if (ModelState.IsValid)
             {
-                planillascontratos.PC_Ext =".docx";
+                //planillascontratos.PC_Ext =".docx";
                 db.planillascontratos.Add(planillascontratos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -103,17 +105,7 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult UploadFiles(IEnumerable<HttpPostedFileBase> files)
-        {
-            foreach (var file in files)
-            {
-                string filePath = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                file.SaveAs(Path.Combine(Server.MapPath("~/UploadedFiles"), filePath));
-                //Here you can write code for save this information in your database if you want
-            }
-            return Json("file uploaded successfully");
-        }
+      
         // GET: planillascontratos/Edit/5
         public ActionResult Edit(int? id)
         {

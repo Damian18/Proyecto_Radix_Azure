@@ -10,73 +10,162 @@
         @Html.ActionLink("Nueva Persona", "RedirecionarPersonas", new { subemp_id = ViewBag.subemp_id })
 
     </h3>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.personas.Per_Rut)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.personas.Per_Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.personas.Per_ApePat)
-                @Html.DisplayNameFor(model => model.personas.Per_ApeMat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Con_FechaInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Con_FechaFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Con_Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.personas.cargos.Car_Nom)
-            </th>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    RUT
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellidos
+                </th>
+                <th>
+                    Inicio Contrato
+                </th>
+                <th>
+                    Fin Contrato
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Cargo
+                </th>
 
 
 
-            <th></th>
-        </tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_Rut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
+                        @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Con_FechaInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Con_FechaFin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Con_Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
+                    </td>
+                    <td>
+                        @if (item.personas.cargos.Car_Nom != "Agricola")
+                        {
+                            <a href="@Url.Action("RedirecionarCuenta", "Contratos", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut, car_nom = item.personas.cargos.Car_Nom})"
+                               class="btn btn-outline-success btn-sm m-0">
+                                Crear Cuenta
 
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.personas.Per_Rut)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.personas.Per_Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
-                @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Con_FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Con_FechaFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Con_Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
-            </td>
-            <td>
-               @if (item.personas.cargos.Car_Nom != "Agricola")
-                {
-                    @Html.ActionLink("Crear Cuenta", "RedirecionarCuenta", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut,car_nom=item.personas.cargos.Car_Nom })
-                }|
-                @Html.ActionLink("Edit", "Edit", new { id = item.Con_Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Con_Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Con_Id })
-            </td>
 
-        </tr>
-        }
+                            </a>
 
+                            @*@Html.ActionLink("Crear Cuenta", "RedirecionarCuenta", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut, car_nom = item.personas.cargos.Car_Nom})*@
+                        }
+                        @*<a href="@Url.Action("Details", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                              Detalle
+                            </a>|*@
+                        <a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                            Editar
+                        </a>
+                        <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                            Eliminar
+                        </a>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Con_Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Con_Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Con_Id })*@
+                    </td>
+
+                </tr>
+            }
+        </tbody>
     </table>
+
+
+
+    @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.personas.Per_Rut)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.personas.Per_Nom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.personas.Per_ApePat)
+                    @Html.DisplayNameFor(model => model.personas.Per_ApeMat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Con_FechaInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Con_FechaFin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Con_Estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.personas.cargos.Car_Nom)
+                </th>
+
+
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_Rut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
+                        @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Con_FechaInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Con_FechaFin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Con_Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
+                    </td>
+                    <td>
+                        @if (item.personas.cargos.Car_Nom != "Agricola")
+                        {
+                            @Html.ActionLink("Crear Cuenta", "RedirecionarCuenta", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut, car_nom = item.personas.cargos.Car_Nom })
+                        }|
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Con_Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Con_Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Con_Id })
+                    </td>
+
+                </tr>
+            }
+
+        </table>*@
 </div>
