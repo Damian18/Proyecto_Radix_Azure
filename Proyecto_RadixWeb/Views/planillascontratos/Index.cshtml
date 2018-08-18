@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
     <h3>
         @Html.ActionLink("Nueva Plantilla", "Create")
@@ -37,7 +37,7 @@
                     @Html.ActionLink("Descargar Docx", "DescargarDocx", new { id = item.PC_Id })  |
                     @Html.ActionLink("Descargar Pdf", "DescargarPdf", new { id = item.PC_Id })
                 </td>
-           
+
             </tr>
         }
 

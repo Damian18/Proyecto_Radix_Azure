@@ -42,6 +42,9 @@ namespace IdentitySample.Controllers
             return View();
         }
 
+
+
+
         public JsonResult ObtenerSubEmpresa()
         {
             int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());

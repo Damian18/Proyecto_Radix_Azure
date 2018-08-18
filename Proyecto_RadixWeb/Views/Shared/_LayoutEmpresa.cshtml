@@ -64,8 +64,7 @@
                     <li>
                         <a href="@Url.Action("Index", "subempresas")">Sucursales</a>
                         <ul id="listaSucursal">
-
-                         
+                      
                         </ul>
                     </li>
                     <li>
@@ -98,9 +97,37 @@
             </div>
         </div>
     </div>
+    <div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
-  
+
+    </div>
+
     <style>
+
+        #contenido {
+            text-align: center;
+            list-style: none;
+        }
+
+            #contenido button {
+                text-decoration: none;
+                width: 188px;
+                padding: 10px 10px 10px 40px;
+                background: #999;
+                color: #000;
+                font-size: 16px;
+                border: 0;
+                border-bottom: 1px solid #ccc;
+                box-sizing: border-box;
+                border-radius: 0px;
+            }
+
+                #contenido button:hover {
+                    background: #666;
+                    color: #fff;
+                }
+
+
         ul.acorh,
         ul.acorh * {
             margin: 0;
@@ -171,13 +198,13 @@
 
     <script>
 
-
             $(document).ready(function () {
 
                 Cargar();
 
 
-            });
+        });
+
             function Cargar() {
 
                 $.ajax({
@@ -188,19 +215,36 @@
                         var $lista;
                         $.each(data, function (i, item) {
 
-                            
-                            var row = '<li><a href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
+
+                            //var row = '<li><a id="link' + item.SubEmp+' "  href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
+                            var row = '<li><a class="li_subemp" id="' + item.SubEmp + '" href="#">' + item.Nombre + '</a></li>';
                             row = row.replace("SubEmp", item.SubEmp);
 
                             $('#listaSucursal').append(row);
-                         
+
                         });
 
-                  
                     }
                 });
 
-            }
+       }
+
+        $('li').on("click","a.li_subemp", function () {
+
+            var id = this.id;
+            $('#pagina').load('/Contratos/VistaParcial', { subemp_id: id });
+
+        });
+
+
+        //$('#boton1').click(function () {
+
+        //    $('#pagina').load("/Contratos/VistaParcial", { subemp_id: $('#boton1').val() });
+
+        //});
+
+
+
     </script>
 
     @RenderSection("scripts", required: false)

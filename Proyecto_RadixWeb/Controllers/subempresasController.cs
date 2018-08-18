@@ -27,6 +27,7 @@ namespace Proyecto_RadixWeb.Controllers
             return View(subempresas.Where(s=> s.empresas.Emp_Nom==emp_nom).ToList());
         }
 
+
         // GET: subempresas/Details/5
         public ActionResult Details(int? id)
         {

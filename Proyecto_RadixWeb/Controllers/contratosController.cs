@@ -14,6 +14,18 @@ namespace Proyecto_RadixWeb.Controllers
     {
         private radixEntities db = new radixEntities();
 
+
+        public ActionResult VistaParcial(int? subemp_id)
+        {
+
+            ViewBag.subemp_id = subemp_id;
+
+            var model = db.contratos.Where(p=>p.Sub_Id==subemp_id).ToList();
+
+            return PartialView(model);
+        }
+
+
         // GET: contratos
         public ActionResult Index(int? subemp_id)
         {

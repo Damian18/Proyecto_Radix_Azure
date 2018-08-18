@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
     <h3>
         @Html.ActionLink("Nueva Sucursal", "Create")
@@ -59,19 +59,14 @@
                     <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
                         Ver Información
                     </a>
-                    @*<a href="@Url.Action("Details", "SubEmpresas", new { id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
-                      Detalle
-                    </a>|*@
+           
                     <a href="@Url.Action("Edit", "SubEmpresas", new { id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
                         Editar
                     </a>
                     <a href="@Url.Action("Delete", "SubEmpresas", new { id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
                        Eliminar
                     </a>
-                    @*@Html.ActionLink("Detalle", "Details", new { id = item.Sub_Id }) |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Sub_Id }) |
-
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Sub_Id })*@
+              
                 </td>
                 
             </tr>
@@ -79,62 +74,5 @@
         </tbody>
     </table>
   
-    @*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Sub_Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sub_Cant)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sub_Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sub_Dir)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.comunas.Com_Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.empresas.Emp_Nom)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sub_Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sub_Cant)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sub_Estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sub_Dir)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.comunas.Com_Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
-                </td>
-                <td>
-                    <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })">
-                        Ver Información
-                    </a>|
-                    @Html.ActionLink("Detalle", "Details", new { id = item.Sub_Id }) |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Sub_Id }) |
-
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Sub_Id })
-                </td>
-            </tr>
-        }
-
-    </table>*@
-
+  
 </div>
