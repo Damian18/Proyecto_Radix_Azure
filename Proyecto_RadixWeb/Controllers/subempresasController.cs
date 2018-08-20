@@ -23,8 +23,38 @@ namespace Proyecto_RadixWeb.Controllers
             ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
             ViewBag.empresa = emp_nom;
 
+            List<regiones> listaregiones = db.regiones.ToList();
+            ViewBag.regiones = new SelectList(listaregiones, "Reg_Id", "Reg_Nom");
+
+            
             var subempresas = db.subempresas.Include(s => s.comunas).Include(s => s.empresas);
-            return View(subempresas.Where(s=> s.empresas.Emp_Nom==emp_nom).ToList());
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjESubEmpresas= subempresas.Where(s => s.empresas.Emp_Nom == emp_nom).ToList()
+            };
+
+            return View(multiples);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "Sub_Id,Sub_Nom,Sub_Cant,Sub_Estado,Sub_Dir,Com_Id")]  subempresas subempresas)
+        {
+            if (ModelState.IsValid)
+            {
+                string emp_id = HttpContext.Session["Emp_id"].ToString();
+                string empresa = HttpContext.Session["Empresa"].ToString();
+
+                subempresas.Emp_Id = Convert.ToInt32(emp_id);
+                db.subempresas.Add(subempresas);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+                //return RedirectToAction("Index", "SubEmpresas", new { emp_nom = empresa, emp_id });
+            }
+
+            //ViewBag.Com_Id = new SelectList(db.comunas, "Com_Id", "Com_Nom", subempresas.Com_Id);
+            //ViewBag.Emp_Id = new SelectList(db.empresas, "Emp_Id", "Emp_Nom", subempresas.Emp_Id);
+            return View(subempresas);
         }
 
 
@@ -42,6 +72,40 @@ namespace Proyecto_RadixWeb.Controllers
             }
             return View(subempresas);
         }
+
+        public ActionResult Agregar()
+        {
+
+            List<regiones> listaregiones = db.regiones.ToList();
+            ViewBag.regiones = new SelectList(listaregiones, "Reg_Id", "Reg_Nom");
+
+
+
+            return PartialView();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Agregar(subempresas subempresas)
+        {
+            string message = "";
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+
+                db.subempresas.Add(subempresas);
+                db.SaveChanges();
+                status = true;
+                    message = "Almacenado Correctamente";
+                
+            }
+            else
+            {
+                message = "Error";
+            }
+            return new JsonResult { Data = new { status = status, message = message } };
+        }
+
 
         // GET: subempresas/Create
         public ActionResult Create()

@@ -106,8 +106,8 @@
 
     $(document).ready(function () {
 
-        $("#objProvincias_Prov_Id").change(function () {
-            $.get("/subempresas/ObtenerComuna", { Prov_Id: $("#objProvincias_Prov_Id").val() }, function (data) {
+        $("#ObjProvincias_Prov_Id").change(function () {
+            $.get("/SubEmpresas/ObtenerComuna", { Prov_Id: $("#ObjProvincias_Prov_Id").val() }, function (data) {
                 $("#Com_Id").empty();
                 $.each(data, function (Create, row) {
 

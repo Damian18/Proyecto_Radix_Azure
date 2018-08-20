@@ -839,6 +839,7 @@
     <Content Include="Views\Personas\CuentaPersonas.cshtml" />
     <Content Include="Views\Account\CuentaPersonas.cshtml" />
     <Content Include="Views\Contratos\VistaParcial.cshtml" />
+    <Content Include="Views\SubEmpresas\Agregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
