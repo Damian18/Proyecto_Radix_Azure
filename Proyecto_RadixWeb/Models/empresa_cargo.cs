@@ -12,18 +12,13 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class horario
+    public partial class empresa_cargo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public horario()
-        {
-            this.grupos = new HashSet<grupos>();
-        }
+        public int Empcar_id { get; set; }
+        public Nullable<int> Emp_Id { get; set; }
+        public Nullable<int> Car_Id { get; set; }
     
-        public int Hor_Id { get; set; }
-        public string Hor_intervalo { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<grupos> grupos { get; set; }
+        public virtual cargos cargos { get; set; }
+        public virtual empresas empresas { get; set; }
     }
 }

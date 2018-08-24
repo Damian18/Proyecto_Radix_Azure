@@ -12,16 +12,13 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class grupos
+    public partial class subempresa_cargo_horario
     {
-        public int Grup_Id { get; set; }
-        public string Grup_Nom { get; set; }
-        public int Jor_Id { get; set; }
-        public int Hor_Id { get; set; }
-        public int Sec_Id { get; set; }
+        public int Sch_Id { get; set; }
+        public Nullable<int> Subempcar_id { get; set; }
+        public Nullable<int> Hl_Id { get; set; }
     
-        public virtual horario horario { get; set; }
-        public virtual jornada jornada { get; set; }
-        public virtual sectores sectores { get; set; }
+        public virtual horario_laboral horario_laboral { get; set; }
+        public virtual subempresa_cargo subempresa_cargo { get; set; }
     }
 }

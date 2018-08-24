@@ -27,15 +27,10 @@ namespace Proyecto_RadixWeb.Models
     
         public virtual DbSet<bancos> bancos { get; set; }
         public virtual DbSet<bancostiposcuentas> bancostiposcuentas { get; set; }
-        public virtual DbSet<cargos> cargos { get; set; }
         public virtual DbSet<estadosciviles> estadosciviles { get; set; }
         public virtual DbSet<fichadescuentos> fichadescuentos { get; set; }
         public virtual DbSet<fichasasistencias> fichasasistencias { get; set; }
-        public virtual DbSet<grupos> grupos { get; set; }
-        public virtual DbSet<horario> horario { get; set; }
-        public virtual DbSet<jornada> jornada { get; set; }
         public virtual DbSet<pago> pago { get; set; }
-        public virtual DbSet<sectores> sectores { get; set; }
         public virtual DbSet<subempresas> subempresas { get; set; }
         public virtual DbSet<tipoformaspago> tipoformaspago { get; set; }
         public virtual DbSet<tipoimpuestos> tipoimpuestos { get; set; }
@@ -58,6 +53,10 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<generos> generos { get; set; }
         public virtual DbSet<contratos> contratos { get; set; }
         public virtual DbSet<personas> personas { get; set; }
+        public virtual DbSet<cargos> cargos { get; set; }
+        public virtual DbSet<empresa_cargo> empresa_cargo { get; set; }
         public virtual DbSet<horario_laboral> horario_laboral { get; set; }
+        public virtual DbSet<subempresa_cargo> subempresa_cargo { get; set; }
+        public virtual DbSet<subempresa_cargo_horario> subempresa_cargo_horario { get; set; }
     }
 }

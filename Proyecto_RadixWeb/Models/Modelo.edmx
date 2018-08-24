@@ -90,6 +90,14 @@
           <Property Name="Doc_Binario" Type="longblob" Nullable="false" />
           <Property Name="Per_Rut" Type="varchar" MaxLength="12" Nullable="false" />
         </EntityType>
+        <EntityType Name="empresa_cargo">
+          <Key>
+            <PropertyRef Name="Empcar_id" />
+          </Key>
+          <Property Name="Empcar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Id" Type="int" />
+          <Property Name="Car_Id" Type="int" />
+        </EntityType>
         <EntityType Name="empresas">
           <Key>
             <PropertyRef Name="Emp_Id" />
@@ -138,42 +146,17 @@
           <Property Name="Gen_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gen_Nom" Type="varchar" MaxLength="15" />
         </EntityType>
-        <EntityType Name="grupos">
-          <Key>
-            <PropertyRef Name="Grup_Id" />
-          </Key>
-          <Property Name="Grup_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Grup_Nom" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="Jor_Id" Type="int" Nullable="false" />
-          <Property Name="Hor_Id" Type="int" Nullable="false" />
-          <Property Name="Sec_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="horario">
-          <Key>
-            <PropertyRef Name="Hor_Id" />
-          </Key>
-          <Property Name="Hor_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Hor_intervalo" Type="varchar" MaxLength="45" Nullable="false" />
-        </EntityType>
         <EntityType Name="horario_laboral">
           <Key>
             <PropertyRef Name="Hl_Id" />
           </Key>
           <Property Name="Hl_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Car_Id" Type="int" />
           <Property Name="Hl_Titulo" Type="varchar" MaxLength="100" />
           <Property Name="Hl_Descripcion" Type="varchar" MaxLength="300" />
           <Property Name="Hl_Inicio" Type="datetime" Precision="0" />
           <Property Name="Hl_Termino" Type="datetime" Precision="0" />
           <Property Name="Hl_ColorTema" Type="varchar" MaxLength="10" />
           <Property Name="Hl_TodoDia" Type="bit" />
-        </EntityType>
-        <EntityType Name="jornada">
-          <Key>
-            <PropertyRef Name="Jor_Id" />
-          </Key>
-          <Property Name="Jor_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Jor_Nom" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -248,12 +231,21 @@
           <Property Name="Reg_Nom" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Reg_NomOrig" Type="varchar" MaxLength="8" Nullable="false" />
         </EntityType>
-        <EntityType Name="sectores">
+        <EntityType Name="subempresa_cargo">
           <Key>
-            <PropertyRef Name="Sec_Id" />
+            <PropertyRef Name="Subempcar_id" />
           </Key>
-          <Property Name="Sec_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Sec_Nom" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Subempcar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sub_Id" Type="int" />
+          <Property Name="Car_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="subempresa_cargo_horario">
+          <Key>
+            <PropertyRef Name="Sch_Id" />
+          </Key>
+          <Property Name="Sch_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subempcar_id" Type="int" />
+          <Property Name="Hl_Id" Type="int" />
         </EntityType>
         <EntityType Name="subempresas">
           <Key>
@@ -331,6 +323,42 @@
             </Principal>
             <Dependent Role="aspnetuserroles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cargo">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cargo_subempresa">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Emp_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -485,62 +513,6 @@
             </Principal>
             <Dependent Role="pago">
               <PropertyRef Name="TFor_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Grupos_Horario1">
-          <End Role="horario" Type="Self.horario" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="grupos" Type="Self.grupos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="horario">
-              <PropertyRef Name="Hor_Id" />
-            </Principal>
-            <Dependent Role="grupos">
-              <PropertyRef Name="Hor_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Grupos_Jornada1">
-          <End Role="jornada" Type="Self.jornada" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="grupos" Type="Self.grupos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="jornada">
-              <PropertyRef Name="Jor_Id" />
-            </Principal>
-            <Dependent Role="grupos">
-              <PropertyRef Name="Jor_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Grupos_Sectores1">
-          <End Role="sectores" Type="Self.sectores" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="grupos" Type="Self.grupos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sectores">
-              <PropertyRef Name="Sec_Id" />
-            </Principal>
-            <Dependent Role="grupos">
-              <PropertyRef Name="Sec_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Horario_Cargo">
-          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cargos">
-              <PropertyRef Name="Car_Id" />
-            </Principal>
-            <Dependent Role="horario_laboral">
-              <PropertyRef Name="Car_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -738,6 +710,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="hl_id">
+          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="0..1" />
+          <End Role="subempresa_cargo_horario" Type="Self.subempresa_cargo_horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo_horario">
+              <PropertyRef Name="Hl_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="IdentityRole_Users">
           <End Role="aspnetroles" Type="Self.aspnetroles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -752,6 +736,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="subempcar_id">
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="0..1" />
+          <End Role="subempresa_cargo_horario" Type="Self.subempresa_cargo_horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo_horario">
+              <PropertyRef Name="Subempcar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresa_cargo1">
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="0..1" />
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="radixModelStoreContainer">
           <EntitySet Name="aspnetroles" EntityType="Self.aspnetroles" Schema="radix" store:Type="Tables" />
           <EntitySet Name="aspnetuserroles" EntityType="Self.aspnetuserroles" Schema="radix" store:Type="Tables" />
@@ -762,15 +770,13 @@
           <EntitySet Name="comunas" EntityType="Self.comunas" Schema="radix" store:Type="Tables" />
           <EntitySet Name="contratos" EntityType="Self.contratos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="documentos" EntityType="Self.documentos" Schema="radix" store:Type="Tables" />
+          <EntitySet Name="empresa_cargo" EntityType="Self.empresa_cargo" Schema="radix" store:Type="Tables" />
           <EntitySet Name="empresas" EntityType="Self.empresas" Schema="radix" store:Type="Tables" />
           <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" Schema="radix" store:Type="Tables" />
           <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" Schema="radix" store:Type="Tables" />
           <EntitySet Name="generos" EntityType="Self.generos" Schema="radix" store:Type="Tables" />
-          <EntitySet Name="grupos" EntityType="Self.grupos" Schema="radix" store:Type="Tables" />
-          <EntitySet Name="horario" EntityType="Self.horario" Schema="radix" store:Type="Tables" />
           <EntitySet Name="horario_laboral" EntityType="Self.horario_laboral" Schema="radix" store:Type="Tables" />
-          <EntitySet Name="jornada" EntityType="Self.jornada" Schema="radix" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="radix" store:Type="Tables" />
           <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" Schema="radix" store:Type="Tables" />
           <EntitySet Name="pago" EntityType="Self.pago" Schema="radix" store:Type="Tables" />
@@ -778,7 +784,8 @@
           <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="provincias" EntityType="Self.provincias" Schema="radix" store:Type="Tables" />
           <EntitySet Name="regiones" EntityType="Self.regiones" Schema="radix" store:Type="Tables" />
-          <EntitySet Name="sectores" EntityType="Self.sectores" Schema="radix" store:Type="Tables" />
+          <EntitySet Name="subempresa_cargo" EntityType="Self.subempresa_cargo" Schema="radix" store:Type="Tables" />
+          <EntitySet Name="subempresa_cargo_horario" EntityType="Self.subempresa_cargo_horario" Schema="radix" store:Type="Tables" />
           <EntitySet Name="subempresas" EntityType="Self.subempresas" Schema="radix" store:Type="Tables" />
           <EntitySet Name="tipoformaspago" EntityType="Self.tipoformaspago" Schema="radix" store:Type="Tables" />
           <EntitySet Name="tipoimpuestos" EntityType="Self.tipoimpuestos" Schema="radix" store:Type="Tables" />
@@ -790,6 +797,18 @@
           <AssociationSet Name="ApplicationUser_Roles" Association="Self.ApplicationUser_Roles">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
+          </AssociationSet>
+          <AssociationSet Name="cargo" Association="Self.cargo">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="cargo_subempresa" Association="Self.cargo_subempresa">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="empresa" Association="Self.empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
           </AssociationSet>
           <AssociationSet Name="fk_Bancos_has_TiposCuentas_Bancos1" Association="Self.fk_Bancos_has_TiposCuentas_Bancos1">
             <End Role="bancos" EntitySet="bancos" />
@@ -834,22 +853,6 @@
           <AssociationSet Name="fk_FormasDePago_TipoFormasPago1" Association="Self.fk_FormasDePago_TipoFormasPago1">
             <End Role="tipoformaspago" EntitySet="tipoformaspago" />
             <End Role="pago" EntitySet="pago" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Grupos_Horario1" Association="Self.fk_Grupos_Horario1">
-            <End Role="horario" EntitySet="horario" />
-            <End Role="grupos" EntitySet="grupos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Grupos_Jornada1" Association="Self.fk_Grupos_Jornada1">
-            <End Role="jornada" EntitySet="jornada" />
-            <End Role="grupos" EntitySet="grupos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Grupos_Sectores1" Association="Self.fk_Grupos_Sectores1">
-            <End Role="sectores" EntitySet="sectores" />
-            <End Role="grupos" EntitySet="grupos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Horario_Cargo" Association="Self.fk_Horario_Cargo">
-            <End Role="cargos" EntitySet="cargos" />
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
           </AssociationSet>
           <AssociationSet Name="fk_Login_CuentaAsp" Association="Self.fk_Login_CuentaAsp">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
@@ -907,9 +910,21 @@
             <End Role="tiposperiodos" EntitySet="tiposperiodos" />
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
           </AssociationSet>
+          <AssociationSet Name="hl_id" Association="Self.hl_id">
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
+          </AssociationSet>
           <AssociationSet Name="IdentityRole_Users" Association="Self.IdentityRole_Users">
             <End Role="aspnetroles" EntitySet="aspnetroles" />
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
+          </AssociationSet>
+          <AssociationSet Name="subempcar_id" Association="Self.subempcar_id">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
+          </AssociationSet>
+          <AssociationSet Name="subempresa_cargo1" Association="Self.subempresa_cargo1">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -934,15 +949,6 @@
           <NavigationProperty Name="bancos" Relationship="Self.fk_Bancos_has_TiposCuentas_Bancos1" FromRole="bancostiposcuentas" ToRole="bancos" />
           <NavigationProperty Name="tiposcuentas" Relationship="Self.fk_Bancos_has_TiposCuentas_TiposCuentas1" FromRole="bancostiposcuentas" ToRole="tiposcuentas" />
           <NavigationProperty Name="pago" Relationship="Self.fk_FormasDePago_BancosTiposCuentas1" FromRole="bancostiposcuentas" ToRole="pago" />
-        </EntityType>
-        <EntityType Name="cargos">
-          <Key>
-            <PropertyRef Name="Car_Id" />
-          </Key>
-          <Property Name="Car_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Car_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="personas" Relationship="radixModel.fk_Personas_cargos1" FromRole="cargos" ToRole="personas" />
-          <NavigationProperty Name="horario_laboral" Relationship="radixModel.fk_Horario_Cargo" FromRole="cargos" ToRole="horario_laboral" />
         </EntityType>
         <EntityType Name="estadosciviles">
           <Key>
@@ -978,35 +984,6 @@
           <Property Name="Cos_Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="FAsi_Fecha" Type="DateTime" />
         </EntityType>
-        <EntityType Name="grupos">
-          <Key>
-            <PropertyRef Name="Grup_Id" />
-          </Key>
-          <Property Name="Grup_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Grup_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Jor_Id" Type="Int32" Nullable="false" />
-          <Property Name="Hor_Id" Type="Int32" Nullable="false" />
-          <Property Name="Sec_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="horario" Relationship="Self.fk_Grupos_Horario1" FromRole="grupos" ToRole="horario" />
-          <NavigationProperty Name="jornada" Relationship="Self.fk_Grupos_Jornada1" FromRole="grupos" ToRole="jornada" />
-          <NavigationProperty Name="sectores" Relationship="Self.fk_Grupos_Sectores1" FromRole="grupos" ToRole="sectores" />
-        </EntityType>
-        <EntityType Name="horario">
-          <Key>
-            <PropertyRef Name="Hor_Id" />
-          </Key>
-          <Property Name="Hor_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Hor_intervalo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="grupos" Relationship="Self.fk_Grupos_Horario1" FromRole="horario" ToRole="grupos" />
-        </EntityType>
-        <EntityType Name="jornada">
-          <Key>
-            <PropertyRef Name="Jor_Id" />
-          </Key>
-          <Property Name="Jor_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Jor_Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="grupos" Relationship="Self.fk_Grupos_Jornada1" FromRole="jornada" ToRole="grupos" />
-        </EntityType>
         <EntityType Name="pago">
           <Key>
             <PropertyRef Name="Pag_Id" />
@@ -1020,14 +997,6 @@
           <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="bancostiposcuentas" Relationship="Self.fk_FormasDePago_BancosTiposCuentas1" FromRole="pago" ToRole="bancostiposcuentas" />
           <NavigationProperty Name="tipoformaspago" Relationship="Self.fk_FormasDePago_TipoFormasPago1" FromRole="pago" ToRole="tipoformaspago" />
-        </EntityType>
-        <EntityType Name="sectores">
-          <Key>
-            <PropertyRef Name="Sec_Id" />
-          </Key>
-          <Property Name="Sec_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Sec_Nom" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="grupos" Relationship="Self.fk_Grupos_Sectores1" FromRole="sectores" ToRole="grupos" />
         </EntityType>
         <EntityType Name="subempresas">
           <Key>
@@ -1043,6 +1012,7 @@
           <NavigationProperty Name="comunas" Relationship="radixModel.FK_subempresas_comunas" FromRole="subempresas" ToRole="comunas" />
           <NavigationProperty Name="empresas" Relationship="radixModel.FK_subempresas_empresas" FromRole="subempresas" ToRole="empresas" />
           <NavigationProperty Name="contratos" Relationship="radixModel.FK_contratos_subempresas" FromRole="subempresas" ToRole="contratos" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.subempresa_cargo1" FromRole="subempresas" ToRole="subempresa_cargo" />
         </EntityType>
         <EntityType Name="tipoformaspago">
           <Key>
@@ -1161,48 +1131,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Grupos_Horario1">
-          <End Role="horario" Type="Self.horario" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="grupos" Type="Self.grupos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="horario">
-              <PropertyRef Name="Hor_Id" />
-            </Principal>
-            <Dependent Role="grupos">
-              <PropertyRef Name="Hor_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Grupos_Jornada1">
-          <End Role="jornada" Type="Self.jornada" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="grupos" Type="Self.grupos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="jornada">
-              <PropertyRef Name="Jor_Id" />
-            </Principal>
-            <Dependent Role="grupos">
-              <PropertyRef Name="Jor_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Grupos_Sectores1">
-          <End Role="sectores" Type="Self.sectores" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="grupos" Type="Self.grupos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sectores">
-              <PropertyRef Name="Sec_Id" />
-            </Principal>
-            <Dependent Role="grupos">
-              <PropertyRef Name="Sec_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_FormasDePago_TipoFormasPago1">
           <End Role="tipoformaspago" Type="Self.tipoformaspago" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1234,15 +1162,10 @@
         <EntityContainer Name="radixEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bancos" EntityType="Self.bancos" />
           <EntitySet Name="bancostiposcuentas" EntityType="Self.bancostiposcuentas" />
-          <EntitySet Name="cargos" EntityType="Self.cargos" />
           <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" />
           <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" />
           <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" />
-          <EntitySet Name="grupos" EntityType="Self.grupos" />
-          <EntitySet Name="horario" EntityType="Self.horario" />
-          <EntitySet Name="jornada" EntityType="Self.jornada" />
           <EntitySet Name="pago" EntityType="Self.pago" />
-          <EntitySet Name="sectores" EntityType="Self.sectores" />
           <EntitySet Name="subempresas" EntityType="Self.subempresas" />
           <EntitySet Name="tipoformaspago" EntityType="Self.tipoformaspago" />
           <EntitySet Name="tipoimpuestos" EntityType="Self.tipoimpuestos" />
@@ -1266,18 +1189,6 @@
           <AssociationSet Name="FK_fichadescuentos_tipodescuento" Association="Self.FK_fichadescuentos_tipodescuento">
             <End Role="tiposdescuentos" EntitySet="tiposdescuentos" />
             <End Role="fichadescuentos" EntitySet="fichadescuentos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Grupos_Horario1" Association="Self.fk_Grupos_Horario1">
-            <End Role="horario" EntitySet="horario" />
-            <End Role="grupos" EntitySet="grupos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Grupos_Jornada1" Association="Self.fk_Grupos_Jornada1">
-            <End Role="jornada" EntitySet="jornada" />
-            <End Role="grupos" EntitySet="grupos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Grupos_Sectores1" Association="Self.fk_Grupos_Sectores1">
-            <End Role="sectores" EntitySet="sectores" />
-            <End Role="grupos" EntitySet="grupos" />
           </AssociationSet>
           <AssociationSet Name="fk_FormasDePago_TipoFormasPago1" Association="Self.fk_FormasDePago_TipoFormasPago1">
             <End Role="tipoformaspago" EntitySet="tipoformaspago" />
@@ -1333,10 +1244,6 @@
           <EntitySet Name="generos" EntityType="radixModel.generos" />
           <EntitySet Name="contratos" EntityType="radixModel.contratos" />
           <EntitySet Name="personas" EntityType="radixModel.personas" />
-          <AssociationSet Name="fk_Personas_cargos1" Association="radixModel.fk_Personas_cargos1">
-            <End Role="cargos" EntitySet="cargos" />
-            <End Role="personas" EntitySet="personas" />
-          </AssociationSet>
           <AssociationSet Name="fk_Contratos_Personas" Association="radixModel.fk_Contratos_Personas">
             <End Role="personas" EntitySet="personas" />
             <End Role="contratos" EntitySet="contratos" />
@@ -1385,10 +1292,38 @@
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
             <End Role="personas" EntitySet="personas" />
           </AssociationSet>
+          <EntitySet Name="cargos" EntityType="radixModel.cargos" />
+          <EntitySet Name="empresa_cargo" EntityType="radixModel.empresa_cargo" />
           <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
-          <AssociationSet Name="fk_Horario_Cargo" Association="radixModel.fk_Horario_Cargo">
+          <EntitySet Name="subempresa_cargo" EntityType="radixModel.subempresa_cargo" />
+          <EntitySet Name="subempresa_cargo_horario" EntityType="radixModel.subempresa_cargo_horario" />
+          <AssociationSet Name="cargo" Association="radixModel.cargo">
             <End Role="cargos" EntitySet="cargos" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="cargo_subempresa" Association="radixModel.cargo_subempresa">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Personas_cargos1" Association="radixModel.fk_Personas_cargos1">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="empresa" Association="radixModel.empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="hl_id" Association="radixModel.hl_id">
             <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
+          </AssociationSet>
+          <AssociationSet Name="subempcar_id" Association="radixModel.subempcar_id">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
+          </AssociationSet>
+          <AssociationSet Name="subempresa_cargo1" Association="radixModel.subempresa_cargo1">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="comunas">
@@ -1502,6 +1437,7 @@
           <Property Name="Emp_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="login" Relationship="radixModel.fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
+          <NavigationProperty Name="empresa_cargo" Relationship="radixModel.empresa" FromRole="empresas" ToRole="empresa_cargo" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -1662,7 +1598,6 @@
           <Property Name="Per_Des" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Desc_Id" Type="Int32" />
           <Property Name="THor_Id" Type="Int32" />
-          <NavigationProperty Name="cargos" Relationship="radixModel.fk_Personas_cargos1" FromRole="personas" ToRole="cargos" />
           <NavigationProperty Name="contratos" Relationship="radixModel.fk_Contratos_Personas" FromRole="personas" ToRole="contratos" />
           <NavigationProperty Name="documentos" Relationship="radixModel.fk_Documento_persona" FromRole="personas" ToRole="documentos" />
           <NavigationProperty Name="estadosciviles" Relationship="radixModel.fk_personas_estadocivil" FromRole="personas" ToRole="estadosciviles" />
@@ -1672,21 +1607,8 @@
           <NavigationProperty Name="nacionalidades" Relationship="radixModel.fk_personas_nac" FromRole="personas" ToRole="nacionalidades" />
           <NavigationProperty Name="tiposhorasextras" Relationship="radixModel.fk_personas_thora" FromRole="personas" ToRole="tiposhorasextras" />
           <NavigationProperty Name="tipoimpuestos" Relationship="radixModel.fk_personas_tipoimpuesto" FromRole="personas" ToRole="tipoimpuestos" />
+          <NavigationProperty Name="cargos" Relationship="radixModel.fk_Personas_cargos1" FromRole="personas" ToRole="cargos" />
         </EntityType>
-        <Association Name="fk_Personas_cargos1">
-          <End Type="radixModel.cargos" Role="cargos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cargos">
-              <PropertyRef Name="Car_Id" />
-            </Principal>
-            <Dependent Role="personas">
-              <PropertyRef Name="Car_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Contratos_Personas">
           <End Type="radixModel.personas" Role="personas" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1855,31 +1777,143 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="cargos">
+          <Key>
+            <PropertyRef Name="Car_Id" />
+          </Key>
+          <Property Name="Car_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Car_Nom" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresa_cargo" Relationship="radixModel.cargo" FromRole="cargos" ToRole="empresa_cargo" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.cargo_subempresa" FromRole="cargos" ToRole="subempresa_cargo" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_Personas_cargos1" FromRole="cargos" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="empresa_cargo">
+          <Key>
+            <PropertyRef Name="Empcar_id" />
+          </Key>
+          <Property Name="Empcar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Int32" />
+          <Property Name="Car_Id" Type="Int32" />
+          <NavigationProperty Name="cargos" Relationship="radixModel.cargo" FromRole="empresa_cargo" ToRole="cargos" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.empresa" FromRole="empresa_cargo" ToRole="empresas" />
+        </EntityType>
         <EntityType Name="horario_laboral">
           <Key>
             <PropertyRef Name="Hl_Id" />
           </Key>
           <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Car_Id" Type="Int32" />
           <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Hl_Inicio" Type="DateTime" />
           <Property Name="Hl_Termino" Type="DateTime" />
           <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Hl_TodoDia" Type="Boolean" />
-          <NavigationProperty Name="cargos" Relationship="radixModel.fk_Horario_Cargo" FromRole="horario_laboral" ToRole="cargos" />
+          <NavigationProperty Name="subempresa_cargo_horario" Relationship="radixModel.hl_id" FromRole="horario_laboral" ToRole="subempresa_cargo_horario" />
         </EntityType>
-        <Association Name="fk_Horario_Cargo">
-          <End Type="radixModel.cargos" Role="cargos" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
+        <EntityType Name="subempresa_cargo">
+          <Key>
+            <PropertyRef Name="Subempcar_id" />
+          </Key>
+          <Property Name="Subempcar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Id" Type="Int32" />
+          <Property Name="Car_Id" Type="Int32" />
+          <NavigationProperty Name="cargos" Relationship="radixModel.cargo_subempresa" FromRole="subempresa_cargo" ToRole="cargos" />
+          <NavigationProperty Name="subempresa_cargo_horario" Relationship="radixModel.subempcar_id" FromRole="subempresa_cargo" ToRole="subempresa_cargo_horario" />
+          <NavigationProperty Name="subempresas" Relationship="radixModel.subempresa_cargo1" FromRole="subempresa_cargo" ToRole="subempresas" />
+        </EntityType>
+        <EntityType Name="subempresa_cargo_horario">
+          <Key>
+            <PropertyRef Name="Sch_Id" />
+          </Key>
+          <Property Name="Sch_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subempcar_id" Type="Int32" />
+          <Property Name="Hl_Id" Type="Int32" />
+          <NavigationProperty Name="horario_laboral" Relationship="radixModel.hl_id" FromRole="subempresa_cargo_horario" ToRole="horario_laboral" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.subempcar_id" FromRole="subempresa_cargo_horario" ToRole="subempresa_cargo" />
+        </EntityType>
+        <Association Name="cargo">
+          <End Type="radixModel.cargos" Role="cargos" Multiplicity="0..1" />
+          <End Type="radixModel.empresa_cargo" Role="empresa_cargo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cargos">
               <PropertyRef Name="Car_Id" />
             </Principal>
-            <Dependent Role="horario_laboral">
+            <Dependent Role="empresa_cargo">
               <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cargo_subempresa">
+          <End Type="radixModel.cargos" Role="cargos" Multiplicity="0..1" />
+          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Personas_cargos1">
+          <End Type="radixModel.cargos" Role="cargos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa">
+          <End Type="radixModel.empresas" Role="empresas" Multiplicity="0..1" />
+          <End Type="radixModel.empresa_cargo" Role="empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hl_id">
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="0..1" />
+          <End Type="radixModel.subempresa_cargo_horario" Role="subempresa_cargo_horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo_horario">
+              <PropertyRef Name="Hl_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempcar_id">
+          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="0..1" />
+          <End Type="radixModel.subempresa_cargo_horario" Role="subempresa_cargo_horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo_horario">
+              <PropertyRef Name="Subempcar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresa_cargo1">
+          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="0..1" />
+          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Sub_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1903,14 +1937,6 @@
                 <ScalarProperty Name="BTC_Id" ColumnName="BTC_Id" />
                 <ScalarProperty Name="Ban_Id" ColumnName="Ban_Id" />
                 <ScalarProperty Name="TCuen_Id" ColumnName="TCuen_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cargos">
-            <EntityTypeMapping TypeName="radixModel.cargos">
-              <MappingFragment StoreEntitySet="cargos">
-                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
-                <ScalarProperty Name="Car_Nom" ColumnName="Car_Nom" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1948,33 +1974,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="grupos">
-            <EntityTypeMapping TypeName="radixModel.grupos">
-              <MappingFragment StoreEntitySet="grupos">
-                <ScalarProperty Name="Grup_Id" ColumnName="Grup_Id" />
-                <ScalarProperty Name="Grup_Nom" ColumnName="Grup_Nom" />
-                <ScalarProperty Name="Jor_Id" ColumnName="Jor_Id" />
-                <ScalarProperty Name="Hor_Id" ColumnName="Hor_Id" />
-                <ScalarProperty Name="Sec_Id" ColumnName="Sec_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="horario">
-            <EntityTypeMapping TypeName="radixModel.horario">
-              <MappingFragment StoreEntitySet="horario">
-                <ScalarProperty Name="Hor_Id" ColumnName="Hor_Id" />
-                <ScalarProperty Name="Hor_intervalo" ColumnName="Hor_intervalo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="jornada">
-            <EntityTypeMapping TypeName="radixModel.jornada">
-              <MappingFragment StoreEntitySet="jornada">
-                <ScalarProperty Name="Jor_Id" ColumnName="Jor_Id" />
-                <ScalarProperty Name="Jor_Nom" ColumnName="Jor_Nom" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="pago">
             <EntityTypeMapping TypeName="radixModel.pago">
               <MappingFragment StoreEntitySet="pago">
@@ -1985,14 +1984,6 @@
                 <ScalarProperty Name="Pag_Motivo" ColumnName="Pag_Motivo" />
                 <ScalarProperty Name="BTC_Id" ColumnName="BTC_Id" />
                 <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sectores">
-            <EntityTypeMapping TypeName="radixModel.sectores">
-              <MappingFragment StoreEntitySet="sectores">
-                <ScalarProperty Name="Sec_Id" ColumnName="Sec_Id" />
-                <ScalarProperty Name="Sec_Nom" ColumnName="Sec_Nom" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2223,6 +2214,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="cargos">
+            <EntityTypeMapping TypeName="radixModel.cargos">
+              <MappingFragment StoreEntitySet="cargos">
+                <ScalarProperty Name="Car_Nom" ColumnName="Car_Nom" />
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresa_cargo">
+            <EntityTypeMapping TypeName="radixModel.empresa_cargo">
+              <MappingFragment StoreEntitySet="empresa_cargo">
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Empcar_id" ColumnName="Empcar_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="horario_laboral">
             <EntityTypeMapping TypeName="radixModel.horario_laboral">
               <MappingFragment StoreEntitySet="horario_laboral">
@@ -2232,8 +2240,25 @@
                 <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
                 <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
                 <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
-                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
                 <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subempresa_cargo">
+            <EntityTypeMapping TypeName="radixModel.subempresa_cargo">
+              <MappingFragment StoreEntitySet="subempresa_cargo">
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Subempcar_id" ColumnName="Subempcar_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subempresa_cargo_horario">
+            <EntityTypeMapping TypeName="radixModel.subempresa_cargo_horario">
+              <MappingFragment StoreEntitySet="subempresa_cargo_horario">
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+                <ScalarProperty Name="Subempcar_id" ColumnName="Subempcar_id" />
+                <ScalarProperty Name="Sch_Id" ColumnName="Sch_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,18 +12,21 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class jornada
+    public partial class subempresa_cargo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public jornada()
+        public subempresa_cargo()
         {
-            this.grupos = new HashSet<grupos>();
+            this.subempresa_cargo_horario = new HashSet<subempresa_cargo_horario>();
         }
     
-        public int Jor_Id { get; set; }
-        public string Jor_Nom { get; set; }
+        public int Subempcar_id { get; set; }
+        public Nullable<int> Sub_Id { get; set; }
+        public Nullable<int> Car_Id { get; set; }
     
+        public virtual cargos cargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<grupos> grupos { get; set; }
+        public virtual ICollection<subempresa_cargo_horario> subempresa_cargo_horario { get; set; }
+        public virtual subempresas subempresas { get; set; }
     }
 }

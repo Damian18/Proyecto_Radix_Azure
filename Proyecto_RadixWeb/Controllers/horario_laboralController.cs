@@ -18,6 +18,10 @@ namespace Proyecto_RadixWeb.Controllers
         {
             return View();
         }
+        public ActionResult Horario_Personas()
+        {
+            return View();
+        }
 
         public JsonResult GetEvents()
         {
@@ -31,7 +35,7 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: Horario_laboral
         public ActionResult Index()
         {
-            var horario_laboral = db.horario_laboral.Include(h => h.cargos);
+            var horario_laboral = db.horario_laboral;
             return View(horario_laboral.ToList());
         }
 

@@ -119,18 +119,18 @@
                                 title: v.Hl_Titulo,
                                 description: v.Hl_Descripcion,
                                 start: moment(v.Hl_Inicio),
-                                end: v.Hl_Termino != null ? moment(v.Hl_Termino) : null,
+                                end: v.Hl_Termino !== null ? moment(v.Hl_Termino) : null,
                                 color: v.Hl_ColorTema,
                                 allDay: v.Hl_TodoDia
                             });
-                        })
+                        });
 
                         GenerateCalender(events);
                     },
                     error: function (error) {
                         alert('failed');
                     }
-                })
+                });
             }
 
             var NombreDias = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -158,7 +158,7 @@
                         today: 'Hoy',
                         day: 'Día',
                         week: 'Semana',
-                        month: 'Mes',
+                        month: 'Mes'
                     },
                     dayNames: NombreDias,
                     dayNamesShort: NombreDiasAbrebiado,
@@ -173,7 +173,7 @@
                         $('#myModal #eventTitle').text(calEvent.title);
                         var $description = $('<div/>');
                         $description.append($('<p/>').html('<b>Inicio:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
-                        if (calEvent.end != null) {
+                        if (calEvent.end !== null) {
                             $description.append($('<p/>').html('<b>Termino:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                         }
                         $description.append($('<p/>').html('<b>Descripción:</b>' + calEvent.description));
@@ -201,14 +201,14 @@
                             EventID: event.eventID,
                             Subject: event.title,
                             Start: event.start.format('DD/MM/YYYY HH:mm A'),
-                            End: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
+                            End: event.end !== null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
                             Description: event.description,
                             ThemeColor: event.color,
                             IsFullDay: event.allDay
                         };
                         SaveEvent(data);
                     }
-                })
+                });
             }
 
             // ------------------ Metodo Editar -------------------- //
@@ -220,7 +220,7 @@
             // ------------------ Metodo Eliminar ------------------ //
 
             $('#btnDelete').click(function () {
-                if (selectedEvent != null && confirm('¿Desea Eliminar?')) {
+                if (selectedEvent !== null && confirm('¿Desea Eliminar?')) {
                     $.ajax({
                         type: "POST",
                         url: '/Horario_laboral/DeleteEvent',
@@ -235,7 +235,7 @@
                         error: function () {
                             alert('Failed');
                         }
-                    })
+                    });
                 }
             });
             $('#dtp1,#dtp2').datetimepicker({
@@ -253,13 +253,13 @@
             // ------------------ Metodo Abrir Formulario ------------------ //
 
             function openAddEditForm() {
-                if (selectedEvent != null) {
+                if (selectedEvent !== null) {
                     $('#hdEventID').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);
                     $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
                     $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
                     $('#chkIsFullDay').change();
-                    $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
+                    $('#txtEnd').val(selectedEvent.end !== null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
                     $('#txtDescription').val(selectedEvent.description);
                     $('#ddThemeColor').val(selectedEvent.color);
                 }
@@ -271,15 +271,15 @@
 
             $('#btnSave').click(function () {
                 //Validation/
-                if ($('#txtSubject').val().trim() == "") {
+                if ($('#txtSubject').val().trim() === "") {
                     alert('Subject required');
                     return;
                 }
-                if ($('#txtStart').val().trim() == "") {
+                if ($('#txtStart').val().trim() === "") {
                     alert('Start date required');
                     return;
                 }
-                if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
+                if ($('#chkIsFullDay').is(':checked') === false && $('#txtEnd').val().trim() === "") {
                     alert('End date required');
                     return;
                 }
@@ -303,7 +303,7 @@
                 }
                 SaveEvent(data);
                 // call function for submit data to the server
-            })
+            });
             function SaveEvent(data) {
                 $.ajax({
                     type: "POST",
@@ -319,8 +319,8 @@
                     error: function () {
                         alert('Failed');
                     }
-                })
+                });
             }
-        })
+        });
     </script>
 }

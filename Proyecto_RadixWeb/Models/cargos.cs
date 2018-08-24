@@ -17,16 +17,19 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cargos()
         {
+            this.empresa_cargo = new HashSet<empresa_cargo>();
+            this.subempresa_cargo = new HashSet<subempresa_cargo>();
             this.personas = new HashSet<personas>();
-            this.horario_laboral = new HashSet<horario_laboral>();
         }
     
         public int Car_Id { get; set; }
         public string Car_Nom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personas> personas { get; set; }
+        public virtual ICollection<empresa_cargo> empresa_cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<horario_laboral> horario_laboral { get; set; }
+        public virtual ICollection<subempresa_cargo> subempresa_cargo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<personas> personas { get; set; }
     }
 }

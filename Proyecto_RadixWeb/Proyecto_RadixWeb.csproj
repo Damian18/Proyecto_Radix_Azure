@@ -223,6 +223,7 @@
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\ContratosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\Empresa_CargoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Horario_laboralController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Controllers\PlanillascontratosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SubEmpresasController.cs" />
+    <Compile Include="Controllers\Subempresa_CargoController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -266,6 +268,9 @@
     <Compile Include="Models\empresas.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\empresa_cargo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\estadosciviles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -278,19 +283,10 @@
     <Compile Include="Models\generos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\grupos.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\horario.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\horario_laboral.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\jornada.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\login.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -331,10 +327,13 @@
     <Compile Include="Models\regiones.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sectores.cs">
+    <Compile Include="Models\subempresas.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\subempresas.cs">
+    <Compile Include="Models\subempresa_cargo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\subempresa_cargo_horario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipoformaspago.cs">
@@ -840,6 +839,17 @@
     <Content Include="Views\Account\CuentaPersonas.cshtml" />
     <Content Include="Views\Contratos\VistaParcial.cshtml" />
     <Content Include="Views\SubEmpresas\Agregar.cshtml" />
+    <Content Include="Views\Horario_laboral\Horario_Personas.cshtml" />
+    <Content Include="Views\Empresa_Cargo\Create.cshtml" />
+    <Content Include="Views\Empresa_Cargo\Delete.cshtml" />
+    <Content Include="Views\Empresa_Cargo\Details.cshtml" />
+    <Content Include="Views\Empresa_Cargo\Edit.cshtml" />
+    <Content Include="Views\Empresa_Cargo\Index.cshtml" />
+    <Content Include="Views\Subempresa_Cargo\Create.cshtml" />
+    <Content Include="Views\Subempresa_Cargo\Delete.cshtml" />
+    <Content Include="Views\Subempresa_Cargo\Details.cshtml" />
+    <Content Include="Views\Subempresa_Cargo\Edit.cshtml" />
+    <Content Include="Views\Subempresa_Cargo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
