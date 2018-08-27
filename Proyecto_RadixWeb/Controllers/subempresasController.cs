@@ -84,27 +84,7 @@ namespace Proyecto_RadixWeb.Controllers
             return PartialView();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Agregar(subempresas subempresas)
-        {
-            string message = "";
-            bool status = false;
-            if (ModelState.IsValid)
-            {
-
-                db.subempresas.Add(subempresas);
-                db.SaveChanges();
-                status = true;
-                    message = "Almacenado Correctamente";
-                
-            }
-            else
-            {
-                message = "Error";
-            }
-            return new JsonResult { Data = new { status = status, message = message } };
-        }
+        
 
 
         // GET: subempresas/Create

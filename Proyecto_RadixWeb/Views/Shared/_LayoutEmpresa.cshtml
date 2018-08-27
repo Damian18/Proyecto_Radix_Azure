@@ -21,11 +21,12 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
+    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>*@
+    <script src="~/Scripts/jquery-3.3.1.slim.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
     <div class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
@@ -63,16 +64,14 @@
                 <ul class="acorh">
                     <li>
                         <a href="@Url.Action("Index", "subempresas")">Sucursales</a>
-                        <ul id="listaSucursal">
-                      
-                        </ul>
+                        <ul id="listaSucursal"></ul>
                     </li>
                     <li>
                         <a href="#">RR.HH.</a>
                         <ul>
                             <li><a href="#">Lista de Trabajadores</a></li>
                             <li><a href="@Url.Action("Index", "Planillascontratos")">Documentos</a></li>
-                            <li><a href="@Url.Action("Index", "Cargos")">Cargos</a></li>
+                            <li><a href="@Url.Action("Index", "Empresa_Cargo")">Cargos</a></li>
                             <li><a href="@Url.Action("Horario", "Horario_laboral")">Horarios</a></li>
                         </ul>
                     </li>
@@ -247,9 +246,9 @@
 
     </script>
 
-    @RenderSection("scripts", required: false)
-
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
 
 </body>
 

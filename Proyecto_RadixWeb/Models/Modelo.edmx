@@ -157,6 +157,7 @@
           <Property Name="Hl_Termino" Type="datetime" Precision="0" />
           <Property Name="Hl_ColorTema" Type="varchar" MaxLength="10" />
           <Property Name="Hl_TodoDia" Type="bit" />
+          <Property Name="Subempcar_id" Type="int" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -238,14 +239,6 @@
           <Property Name="Subempcar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Sub_Id" Type="int" />
           <Property Name="Car_Id" Type="int" />
-        </EntityType>
-        <EntityType Name="subempresa_cargo_horario">
-          <Key>
-            <PropertyRef Name="Sch_Id" />
-          </Key>
-          <Property Name="Sch_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Subempcar_id" Type="int" />
-          <Property Name="Hl_Id" Type="int" />
         </EntityType>
         <EntityType Name="subempresas">
           <Key>
@@ -710,15 +703,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="hl_id">
-          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="0..1" />
-          <End Role="subempresa_cargo_horario" Type="Self.subempresa_cargo_horario" Multiplicity="*" />
+        <Association Name="horario_subempresa_cargo">
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="0..1" />
+          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="horario_laboral">
-              <PropertyRef Name="Hl_Id" />
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
             </Principal>
-            <Dependent Role="subempresa_cargo_horario">
-              <PropertyRef Name="Hl_Id" />
+            <Dependent Role="horario_laboral">
+              <PropertyRef Name="Subempcar_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -733,18 +726,6 @@
             </Principal>
             <Dependent Role="aspnetuserroles">
               <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="subempcar_id">
-          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="0..1" />
-          <End Role="subempresa_cargo_horario" Type="Self.subempresa_cargo_horario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subempresa_cargo">
-              <PropertyRef Name="Subempcar_id" />
-            </Principal>
-            <Dependent Role="subempresa_cargo_horario">
-              <PropertyRef Name="Subempcar_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -785,7 +766,6 @@
           <EntitySet Name="provincias" EntityType="Self.provincias" Schema="radix" store:Type="Tables" />
           <EntitySet Name="regiones" EntityType="Self.regiones" Schema="radix" store:Type="Tables" />
           <EntitySet Name="subempresa_cargo" EntityType="Self.subempresa_cargo" Schema="radix" store:Type="Tables" />
-          <EntitySet Name="subempresa_cargo_horario" EntityType="Self.subempresa_cargo_horario" Schema="radix" store:Type="Tables" />
           <EntitySet Name="subempresas" EntityType="Self.subempresas" Schema="radix" store:Type="Tables" />
           <EntitySet Name="tipoformaspago" EntityType="Self.tipoformaspago" Schema="radix" store:Type="Tables" />
           <EntitySet Name="tipoimpuestos" EntityType="Self.tipoimpuestos" Schema="radix" store:Type="Tables" />
@@ -910,17 +890,13 @@
             <End Role="tiposperiodos" EntitySet="tiposperiodos" />
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
           </AssociationSet>
-          <AssociationSet Name="hl_id" Association="Self.hl_id">
+          <AssociationSet Name="horario_subempresa_cargo" Association="Self.horario_subempresa_cargo">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
             <End Role="horario_laboral" EntitySet="horario_laboral" />
-            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
           </AssociationSet>
           <AssociationSet Name="IdentityRole_Users" Association="Self.IdentityRole_Users">
             <End Role="aspnetroles" EntitySet="aspnetroles" />
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
-          </AssociationSet>
-          <AssociationSet Name="subempcar_id" Association="Self.subempcar_id">
-            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
-            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
           </AssociationSet>
           <AssociationSet Name="subempresa_cargo1" Association="Self.subempresa_cargo1">
             <End Role="subempresas" EntitySet="subempresas" />
@@ -1294,9 +1270,7 @@
           </AssociationSet>
           <EntitySet Name="cargos" EntityType="radixModel.cargos" />
           <EntitySet Name="empresa_cargo" EntityType="radixModel.empresa_cargo" />
-          <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
           <EntitySet Name="subempresa_cargo" EntityType="radixModel.subempresa_cargo" />
-          <EntitySet Name="subempresa_cargo_horario" EntityType="radixModel.subempresa_cargo_horario" />
           <AssociationSet Name="cargo" Association="radixModel.cargo">
             <End Role="cargos" EntitySet="cargos" />
             <End Role="empresa_cargo" EntitySet="empresa_cargo" />
@@ -1313,17 +1287,14 @@
             <End Role="empresas" EntitySet="empresas" />
             <End Role="empresa_cargo" EntitySet="empresa_cargo" />
           </AssociationSet>
-          <AssociationSet Name="hl_id" Association="radixModel.hl_id">
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
-            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
-          </AssociationSet>
-          <AssociationSet Name="subempcar_id" Association="radixModel.subempcar_id">
-            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
-            <End Role="subempresa_cargo_horario" EntitySet="subempresa_cargo_horario" />
-          </AssociationSet>
           <AssociationSet Name="subempresa_cargo1" Association="radixModel.subempresa_cargo1">
             <End Role="subempresas" EntitySet="subempresas" />
             <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+          </AssociationSet>
+          <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
+          <AssociationSet Name="horario_subempresa_cargo" Association="radixModel.horario_subempresa_cargo">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="comunas">
@@ -1797,19 +1768,6 @@
           <NavigationProperty Name="cargos" Relationship="radixModel.cargo" FromRole="empresa_cargo" ToRole="cargos" />
           <NavigationProperty Name="empresas" Relationship="radixModel.empresa" FromRole="empresa_cargo" ToRole="empresas" />
         </EntityType>
-        <EntityType Name="horario_laboral">
-          <Key>
-            <PropertyRef Name="Hl_Id" />
-          </Key>
-          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Hl_Inicio" Type="DateTime" />
-          <Property Name="Hl_Termino" Type="DateTime" />
-          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Hl_TodoDia" Type="Boolean" />
-          <NavigationProperty Name="subempresa_cargo_horario" Relationship="radixModel.hl_id" FromRole="horario_laboral" ToRole="subempresa_cargo_horario" />
-        </EntityType>
         <EntityType Name="subempresa_cargo">
           <Key>
             <PropertyRef Name="Subempcar_id" />
@@ -1818,18 +1776,8 @@
           <Property Name="Sub_Id" Type="Int32" />
           <Property Name="Car_Id" Type="Int32" />
           <NavigationProperty Name="cargos" Relationship="radixModel.cargo_subempresa" FromRole="subempresa_cargo" ToRole="cargos" />
-          <NavigationProperty Name="subempresa_cargo_horario" Relationship="radixModel.subempcar_id" FromRole="subempresa_cargo" ToRole="subempresa_cargo_horario" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.subempresa_cargo1" FromRole="subempresa_cargo" ToRole="subempresas" />
-        </EntityType>
-        <EntityType Name="subempresa_cargo_horario">
-          <Key>
-            <PropertyRef Name="Sch_Id" />
-          </Key>
-          <Property Name="Sch_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Subempcar_id" Type="Int32" />
-          <Property Name="Hl_Id" Type="Int32" />
-          <NavigationProperty Name="horario_laboral" Relationship="radixModel.hl_id" FromRole="subempresa_cargo_horario" ToRole="horario_laboral" />
-          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.subempcar_id" FromRole="subempresa_cargo_horario" ToRole="subempresa_cargo" />
+          <NavigationProperty Name="horario_laboral" Relationship="radixModel.horario_subempresa_cargo" FromRole="subempresa_cargo" ToRole="horario_laboral" />
         </EntityType>
         <Association Name="cargo">
           <End Type="radixModel.cargos" Role="cargos" Multiplicity="0..1" />
@@ -1881,30 +1829,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="hl_id">
-          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="0..1" />
-          <End Type="radixModel.subempresa_cargo_horario" Role="subempresa_cargo_horario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="horario_laboral">
-              <PropertyRef Name="Hl_Id" />
-            </Principal>
-            <Dependent Role="subempresa_cargo_horario">
-              <PropertyRef Name="Hl_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="subempcar_id">
-          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="0..1" />
-          <End Type="radixModel.subempresa_cargo_horario" Role="subempresa_cargo_horario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subempresa_cargo">
-              <PropertyRef Name="Subempcar_id" />
-            </Principal>
-            <Dependent Role="subempresa_cargo_horario">
-              <PropertyRef Name="Subempcar_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="subempresa_cargo1">
           <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="0..1" />
           <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="*" />
@@ -1914,6 +1838,32 @@
             </Principal>
             <Dependent Role="subempresa_cargo">
               <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="horario_laboral">
+          <Key>
+            <PropertyRef Name="Hl_Id" />
+          </Key>
+          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Hl_Inicio" Type="DateTime" />
+          <Property Name="Hl_Termino" Type="DateTime" />
+          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Hl_TodoDia" Type="Boolean" />
+          <Property Name="Subempcar_id" Type="Int32" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.horario_subempresa_cargo" FromRole="horario_laboral" ToRole="subempresa_cargo" />
+        </EntityType>
+        <Association Name="horario_subempresa_cargo">
+          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="0..1" />
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
+            </Principal>
+            <Dependent Role="horario_laboral">
+              <PropertyRef Name="Subempcar_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2231,19 +2181,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="horario_laboral">
-            <EntityTypeMapping TypeName="radixModel.horario_laboral">
-              <MappingFragment StoreEntitySet="horario_laboral">
-                <ScalarProperty Name="Hl_TodoDia" ColumnName="Hl_TodoDia" />
-                <ScalarProperty Name="Hl_ColorTema" ColumnName="Hl_ColorTema" />
-                <ScalarProperty Name="Hl_Termino" ColumnName="Hl_Termino" />
-                <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
-                <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
-                <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
-                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="subempresa_cargo">
             <EntityTypeMapping TypeName="radixModel.subempresa_cargo">
               <MappingFragment StoreEntitySet="subempresa_cargo">
@@ -2253,12 +2190,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="subempresa_cargo_horario">
-            <EntityTypeMapping TypeName="radixModel.subempresa_cargo_horario">
-              <MappingFragment StoreEntitySet="subempresa_cargo_horario">
-                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+          <EntitySetMapping Name="horario_laboral">
+            <EntityTypeMapping TypeName="radixModel.horario_laboral">
+              <MappingFragment StoreEntitySet="horario_laboral">
                 <ScalarProperty Name="Subempcar_id" ColumnName="Subempcar_id" />
-                <ScalarProperty Name="Sch_Id" ColumnName="Sch_Id" />
+                <ScalarProperty Name="Hl_TodoDia" ColumnName="Hl_TodoDia" />
+                <ScalarProperty Name="Hl_ColorTema" ColumnName="Hl_ColorTema" />
+                <ScalarProperty Name="Hl_Termino" ColumnName="Hl_Termino" />
+                <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
+                <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
+                <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

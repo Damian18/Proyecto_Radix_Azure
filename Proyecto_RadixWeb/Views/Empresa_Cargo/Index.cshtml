@@ -3,37 +3,40 @@
 @{
     ViewBag.Title = "Index";
 }
+<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
-<h2>Index</h2>
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.cargos.Car_Nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.empresas.Emp_Nom)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cargos.Car_Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.empresas.Emp_Nom)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Empcar_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Empcar_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Empcar_id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Empcar_id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Empcar_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Empcar_id })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

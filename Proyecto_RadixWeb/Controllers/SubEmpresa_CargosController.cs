@@ -10,19 +10,19 @@ using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
 {
-    public class Subempresa_CargoController : Controller
+    public class SubEmpresa_CargosController : Controller
     {
         private radixEntities db = new radixEntities();
 
         // GET: Subempresa_Cargo
-        public ActionResult Index()
+        public ActionResult Index(int? subemp_id)
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();
 
-            int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+            ViewBag.subemp_id = subemp_id;
             ViewBag.empresa = emp_nom;
             var subempresa_cargo = db.subempresa_cargo.Include(s => s.cargos).Include(s => s.subempresas);
-            return View(subempresa_cargo.Where(s=>s.subempresas.empresas.Emp_Id==emp_id).ToList());
+            return View(subempresa_cargo.Where(s => s.Sub_Id == subemp_id).ToList());
         }
 
         // GET: Subempresa_Cargo/Details/5
@@ -41,17 +41,19 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         // GET: Subempresa_Cargo/Create
-        public ActionResult Create()
+        public ActionResult Create(int? subemp_id)
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();
 
             int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
             ViewBag.empresa = emp_nom;
 
-            List<empresa_cargo> listaCargos = db.empresa_cargo.Where(e=>e.Emp_Id==emp_id).ToList();
-            ViewBag.Car_Id = new SelectList(listaCargos, "Car_Id", "Car_Mom");
+            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+
            
-            ViewBag.Sub_Id = new SelectList(db.subempresas, "Sub_Id", "Sub_Nom");
+            List<empresa_cargo> listacargos = db.empresa_cargo.ToList();
+            ViewBag.listacargos = new SelectList(listacargos, "Car_Id", "cargos.Car_Nom");
+
             return View();
         }
 
@@ -60,13 +62,14 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Subempcar_id,Sub_Id,Car_Id")] subempresa_cargo subempresa_cargo)
+        public ActionResult Create([Bind(Include = "Subempcar_id,Car_Id")] subempresa_cargo subempresa_cargo, int subemp_id)
         {
             if (ModelState.IsValid)
             {
+                subempresa_cargo.Sub_Id = subemp_id;
                 db.subempresa_cargo.Add(subempresa_cargo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { subemp_id });
             }
 
             ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom", subempresa_cargo.Car_Id);
