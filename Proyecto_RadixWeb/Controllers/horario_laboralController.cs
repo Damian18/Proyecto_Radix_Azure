@@ -14,19 +14,30 @@ namespace Proyecto_RadixWeb.Controllers
     {
         private radixEntities db = new radixEntities();
 
-        public ActionResult Horario()
+        public ActionResult Horario(int? Subempcar_id)
         {
+
+
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
+            ViewBag.empresa = emp_nom;
+            ViewBag.Subempcar_id = Subempcar_id;
+
             return View();
         }
         public ActionResult Horario_Personas()
         {
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
+            ViewBag.empresa = emp_nom;
             return View();
         }
 
-        public JsonResult GetEvents()
+
+        public JsonResult GetEvents(int? Subempcar_id)
         {
 
-            var events = db.horario_laboral.ToList();
+            List<horario_laboral> events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
+            //var events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
+
             return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
         }
@@ -40,7 +51,7 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveEvent(horario_laboral e)
+        public JsonResult SaveEvent(horario_laboral e, int? Subempcar_id)
         {
             var status = false;
 
@@ -60,6 +71,7 @@ namespace Proyecto_RadixWeb.Controllers
             }
             else
             {
+                e.Subempcar_id = Subempcar_id;
                 db.horario_laboral.Add(e);
             }
             db.SaveChanges();
@@ -75,14 +87,14 @@ namespace Proyecto_RadixWeb.Controllers
             var status = false;
 
             var v = db.horario_laboral.Where(a => a.Hl_Id == Hl_Id).FirstOrDefault();
-          
-                if (v != null)
-                {
-                    db.horario_laboral.Remove(v);
-                    db.SaveChanges();
-                    status = true;
-                }
-           return new JsonResult { Data = new { status } };
+
+            if (v != null)
+            {
+                db.horario_laboral.Remove(v);
+                db.SaveChanges();
+                status = true;
+            }
+            return new JsonResult { Data = new { status } };
         }
     }
 }
