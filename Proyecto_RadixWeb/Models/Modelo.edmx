@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="radixModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="asistencias">
+          <Key>
+            <PropertyRef Name="asis_id" />
+          </Key>
+          <Property Name="asis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Con_Id" Type="int" />
+          <Property Name="Hl_Id" Type="int" />
+          <Property Name="asis_estado" Type="bit" />
+        </EntityType>
         <EntityType Name="aspnetroles">
           <Key>
             <PropertyRef Name="Id" />
@@ -316,6 +325,30 @@
             </Principal>
             <Dependent Role="aspnetuserroles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asis_contrato">
+          <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
+          <End Role="asistencias" Type="Self.asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Con_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asis_horario">
+          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="0..1" />
+          <End Role="asistencias" Type="Self.asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Hl_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -742,6 +775,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="radixModelStoreContainer">
+          <EntitySet Name="asistencias" EntityType="Self.asistencias" Schema="radix" store:Type="Tables" />
           <EntitySet Name="aspnetroles" EntityType="Self.aspnetroles" Schema="radix" store:Type="Tables" />
           <EntitySet Name="aspnetuserroles" EntityType="Self.aspnetuserroles" Schema="radix" store:Type="Tables" />
           <EntitySet Name="aspnetusers" EntityType="Self.aspnetusers" Schema="radix" store:Type="Tables" />
@@ -777,6 +811,14 @@
           <AssociationSet Name="ApplicationUser_Roles" Association="Self.ApplicationUser_Roles">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
+          </AssociationSet>
+          <AssociationSet Name="asis_contrato" Association="Self.asis_contrato">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
+          <AssociationSet Name="asis_horario" Association="Self.asis_horario">
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="asistencias" EntitySet="asistencias" />
           </AssociationSet>
           <AssociationSet Name="cargo" Association="Self.cargo">
             <End Role="cargos" EntitySet="cargos" />
@@ -1296,6 +1338,15 @@
             <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
             <End Role="horario_laboral" EntitySet="horario_laboral" />
           </AssociationSet>
+          <EntitySet Name="asistencias" EntityType="radixModel.asistencias" />
+          <AssociationSet Name="asis_contrato" Association="radixModel.asis_contrato">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
+          <AssociationSet Name="asis_horario" Association="radixModel.asis_horario">
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="comunas">
           <Key>
@@ -1549,6 +1600,7 @@
           <NavigationProperty Name="planillascontratos" Relationship="radixModel.FK_contratos_planillacontratos" FromRole="contratos" ToRole="planillascontratos" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.FK_contratos_subempresas" FromRole="contratos" ToRole="subempresas" />
           <NavigationProperty Name="tiposcontratos" Relationship="radixModel.fk_Contratos_TiposContratos1" FromRole="contratos" ToRole="tiposcontratos" />
+          <NavigationProperty Name="asistencias" Relationship="radixModel.asis_contrato" FromRole="contratos" ToRole="asistencias" />
         </EntityType>
         <EntityType Name="personas">
           <Key>
@@ -1854,6 +1906,7 @@
           <Property Name="Hl_TodoDia" Type="Boolean" />
           <Property Name="Subempcar_id" Type="Int32" />
           <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.horario_subempresa_cargo" FromRole="horario_laboral" ToRole="subempresa_cargo" />
+          <NavigationProperty Name="asistencias" Relationship="radixModel.asis_horario" FromRole="horario_laboral" ToRole="asistencias" />
         </EntityType>
         <Association Name="horario_subempresa_cargo">
           <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="0..1" />
@@ -1864,6 +1917,41 @@
             </Principal>
             <Dependent Role="horario_laboral">
               <PropertyRef Name="Subempcar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="asistencias">
+          <Key>
+            <PropertyRef Name="asis_id" />
+          </Key>
+          <Property Name="asis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Con_Id" Type="Int32" />
+          <Property Name="Hl_Id" Type="Int32" />
+          <Property Name="asis_estado" Type="Boolean" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.asis_contrato" FromRole="asistencias" ToRole="contratos" />
+          <NavigationProperty Name="horario_laboral" Relationship="radixModel.asis_horario" FromRole="asistencias" ToRole="horario_laboral" />
+        </EntityType>
+        <Association Name="asis_contrato">
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
+          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Con_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asis_horario">
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="0..1" />
+          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Hl_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2201,6 +2289,16 @@
                 <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
                 <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
                 <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="asistencias">
+            <EntityTypeMapping TypeName="radixModel.asistencias">
+              <MappingFragment StoreEntitySet="asistencias">
+                <ScalarProperty Name="asis_estado" ColumnName="asis_estado" />
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+                <ScalarProperty Name="asis_id" ColumnName="asis_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

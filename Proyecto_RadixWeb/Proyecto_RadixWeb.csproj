@@ -220,6 +220,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\ContratosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
@@ -238,6 +239,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\asistencias.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\aspnetroles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -836,6 +840,11 @@
     <Content Include="Views\SubEmpresa_Cargos\Details.cshtml" />
     <Content Include="Views\SubEmpresa_Cargos\Edit.cshtml" />
     <Content Include="Views\SubEmpresa_Cargos\Index.cshtml" />
+    <Content Include="Views\Asistencias\Create.cshtml" />
+    <Content Include="Views\Asistencias\Delete.cshtml" />
+    <Content Include="Views\Asistencias\Details.cshtml" />
+    <Content Include="Views\Asistencias\Edit.cshtml" />
+    <Content Include="Views\Asistencias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

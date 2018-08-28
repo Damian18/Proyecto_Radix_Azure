@@ -14,6 +14,12 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class contratos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public contratos()
+        {
+            this.asistencias = new HashSet<asistencias>();
+        }
+    
         public int Con_Id { get; set; }
         public int Sub_Id { get; set; }
         public Nullable<int> PC_Id { get; set; }
@@ -27,5 +33,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual planillascontratos planillascontratos { get; set; }
         public virtual subempresas subempresas { get; set; }
         public virtual tiposcontratos tiposcontratos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<asistencias> asistencias { get; set; }
     }
 }

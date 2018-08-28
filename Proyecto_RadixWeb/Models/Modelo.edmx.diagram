@@ -69,6 +69,9 @@
         <AssociationConnector Association="radixModel.subempresa_cargo1" />
         <EntityTypeShape EntityType="radixModel.horario_laboral" Width="1.5" PointX="12.75" PointY="31.5" />
         <AssociationConnector Association="radixModel.horario_subempresa_cargo" />
+        <EntityTypeShape EntityType="radixModel.asistencias" Width="1.5" PointX="15" PointY="25.5" />
+        <AssociationConnector Association="radixModel.asis_contrato" />
+        <AssociationConnector Association="radixModel.asis_horario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

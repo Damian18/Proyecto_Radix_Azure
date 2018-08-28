@@ -14,6 +14,12 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class horario_laboral
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public horario_laboral()
+        {
+            this.asistencias = new HashSet<asistencias>();
+        }
+    
         public int Hl_Id { get; set; }
         public string Hl_Titulo { get; set; }
         public string Hl_Descripcion { get; set; }
@@ -24,5 +30,7 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<int> Subempcar_id { get; set; }
     
         public virtual subempresa_cargo subempresa_cargo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<asistencias> asistencias { get; set; }
     }
 }

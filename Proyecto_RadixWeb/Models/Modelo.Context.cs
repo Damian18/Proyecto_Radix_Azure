@@ -57,5 +57,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<empresa_cargo> empresa_cargo { get; set; }
         public virtual DbSet<subempresa_cargo> subempresa_cargo { get; set; }
         public virtual DbSet<horario_laboral> horario_laboral { get; set; }
+        public virtual DbSet<asistencias> asistencias { get; set; }
     }
 }
