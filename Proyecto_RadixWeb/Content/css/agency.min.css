@@ -133,18 +133,18 @@ section {
 }
 /*BOTONES #0935c4 #0b266f*/
 .btn-primary {
-    background-color: #764908;
-    border-color: #452507
+    background-color: #0935c4;
+    border-color: #0b266f
 }
 
     .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-        background-color: #8f5709 !important;
-        border-color: #8e4907 !important;
+        background-color: #095e8f !important;
+        border-color: #0935c4 !important;
         color: #fff
     }
 
     .btn-primary:active, .btn-primary:focus {
-        box-shadow: 0 0 0 .2rem #764908 !important
+        box-shadow: 0 0 0 .2rem #081476 !important
     }
 
 ::-moz-selection {
