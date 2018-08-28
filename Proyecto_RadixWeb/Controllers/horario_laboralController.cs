@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto_RadixWeb.Models;
+using Newtonsoft.Json;
 
 namespace Proyecto_RadixWeb.Controllers
 {
@@ -24,6 +25,7 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View();
         }
+
         public ActionResult Horario_Personas()
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();

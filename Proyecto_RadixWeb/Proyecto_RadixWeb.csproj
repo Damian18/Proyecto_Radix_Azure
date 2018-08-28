@@ -435,7 +435,11 @@
     <Content Include="Content\img\about\2.jpg" />
     <Content Include="Content\img\about\3.jpg" />
     <Content Include="Content\img\about\4.jpg" />
-    <Content Include="Content\img\header-bg.jpg" />
+    <Content Include="Content\img\1.jpg" />
+    <Content Include="Content\img\about\5.jpg" />
+    <Content Include="Content\img\about\6.jpg" />
+    <Content Include="Content\img\about\7.jpg" />
+    <Content Include="Content\img\about\8.jpg" />
     <Content Include="Content\img\logos\creative-market.jpg" />
     <Content Include="Content\img\logos\designmodo.jpg" />
     <Content Include="Content\img\logos\envato.jpg" />
@@ -453,8 +457,10 @@
     <Content Include="Content\img\portfolio\05-thumbnail.jpg" />
     <Content Include="Content\img\portfolio\06-full.jpg" />
     <Content Include="Content\img\portfolio\06-thumbnail.jpg" />
-    <Content Include="Content\img\team\1.jpg" />
-    <Content Include="Content\img\team\2.jpg" />
+    <Content Include="Content\img\team\2.png" />
+    <Content Include="Content\img\team\1.png" />
+    <Content Include="Content\img\team\3.jpg" />
+    <Content Include="Content\img\team\4.jpg" />
     <Content Include="Content\js\agency.js" />
     <Content Include="Content\js\agency.min.js" />
     <Content Include="Content\js\app.js" />
