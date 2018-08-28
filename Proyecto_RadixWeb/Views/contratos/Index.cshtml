@@ -74,12 +74,15 @@
 
                         }
 
-                        <a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                            Editar
+                        <a href="@Url.Action("Horario_Personas", "Horario_laboral", new { sub_Id = item.Sub_Id,car_id=item.personas.Car_Id })" class="btn btn-outline-success btn-sm m-0">
+                            Horario
                         </a>
-                        <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                            Eliminar
-                        </a>
+                        @*<a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                                Editar
+                            </a>
+                            <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                                Eliminar
+                            </a>*@
 
                     </td>
 
