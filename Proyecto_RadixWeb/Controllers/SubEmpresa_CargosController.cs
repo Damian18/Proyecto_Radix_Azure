@@ -48,7 +48,7 @@ namespace Proyecto_RadixWeb.Controllers
             int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
             ViewBag.empresa = emp_nom;
 
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+            //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
 
            
             List<empresa_cargo> listacargos = db.empresa_cargo.ToList();
