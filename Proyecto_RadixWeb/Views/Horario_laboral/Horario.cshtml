@@ -4,7 +4,7 @@
 }
 
 
-<div  style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+<div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
 
     @*<div>
@@ -23,7 +23,7 @@
                 <div class="modal-body">
 
                     <p id="pDetails"></p>
-                  
+
                 </div>
                 <div class="modal-footer">
                     <button id="btnDelete" class="btn btn-default btn-sm pull-right">
@@ -130,13 +130,15 @@
                 var events = [];
             var selectedEvent = null;
             var Subempcar_id = '@ViewBag.Subempcar_id';
-                FetchEventAndRenderCalendar();
-                function FetchEventAndRenderCalendar() {
+            FetchEventAndRenderCalendar();
+
+
+            function FetchEventAndRenderCalendar() {
                     events = [];
                     $.ajax({
                         type: "GET",
                         url: '@Url.Action("GetEvents", "Horario_laboral")',
-                        datatype: JSON, 
+                        datatype: JSON,
                         data: {'Subempcar_id': Subempcar_id },
                       // url: "/Horario_laboral/GetEvents?Subempcar_id"+ViewBag.Subempcar_id,
                         success: function (data) {
@@ -155,7 +157,7 @@
                             GenerateCalender(events);
                         },
                         error: function (error) {
-                            alert('failed');
+                            alert('Error en cargar');
                         }
                     });
                 }
@@ -169,12 +171,12 @@
                 var NombreMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
                 var NombreMesesAbrebiado = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
-                function GenerateCalender(events) {
+            function GenerateCalender(events) {
                     $('#calender').fullCalendar('destroy');
 
                     $('#calender').fullCalendar({
 
-                       
+
                         defaultView: 'agendaWeek',
                         defaultDate: new Date(),
                         timeFormat: 'h(:mm)a',

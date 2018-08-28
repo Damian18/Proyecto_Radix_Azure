@@ -162,7 +162,7 @@
                     $("#ObjProvincias_Prov_Id").append("<option value='" + row.Prov_Id + "'>" + row.Prov_Nom + "</option>")
                 });
             });
-        })
+        });
 
         $("#ObjProvincias_Prov_Id").change(function () {
             $.get("/SubEmpresas/ObtenerComuna", { Prov_Id: $("#ObjProvincias_Prov_Id").val() }, function (data) {
@@ -172,7 +172,7 @@
                     $("#Com_Id").append("<option value='" + row.Com_Id + "'>" + row.Com_Nom + "</option>")
                 });
             });
-        })
+        });
     });
 
 

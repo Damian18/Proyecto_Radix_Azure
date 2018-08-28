@@ -35,6 +35,7 @@ namespace Proyecto_RadixWeb.Controllers
         public JsonResult GetEvents(int? Subempcar_id)
         {
 
+            db.Configuration.ProxyCreationEnabled = false;
             List<horario_laboral> events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
             //var events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
 
