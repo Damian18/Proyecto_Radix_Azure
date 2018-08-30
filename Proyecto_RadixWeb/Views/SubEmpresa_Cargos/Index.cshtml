@@ -29,16 +29,12 @@
                     <a href="@Url.Action("Horario", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
                         Horario
                     </a>
-                    <a href="@Url.Action("Index", "Asistencias", new { subemp_id = ViewBag.subemp_id, car_id=item.Car_Id })" class="btn btn-outline-success btn-sm m-0">
+                    <a href="@Url.Action("Index", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
                         Asistencia
                     </a>
 
                 </td>
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Subempcar_id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Subempcar_id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Subempcar_id })
-                    </td>*@
+             
             </tr>
         }
 

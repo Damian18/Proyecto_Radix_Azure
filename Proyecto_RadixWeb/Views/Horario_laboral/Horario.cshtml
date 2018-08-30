@@ -140,7 +140,6 @@
                         url: '@Url.Action("GetEvents", "Horario_laboral")',
                         datatype: JSON,
                         data: {'Subempcar_id': Subempcar_id },
-                      // url: "/Horario_laboral/GetEvents?Subempcar_id"+ViewBag.Subempcar_id,
                         success: function (data) {
                             $.each(data, function (i, v) {
                                 events.push({

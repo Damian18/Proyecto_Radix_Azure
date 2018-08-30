@@ -49,10 +49,10 @@ namespace Proyecto_RadixWeb.Controllers
 
 
         // GET: Horario_laboral
-        public ActionResult Index()
+        public ActionResult Index(int? Subempcar_id)
         {
             var horario_laboral = db.horario_laboral;
-            return View(horario_laboral.ToList());
+            return View(horario_laboral.Where(hl=>hl.Subempcar_id== Subempcar_id).ToList());
         }
 
         [HttpPost]

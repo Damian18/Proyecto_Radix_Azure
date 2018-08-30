@@ -15,13 +15,61 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: Asistencias
-        public ActionResult Index(int? subemp_id ,int? car_id)
+        public ActionResult Index(int? subemp_id, int? car_id)
         {
-            var subempcar= db.subempresa_cargo.FirstOrDefault(s=>s.Sub_Id==subemp_id&&s.Car_Id==car_id);
+            var subempcar = db.subempresa_cargo.FirstOrDefault(s => s.Sub_Id == subemp_id && s.Car_Id == car_id);
 
             var asistencias = db.asistencias.Include(a => a.contratos).Include(a => a.horario_laboral);
-            return View(asistencias.Where(a=>a.horario_laboral.Subempcar_id==subempcar.Subempcar_id).ToList());
+            return View(asistencias.Where(a => a.horario_laboral.Subempcar_id == subempcar.Subempcar_id).ToList());
         }
+
+        public ActionResult Asistencia_Personas(int? Subempcar_id, int? horario_id)
+        {
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+            var subempcar = db.subempresa_cargo.FirstOrDefault(s => s.Subempcar_id == Subempcar_id);
+
+
+            ViewBag.car_id = subempcar.Car_Id;
+            ViewBag.subemp_id = subempcar.Sub_Id;
+
+            ViewBag.Subempcar_id = Subempcar_id;
+            ViewBag.horario_id = horario_id;
+
+            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas);
+            var asistencias = db.asistencias.Include(a => a.contratos).Include(a => a.horario_laboral);
+            MultiplesClases multiple = new MultiplesClases
+            {
+
+                ObjEContrato = contratos.Where(c => c.Sub_Id == subempcar.Sub_Id && c.personas.Car_Id == subempcar.Car_Id).ToList(),
+                ObjEAsistencia= asistencias.ToList()
+
+            };
+
+
+            return View(multiple);
+        }
+
+        public JsonResult Guardar_Asistencia(List<asistencias> lista_asistencia)
+        {
+            var status = false;
+
+            if (lista_asistencia==null)
+            {
+                lista_asistencia = new List<asistencias>();
+            }
+
+            foreach (asistencias item in lista_asistencia)
+            {
+
+                db.asistencias.Add(item);
+            }
+
+            db.SaveChanges();
+            status = true;
+            return new JsonResult { Data = new { status } };
+        }
+
 
         // GET: Asistencias/Details/5
         public ActionResult Details(int? id)

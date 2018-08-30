@@ -1,0 +1,199 @@
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
+@{
+    ViewBag.Title = "Asistencia_Personas";
+}
+
+<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+
+    <h2>Medir Asistencia Personas</h2>
+
+    <h2><button id="btn_medir" class="btn btn-outline-success btn-sm m-0"> Aplicar </button></h2>
+
+    <table class="table" id="tb_asistencia">
+
+        <thead>
+            <tr>
+
+                <th>
+                    R.U.T
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellidos
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.ObjEContrato)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_Rut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
+                        @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                    </td>
+                    <td>
+
+                        <label class="switch">
+                            <input class="checkbox" id="togBtn" value="@item.Con_Id" type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+    <p id="demo"></p>
+
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+
+    //$('#btn_medir').on('click', function () {
+
+    //    var switchStatus = false;
+    //    id = $(".checkbox").val();
+    //    if ($(".checkbox").is(':checked')) {
+    //        switchStatus = $(".checkbox").is(':checked');
+
+    //    }
+    //    else {
+    //        switchStatus = $(".checkbox").is(':checked');
+
+    //    }
+    //    alert(" Boton " + switchStatus + id);
+
+
+    //});
+
+    $('#btn_medir').on('click', function () {
+
+        var lista_asistencia = new Array();
+
+        $('#tb_asistencia tbody tr').each(function ( ) {
+
+            var row = $(this);
+          
+            var lista = {};
+
+            var switchStatus = '';
+
+
+            if (row.find("TD .checkbox").is(':checked')) {
+
+                switchStatus = row.find("td .checkbox").is(':checked');
+
+            }
+            else {
+                switchStatus = row.find("td .checkbox").is(':checked');
+
+            }
+
+
+            lista.Con_Id = row.find("td .checkbox").val();
+            lista.asis_estado = ""+switchStatus+"";
+            lista.Hl_Id = "@ViewBag.horario_id";
+
+            lista_asistencia.push(lista);
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Guardar_Asistencia", "Asistencias")",
+                data: {'lista_asistencia': lista_asistencia },
+                success: function (data) {
+                    if (data.status) {
+                        alert('Almacenado'):
+                        window.location.href = "@Url.Action("Index", "Horario_laboral", new { Subempcar_id = ViewBag.Subempcar_id })";
+                    }
+                },
+                error: function () {
+                    alert('Error');
+                }
+
+            });
+
+
+        });
+
+    });
+
+
+
+</script>
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        .switch input {
+            display: none;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
