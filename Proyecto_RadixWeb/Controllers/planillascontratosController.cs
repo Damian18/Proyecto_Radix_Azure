@@ -16,6 +16,12 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
       
+        public ActionResult SubirArchivo()
+        {
+            return View();
+        }
+
+
         // GET: planillascontratos
         public ActionResult Index(string emp_id)
         {
