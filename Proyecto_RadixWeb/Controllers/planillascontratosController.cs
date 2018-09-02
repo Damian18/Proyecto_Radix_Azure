@@ -8,6 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto_RadixWeb.Models;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Api;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Client;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Model;
+using System.Diagnostics;
+using System.Text;
 
 namespace Proyecto_RadixWeb.Controllers
 {
@@ -38,24 +43,28 @@ namespace Proyecto_RadixWeb.Controllers
 
          
             return File(archivo.PC_Binario, "document/docx", archivo.PC_Nom + ".docx");
+
         }
 
         public ActionResult DescargarPdf(int? id)
         {
             var archivo = db.planillascontratos.Where(dp => dp.PC_Id == id).FirstOrDefault();
-
-
-            SautinSoft.PdfMetamorphosis p = new SautinSoft.PdfMetamorphosis();
-
-            if (p != null)
+            // Configure API key authorization: Apikey
+            Configuration.Default.AddApiKey("Apikey", "768fa287-07a9-41f9-962d-d1b9356a6b04");
+            ConvertDocumentApi apiInstance = new ConvertDocumentApi();
+            //convertir un binario a system.io.stream
+            MemoryStream stream = new MemoryStream(archivo.PC_Binario);
+            try
             {
-                byte[] pdfbyte = p.DocxToPdfConvertByte(archivo.PC_Binario);
-
-                return File(pdfbyte, "document/pdf", archivo.PC_Nom + ".pdf");
+                // convertir
+                byte[] result = apiInstance.ConvertDocumentDocxToPdf(stream);
+                return File(result, "document/pdf", archivo.PC_Nom + ".pdf");
             }
-
+            catch (Exception e)
+            {
+                Debug.Print("Error al convertir : " + e.Message);
+            }
             return View();
-
         }
         // GET: planillascontratos/Details/5
         public ActionResult Details(int? id)
