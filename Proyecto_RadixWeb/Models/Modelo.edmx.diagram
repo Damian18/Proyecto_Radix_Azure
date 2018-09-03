@@ -42,16 +42,9 @@
         <EntityTypeShape EntityType="radixModel.aspnetroles" Width="1.5" PointX="11.625" PointY="1.75" />
         <AssociationConnector Association="radixModel.aspnetuserrolesaspnetroles" />
         <EntityTypeShape EntityType="radixModel.nacionalidades" Width="1.5" PointX="3.375" PointY="0.875" />
-        <EntityTypeShape EntityType="radixModel.documentos" Width="1.5" PointX="7.875" PointY="8.5" />
         <EntityTypeShape EntityType="radixModel.planillascontratos" Width="1.5" PointX="0.75" PointY="0.875" />
         <EntityTypeShape EntityType="radixModel.generos" Width="1.5" PointX="3.375" PointY="26" />
-        <EntityTypeShape EntityType="radixModel.contratos" Width="1.5" PointX="10.875" PointY="18.625" />
         <EntityTypeShape EntityType="radixModel.personas" Width="1.5" PointX="5.625" PointY="19.875" />
-        <AssociationConnector Association="radixModel.fk_Contratos_Personas" />
-        <AssociationConnector Association="radixModel.FK_contratos_planillacontratos" />
-        <AssociationConnector Association="radixModel.FK_contratos_subempresas" />
-        <AssociationConnector Association="radixModel.fk_Contratos_TiposContratos1" />
-        <AssociationConnector Association="radixModel.fk_Documento_persona" />
         <AssociationConnector Association="radixModel.fk_personas_estadocivil" />
         <AssociationConnector Association="radixModel.fk_personas_descuentos" />
         <AssociationConnector Association="radixModel.fk_personas_sexo" />
@@ -60,18 +53,25 @@
         <AssociationConnector Association="radixModel.fk_personas_thora" />
         <AssociationConnector Association="radixModel.fk_personas_tipoimpuesto" />
         <EntityTypeShape EntityType="radixModel.cargos" Width="1.5" PointX="0.5" PointY="22" />
-        <EntityTypeShape EntityType="radixModel.empresa_cargo" Width="1.5" PointX="0.5" PointY="33.875" />
         <EntityTypeShape EntityType="radixModel.subempresa_cargo" Width="1.5" PointX="9.875" PointY="31.75" />
-        <AssociationConnector Association="radixModel.cargo" />
         <AssociationConnector Association="radixModel.cargo_subempresa" />
         <AssociationConnector Association="radixModel.fk_Personas_cargos1" />
-        <AssociationConnector Association="radixModel.empresa" />
         <AssociationConnector Association="radixModel.subempresa_cargo1" />
         <EntityTypeShape EntityType="radixModel.horario_laboral" Width="1.5" PointX="12.75" PointY="31.5" />
         <AssociationConnector Association="radixModel.horario_subempresa_cargo" />
         <EntityTypeShape EntityType="radixModel.asistencias" Width="1.5" PointX="15" PointY="25.5" />
-        <AssociationConnector Association="radixModel.asis_contrato" />
         <AssociationConnector Association="radixModel.asis_horario" />
+        <EntityTypeShape EntityType="radixModel.contratos" Width="1.5" PointX="7.875" PointY="27.375" />
+        <EntityTypeShape EntityType="radixModel.documentos" Width="1.5" PointX="5.625" PointY="28.125" />
+        <EntityTypeShape EntityType="radixModel.empresa_cargo" Width="1.5" PointX="8.25" PointY="19.5" />
+        <AssociationConnector Association="radixModel.asis_contrato" />
+        <AssociationConnector Association="radixModel.cargo" />
+        <AssociationConnector Association="radixModel.FK_contratos_Documentos" />
+        <AssociationConnector Association="radixModel.fk_Contratos_Personas" />
+        <AssociationConnector Association="radixModel.FK_contratos_subempresas" />
+        <AssociationConnector Association="radixModel.fk_Contratos_TiposContratos1" />
+        <AssociationConnector Association="radixModel.empresa" />
+        <AssociationConnector Association="radixModel.plantilla" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

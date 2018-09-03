@@ -16,15 +16,7 @@
             <th>
                 Apellidos
             </th>
-            <th>
-                Inicio Contrato
-            </th>
-            <th>
-                Fin Contrato
-            </th>
-            <th>
-                Estado
-            </th>
+          
             <th>
                 Cargo
             </th>
@@ -46,15 +38,7 @@
                     @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
                     @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Con_FechaInicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Con_FechaFin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Con_Estado)
-                </td>
+           
                 <td>
                     @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
                 </td>
@@ -68,12 +52,26 @@
 
                     }
 
-                    <a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                        Editar
-                    </a>
-                    <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                        Eliminar
-                    </a>
+                    @if (item.Doc_Id == null)
+                    {
+                        <a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                            Crear Contrato
+                        </a>
+                    }
+                    else if(item.Doc_Id!=null){
+
+                        <a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                            Ver Contrato
+                        </a>
+                    }
+
+
+                    @*<a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+            Editar
+        </a>
+        <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+            Eliminar
+        </a>*@
 
                 </td>
 

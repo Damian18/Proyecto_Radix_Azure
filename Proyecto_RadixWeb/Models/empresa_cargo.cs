@@ -17,8 +17,10 @@ namespace Proyecto_RadixWeb.Models
         public int Empcar_id { get; set; }
         public Nullable<int> Emp_Id { get; set; }
         public Nullable<int> Car_Id { get; set; }
+        public Nullable<int> PC_Id { get; set; }
     
         public virtual cargos cargos { get; set; }
         public virtual empresas empresas { get; set; }
+        public virtual planillascontratos planillascontratos { get; set; }
     }
 }

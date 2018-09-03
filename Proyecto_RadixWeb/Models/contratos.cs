@@ -22,18 +22,18 @@ namespace Proyecto_RadixWeb.Models
     
         public int Con_Id { get; set; }
         public int Sub_Id { get; set; }
-        public Nullable<int> PC_Id { get; set; }
+        public Nullable<int> Doc_Id { get; set; }
         public Nullable<int> TCon_Id { get; set; }
         public string Per_Rut { get; set; }
         public string Con_FechaInicio { get; set; }
         public string Con_FechaFin { get; set; }
         public string Con_Estado { get; set; }
     
-        public virtual personas personas { get; set; }
-        public virtual planillascontratos planillascontratos { get; set; }
-        public virtual subempresas subempresas { get; set; }
-        public virtual tiposcontratos tiposcontratos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<asistencias> asistencias { get; set; }
+        public virtual documentos documentos { get; set; }
+        public virtual personas personas { get; set; }
+        public virtual subempresas subempresas { get; set; }
+        public virtual tiposcontratos tiposcontratos { get; set; }
     }
 }

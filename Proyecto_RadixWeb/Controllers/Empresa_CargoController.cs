@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -23,8 +24,53 @@ namespace Proyecto_RadixWeb.Controllers
             int emp_id =Convert.ToInt32( HttpContext.Session["Emp_id"].ToString());
             ViewBag.empresa = emp_nom;
             var empresa_cargo = db.empresa_cargo.Include(e => e.cargos).Include(e => e.empresas);
-            return View(empresa_cargo.Where(e=>e.Emp_Id==emp_id).ToList());
+
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjEEmpresa_Cargo = empresa_cargo.Where(e => e.Emp_Id == emp_id).ToList()
+            };
+
+
+            return View(multiples);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "PC_Id,PC_Nom,empcar_id")] planillascontratos planillascontratos, HttpPostedFileBase plantilla)
+        {
+            if (plantilla != null && plantilla.ContentLength > 0)
+            {
+                var length = plantilla.InputStream.Length; //Length: 103050706
+
+               
+                byte[] datoplantilla = null;
+                using (var binarydoc = new BinaryReader(plantilla.InputStream))
+                {
+                    datoplantilla = binarydoc.ReadBytes(plantilla.ContentLength);
+                }
+                planillascontratos.PC_Binario = datoplantilla;
+                planillascontratos.PC_Ext = Path.GetExtension(plantilla.FileName);
+            }
+
+            var empresa_Cargo = db.empresa_cargo.Find(planillascontratos.empcar_id);
+
+            if (ModelState.IsValid)
+            {
+                //planillascontratos.PC_Ext =".docx";
+                db.planillascontratos.Add(planillascontratos);
+
+                empresa_Cargo.PC_Id = planillascontratos.PC_Id;
+                db.Entry(empresa_Cargo).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+
+            return View(planillascontratos);
+        }
+      
 
         // GET: Empresa_Cargo/Details/5
         public ActionResult Details(int? id)

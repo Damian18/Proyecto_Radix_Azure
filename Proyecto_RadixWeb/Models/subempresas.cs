@@ -17,8 +17,8 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public subempresas()
         {
-            this.contratos = new HashSet<contratos>();
             this.subempresa_cargo = new HashSet<subempresa_cargo>();
+            this.contratos = new HashSet<contratos>();
         }
     
         public int Sub_Id { get; set; }
@@ -32,8 +32,8 @@ namespace Proyecto_RadixWeb.Models
         public virtual comunas comunas { get; set; }
         public virtual empresas empresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<contratos> contratos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subempresa_cargo> subempresa_cargo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<contratos> contratos { get; set; }
     }
 }

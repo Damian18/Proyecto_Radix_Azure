@@ -34,7 +34,7 @@ namespace Proyecto_RadixWeb.Controllers
             ViewBag.subemp_id = subemp_id;
             
 
-            var contratos = db.contratos.Include(c => c.personas).Include(c => c.planillascontratos).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
             return View(contratos.Where(c => c.Sub_Id == subemp_id).ToList());
         }
 
@@ -88,7 +88,7 @@ namespace Proyecto_RadixWeb.Controllers
             }
 
             ViewBag.Per_Rut = new SelectList(db.personas, "Per_Rut", "Per_Nom", contratos.Per_Rut);
-            ViewBag.PC_Id = new SelectList(db.planillascontratos, "PC_Id", "PC_Nom", contratos.PC_Id);
+            ViewBag.Doc_Id = new SelectList(db.planillascontratos, "Doc_Id", "Doc_Nom", contratos.Doc_Id);
             ViewBag.Sub_Id = new SelectList(db.subempresas, "Sub_Id", "Sub_Nom", contratos.Sub_Id);
             ViewBag.TCon_Id = new SelectList(db.tiposcontratos, "TCon_Id", "TCon_Nom", contratos.TCon_Id);
             return View(contratos);
@@ -107,7 +107,7 @@ namespace Proyecto_RadixWeb.Controllers
                 return HttpNotFound();
             }
             ViewBag.Per_Rut = new SelectList(db.personas, "Per_Rut", "Per_Nom", contratos.Per_Rut);
-            ViewBag.PC_Id = new SelectList(db.planillascontratos, "PC_Id", "PC_Nom", contratos.PC_Id);
+            ViewBag.Doc_Id = new SelectList(db.planillascontratos, "Doc_Id", "Doc_Nom", contratos.Doc_Id);
             ViewBag.Sub_Id = new SelectList(db.subempresas, "Sub_Id", "Sub_Nom", contratos.Sub_Id);
             ViewBag.TCon_Id = new SelectList(db.tiposcontratos, "TCon_Id", "TCon_Nom", contratos.TCon_Id);
             return View(contratos);
@@ -127,7 +127,7 @@ namespace Proyecto_RadixWeb.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Per_Rut = new SelectList(db.personas, "Per_Rut", "Per_Nom", contratos.Per_Rut);
-            ViewBag.PC_Id = new SelectList(db.planillascontratos, "PC_Id", "PC_Nom", contratos.PC_Id);
+            ViewBag.Doc_Id = new SelectList(db.planillascontratos, "Doc_Id", "Doc_Nom", contratos.Doc_Id);
             ViewBag.Sub_Id = new SelectList(db.subempresas, "Sub_Id", "Sub_Nom", contratos.Sub_Id);
             ViewBag.TCon_Id = new SelectList(db.tiposcontratos, "TCon_Id", "TCon_Nom", contratos.TCon_Id);
             return View(contratos);

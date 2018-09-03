@@ -26,6 +26,11 @@ namespace Proyecto_RadixWeb.Controllers
             return View();
         }
 
+        public ActionResult SubirArchivo_v2()
+        {
+            return View();
+        }
+
 
         // GET: planillascontratos
         public ActionResult Index(string emp_id)
@@ -34,6 +39,11 @@ namespace Proyecto_RadixWeb.Controllers
             ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
             return View(db.planillascontratos.ToList());
+        }
+
+        public ActionResult ViewDocx(int? id)
+        {
+            return View();
         }
 
         public ActionResult DescargarDocx(int? id)
@@ -112,6 +122,8 @@ namespace Proyecto_RadixWeb.Controllers
             {
                 //planillascontratos.PC_Ext =".docx";
                 db.planillascontratos.Add(planillascontratos);
+
+               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
