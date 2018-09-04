@@ -35,7 +35,7 @@ namespace Proyecto_RadixWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult VistaParcial([Bind(Include = "Doc_Id,Doc_Nom,Con_id")] documentos documentos, HttpPostedFileBase plantilla)
+        public ActionResult Index([Bind(Include = "Doc_Id,Doc_Nom,Con_id")] documentos documentos, HttpPostedFileBase plantilla)
         {
             if (plantilla != null && plantilla.ContentLength > 0)
             {
@@ -51,7 +51,7 @@ namespace Proyecto_RadixWeb.Controllers
                 documentos.Doc_Ext = Path.GetExtension(plantilla.FileName);
             }
 
-            var contrato = db.contratos.Find(documentos.Doc_Id);
+            var contrato = db.contratos.Find(documentos.Con_Id);
 
             if (ModelState.IsValid)
             {
@@ -82,7 +82,10 @@ namespace Proyecto_RadixWeb.Controllers
             
 
             var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
-            return View(contratos.Where(c => c.Sub_Id == subemp_id).ToList());
+            MultiplesClases multiple = new MultiplesClases {
+                ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id).ToList()
+            };
+            return View(multiple);
         }
 
         public ActionResult RedirecionarPersonas(int? subemp_id)

@@ -11,7 +11,7 @@ namespace Proyecto_RadixWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class documentos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +19,13 @@ namespace Proyecto_RadixWeb.Models
         {
             this.contratos = new HashSet<contratos>();
         }
-    
+
         public int Doc_Id { get; set; }
         public string Doc_Nom { get; set; }
         public string Doc_Ext { get; set; }
         public byte[] Doc_Binario { get; set; }
-    
+        public int Con_Id { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contratos> contratos { get; set; }
     }
