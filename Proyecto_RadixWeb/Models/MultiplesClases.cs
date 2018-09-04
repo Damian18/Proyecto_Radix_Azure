@@ -27,6 +27,7 @@ namespace Proyecto_RadixWeb.Models
         public Proyecto_RadixWeb.Models.contratos ObjContrato { get; set; }
         public Proyecto_RadixWeb.Models.empresa_cargo ObjEmpresa_Cargo { get; set; }
         public Proyecto_RadixWeb.Models.planillascontratos ObjPlantillascontratos { get; set; }
+        public Proyecto_RadixWeb.Models.documentos ObjDocumentos { get; set; }
 
         public IEnumerable<Proyecto_RadixWeb.Models.subempresas> ObjESubEmpresas { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.personas> ObjEPersonas { get; set; }

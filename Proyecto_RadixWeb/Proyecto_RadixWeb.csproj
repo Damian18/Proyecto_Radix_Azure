@@ -950,6 +950,7 @@
     <Content Include="Views\Asistencias\Asistencia_Personas.cshtml" />
     <Content Include="Views\Planillascontratos\SubirArchivo.cshtml" />
     <Content Include="Views\Planillascontratos\SubirArchivo_v2.cshtml" />
+    <Content Include="Views\Empresa_Cargo\ViewPdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

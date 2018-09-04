@@ -8,6 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto_RadixWeb.Models;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Api;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Client;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Model;
+using System.Diagnostics;
+using System.Text;
 
 namespace Proyecto_RadixWeb.Controllers
 {
@@ -70,7 +75,34 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(planillascontratos);
         }
-      
+
+        public ActionResult ViewDocx(int? id)
+        {
+            return View();
+        }
+
+       
+
+        public FileResult ViewPdf(int? id)
+        {
+            var archivo = db.planillascontratos.Where(dp => dp.PC_Id == id).FirstOrDefault();
+            // Configure API key authorization: Apikey
+            Configuration.Default.AddApiKey("Apikey", "768fa287-07a9-41f9-962d-d1b9356a6b04");
+            ConvertDocumentApi apiInstance = new ConvertDocumentApi();
+            //convertir un binario a system.io.stream
+            MemoryStream stream = new MemoryStream(archivo.PC_Binario);
+        
+                // convertir
+                byte[] result = apiInstance.ConvertDocumentDocxToPdf(stream);
+
+            //return File(result, "document/pdf", archivo.PC_Nom + ".pdf");
+
+            ViewBag.nombre = archivo.PC_Nom + "" + archivo.PC_Ext;
+                return File(result, "application/pdf");
+
+        }
+
+
 
         // GET: Empresa_Cargo/Details/5
         public ActionResult Details(int? id)

@@ -41,10 +41,7 @@ namespace Proyecto_RadixWeb.Controllers
             return View(db.planillascontratos.ToList());
         }
 
-        public ActionResult ViewDocx(int? id)
-        {
-            return View();
-        }
+        
 
         public ActionResult DescargarDocx(int? id)
         {

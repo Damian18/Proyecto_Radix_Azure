@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,8 +23,54 @@ namespace Proyecto_RadixWeb.Controllers
 
             var model = db.contratos.Where(p=>p.Sub_Id==subemp_id).ToList();
 
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjEContrato=model
+
+            };
+
+
             return PartialView(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult VistaParcial([Bind(Include = "Doc_Id,Doc_Nom,Con_id")] documentos documentos, HttpPostedFileBase plantilla)
+        {
+            if (plantilla != null && plantilla.ContentLength > 0)
+            {
+                var length = plantilla.InputStream.Length; //Length: 103050706
+
+
+                byte[] datoplantilla = null;
+                using (var binarydoc = new BinaryReader(plantilla.InputStream))
+                {
+                    datoplantilla = binarydoc.ReadBytes(plantilla.ContentLength);
+                }
+                documentos.Doc_Binario = datoplantilla;
+                documentos.Doc_Ext = Path.GetExtension(plantilla.FileName);
+            }
+
+            var contrato = db.contratos.Find(documentos.Doc_Id);
+
+            if (ModelState.IsValid)
+            {
+                //planillascontratos.PC_Ext =".docx";
+                db.documentos.Add(documentos);
+
+                contrato.Doc_Id = documentos.Doc_Id;
+                db.Entry(contrato).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+
+            return View(documentos);
+        }
+
+
+
 
 
         // GET: contratos
