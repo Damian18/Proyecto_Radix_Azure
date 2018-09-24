@@ -86,53 +86,62 @@
 
     $('#btn_medir').on('click', function () {
 
-        var lista_asistencia = new Array();
+        var lista_asistencia = [];
 
-        $('#tb_asistencia tbody tr').each(function ( ) {
+        //var filas = $('#tb_asistencia tbody tr').length;
 
-            var row = $(this);
-          
+
+           $('#tb_asistencia tbody tr').each(function ( ) {
+            var horario_id = "@ViewBag.horario_id";
+
             var lista = {};
 
             var switchStatus = '';
 
+            var rows = $('#tb_asistencia tbody tr').length;
 
-            if (row.find("TD .checkbox").is(':checked')) {
-
-                switchStatus = row.find("td .checkbox").is(':checked');
-
-            }
-            else {
-                switchStatus = row.find("td .checkbox").is(':checked');
-
-            }
+               for (var i = 1; i < rows; i++) {
+                   var row = $(this);
 
 
-            lista.Con_Id = row.find("td .checkbox").val();
-            lista.asis_estado = ""+switchStatus+"";
-            lista.Hl_Id = "@ViewBag.horario_id";
+                   if (row.find("TD .checkbox").is(':checked')) {
+
+                       switchStatus = row.find("td .checkbox").is(':checked');
+
+                   }
+                   else {
+                       switchStatus = row.find("td .checkbox").is(':checked');
+
+                   }
+
+
+                   lista.Con_Id = row.find("td .checkbox").val();
+                   lista.asis_estado = "" + switchStatus + "";
+                   lista.Hl_Id = horario_id;
+               }
 
             lista_asistencia.push(lista);
+          
 
-            $.ajax({
+
+
+           });
+         $.ajax({
                 type: "POST",
                 url: "@Url.Action("Guardar_Asistencia", "Asistencias")",
                 data: {'lista_asistencia': lista_asistencia },
                 success: function (data) {
                     if (data.status) {
-                        alert('Almacenado'):
+
                         window.location.href = "@Url.Action("Index", "Horario_laboral", new { Subempcar_id = ViewBag.Subempcar_id })";
                     }
+                    alert('Almacenado');
                 },
                 error: function () {
                     alert('Error');
                 }
 
             });
-
-
-        });
-
     });
 
 

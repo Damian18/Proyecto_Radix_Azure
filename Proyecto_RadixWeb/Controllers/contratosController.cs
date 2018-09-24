@@ -8,6 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto_RadixWeb.Models;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Api;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Client;
+using Cloudmersive.APIClient.NET.DocumentAndDataConvert.Model;
+using System.Diagnostics;
+using System.Text;
 
 namespace Proyecto_RadixWeb.Controllers
 {
@@ -33,13 +38,29 @@ namespace Proyecto_RadixWeb.Controllers
             return PartialView(model);
         }
 
+        // GET: contratos
+        public ActionResult Index(int? subemp_id)
+        {
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+            ViewBag.subemp_id = subemp_id;
+
+
+            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+            MultiplesClases multiple = new MultiplesClases
+            {
+                ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id).ToList()
+            };
+            return View(multiple);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Doc_Id,Doc_Nom,Con_id")] documentos documentos, HttpPostedFileBase plantilla)
+        public ActionResult Index([Bind(Include = "Doc_Id,Doc_Nom,Con_id")] documentos documentos, HttpPostedFileBase plantilla,int subemp_id)
         {
             if (plantilla != null && plantilla.ContentLength > 0)
             {
-                var length = plantilla.InputStream.Length; //Length: 103050706
+                var length = plantilla.InputStream.Length; 
 
 
                 byte[] datoplantilla = null;
@@ -62,31 +83,42 @@ namespace Proyecto_RadixWeb.Controllers
                 db.Entry(contrato).State = EntityState.Modified;
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { subemp_id });
             }
 
 
             return View(documentos);
         }
 
-
-
-
-
-        // GET: contratos
-        public ActionResult Index(int? subemp_id)
+        public FileResult ViewPdf(int? id)
         {
-            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+            var archivo = db.documentos.Where(dp => dp.Doc_Id == id).FirstOrDefault();
+            // Configure API key authorization: Apikey
+            Configuration.Default.AddApiKey("Apikey", "768fa287-07a9-41f9-962d-d1b9356a6b04");
+            ConvertDocumentApi apiInstance = new ConvertDocumentApi();
+            //convertir un binario a system.io.stream
+            MemoryStream stream = new MemoryStream(archivo.Doc_Binario);
 
-            ViewBag.subemp_id = subemp_id;
-            
+            // convertir
+            byte[] result = apiInstance.ConvertDocumentDocxToPdf(stream);
 
-            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
-            MultiplesClases multiple = new MultiplesClases {
-                ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id).ToList()
-            };
-            return View(multiple);
+            //return File(result, "document/pdf", archivo.PC_Nom + ".pdf");
+
+            ViewBag.nombre = archivo.Doc_Nom + "" + archivo.Doc_Ext;
+            return File(result, "application/pdf");
+
         }
+
+        public ActionResult DescargarDocx(int? id)
+        {
+
+            var archivo = db.documentos.Where(p => p.Doc_Id == id).FirstOrDefault();
+
+
+            return File(archivo.Doc_Binario, "document/docx", archivo.Doc_Nom + ".docx");
+
+        }
+
 
         public ActionResult RedirecionarPersonas(int? subemp_id)
         {

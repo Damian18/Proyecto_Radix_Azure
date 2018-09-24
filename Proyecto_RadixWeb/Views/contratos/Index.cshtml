@@ -64,9 +64,10 @@
                         else if (item.Doc_Id != null)
                         {
 
-                            <a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                                Ver Contrato
-                            </a>
+                            <a class="btn btn-success" href="@Url.Action("ViewPdf", "Contratos", new { id = item.Doc_Id })" target="_blank">Ver PDF</a>
+
+                            <a class="btn btn-success" href="@Url.Action("DescargarDocx","Contratos",new { id= item.Doc_Id})">Descargar Word</a>
+
                         }
 
 
@@ -140,7 +141,6 @@
 
     $(".documento").on("click", function () {
 
-        alert($(this).attr("id"));
         $("#Con_id").val($(this).attr("id"));
 
     });

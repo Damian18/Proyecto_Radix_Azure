@@ -50,6 +50,7 @@ namespace Proyecto_RadixWeb.Controllers
             return View(multiple);
         }
 
+        [HttpPost]
         public JsonResult Guardar_Asistencia(List<asistencias> lista_asistencia)
         {
             var status = false;

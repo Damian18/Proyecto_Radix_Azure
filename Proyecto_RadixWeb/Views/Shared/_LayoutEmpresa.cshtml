@@ -39,16 +39,16 @@
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         @*<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Perfil
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">*@
-                            @*<a class="dropdown-item" href="#">Datos Personales</a>*@
+                                Perfil
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">*@
+                        @*<a class="dropdown-item" href="#">Datos Personales</a>*@
 
-                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a>
-                            }
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a>
+                        }
                         @*</div>*@
                     </li>
                 </ul>
@@ -70,7 +70,7 @@
                         <a href="#">RR.HH.</a>
                         <ul>
                             <li><a href="#">Lista de Trabajadores</a></li>
-                            <li><a href="@Url.Action("Index", "Planillascontratos")" >Documentos</a></li>
+                            <li><a href="@Url.Action("Index", "Planillascontratos")">Documentos</a></li>
                             <li><a href="@Url.Action("Index", "Empresa_Cargo")">Cargos</a></li>
                             <li><a href="@Url.Action("Horario", "Horario_laboral")">Horarios</a></li>
                         </ul>
@@ -78,7 +78,7 @@
                     <li>
                         <a href="#">Finanzas</a>
                         <ul>
-                            <li><a href="@Url.Action("Index", "Empresa_Cargo")" target="_blank">Verpeliculas</a></li>
+                        
                             <li><a href="#">Opción 2.1</a></li>
                             <li><a href="#">Opción 2.2</a></li>
                             <li><a href="#">Opción 2.3</a></li>
@@ -99,8 +99,10 @@
     </div>
     <div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
 
-
     </div>
+
+
+
 
     <style>
 
@@ -216,8 +218,8 @@
                         $.each(data, function (i, item) {
 
 
-                            //var row = '<li><a id="link' + item.SubEmp+' "  href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
-                            var row = '<li><a class="li_subemp" id="' + item.SubEmp + '" href="#">' + item.Nombre + '</a></li>';
+                            var row = '<li><a id="link' + item.SubEmp+' "  href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
+                            //var row = '<li><a class="li_subemp" id="' + item.SubEmp + '" href="#">' + item.Nombre + '</a></li>';
                             row = row.replace("SubEmp", item.SubEmp);
 
                             $('#listaSucursal').append(row);
@@ -229,12 +231,13 @@
 
        }
 
-        $('li').on("click","a.li_subemp", function () {
+        //$('li').on("click","a.li_subemp", function () {
 
-            var id = this.id;
-            $('#pagina').load('/Contratos/VistaParcial', { subemp_id: id });
+        //    var id = this.id;
+        //    //$('#pagina').load('/Contratos/VistaParcial', { subemp_id: id });
+        //    $('#pagina').load('/Contratos/Index', { subemp_id: id });
 
-        });
+        //});
 
 
         //$('#boton1').click(function () {
@@ -246,6 +249,10 @@
 
 
     </script>
+
+
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
