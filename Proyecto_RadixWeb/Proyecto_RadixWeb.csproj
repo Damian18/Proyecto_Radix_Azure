@@ -391,7 +391,14 @@
     <Content Include="Content\css\cargar.css" />
     <Content Include="Content\css\agency.css" />
     <Content Include="Content\css\agency.min.css" />
+    <Content Include="Content\css\dashboard\bootstrap.min.css" />
+    <Content Include="Content\css\dashboard\dataTables.bootstrap4.css" />
+    <Content Include="Content\css\dashboard\font-awesome.min.css" />
+    <Content Include="Content\css\dashboard\sb-admin.css" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\login\bootstrap.min.css" />
+    <Content Include="Content\css\login\font-awesome.min.css" />
+    <Content Include="Content\css\login\sb-admin.css" />
     <Content Include="Content\css\sb-admin.css" />
     <Content Include="Content\css\sb-admin.min.css" />
     <Content Include="Content\css\vendor.css" />
@@ -437,6 +444,15 @@
     <Content Include="Content\img\team\1.png" />
     <Content Include="Content\img\team\3.jpg" />
     <Content Include="Content\img\team\4.jpg" />
+    <Content Include="Scripts\dashboard\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\dashboard\Chart.min.js" />
+    <Content Include="Scripts\dashboard\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\dashboard\jquery.dataTables.js" />
+    <Content Include="Scripts\dashboard\jquery.easing.min.js" />
+    <Content Include="Scripts\dashboard\jquery.min.js" />
+    <Content Include="Scripts\dashboard\sb-admin-charts.min.js" />
+    <Content Include="Scripts\dashboard\sb-admin-datatables.min.js" />
+    <Content Include="Scripts\dashboard\sb-admin.min.js" />
     <Content Include="Scripts\Layout\agency.js" />
     <Content Include="Scripts\Layout\agency.min.js" />
     <Content Include="Scripts\Layout\contact_me.js" />
@@ -726,6 +742,9 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\login\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\login\jquery.easing.min.js" />
+    <Content Include="Scripts\login\jquery.min.js" />
     <Content Include="Scripts\mdb\addons\datatables.js" />
     <Content Include="Scripts\mdb\addons\datatables.min.js" />
     <Content Include="Scripts\mdb\bootstrap.js" />
@@ -793,8 +812,6 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -818,8 +835,6 @@
     <Content Include="Views\Cargos\Edit.cshtml" />
     <Content Include="Views\Cargos\Index.cshtml" />
     <Content Include="Views\Shared\_Layout3.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_LayoutEmpresa.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Planillascontratos\Create.cshtml" />
     <Content Include="Views\Planillascontratos\Delete.cshtml" />
@@ -873,6 +888,11 @@
     <Content Include="Views\Planillascontratos\SubirArchivo.cshtml" />
     <Content Include="Views\Planillascontratos\SubirArchivo_v2.cshtml" />
     <Content Include="Views\Empresa_Cargo\ViewPdf.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Modal_Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
