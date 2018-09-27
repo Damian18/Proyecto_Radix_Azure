@@ -62,7 +62,7 @@ namespace Proyecto_RadixWeb.Controllers
 
             if (e.Hl_Id > 0)
             {
-                //Update the event
+                //Update
                 var v = db.horario_laboral.Where(a => a.Hl_Id == e.Hl_Id).FirstOrDefault();
                 if (v != null)
                 {

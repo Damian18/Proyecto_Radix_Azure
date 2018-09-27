@@ -38,11 +38,14 @@ namespace Proyecto_RadixWeb.Controllers
 
             var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas);
             var asistencias = db.asistencias.Include(a => a.contratos).Include(a => a.horario_laboral);
+
+            ViewBag.contar = db.asistencias.Count(a => a.Hl_Id == horario_id);
+
             MultiplesClases multiple = new MultiplesClases
             {
 
                 ObjEContrato = contratos.Where(c => c.Sub_Id == subempcar.Sub_Id && c.personas.Car_Id == subempcar.Car_Id).ToList(),
-                ObjEAsistencia= asistencias.ToList()
+                ObjEAsistencia = asistencias.Where(a => a.Hl_Id == horario_id).ToList()
 
             };
 
@@ -55,19 +58,42 @@ namespace Proyecto_RadixWeb.Controllers
         {
             var status = false;
 
-            if (lista_asistencia==null)
+            if (lista_asistencia == null)
             {
                 lista_asistencia = new List<asistencias>();
             }
+            
 
             foreach (asistencias item in lista_asistencia)
             {
+                if (item.asis_id > 0)
+                {
+                    var a = db.asistencias.Where(s => s.asis_id == item.asis_id).FirstOrDefault();
 
-                db.asistencias.Add(item);
+                    if (a != null)
+                    {
+                   
+                        a.Con_Id = item.Con_Id;
+                        a.Hl_Id = item.Hl_Id;
+                        a.asis_estado = item.asis_estado;
+
+                       
+                    }
+
+                }
+                else
+                {
+                    db.asistencias.Add(item);
+
+                }
+
+                db.SaveChanges();
+                status = true;
+
+
+
             }
 
-            db.SaveChanges();
-            status = true;
             return new JsonResult { Data = new { status } };
         }
 
