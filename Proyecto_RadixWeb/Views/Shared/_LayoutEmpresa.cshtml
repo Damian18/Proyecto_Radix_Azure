@@ -40,6 +40,13 @@
                     </a>
                     <ul id="listaSucursal"></ul>
                 </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#lista" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-wrench"></i>
+                        <span class="nav-link-text">Sucursal v2</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="lista"></ul>
+                </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                     <a class="nav-link" href="charts.html">
                         <i class="fa fa-fw fa-area-chart"></i>
@@ -300,6 +307,51 @@
         <script src="~/Scripts/dashboard/sb-admin-datatables.min.js"></script>
         <script src="~/Scripts/dashboard/sb-admin-charts.min.js"></script>
     </div>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <script>
+
+            $(document).ready(function () {
+
+                Cargar();
+
+
+        });
+
+            function Cargar() {
+
+                $.ajax({
+                    url: '@Url.Action("ObtenerSubEmpresa","Home")',
+                    dataType: 'json',
+                    data: {},
+                    success: function (data) {
+                        var $lista;
+                        $.each(data, function (i, item) {
+
+
+                            var row = '<li><a id="link' + item.SubEmp+' "  href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
+                            //var row = '<li><a class="li_subemp" id="' + item.SubEmp + '" href="#">' + item.Nombre + '</a></li>';
+                            row = row.replace("SubEmp", item.SubEmp);
+
+                            $('#lista').append(row);
+
+                        });
+
+                    }
+                });
+
+       }
+
+      
+
+
+
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>
