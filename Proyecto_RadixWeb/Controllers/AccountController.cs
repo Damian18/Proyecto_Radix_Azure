@@ -41,6 +41,63 @@ namespace IdentitySample.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public ActionResult Modal_Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return PartialView();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Modal_Login(MultiplesClases model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView(model);
+            }
+
+            var result = await SignInManager.PasswordSignInAsync(model.ObjLogin.Email, model.ObjLogin.Password, model.ObjLogin.RememberMe, shouldLockout: false);
+
+            var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
+            var log = db.login.FirstOrDefault(l => l.Id == user.Id);
+
+            var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
+
+
+            // El if conciste en buscar la cuenta que corresponde a la empresa
+
+            if (emp.Emp_Nom == model.ObjEmpresas.Emp_Nom)
+            {
+
+                switch (result)
+                {
+
+                    case SignInStatus.Success:
+
+                        //Crear una variable de session 
+                        HttpContext.Session.Add("Rut", log.Per_Rut);
+                        HttpContext.Session.Add("Emp_id", emp.Emp_Id);
+                        HttpContext.Session.Add("Empresa", emp.Emp_Nom);
+                        HttpContext.Session.Add("Correo", log.Id);
+
+                        return RedirectToLocal(returnUrl);
+
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return PartialView(model);
+                }
+
+            }
+            return PartialView(model);
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
