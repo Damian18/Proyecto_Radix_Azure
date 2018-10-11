@@ -12,12 +12,12 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class aspnetuserroles
+    public partial class AspNetUserRoles
     {
         public string UserId { get; set; }
         public string RoleId { get; set; }
     
-        public virtual aspnetusers aspnetusers { get; set; }
-        public virtual aspnetroles aspnetroles { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetRoles AspNetRoles { get; set; }
     }
 }

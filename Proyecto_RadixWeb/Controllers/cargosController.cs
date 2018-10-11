@@ -65,7 +65,7 @@ namespace Proyecto_RadixWeb.Controllers
                 if (cargos.ObjCargos.Car_Nom != "Radix")
                 {
 
-                    var buscarRoles = db.aspnetroles.Count(r => r.Name == cargos.ObjCargos.Car_Nom);
+                    var buscarRoles = db.AspNetUsers.Count(r => r.UserName == cargos.ObjCargos.Car_Nom);
                     var buscarCargo = db.cargos.Count(r => r.Car_Nom == cargos.ObjCargos.Car_Nom);
 
                     // Si el cargo es diferente a Agricola lo agrega en roles de cuenta, sino solo lo agrega en cargos

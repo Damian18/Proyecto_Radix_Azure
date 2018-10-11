@@ -1,0 +1,2324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="radixModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="asistencias">
+          <Key>
+            <PropertyRef Name="asis_id" />
+          </Key>
+          <Property Name="asis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Con_Id" Type="int" />
+          <Property Name="Hl_Id" Type="int" />
+          <Property Name="asis_estado" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bancos">
+          <Key>
+            <PropertyRef Name="Ban_Id" />
+          </Key>
+          <Property Name="Ban_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ban_Nom" Type="nvarchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bancostiposcuentas">
+          <Key>
+            <PropertyRef Name="BTC_Id" />
+          </Key>
+          <Property Name="BTC_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ban_Id" Type="int" Nullable="false" />
+          <Property Name="TCuen_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cargos">
+          <Key>
+            <PropertyRef Name="Car_Id" />
+          </Key>
+          <Property Name="Car_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Car_Nom" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comunas">
+          <Key>
+            <PropertyRef Name="Com_Id" />
+          </Key>
+          <Property Name="Com_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Com_Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prov_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contratos">
+          <Key>
+            <PropertyRef Name="Con_Id" />
+          </Key>
+          <Property Name="Con_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sub_Id" Type="int" Nullable="false" />
+          <Property Name="Doc_Id" Type="int" />
+          <Property Name="TCon_Id" Type="int" />
+          <Property Name="Per_Rut" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Con_FechaInicio" Type="nvarchar" MaxLength="10" />
+          <Property Name="Con_FechaFin" Type="nvarchar" MaxLength="10" />
+          <Property Name="Con_Estado" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="documentos">
+          <Key>
+            <PropertyRef Name="Doc_Id" />
+          </Key>
+          <Property Name="Doc_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Doc_Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Doc_Ext" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Doc_Binario" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="empresa_cargo">
+          <Key>
+            <PropertyRef Name="Empcar_id" />
+          </Key>
+          <Property Name="Empcar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Id" Type="int" />
+          <Property Name="Car_Id" Type="int" />
+          <Property Name="PC_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Emp_Cant" Type="int" />
+          <Property Name="Emp_Estado" Type="nvarchar" MaxLength="20" />
+          <Property Name="Emp_Dir" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="estadosciviles">
+          <Key>
+            <PropertyRef Name="EC_Id" />
+          </Key>
+          <Property Name="EC_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EC_Nom" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fichadescuentos">
+          <Key>
+            <PropertyRef Name="Desc_Id" />
+          </Key>
+          <Property Name="Desc_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desc_Nom" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="TDes_Id" Type="int" Nullable="false" />
+          <Property Name="Desc_PorcValor" Type="real" Nullable="false" />
+          <Property Name="Desc_ValorMax" Type="real" Nullable="false" />
+          <Property Name="Desc_Forma" Type="nvarchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fichasasistencias">
+          <Key>
+            <PropertyRef Name="FAsi_Id" />
+          </Key>
+          <Property Name="FAsi_Id" Type="int" Nullable="false" />
+          <Property Name="FAsi_CanD" Type="int" />
+          <Property Name="FAsi_Dia" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="FAsi_CanS" Type="int" />
+          <Property Name="FAsi_CanM" Type="int" />
+          <Property Name="FAsi_CanH" Type="int" />
+          <Property Name="Cos_Id" Type="nvarchar" MaxLength="20" />
+          <Property Name="FAsi_Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="generos">
+          <Key>
+            <PropertyRef Name="Gen_Id" />
+          </Key>
+          <Property Name="Gen_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gen_Nom" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="horario_laboral">
+          <Key>
+            <PropertyRef Name="Hl_Id" />
+          </Key>
+          <Property Name="Hl_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hl_Titulo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Hl_Descripcion" Type="nvarchar" MaxLength="300" />
+          <Property Name="Hl_Inicio" Type="datetime2" Precision="0" />
+          <Property Name="Hl_Termino" Type="datetime2" Precision="0" />
+          <Property Name="Hl_ColorTema" Type="nvarchar" MaxLength="10" />
+          <Property Name="Hl_TodoDia" Type="binary" MaxLength="1" />
+          <Property Name="Subempcar_id" Type="int" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Id" Type="int" Nullable="false" />
+          <Property Name="Per_Rut" Type="nvarchar" MaxLength="12" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nacionalidades">
+          <Key>
+            <PropertyRef Name="Nac_Id" />
+          </Key>
+          <Property Name="Nac_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nac_Nom" Type="nvarchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="Pag_Id" />
+          </Key>
+          <Property Name="Pag_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TFor_Id" Type="int" Nullable="false" />
+          <Property Name="Pag_Num" Type="nvarchar" MaxLength="45" />
+          <Property Name="Pag_Correo" Type="nvarchar" MaxLength="45" />
+          <Property Name="Pag_Motivo" Type="nvarchar" MaxLength="45" />
+          <Property Name="BTC_Id" Type="int" />
+          <Property Name="Per_Rut" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="Per_Rut" />
+          </Key>
+          <Property Name="Per_Rut" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Per_Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_ApePat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_ApeMat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_Dir" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_Tel" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nac_Id" Type="int" Nullable="false" />
+          <Property Name="Gen_Id" Type="int" Nullable="false" />
+          <Property Name="EC_Id" Type="int" Nullable="false" />
+          <Property Name="Car_Id" Type="int" Nullable="false" />
+          <Property Name="Per_Suel" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="TImp_Id" Type="int" />
+          <Property Name="Per_Des" Type="nvarchar" MaxLength="100" />
+          <Property Name="Desc_Id" Type="int" />
+          <Property Name="THor_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="planillascontratos">
+          <Key>
+            <PropertyRef Name="PC_Id" />
+          </Key>
+          <Property Name="PC_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PC_Nom" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="PC_Ext" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PC_Binario" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="provincias">
+          <Key>
+            <PropertyRef Name="Prov_Id" />
+          </Key>
+          <Property Name="Prov_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prov_Nom" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Reg_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="regiones">
+          <Key>
+            <PropertyRef Name="Reg_Id" />
+          </Key>
+          <Property Name="Reg_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reg_Nom" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Reg_NomOrig" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subempresa_cargo">
+          <Key>
+            <PropertyRef Name="Subempcar_id" />
+          </Key>
+          <Property Name="Subempcar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sub_Id" Type="int" />
+          <Property Name="Car_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="subempresas">
+          <Key>
+            <PropertyRef Name="Sub_Id" />
+          </Key>
+          <Property Name="Sub_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sub_Nom" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sub_Cant" Type="int" />
+          <Property Name="Emp_Id" Type="int" Nullable="false" />
+          <Property Name="Sub_Estado" Type="nvarchar" MaxLength="20" />
+          <Property Name="Sub_Dir" Type="nvarchar" MaxLength="100" />
+          <Property Name="Com_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipoformaspago">
+          <Key>
+            <PropertyRef Name="TFor_Id" />
+          </Key>
+          <Property Name="TFor_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TFor_Nom" Type="nvarchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipoimpuestos">
+          <Key>
+            <PropertyRef Name="TImp_Id" />
+          </Key>
+          <Property Name="TImp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TImp_nom" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TPer_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tiposcontratos">
+          <Key>
+            <PropertyRef Name="TCon_Id" />
+          </Key>
+          <Property Name="TCon_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCon_Nom" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tiposcuentas">
+          <Key>
+            <PropertyRef Name="TCuen_Id" />
+          </Key>
+          <Property Name="TCuen_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCuen_Nom" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tiposdescuentos">
+          <Key>
+            <PropertyRef Name="TDes_Id" />
+          </Key>
+          <Property Name="TDes_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TDes_Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tiposhorasextras">
+          <Key>
+            <PropertyRef Name="THor_Id" />
+          </Key>
+          <Property Name="THor_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="THor_Nom" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="THor_ValorDia" Type="real" Nullable="false" />
+          <Property Name="THor_ValorHoraDia" Type="real" Nullable="false" />
+          <Property Name="THor_ValorHoraExtraEsp" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tiposperiodos">
+          <Key>
+            <PropertyRef Name="TPer_Id" />
+          </Key>
+          <Property Name="TPer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TPer_Nom" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="asistencias$asis_contrato">
+          <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
+          <End Role="asistencias" Type="Self.asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Con_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asistencias$asis_horario">
+          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="0..1" />
+          <End Role="asistencias" Type="Self.asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Hl_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aspnetuserroles$ApplicationUser_Roles">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aspnetuserroles$IdentityRole_Users">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bancostiposcuentas$fk_Bancos_has_TiposCuentas_Bancos1">
+          <End Role="bancos" Type="Self.bancos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="bancostiposcuentas" Type="Self.bancostiposcuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bancos">
+              <PropertyRef Name="Ban_Id" />
+            </Principal>
+            <Dependent Role="bancostiposcuentas">
+              <PropertyRef Name="Ban_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bancostiposcuentas$fk_Bancos_has_TiposCuentas_TiposCuentas1">
+          <End Role="tiposcuentas" Type="Self.tiposcuentas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="bancostiposcuentas" Type="Self.bancostiposcuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposcuentas">
+              <PropertyRef Name="TCuen_Id" />
+            </Principal>
+            <Dependent Role="bancostiposcuentas">
+              <PropertyRef Name="TCuen_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comunas$FK_comuna_provincia">
+          <End Role="provincias" Type="Self.provincias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comunas" Type="Self.comunas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincias">
+              <PropertyRef Name="Prov_Id" />
+            </Principal>
+            <Dependent Role="comunas">
+              <PropertyRef Name="Prov_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos$FK_contratos_Documentos">
+          <End Role="documentos" Type="Self.documentos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documentos">
+              <PropertyRef Name="Doc_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Doc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos$fk_Contratos_Personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos$FK_contratos_subempresas">
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos$fk_Contratos_TiposContratos1">
+          <End Role="tiposcontratos" Type="Self.tiposcontratos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposcontratos">
+              <PropertyRef Name="TCon_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="TCon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa_cargo$cargo">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa_cargo$empresa">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa_cargo$plantilla">
+          <End Role="planillascontratos" Type="Self.planillascontratos" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planillascontratos">
+              <PropertyRef Name="PC_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="PC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fichadescuentos$FK_fichadescuentos_tipodescuento">
+          <End Role="tiposdescuentos" Type="Self.tiposdescuentos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="fichadescuentos" Type="Self.fichadescuentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposdescuentos">
+              <PropertyRef Name="TDes_Id" />
+            </Principal>
+            <Dependent Role="fichadescuentos">
+              <PropertyRef Name="TDes_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="horario_laboral$horario_subempresa_cargo">
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="0..1" />
+          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
+            </Principal>
+            <Dependent Role="horario_laboral">
+              <PropertyRef Name="Subempcar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login$fk_Login_CuentaAsp">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login$fk_Login_Empresa1">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login$FK_login_Persona1">
+          <End Role="personas" Type="Self.personas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pago$fk_FormasDePago_BancosTiposCuentas1">
+          <End Role="bancostiposcuentas" Type="Self.bancostiposcuentas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pago" Type="Self.pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bancostiposcuentas">
+              <PropertyRef Name="BTC_Id" />
+            </Principal>
+            <Dependent Role="pago">
+              <PropertyRef Name="BTC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pago$fk_FormasDePago_TipoFormasPago1">
+          <End Role="tipoformaspago" Type="Self.tipoformaspago" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pago" Type="Self.pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoformaspago">
+              <PropertyRef Name="TFor_Id" />
+            </Principal>
+            <Dependent Role="pago">
+              <PropertyRef Name="TFor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas$fk_Personas_cargos1">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas$fk_personas_descuentos">
+          <End Role="fichadescuentos" Type="Self.fichadescuentos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fichadescuentos">
+              <PropertyRef Name="Desc_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Desc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas$fk_personas_estadocivil">
+          <End Role="estadosciviles" Type="Self.estadosciviles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estadosciviles">
+              <PropertyRef Name="EC_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="EC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas$fk_personas_nac">
+          <End Role="nacionalidades" Type="Self.nacionalidades" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nacionalidades">
+              <PropertyRef Name="Nac_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Nac_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas$fk_personas_sexo">
+          <End Role="generos" Type="Self.generos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="generos">
+              <PropertyRef Name="Gen_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Gen_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas$fk_personas_thora">
+          <End Role="tiposhorasextras" Type="Self.tiposhorasextras" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposhorasextras">
+              <PropertyRef Name="THor_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="THor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas$fk_personas_tipoimpuesto">
+          <End Role="tipoimpuestos" Type="Self.tipoimpuestos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoimpuestos">
+              <PropertyRef Name="TImp_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="TImp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="provincias$FK_regiones_provincias">
+          <End Role="regiones" Type="Self.regiones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="provincias" Type="Self.provincias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regiones">
+              <PropertyRef Name="Reg_Id" />
+            </Principal>
+            <Dependent Role="provincias">
+              <PropertyRef Name="Reg_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresa_cargo$cargo_subempresa">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresa_cargo$subempresa_cargo">
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="0..1" />
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresas$FK_subempresas_comunas">
+          <End Role="comunas" Type="Self.comunas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comunas">
+              <PropertyRef Name="Com_Id" />
+            </Principal>
+            <Dependent Role="subempresas">
+              <PropertyRef Name="Com_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresas$FK_subempresas_empresas">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="subempresas">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipoimpuestos$FK_tipoimpuesto_tipoperiodo">
+          <End Role="tiposperiodos" Type="Self.tiposperiodos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tipoimpuestos" Type="Self.tipoimpuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposperiodos">
+              <PropertyRef Name="TPer_Id" />
+            </Principal>
+            <Dependent Role="tipoimpuestos">
+              <PropertyRef Name="TPer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="radixModelStoreContainer">
+          <EntitySet Name="asistencias" EntityType="Self.asistencias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bancos" EntityType="Self.bancos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bancostiposcuentas" EntityType="Self.bancostiposcuentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cargos" EntityType="Self.cargos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comunas" EntityType="Self.comunas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contratos" EntityType="Self.contratos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="documentos" EntityType="Self.documentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresa_cargo" EntityType="Self.empresa_cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="generos" EntityType="Self.generos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="horario_laboral" EntityType="Self.horario_laboral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pago" EntityType="Self.pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personas" EntityType="Self.personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provincias" EntityType="Self.provincias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="regiones" EntityType="Self.regiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subempresa_cargo" EntityType="Self.subempresa_cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subempresas" EntityType="Self.subempresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipoformaspago" EntityType="Self.tipoformaspago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipoimpuestos" EntityType="Self.tipoimpuestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tiposcontratos" EntityType="Self.tiposcontratos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tiposcuentas" EntityType="Self.tiposcuentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tiposdescuentos" EntityType="Self.tiposdescuentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tiposhorasextras" EntityType="Self.tiposhorasextras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tiposperiodos" EntityType="Self.tiposperiodos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="asistencias$asis_contrato" Association="Self.asistencias$asis_contrato">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
+          <AssociationSet Name="asistencias$asis_horario" Association="Self.asistencias$asis_horario">
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
+          <AssociationSet Name="aspnetuserroles$ApplicationUser_Roles" Association="Self.aspnetuserroles$ApplicationUser_Roles">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="aspnetuserroles$IdentityRole_Users" Association="Self.aspnetuserroles$IdentityRole_Users">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="bancostiposcuentas$fk_Bancos_has_TiposCuentas_Bancos1" Association="Self.bancostiposcuentas$fk_Bancos_has_TiposCuentas_Bancos1">
+            <End Role="bancos" EntitySet="bancos" />
+            <End Role="bancostiposcuentas" EntitySet="bancostiposcuentas" />
+          </AssociationSet>
+          <AssociationSet Name="bancostiposcuentas$fk_Bancos_has_TiposCuentas_TiposCuentas1" Association="Self.bancostiposcuentas$fk_Bancos_has_TiposCuentas_TiposCuentas1">
+            <End Role="tiposcuentas" EntitySet="tiposcuentas" />
+            <End Role="bancostiposcuentas" EntitySet="bancostiposcuentas" />
+          </AssociationSet>
+          <AssociationSet Name="comunas$FK_comuna_provincia" Association="Self.comunas$FK_comuna_provincia">
+            <End Role="provincias" EntitySet="provincias" />
+            <End Role="comunas" EntitySet="comunas" />
+          </AssociationSet>
+          <AssociationSet Name="contratos$FK_contratos_Documentos" Association="Self.contratos$FK_contratos_Documentos">
+            <End Role="documentos" EntitySet="documentos" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="contratos$fk_Contratos_Personas" Association="Self.contratos$fk_Contratos_Personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="contratos$FK_contratos_subempresas" Association="Self.contratos$FK_contratos_subempresas">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="contratos$fk_Contratos_TiposContratos1" Association="Self.contratos$fk_Contratos_TiposContratos1">
+            <End Role="tiposcontratos" EntitySet="tiposcontratos" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="empresa_cargo$cargo" Association="Self.empresa_cargo$cargo">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="empresa_cargo$empresa" Association="Self.empresa_cargo$empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="empresa_cargo$plantilla" Association="Self.empresa_cargo$plantilla">
+            <End Role="planillascontratos" EntitySet="planillascontratos" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="fichadescuentos$FK_fichadescuentos_tipodescuento" Association="Self.fichadescuentos$FK_fichadescuentos_tipodescuento">
+            <End Role="tiposdescuentos" EntitySet="tiposdescuentos" />
+            <End Role="fichadescuentos" EntitySet="fichadescuentos" />
+          </AssociationSet>
+          <AssociationSet Name="horario_laboral$horario_subempresa_cargo" Association="Self.horario_laboral$horario_subempresa_cargo">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+          </AssociationSet>
+          <AssociationSet Name="login$fk_Login_CuentaAsp" Association="Self.login$fk_Login_CuentaAsp">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="login$fk_Login_Empresa1" Association="Self.login$fk_Login_Empresa1">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="login$FK_login_Persona1" Association="Self.login$FK_login_Persona1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="pago$fk_FormasDePago_BancosTiposCuentas1" Association="Self.pago$fk_FormasDePago_BancosTiposCuentas1">
+            <End Role="bancostiposcuentas" EntitySet="bancostiposcuentas" />
+            <End Role="pago" EntitySet="pago" />
+          </AssociationSet>
+          <AssociationSet Name="pago$fk_FormasDePago_TipoFormasPago1" Association="Self.pago$fk_FormasDePago_TipoFormasPago1">
+            <End Role="tipoformaspago" EntitySet="tipoformaspago" />
+            <End Role="pago" EntitySet="pago" />
+          </AssociationSet>
+          <AssociationSet Name="personas$fk_Personas_cargos1" Association="Self.personas$fk_Personas_cargos1">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas$fk_personas_descuentos" Association="Self.personas$fk_personas_descuentos">
+            <End Role="fichadescuentos" EntitySet="fichadescuentos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas$fk_personas_estadocivil" Association="Self.personas$fk_personas_estadocivil">
+            <End Role="estadosciviles" EntitySet="estadosciviles" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas$fk_personas_nac" Association="Self.personas$fk_personas_nac">
+            <End Role="nacionalidades" EntitySet="nacionalidades" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas$fk_personas_sexo" Association="Self.personas$fk_personas_sexo">
+            <End Role="generos" EntitySet="generos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas$fk_personas_thora" Association="Self.personas$fk_personas_thora">
+            <End Role="tiposhorasextras" EntitySet="tiposhorasextras" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas$fk_personas_tipoimpuesto" Association="Self.personas$fk_personas_tipoimpuesto">
+            <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="provincias$FK_regiones_provincias" Association="Self.provincias$FK_regiones_provincias">
+            <End Role="regiones" EntitySet="regiones" />
+            <End Role="provincias" EntitySet="provincias" />
+          </AssociationSet>
+          <AssociationSet Name="subempresa_cargo$cargo_subempresa" Association="Self.subempresa_cargo$cargo_subempresa">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="subempresa_cargo$subempresa_cargo" Association="Self.subempresa_cargo$subempresa_cargo">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="subempresas$FK_subempresas_comunas" Association="Self.subempresas$FK_subempresas_comunas">
+            <End Role="comunas" EntitySet="comunas" />
+            <End Role="subempresas" EntitySet="subempresas" />
+          </AssociationSet>
+          <AssociationSet Name="subempresas$FK_subempresas_empresas" Association="Self.subempresas$FK_subempresas_empresas">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="subempresas" EntitySet="subempresas" />
+          </AssociationSet>
+          <AssociationSet Name="tipoimpuestos$FK_tipoimpuesto_tipoperiodo" Association="Self.tipoimpuestos$FK_tipoimpuesto_tipoperiodo">
+            <End Role="tiposperiodos" EntitySet="tiposperiodos" />
+            <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="radixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="asistencias">
+          <Key>
+            <PropertyRef Name="asis_id" />
+          </Key>
+          <Property Name="asis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Con_Id" Type="Int32" />
+          <Property Name="Hl_Id" Type="Int32" />
+          <Property Name="asis_estado" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="contratos" Relationship="Self.asistencias_asis_contrato" FromRole="asistencias" ToRole="contratos" />
+          <NavigationProperty Name="horario_laboral" Relationship="Self.asistencias_asis_horario" FromRole="asistencias" ToRole="horario_laboral" />
+        </EntityType>
+        <EntityType Name="bancos">
+          <Key>
+            <PropertyRef Name="Ban_Id" />
+          </Key>
+          <Property Name="Ban_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ban_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="bancostiposcuentas" Relationship="Self.bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1" FromRole="bancos" ToRole="bancostiposcuentas" />
+        </EntityType>
+        <EntityType Name="bancostiposcuentas">
+          <Key>
+            <PropertyRef Name="BTC_Id" />
+          </Key>
+          <Property Name="BTC_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ban_Id" Type="Int32" Nullable="false" />
+          <Property Name="TCuen_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bancos" Relationship="Self.bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1" FromRole="bancostiposcuentas" ToRole="bancos" />
+          <NavigationProperty Name="tiposcuentas" Relationship="Self.bancostiposcuentas_fk_Bancos_has_TiposCuentas_TiposCuentas1" FromRole="bancostiposcuentas" ToRole="tiposcuentas" />
+          <NavigationProperty Name="pago" Relationship="Self.pago_fk_FormasDePago_BancosTiposCuentas1" FromRole="bancostiposcuentas" ToRole="pago" />
+        </EntityType>
+        <EntityType Name="cargos">
+          <Key>
+            <PropertyRef Name="Car_Id" />
+          </Key>
+          <Property Name="Car_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Car_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="empresa_cargo" Relationship="Self.empresa_cargo_cargo" FromRole="cargos" ToRole="empresa_cargo" />
+          <NavigationProperty Name="personas" Relationship="Self.personas_fk_Personas_cargos1" FromRole="cargos" ToRole="personas" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="Self.subempresa_cargo_cargo_subempresa" FromRole="cargos" ToRole="subempresa_cargo" />
+        </EntityType>
+        <EntityType Name="comunas">
+          <Key>
+            <PropertyRef Name="Com_Id" />
+          </Key>
+          <Property Name="Com_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Com_Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prov_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="provincias" Relationship="Self.comunas_FK_comuna_provincia" FromRole="comunas" ToRole="provincias" />
+          <NavigationProperty Name="subempresas" Relationship="Self.subempresas_FK_subempresas_comunas" FromRole="comunas" ToRole="subempresas" />
+        </EntityType>
+        <EntityType Name="contratos">
+          <Key>
+            <PropertyRef Name="Con_Id" />
+          </Key>
+          <Property Name="Con_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Id" Type="Int32" Nullable="false" />
+          <Property Name="Doc_Id" Type="Int32" />
+          <Property Name="TCon_Id" Type="Int32" />
+          <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Con_FechaInicio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Con_FechaFin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Con_Estado" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="asistencias" Relationship="Self.asistencias_asis_contrato" FromRole="contratos" ToRole="asistencias" />
+          <NavigationProperty Name="documentos" Relationship="Self.contratos_FK_contratos_Documentos" FromRole="contratos" ToRole="documentos" />
+          <NavigationProperty Name="personas" Relationship="Self.contratos_fk_Contratos_Personas" FromRole="contratos" ToRole="personas" />
+          <NavigationProperty Name="subempresas" Relationship="Self.contratos_FK_contratos_subempresas" FromRole="contratos" ToRole="subempresas" />
+          <NavigationProperty Name="tiposcontratos" Relationship="Self.contratos_fk_Contratos_TiposContratos1" FromRole="contratos" ToRole="tiposcontratos" />
+        </EntityType>
+        <EntityType Name="documentos">
+          <Key>
+            <PropertyRef Name="Doc_Id" />
+          </Key>
+          <Property Name="Doc_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Doc_Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Doc_Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Doc_Binario" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="contratos" Relationship="Self.contratos_FK_contratos_Documentos" FromRole="documentos" ToRole="contratos" />
+        </EntityType>
+        <EntityType Name="empresa_cargo">
+          <Key>
+            <PropertyRef Name="Empcar_id" />
+          </Key>
+          <Property Name="Empcar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Int32" />
+          <Property Name="Car_Id" Type="Int32" />
+          <Property Name="PC_Id" Type="Int32" />
+          <NavigationProperty Name="cargos" Relationship="Self.empresa_cargo_cargo" FromRole="empresa_cargo" ToRole="cargos" />
+          <NavigationProperty Name="empresas" Relationship="Self.empresa_cargo_empresa" FromRole="empresa_cargo" ToRole="empresas" />
+          <NavigationProperty Name="planillascontratos" Relationship="Self.empresa_cargo_plantilla" FromRole="empresa_cargo" ToRole="planillascontratos" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Emp_Cant" Type="Int32" />
+          <Property Name="Emp_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="empresa_cargo" Relationship="Self.empresa_cargo_empresa" FromRole="empresas" ToRole="empresa_cargo" />
+          <NavigationProperty Name="login" Relationship="Self.login_fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
+          <NavigationProperty Name="subempresas" Relationship="Self.subempresas_FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
+        </EntityType>
+        <EntityType Name="estadosciviles">
+          <Key>
+            <PropertyRef Name="EC_Id" />
+          </Key>
+          <Property Name="EC_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EC_Nom" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="personas" Relationship="Self.personas_fk_personas_estadocivil" FromRole="estadosciviles" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="fichadescuentos">
+          <Key>
+            <PropertyRef Name="Desc_Id" />
+          </Key>
+          <Property Name="Desc_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TDes_Id" Type="Int32" Nullable="false" />
+          <Property Name="Desc_PorcValor" Type="Single" Nullable="false" />
+          <Property Name="Desc_ValorMax" Type="Single" Nullable="false" />
+          <Property Name="Desc_Forma" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tiposdescuentos" Relationship="Self.fichadescuentos_FK_fichadescuentos_tipodescuento" FromRole="fichadescuentos" ToRole="tiposdescuentos" />
+          <NavigationProperty Name="personas" Relationship="Self.personas_fk_personas_descuentos" FromRole="fichadescuentos" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="fichasasistencias">
+          <Key>
+            <PropertyRef Name="FAsi_Id" />
+          </Key>
+          <Property Name="FAsi_Id" Type="Int32" Nullable="false" />
+          <Property Name="FAsi_CanD" Type="Int32" />
+          <Property Name="FAsi_Dia" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="FAsi_CanS" Type="Int32" />
+          <Property Name="FAsi_CanM" Type="Int32" />
+          <Property Name="FAsi_CanH" Type="Int32" />
+          <Property Name="Cos_Id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FAsi_Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="generos">
+          <Key>
+            <PropertyRef Name="Gen_Id" />
+          </Key>
+          <Property Name="Gen_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gen_Nom" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="personas" Relationship="Self.personas_fk_personas_sexo" FromRole="generos" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="horario_laboral">
+          <Key>
+            <PropertyRef Name="Hl_Id" />
+          </Key>
+          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_Inicio" Type="DateTime" Precision="0" />
+          <Property Name="Hl_Termino" Type="DateTime" Precision="0" />
+          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_TodoDia" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Subempcar_id" Type="Int32" />
+          <NavigationProperty Name="asistencias" Relationship="Self.asistencias_asis_horario" FromRole="horario_laboral" ToRole="asistencias" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="Self.horario_laboral_horario_subempresa_cargo" FromRole="horario_laboral" ToRole="subempresa_cargo" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="empresas" Relationship="Self.login_fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
+          <NavigationProperty Name="personas" Relationship="Self.login_FK_login_Persona1" FromRole="login" ToRole="personas" />
+          <NavigationProperty Name="AspNetUsers" Relationship="radixModel.login_fk_Login_CuentaAsp" FromRole="login" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="nacionalidades">
+          <Key>
+            <PropertyRef Name="Nac_Id" />
+          </Key>
+          <Property Name="Nac_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nac_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="personas" Relationship="Self.personas_fk_personas_nac" FromRole="nacionalidades" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="Pag_Id" />
+          </Key>
+          <Property Name="Pag_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TFor_Id" Type="Int32" Nullable="false" />
+          <Property Name="Pag_Num" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="Pag_Correo" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="Pag_Motivo" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="BTC_Id" Type="Int32" />
+          <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="bancostiposcuentas" Relationship="Self.pago_fk_FormasDePago_BancosTiposCuentas1" FromRole="pago" ToRole="bancostiposcuentas" />
+          <NavigationProperty Name="tipoformaspago" Relationship="Self.pago_fk_FormasDePago_TipoFormasPago1" FromRole="pago" ToRole="tipoformaspago" />
+        </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="Per_Rut" />
+          </Key>
+          <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Per_Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Per_ApePat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Per_ApeMat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Per_Dir" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Per_Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="Gen_Id" Type="Int32" Nullable="false" />
+          <Property Name="EC_Id" Type="Int32" Nullable="false" />
+          <Property Name="Car_Id" Type="Int32" Nullable="false" />
+          <Property Name="Per_Suel" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TImp_Id" Type="Int32" />
+          <Property Name="Per_Des" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Desc_Id" Type="Int32" />
+          <Property Name="THor_Id" Type="Int32" />
+          <NavigationProperty Name="cargos" Relationship="Self.personas_fk_Personas_cargos1" FromRole="personas" ToRole="cargos" />
+          <NavigationProperty Name="contratos" Relationship="Self.contratos_fk_Contratos_Personas" FromRole="personas" ToRole="contratos" />
+          <NavigationProperty Name="estadosciviles" Relationship="Self.personas_fk_personas_estadocivil" FromRole="personas" ToRole="estadosciviles" />
+          <NavigationProperty Name="fichadescuentos" Relationship="Self.personas_fk_personas_descuentos" FromRole="personas" ToRole="fichadescuentos" />
+          <NavigationProperty Name="generos" Relationship="Self.personas_fk_personas_sexo" FromRole="personas" ToRole="generos" />
+          <NavigationProperty Name="login" Relationship="Self.login_FK_login_Persona1" FromRole="personas" ToRole="login" />
+          <NavigationProperty Name="nacionalidades" Relationship="Self.personas_fk_personas_nac" FromRole="personas" ToRole="nacionalidades" />
+          <NavigationProperty Name="tiposhorasextras" Relationship="Self.personas_fk_personas_thora" FromRole="personas" ToRole="tiposhorasextras" />
+          <NavigationProperty Name="tipoimpuestos" Relationship="Self.personas_fk_personas_tipoimpuesto" FromRole="personas" ToRole="tipoimpuestos" />
+        </EntityType>
+        <EntityType Name="planillascontratos">
+          <Key>
+            <PropertyRef Name="PC_Id" />
+          </Key>
+          <Property Name="PC_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PC_Nom" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PC_Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PC_Binario" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="empresa_cargo" Relationship="Self.empresa_cargo_plantilla" FromRole="planillascontratos" ToRole="empresa_cargo" />
+        </EntityType>
+        <EntityType Name="provincias">
+          <Key>
+            <PropertyRef Name="Prov_Id" />
+          </Key>
+          <Property Name="Prov_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prov_Nom" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Reg_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comunas" Relationship="Self.comunas_FK_comuna_provincia" FromRole="provincias" ToRole="comunas" />
+          <NavigationProperty Name="regiones" Relationship="Self.provincias_FK_regiones_provincias" FromRole="provincias" ToRole="regiones" />
+        </EntityType>
+        <EntityType Name="regiones">
+          <Key>
+            <PropertyRef Name="Reg_Id" />
+          </Key>
+          <Property Name="Reg_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reg_Nom" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Reg_NomOrig" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="provincias" Relationship="Self.provincias_FK_regiones_provincias" FromRole="regiones" ToRole="provincias" />
+        </EntityType>
+        <EntityType Name="subempresa_cargo">
+          <Key>
+            <PropertyRef Name="Subempcar_id" />
+          </Key>
+          <Property Name="Subempcar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Id" Type="Int32" />
+          <Property Name="Car_Id" Type="Int32" />
+          <NavigationProperty Name="cargos" Relationship="Self.subempresa_cargo_cargo_subempresa" FromRole="subempresa_cargo" ToRole="cargos" />
+          <NavigationProperty Name="horario_laboral" Relationship="Self.horario_laboral_horario_subempresa_cargo" FromRole="subempresa_cargo" ToRole="horario_laboral" />
+          <NavigationProperty Name="subempresas" Relationship="Self.subempresa_cargo_subempresa_cargo" FromRole="subempresa_cargo" ToRole="subempresas" />
+        </EntityType>
+        <EntityType Name="subempresas">
+          <Key>
+            <PropertyRef Name="Sub_Id" />
+          </Key>
+          <Property Name="Sub_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Cant" Type="Int32" />
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Sub_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Com_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comunas" Relationship="Self.subempresas_FK_subempresas_comunas" FromRole="subempresas" ToRole="comunas" />
+          <NavigationProperty Name="contratos" Relationship="Self.contratos_FK_contratos_subempresas" FromRole="subempresas" ToRole="contratos" />
+          <NavigationProperty Name="empresas" Relationship="Self.subempresas_FK_subempresas_empresas" FromRole="subempresas" ToRole="empresas" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="Self.subempresa_cargo_subempresa_cargo" FromRole="subempresas" ToRole="subempresa_cargo" />
+        </EntityType>
+        <EntityType Name="tipoformaspago">
+          <Key>
+            <PropertyRef Name="TFor_Id" />
+          </Key>
+          <Property Name="TFor_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TFor_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="pago" Relationship="Self.pago_fk_FormasDePago_TipoFormasPago1" FromRole="tipoformaspago" ToRole="pago" />
+        </EntityType>
+        <EntityType Name="tipoimpuestos">
+          <Key>
+            <PropertyRef Name="TImp_Id" />
+          </Key>
+          <Property Name="TImp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TImp_nom" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TPer_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="personas" Relationship="Self.personas_fk_personas_tipoimpuesto" FromRole="tipoimpuestos" ToRole="personas" />
+          <NavigationProperty Name="tiposperiodos" Relationship="Self.tipoimpuestos_FK_tipoimpuesto_tipoperiodo" FromRole="tipoimpuestos" ToRole="tiposperiodos" />
+        </EntityType>
+        <EntityType Name="tiposcontratos">
+          <Key>
+            <PropertyRef Name="TCon_Id" />
+          </Key>
+          <Property Name="TCon_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCon_Nom" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="contratos" Relationship="Self.contratos_fk_Contratos_TiposContratos1" FromRole="tiposcontratos" ToRole="contratos" />
+        </EntityType>
+        <EntityType Name="tiposcuentas">
+          <Key>
+            <PropertyRef Name="TCuen_Id" />
+          </Key>
+          <Property Name="TCuen_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCuen_Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="bancostiposcuentas" Relationship="Self.bancostiposcuentas_fk_Bancos_has_TiposCuentas_TiposCuentas1" FromRole="tiposcuentas" ToRole="bancostiposcuentas" />
+        </EntityType>
+        <EntityType Name="tiposdescuentos">
+          <Key>
+            <PropertyRef Name="TDes_Id" />
+          </Key>
+          <Property Name="TDes_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TDes_Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="fichadescuentos" Relationship="Self.fichadescuentos_FK_fichadescuentos_tipodescuento" FromRole="tiposdescuentos" ToRole="fichadescuentos" />
+        </EntityType>
+        <EntityType Name="tiposhorasextras">
+          <Key>
+            <PropertyRef Name="THor_Id" />
+          </Key>
+          <Property Name="THor_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="THor_Nom" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="THor_ValorDia" Type="Single" Nullable="false" />
+          <Property Name="THor_ValorHoraDia" Type="Single" Nullable="false" />
+          <Property Name="THor_ValorHoraExtraEsp" Type="Single" Nullable="false" />
+          <NavigationProperty Name="personas" Relationship="Self.personas_fk_personas_thora" FromRole="tiposhorasextras" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="tiposperiodos">
+          <Key>
+            <PropertyRef Name="TPer_Id" />
+          </Key>
+          <Property Name="TPer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TPer_Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tipoimpuestos" Relationship="Self.tipoimpuestos_FK_tipoimpuesto_tipoperiodo" FromRole="tiposperiodos" ToRole="tipoimpuestos" />
+        </EntityType>
+        <Association Name="asistencias_asis_contrato">
+          <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
+          <End Role="asistencias" Type="Self.asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Con_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asistencias_asis_horario">
+          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="0..1" />
+          <End Role="asistencias" Type="Self.asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Hl_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1">
+          <End Role="bancos" Type="Self.bancos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="bancostiposcuentas" Type="Self.bancostiposcuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bancos">
+              <PropertyRef Name="Ban_Id" />
+            </Principal>
+            <Dependent Role="bancostiposcuentas">
+              <PropertyRef Name="Ban_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bancostiposcuentas_fk_Bancos_has_TiposCuentas_TiposCuentas1">
+          <End Role="tiposcuentas" Type="Self.tiposcuentas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="bancostiposcuentas" Type="Self.bancostiposcuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposcuentas">
+              <PropertyRef Name="TCuen_Id" />
+            </Principal>
+            <Dependent Role="bancostiposcuentas">
+              <PropertyRef Name="TCuen_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pago_fk_FormasDePago_BancosTiposCuentas1">
+          <End Role="bancostiposcuentas" Type="Self.bancostiposcuentas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pago" Type="Self.pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bancostiposcuentas">
+              <PropertyRef Name="BTC_Id" />
+            </Principal>
+            <Dependent Role="pago">
+              <PropertyRef Name="BTC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa_cargo_cargo">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas_fk_Personas_cargos1">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresa_cargo_cargo_subempresa">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comunas_FK_comuna_provincia">
+          <End Role="provincias" Type="Self.provincias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comunas" Type="Self.comunas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincias">
+              <PropertyRef Name="Prov_Id" />
+            </Principal>
+            <Dependent Role="comunas">
+              <PropertyRef Name="Prov_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresas_FK_subempresas_comunas">
+          <End Role="comunas" Type="Self.comunas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comunas">
+              <PropertyRef Name="Com_Id" />
+            </Principal>
+            <Dependent Role="subempresas">
+              <PropertyRef Name="Com_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos_FK_contratos_Documentos">
+          <End Role="documentos" Type="Self.documentos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documentos">
+              <PropertyRef Name="Doc_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Doc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos_fk_Contratos_Personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos_FK_contratos_subempresas">
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratos_fk_Contratos_TiposContratos1">
+          <End Role="tiposcontratos" Type="Self.tiposcontratos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposcontratos">
+              <PropertyRef Name="TCon_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="TCon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa_cargo_empresa">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="empresa_cargo_plantilla">
+          <End Role="planillascontratos" Type="Self.planillascontratos" Multiplicity="0..1" />
+          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planillascontratos">
+              <PropertyRef Name="PC_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="PC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login_fk_Login_Empresa1">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresas_FK_subempresas_empresas">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="subempresas">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas_fk_personas_estadocivil">
+          <End Role="estadosciviles" Type="Self.estadosciviles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estadosciviles">
+              <PropertyRef Name="EC_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="EC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fichadescuentos_FK_fichadescuentos_tipodescuento">
+          <End Role="tiposdescuentos" Type="Self.tiposdescuentos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="fichadescuentos" Type="Self.fichadescuentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposdescuentos">
+              <PropertyRef Name="TDes_Id" />
+            </Principal>
+            <Dependent Role="fichadescuentos">
+              <PropertyRef Name="TDes_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas_fk_personas_descuentos">
+          <End Role="fichadescuentos" Type="Self.fichadescuentos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fichadescuentos">
+              <PropertyRef Name="Desc_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Desc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas_fk_personas_sexo">
+          <End Role="generos" Type="Self.generos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="generos">
+              <PropertyRef Name="Gen_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Gen_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="horario_laboral_horario_subempresa_cargo">
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="0..1" />
+          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
+            </Principal>
+            <Dependent Role="horario_laboral">
+              <PropertyRef Name="Subempcar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login_FK_login_Persona1">
+          <End Role="personas" Type="Self.personas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas_fk_personas_nac">
+          <End Role="nacionalidades" Type="Self.nacionalidades" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nacionalidades">
+              <PropertyRef Name="Nac_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Nac_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pago_fk_FormasDePago_TipoFormasPago1">
+          <End Role="tipoformaspago" Type="Self.tipoformaspago" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pago" Type="Self.pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoformaspago">
+              <PropertyRef Name="TFor_Id" />
+            </Principal>
+            <Dependent Role="pago">
+              <PropertyRef Name="TFor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas_fk_personas_thora">
+          <End Role="tiposhorasextras" Type="Self.tiposhorasextras" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposhorasextras">
+              <PropertyRef Name="THor_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="THor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="personas_fk_personas_tipoimpuesto">
+          <End Role="tipoimpuestos" Type="Self.tipoimpuestos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoimpuestos">
+              <PropertyRef Name="TImp_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="TImp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="provincias_FK_regiones_provincias">
+          <End Role="regiones" Type="Self.regiones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="provincias" Type="Self.provincias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regiones">
+              <PropertyRef Name="Reg_Id" />
+            </Principal>
+            <Dependent Role="provincias">
+              <PropertyRef Name="Reg_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresa_cargo_subempresa_cargo">
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="0..1" />
+          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="subempresa_cargo">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipoimpuestos_FK_tipoimpuesto_tipoperiodo">
+          <End Role="tiposperiodos" Type="Self.tiposperiodos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tipoimpuestos" Type="Self.tipoimpuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposperiodos">
+              <PropertyRef Name="TPer_Id" />
+            </Principal>
+            <Dependent Role="tipoimpuestos">
+              <PropertyRef Name="TPer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="radixEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="asistencias" EntityType="Self.asistencias" />
+          <EntitySet Name="bancos" EntityType="Self.bancos" />
+          <EntitySet Name="bancostiposcuentas" EntityType="Self.bancostiposcuentas" />
+          <EntitySet Name="cargos" EntityType="Self.cargos" />
+          <EntitySet Name="comunas" EntityType="Self.comunas" />
+          <EntitySet Name="contratos" EntityType="Self.contratos" />
+          <EntitySet Name="documentos" EntityType="Self.documentos" />
+          <EntitySet Name="empresa_cargo" EntityType="Self.empresa_cargo" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" />
+          <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" />
+          <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" />
+          <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" />
+          <EntitySet Name="generos" EntityType="Self.generos" />
+          <EntitySet Name="horario_laboral" EntityType="Self.horario_laboral" />
+          <EntitySet Name="login" EntityType="Self.login" />
+          <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" />
+          <EntitySet Name="pago" EntityType="Self.pago" />
+          <EntitySet Name="personas" EntityType="Self.personas" />
+          <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" />
+          <EntitySet Name="provincias" EntityType="Self.provincias" />
+          <EntitySet Name="regiones" EntityType="Self.regiones" />
+          <EntitySet Name="subempresa_cargo" EntityType="Self.subempresa_cargo" />
+          <EntitySet Name="subempresas" EntityType="Self.subempresas" />
+          <EntitySet Name="tipoformaspago" EntityType="Self.tipoformaspago" />
+          <EntitySet Name="tipoimpuestos" EntityType="Self.tipoimpuestos" />
+          <EntitySet Name="tiposcontratos" EntityType="Self.tiposcontratos" />
+          <EntitySet Name="tiposcuentas" EntityType="Self.tiposcuentas" />
+          <EntitySet Name="tiposdescuentos" EntityType="Self.tiposdescuentos" />
+          <EntitySet Name="tiposhorasextras" EntityType="Self.tiposhorasextras" />
+          <EntitySet Name="tiposperiodos" EntityType="Self.tiposperiodos" />
+          <AssociationSet Name="asistencias_asis_contrato" Association="Self.asistencias_asis_contrato">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
+          <AssociationSet Name="asistencias_asis_horario" Association="Self.asistencias_asis_horario">
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
+          <AssociationSet Name="bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1" Association="Self.bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1">
+            <End Role="bancos" EntitySet="bancos" />
+            <End Role="bancostiposcuentas" EntitySet="bancostiposcuentas" />
+          </AssociationSet>
+          <AssociationSet Name="bancostiposcuentas_fk_Bancos_has_TiposCuentas_TiposCuentas1" Association="Self.bancostiposcuentas_fk_Bancos_has_TiposCuentas_TiposCuentas1">
+            <End Role="tiposcuentas" EntitySet="tiposcuentas" />
+            <End Role="bancostiposcuentas" EntitySet="bancostiposcuentas" />
+          </AssociationSet>
+          <AssociationSet Name="pago_fk_FormasDePago_BancosTiposCuentas1" Association="Self.pago_fk_FormasDePago_BancosTiposCuentas1">
+            <End Role="bancostiposcuentas" EntitySet="bancostiposcuentas" />
+            <End Role="pago" EntitySet="pago" />
+          </AssociationSet>
+          <AssociationSet Name="empresa_cargo_cargo" Association="Self.empresa_cargo_cargo">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="personas_fk_Personas_cargos1" Association="Self.personas_fk_Personas_cargos1">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="subempresa_cargo_cargo_subempresa" Association="Self.subempresa_cargo_cargo_subempresa">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="comunas_FK_comuna_provincia" Association="Self.comunas_FK_comuna_provincia">
+            <End Role="provincias" EntitySet="provincias" />
+            <End Role="comunas" EntitySet="comunas" />
+          </AssociationSet>
+          <AssociationSet Name="subempresas_FK_subempresas_comunas" Association="Self.subempresas_FK_subempresas_comunas">
+            <End Role="comunas" EntitySet="comunas" />
+            <End Role="subempresas" EntitySet="subempresas" />
+          </AssociationSet>
+          <AssociationSet Name="contratos_FK_contratos_Documentos" Association="Self.contratos_FK_contratos_Documentos">
+            <End Role="documentos" EntitySet="documentos" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="contratos_fk_Contratos_Personas" Association="Self.contratos_fk_Contratos_Personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="contratos_FK_contratos_subempresas" Association="Self.contratos_FK_contratos_subempresas">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="contratos_fk_Contratos_TiposContratos1" Association="Self.contratos_fk_Contratos_TiposContratos1">
+            <End Role="tiposcontratos" EntitySet="tiposcontratos" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="empresa_cargo_empresa" Association="Self.empresa_cargo_empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="empresa_cargo_plantilla" Association="Self.empresa_cargo_plantilla">
+            <End Role="planillascontratos" EntitySet="planillascontratos" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="login_fk_Login_Empresa1" Association="Self.login_fk_Login_Empresa1">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="subempresas_FK_subempresas_empresas" Association="Self.subempresas_FK_subempresas_empresas">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="subempresas" EntitySet="subempresas" />
+          </AssociationSet>
+          <AssociationSet Name="personas_fk_personas_estadocivil" Association="Self.personas_fk_personas_estadocivil">
+            <End Role="estadosciviles" EntitySet="estadosciviles" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fichadescuentos_FK_fichadescuentos_tipodescuento" Association="Self.fichadescuentos_FK_fichadescuentos_tipodescuento">
+            <End Role="tiposdescuentos" EntitySet="tiposdescuentos" />
+            <End Role="fichadescuentos" EntitySet="fichadescuentos" />
+          </AssociationSet>
+          <AssociationSet Name="personas_fk_personas_descuentos" Association="Self.personas_fk_personas_descuentos">
+            <End Role="fichadescuentos" EntitySet="fichadescuentos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas_fk_personas_sexo" Association="Self.personas_fk_personas_sexo">
+            <End Role="generos" EntitySet="generos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="horario_laboral_horario_subempresa_cargo" Association="Self.horario_laboral_horario_subempresa_cargo">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+          </AssociationSet>
+          <AssociationSet Name="login_FK_login_Persona1" Association="Self.login_FK_login_Persona1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="personas_fk_personas_nac" Association="Self.personas_fk_personas_nac">
+            <End Role="nacionalidades" EntitySet="nacionalidades" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="pago_fk_FormasDePago_TipoFormasPago1" Association="Self.pago_fk_FormasDePago_TipoFormasPago1">
+            <End Role="tipoformaspago" EntitySet="tipoformaspago" />
+            <End Role="pago" EntitySet="pago" />
+          </AssociationSet>
+          <AssociationSet Name="personas_fk_personas_thora" Association="Self.personas_fk_personas_thora">
+            <End Role="tiposhorasextras" EntitySet="tiposhorasextras" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="personas_fk_personas_tipoimpuesto" Association="Self.personas_fk_personas_tipoimpuesto">
+            <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="provincias_FK_regiones_provincias" Association="Self.provincias_FK_regiones_provincias">
+            <End Role="regiones" EntitySet="regiones" />
+            <End Role="provincias" EntitySet="provincias" />
+          </AssociationSet>
+          <AssociationSet Name="subempresa_cargo_subempresa_cargo" Association="Self.subempresa_cargo_subempresa_cargo">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="tipoimpuestos_FK_tipoimpuesto_tipoperiodo" Association="Self.tipoimpuestos_FK_tipoimpuesto_tipoperiodo">
+            <End Role="tiposperiodos" EntitySet="tiposperiodos" />
+            <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUserRoles" EntityType="radixModel.AspNetUserRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="radixModel.AspNetUsers" />
+          <AssociationSet Name="aspnetuserroles_ApplicationUser_Roles" Association="radixModel.aspnetuserroles_ApplicationUser_Roles">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="login_fk_Login_CuentaAsp" Association="radixModel.login_fk_Login_CuentaAsp">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="radixModel.AspNetRoles" />
+          <AssociationSet Name="AspNetRolesAspNetUserRoles" Association="radixModel.AspNetRolesAspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="radixModel.aspnetuserroles_ApplicationUser_Roles" FromRole="AspNetUserRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetRoles" Relationship="radixModel.AspNetRolesAspNetUserRoles" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="radixModel.aspnetuserroles_ApplicationUser_Roles" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
+          <NavigationProperty Name="login" Relationship="radixModel.login_fk_Login_CuentaAsp" FromRole="AspNetUsers" ToRole="login" />
+        </EntityType>
+        <Association Name="aspnetuserroles_ApplicationUser_Roles">
+          <End Type="radixModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.AspNetUserRoles" Role="AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login_fk_Login_CuentaAsp">
+          <End Type="radixModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.login" Role="login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="radixModel.AspNetRolesAspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+        </EntityType>
+        <Association Name="AspNetRolesAspNetUserRoles">
+          <End Type="radixModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="radixModel.AspNetUserRoles" Role="AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="radixModelStoreContainer" CdmEntityContainer="radixEntities">
+          <EntitySetMapping Name="asistencias">
+            <EntityTypeMapping TypeName="radixModel.asistencias">
+              <MappingFragment StoreEntitySet="asistencias">
+                <ScalarProperty Name="asis_id" ColumnName="asis_id" />
+                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+                <ScalarProperty Name="asis_estado" ColumnName="asis_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bancos">
+            <EntityTypeMapping TypeName="radixModel.bancos">
+              <MappingFragment StoreEntitySet="bancos">
+                <ScalarProperty Name="Ban_Id" ColumnName="Ban_Id" />
+                <ScalarProperty Name="Ban_Nom" ColumnName="Ban_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bancostiposcuentas">
+            <EntityTypeMapping TypeName="radixModel.bancostiposcuentas">
+              <MappingFragment StoreEntitySet="bancostiposcuentas">
+                <ScalarProperty Name="BTC_Id" ColumnName="BTC_Id" />
+                <ScalarProperty Name="Ban_Id" ColumnName="Ban_Id" />
+                <ScalarProperty Name="TCuen_Id" ColumnName="TCuen_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cargos">
+            <EntityTypeMapping TypeName="radixModel.cargos">
+              <MappingFragment StoreEntitySet="cargos">
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+                <ScalarProperty Name="Car_Nom" ColumnName="Car_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comunas">
+            <EntityTypeMapping TypeName="radixModel.comunas">
+              <MappingFragment StoreEntitySet="comunas">
+                <ScalarProperty Name="Com_Id" ColumnName="Com_Id" />
+                <ScalarProperty Name="Com_Nom" ColumnName="Com_Nom" />
+                <ScalarProperty Name="Prov_Id" ColumnName="Prov_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contratos">
+            <EntityTypeMapping TypeName="radixModel.contratos">
+              <MappingFragment StoreEntitySet="contratos">
+                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Doc_Id" ColumnName="Doc_Id" />
+                <ScalarProperty Name="TCon_Id" ColumnName="TCon_Id" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+                <ScalarProperty Name="Con_FechaInicio" ColumnName="Con_FechaInicio" />
+                <ScalarProperty Name="Con_FechaFin" ColumnName="Con_FechaFin" />
+                <ScalarProperty Name="Con_Estado" ColumnName="Con_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="documentos">
+            <EntityTypeMapping TypeName="radixModel.documentos">
+              <MappingFragment StoreEntitySet="documentos">
+                <ScalarProperty Name="Doc_Id" ColumnName="Doc_Id" />
+                <ScalarProperty Name="Doc_Nom" ColumnName="Doc_Nom" />
+                <ScalarProperty Name="Doc_Ext" ColumnName="Doc_Ext" />
+                <ScalarProperty Name="Doc_Binario" ColumnName="Doc_Binario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresa_cargo">
+            <EntityTypeMapping TypeName="radixModel.empresa_cargo">
+              <MappingFragment StoreEntitySet="empresa_cargo">
+                <ScalarProperty Name="Empcar_id" ColumnName="Empcar_id" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+                <ScalarProperty Name="PC_Id" ColumnName="PC_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresas">
+            <EntityTypeMapping TypeName="radixModel.empresas">
+              <MappingFragment StoreEntitySet="empresas">
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Emp_Nom" ColumnName="Emp_Nom" />
+                <ScalarProperty Name="Emp_Cant" ColumnName="Emp_Cant" />
+                <ScalarProperty Name="Emp_Estado" ColumnName="Emp_Estado" />
+                <ScalarProperty Name="Emp_Dir" ColumnName="Emp_Dir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estadosciviles">
+            <EntityTypeMapping TypeName="radixModel.estadosciviles">
+              <MappingFragment StoreEntitySet="estadosciviles">
+                <ScalarProperty Name="EC_Id" ColumnName="EC_Id" />
+                <ScalarProperty Name="EC_Nom" ColumnName="EC_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fichadescuentos">
+            <EntityTypeMapping TypeName="radixModel.fichadescuentos">
+              <MappingFragment StoreEntitySet="fichadescuentos">
+                <ScalarProperty Name="Desc_Id" ColumnName="Desc_Id" />
+                <ScalarProperty Name="Desc_Nom" ColumnName="Desc_Nom" />
+                <ScalarProperty Name="TDes_Id" ColumnName="TDes_Id" />
+                <ScalarProperty Name="Desc_PorcValor" ColumnName="Desc_PorcValor" />
+                <ScalarProperty Name="Desc_ValorMax" ColumnName="Desc_ValorMax" />
+                <ScalarProperty Name="Desc_Forma" ColumnName="Desc_Forma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fichasasistencias">
+            <EntityTypeMapping TypeName="radixModel.fichasasistencias">
+              <MappingFragment StoreEntitySet="fichasasistencias">
+                <ScalarProperty Name="FAsi_Id" ColumnName="FAsi_Id" />
+                <ScalarProperty Name="FAsi_CanD" ColumnName="FAsi_CanD" />
+                <ScalarProperty Name="FAsi_Dia" ColumnName="FAsi_Dia" />
+                <ScalarProperty Name="FAsi_CanS" ColumnName="FAsi_CanS" />
+                <ScalarProperty Name="FAsi_CanM" ColumnName="FAsi_CanM" />
+                <ScalarProperty Name="FAsi_CanH" ColumnName="FAsi_CanH" />
+                <ScalarProperty Name="Cos_Id" ColumnName="Cos_Id" />
+                <ScalarProperty Name="FAsi_Fecha" ColumnName="FAsi_Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="generos">
+            <EntityTypeMapping TypeName="radixModel.generos">
+              <MappingFragment StoreEntitySet="generos">
+                <ScalarProperty Name="Gen_Id" ColumnName="Gen_Id" />
+                <ScalarProperty Name="Gen_Nom" ColumnName="Gen_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horario_laboral">
+            <EntityTypeMapping TypeName="radixModel.horario_laboral">
+              <MappingFragment StoreEntitySet="horario_laboral">
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+                <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
+                <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
+                <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
+                <ScalarProperty Name="Hl_Termino" ColumnName="Hl_Termino" />
+                <ScalarProperty Name="Hl_ColorTema" ColumnName="Hl_ColorTema" />
+                <ScalarProperty Name="Hl_TodoDia" ColumnName="Hl_TodoDia" />
+                <ScalarProperty Name="Subempcar_id" ColumnName="Subempcar_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login">
+            <EntityTypeMapping TypeName="radixModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nacionalidades">
+            <EntityTypeMapping TypeName="radixModel.nacionalidades">
+              <MappingFragment StoreEntitySet="nacionalidades">
+                <ScalarProperty Name="Nac_Id" ColumnName="Nac_Id" />
+                <ScalarProperty Name="Nac_Nom" ColumnName="Nac_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pago">
+            <EntityTypeMapping TypeName="radixModel.pago">
+              <MappingFragment StoreEntitySet="pago">
+                <ScalarProperty Name="Pag_Id" ColumnName="Pag_Id" />
+                <ScalarProperty Name="TFor_Id" ColumnName="TFor_Id" />
+                <ScalarProperty Name="Pag_Num" ColumnName="Pag_Num" />
+                <ScalarProperty Name="Pag_Correo" ColumnName="Pag_Correo" />
+                <ScalarProperty Name="Pag_Motivo" ColumnName="Pag_Motivo" />
+                <ScalarProperty Name="BTC_Id" ColumnName="BTC_Id" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personas">
+            <EntityTypeMapping TypeName="radixModel.personas">
+              <MappingFragment StoreEntitySet="personas">
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+                <ScalarProperty Name="Per_Nom" ColumnName="Per_Nom" />
+                <ScalarProperty Name="Per_ApePat" ColumnName="Per_ApePat" />
+                <ScalarProperty Name="Per_ApeMat" ColumnName="Per_ApeMat" />
+                <ScalarProperty Name="Per_Dir" ColumnName="Per_Dir" />
+                <ScalarProperty Name="Per_Tel" ColumnName="Per_Tel" />
+                <ScalarProperty Name="Nac_Id" ColumnName="Nac_Id" />
+                <ScalarProperty Name="Gen_Id" ColumnName="Gen_Id" />
+                <ScalarProperty Name="EC_Id" ColumnName="EC_Id" />
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+                <ScalarProperty Name="Per_Suel" ColumnName="Per_Suel" />
+                <ScalarProperty Name="TImp_Id" ColumnName="TImp_Id" />
+                <ScalarProperty Name="Per_Des" ColumnName="Per_Des" />
+                <ScalarProperty Name="Desc_Id" ColumnName="Desc_Id" />
+                <ScalarProperty Name="THor_Id" ColumnName="THor_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="planillascontratos">
+            <EntityTypeMapping TypeName="radixModel.planillascontratos">
+              <MappingFragment StoreEntitySet="planillascontratos">
+                <ScalarProperty Name="PC_Id" ColumnName="PC_Id" />
+                <ScalarProperty Name="PC_Nom" ColumnName="PC_Nom" />
+                <ScalarProperty Name="PC_Ext" ColumnName="PC_Ext" />
+                <ScalarProperty Name="PC_Binario" ColumnName="PC_Binario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provincias">
+            <EntityTypeMapping TypeName="radixModel.provincias">
+              <MappingFragment StoreEntitySet="provincias">
+                <ScalarProperty Name="Prov_Id" ColumnName="Prov_Id" />
+                <ScalarProperty Name="Prov_Nom" ColumnName="Prov_Nom" />
+                <ScalarProperty Name="Reg_Id" ColumnName="Reg_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regiones">
+            <EntityTypeMapping TypeName="radixModel.regiones">
+              <MappingFragment StoreEntitySet="regiones">
+                <ScalarProperty Name="Reg_Id" ColumnName="Reg_Id" />
+                <ScalarProperty Name="Reg_Nom" ColumnName="Reg_Nom" />
+                <ScalarProperty Name="Reg_NomOrig" ColumnName="Reg_NomOrig" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subempresa_cargo">
+            <EntityTypeMapping TypeName="radixModel.subempresa_cargo">
+              <MappingFragment StoreEntitySet="subempresa_cargo">
+                <ScalarProperty Name="Subempcar_id" ColumnName="Subempcar_id" />
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subempresas">
+            <EntityTypeMapping TypeName="radixModel.subempresas">
+              <MappingFragment StoreEntitySet="subempresas">
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Sub_Nom" ColumnName="Sub_Nom" />
+                <ScalarProperty Name="Sub_Cant" ColumnName="Sub_Cant" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Sub_Estado" ColumnName="Sub_Estado" />
+                <ScalarProperty Name="Sub_Dir" ColumnName="Sub_Dir" />
+                <ScalarProperty Name="Com_Id" ColumnName="Com_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipoformaspago">
+            <EntityTypeMapping TypeName="radixModel.tipoformaspago">
+              <MappingFragment StoreEntitySet="tipoformaspago">
+                <ScalarProperty Name="TFor_Id" ColumnName="TFor_Id" />
+                <ScalarProperty Name="TFor_Nom" ColumnName="TFor_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipoimpuestos">
+            <EntityTypeMapping TypeName="radixModel.tipoimpuestos">
+              <MappingFragment StoreEntitySet="tipoimpuestos">
+                <ScalarProperty Name="TImp_Id" ColumnName="TImp_Id" />
+                <ScalarProperty Name="TImp_nom" ColumnName="TImp_nom" />
+                <ScalarProperty Name="TPer_Id" ColumnName="TPer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tiposcontratos">
+            <EntityTypeMapping TypeName="radixModel.tiposcontratos">
+              <MappingFragment StoreEntitySet="tiposcontratos">
+                <ScalarProperty Name="TCon_Id" ColumnName="TCon_Id" />
+                <ScalarProperty Name="TCon_Nom" ColumnName="TCon_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tiposcuentas">
+            <EntityTypeMapping TypeName="radixModel.tiposcuentas">
+              <MappingFragment StoreEntitySet="tiposcuentas">
+                <ScalarProperty Name="TCuen_Id" ColumnName="TCuen_Id" />
+                <ScalarProperty Name="TCuen_Nom" ColumnName="TCuen_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tiposdescuentos">
+            <EntityTypeMapping TypeName="radixModel.tiposdescuentos">
+              <MappingFragment StoreEntitySet="tiposdescuentos">
+                <ScalarProperty Name="TDes_Id" ColumnName="TDes_Id" />
+                <ScalarProperty Name="TDes_Nom" ColumnName="TDes_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tiposhorasextras">
+            <EntityTypeMapping TypeName="radixModel.tiposhorasextras">
+              <MappingFragment StoreEntitySet="tiposhorasextras">
+                <ScalarProperty Name="THor_Id" ColumnName="THor_Id" />
+                <ScalarProperty Name="THor_Nom" ColumnName="THor_Nom" />
+                <ScalarProperty Name="THor_ValorDia" ColumnName="THor_ValorDia" />
+                <ScalarProperty Name="THor_ValorHoraDia" ColumnName="THor_ValorHoraDia" />
+                <ScalarProperty Name="THor_ValorHoraExtraEsp" ColumnName="THor_ValorHoraExtraEsp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tiposperiodos">
+            <EntityTypeMapping TypeName="radixModel.tiposperiodos">
+              <MappingFragment StoreEntitySet="tiposperiodos">
+                <ScalarProperty Name="TPer_Id" ColumnName="TPer_Id" />
+                <ScalarProperty Name="TPer_Nom" ColumnName="TPer_Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="radixModel.AspNetUserRoles">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="radixModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="radixModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

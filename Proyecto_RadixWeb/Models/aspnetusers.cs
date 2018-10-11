@@ -12,12 +12,12 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class aspnetusers
+    public partial class AspNetUsers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public aspnetusers()
+        public AspNetUsers()
         {
-            this.aspnetuserroles = new HashSet<aspnetuserroles>();
+            this.AspNetUserRoles = new HashSet<AspNetUserRoles>();
             this.login = new HashSet<login>();
         }
     
@@ -35,7 +35,7 @@ namespace Proyecto_RadixWeb.Models
         public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnetuserroles> aspnetuserroles { get; set; }
+        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<login> login { get; set; }
     }

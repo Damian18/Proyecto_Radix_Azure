@@ -19,8 +19,8 @@ namespace Proyecto_RadixWeb.Models
         public string Per_Rut { get; set; }
         public string Id { get; set; }
     
-        public virtual aspnetusers aspnetusers { get; set; }
         public virtual empresas empresas { get; set; }
         public virtual personas personas { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

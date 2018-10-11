@@ -12,7 +12,7 @@ namespace Proyecto_RadixWeb.Models
         public IdentitySample.Models.RoleViewModel ObjRoles { get; set; }
         public IdentitySample.Models.LoginViewModel ObjLogin { get; set; }
         
-        public Proyecto_RadixWeb.Models.aspnetuserroles ObjAspnetUserRoles { get; set; }
+        public Proyecto_RadixWeb.Models.AspNetUserRoles ObjAspnetUserRoles { get; set; }
         public Proyecto_RadixWeb.Models.empresas ObjEmpresas { get; set; }
         public Proyecto_RadixWeb.Models.login ObjLogin_v2 { get; set; }
         public Proyecto_RadixWeb.Models.subempresas ObjSubEmpresas { get; set; }

@@ -25,12 +25,33 @@ namespace Proyecto_RadixWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<asistencias> asistencias { get; set; }
+        public virtual DbSet<aspnetroles> aspnetroles { get; set; }
+        public virtual DbSet<aspnetuserclaims> aspnetuserclaims { get; set; }
+        public virtual DbSet<aspnetuserlogins> aspnetuserlogins { get; set; }
+        public virtual DbSet<aspnetusers> aspnetusers { get; set; }
         public virtual DbSet<bancos> bancos { get; set; }
         public virtual DbSet<bancostiposcuentas> bancostiposcuentas { get; set; }
+        public virtual DbSet<cargos> cargos { get; set; }
+        public virtual DbSet<comunas> comunas { get; set; }
+        public virtual DbSet<contratos> contratos { get; set; }
+        public virtual DbSet<departamentos> departamentos { get; set; }
+        public virtual DbSet<documentos> documentos { get; set; }
+        public virtual DbSet<empresa_cargo> empresa_cargo { get; set; }
+        public virtual DbSet<empresas> empresas { get; set; }
         public virtual DbSet<estadosciviles> estadosciviles { get; set; }
         public virtual DbSet<fichadescuentos> fichadescuentos { get; set; }
         public virtual DbSet<fichasasistencias> fichasasistencias { get; set; }
+        public virtual DbSet<generos> generos { get; set; }
+        public virtual DbSet<horario_laboral> horario_laboral { get; set; }
+        public virtual DbSet<login> login { get; set; }
+        public virtual DbSet<nacionalidades> nacionalidades { get; set; }
         public virtual DbSet<pago> pago { get; set; }
+        public virtual DbSet<personas> personas { get; set; }
+        public virtual DbSet<planillascontratos> planillascontratos { get; set; }
+        public virtual DbSet<provincias> provincias { get; set; }
+        public virtual DbSet<regiones> regiones { get; set; }
+        public virtual DbSet<subempresa_cargo> subempresa_cargo { get; set; }
         public virtual DbSet<subempresas> subempresas { get; set; }
         public virtual DbSet<tipoformaspago> tipoformaspago { get; set; }
         public virtual DbSet<tipoimpuestos> tipoimpuestos { get; set; }
@@ -39,24 +60,5 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<tiposdescuentos> tiposdescuentos { get; set; }
         public virtual DbSet<tiposhorasextras> tiposhorasextras { get; set; }
         public virtual DbSet<tiposperiodos> tiposperiodos { get; set; }
-        public virtual DbSet<comunas> comunas { get; set; }
-        public virtual DbSet<provincias> provincias { get; set; }
-        public virtual DbSet<regiones> regiones { get; set; }
-        public virtual DbSet<aspnetuserroles> aspnetuserroles { get; set; }
-        public virtual DbSet<aspnetusers> aspnetusers { get; set; }
-        public virtual DbSet<empresas> empresas { get; set; }
-        public virtual DbSet<login> login { get; set; }
-        public virtual DbSet<aspnetroles> aspnetroles { get; set; }
-        public virtual DbSet<nacionalidades> nacionalidades { get; set; }
-        public virtual DbSet<planillascontratos> planillascontratos { get; set; }
-        public virtual DbSet<generos> generos { get; set; }
-        public virtual DbSet<personas> personas { get; set; }
-        public virtual DbSet<cargos> cargos { get; set; }
-        public virtual DbSet<subempresa_cargo> subempresa_cargo { get; set; }
-        public virtual DbSet<horario_laboral> horario_laboral { get; set; }
-        public virtual DbSet<asistencias> asistencias { get; set; }
-        public virtual DbSet<contratos> contratos { get; set; }
-        public virtual DbSet<documentos> documentos { get; set; }
-        public virtual DbSet<empresa_cargo> empresa_cargo { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace Proyecto_RadixWeb.Models
         public int asis_id { get; set; }
         public Nullable<int> Con_Id { get; set; }
         public Nullable<int> Hl_Id { get; set; }
-        public Nullable<bool> asis_estado { get; set; }
+        public byte[] asis_estado { get; set; }
     
-        public virtual horario_laboral horario_laboral { get; set; }
         public virtual contratos contratos { get; set; }
+        public virtual horario_laboral horario_laboral { get; set; }
     }
 }

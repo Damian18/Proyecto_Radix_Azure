@@ -60,7 +60,7 @@ namespace IdentitySample.Controllers
 
             var result = await SignInManager.PasswordSignInAsync(model.ObjLogin.Email, model.ObjLogin.Password, model.ObjLogin.RememberMe, shouldLockout: false);
 
-            var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
+            var user = db.AspNetUsers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
             var log = db.login.FirstOrDefault(l => l.Id == user.Id);
 
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
@@ -132,7 +132,7 @@ namespace IdentitySample.Controllers
 
             var result = await SignInManager.PasswordSignInAsync(model.ObjLogin.Email, model.ObjLogin.Password, model.ObjLogin.RememberMe, shouldLockout: false);
 
-            var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
+            var user = db.AspNetUsers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
             var log = db.login.FirstOrDefault(l => l.Id == user.Id);
 
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
@@ -245,15 +245,15 @@ namespace IdentitySample.Controllers
 
                 string idcuenta = user.Id;
 
-                aspnetroles asprol = db.aspnetroles.FirstOrDefault(r => r.Name == "Administrador");
+                AspNetRoles asprol = db.AspNetRoles.FirstOrDefault(r => r.Name == "Administrador");
 
-                var rol = new aspnetuserroles
+                var rol = new AspNetUserRoles
                 {
                     UserId = idcuenta,
                     RoleId = asprol.Id
                 };
 
-                db.aspnetuserroles.Add(rol);
+                db.AspNetUserRoles.Add(rol);
                 db.SaveChanges();
 
                 var emp = new empresas
@@ -320,16 +320,16 @@ namespace IdentitySample.Controllers
 
 
 
-                aspnetroles asprol = db.aspnetroles.FirstOrDefault(r => r.Name == car_nom);
+                AspNetRoles asprol = db.AspNetRoles.FirstOrDefault(r => r.Name == car_nom);
 
-                aspnetuserroles rol = new aspnetuserroles
+                AspNetUserRoles rol = new AspNetUserRoles
                 {
                     UserId = idcuenta,
                     RoleId = asprol.Id
                 };
 
 
-                db.aspnetuserroles.Add(rol);
+                db.AspNetUserRoles.Add(rol);
                 db.SaveChanges();
 
 

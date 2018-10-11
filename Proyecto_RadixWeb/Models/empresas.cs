@@ -17,9 +17,9 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public empresas()
         {
+            this.empresa_cargo = new HashSet<empresa_cargo>();
             this.login = new HashSet<login>();
             this.subempresas = new HashSet<subempresas>();
-            this.empresa_cargo = new HashSet<empresa_cargo>();
         }
     
         public int Emp_Id { get; set; }
@@ -29,10 +29,10 @@ namespace Proyecto_RadixWeb.Models
         public string Emp_Dir { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<empresa_cargo> empresa_cargo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<login> login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subempresas> subempresas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<empresa_cargo> empresa_cargo { get; set; }
     }
 }

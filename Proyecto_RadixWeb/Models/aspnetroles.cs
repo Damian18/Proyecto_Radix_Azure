@@ -12,18 +12,18 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class aspnetroles
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public aspnetroles()
+        public AspNetRoles()
         {
-            this.aspnetuserroles = new HashSet<aspnetuserroles>();
+            this.AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnetuserroles> aspnetuserroles { get; set; }
+        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
     }
 }

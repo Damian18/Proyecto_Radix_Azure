@@ -25,8 +25,8 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<int> Car_Id { get; set; }
     
         public virtual cargos cargos { get; set; }
-        public virtual subempresas subempresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<horario_laboral> horario_laboral { get; set; }
+        public virtual subempresas subempresas { get; set; }
     }
 }
