@@ -3,40 +3,59 @@
 @{
     ViewBag.Title = "Index";
 }
-<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h2>Index</h2>
 
-    <h2>Index</h2>
+                    <p>
+                        @Html.ActionLink("Create New", "Create", new { subemp_id = ViewBag.subemp_id })
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.cargos.Car_Nom)
+                            </th>
 
-    <p>
-        @Html.ActionLink("Create New", "Create", new { subemp_id = ViewBag.subemp_id })
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.cargos.Car_Nom)
-            </th>
+                            <th></th>
+                        </tr>
 
-            <th></th>
-        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Horario", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
+                                        Horario
+                                    </a>
+                                    <a href="@Url.Action("Index", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
+                                        Asistencia
+                                    </a>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
-                </td>
-                <td>
-                    <a href="@Url.Action("Horario", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
-                        Horario
-                    </a>
-                    <a href="@Url.Action("Index", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
-                        Asistencia
-                    </a>
+                                    @if (item.cargos.Car_Nom != "Administrador")
+                                    {
 
-                </td>
-             
-            </tr>
-        }
+                                        <a href="@Url.Action("RedirecionarCuenta", "Contratos", new { subemp_id = ViewBag.subemp_id, per_rut = item.cargos, car_nom = item.cargos.Car_Nom})"
+                                           class="btn btn-outline-secondary btn-sm text-danger">
+                                            Crear Cuenta Administrador para la sucursal
+                                            <span><i class="fa fa-fw fa-info"></i></span>
+                                        </a>
 
-    </table>
-</div>
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
