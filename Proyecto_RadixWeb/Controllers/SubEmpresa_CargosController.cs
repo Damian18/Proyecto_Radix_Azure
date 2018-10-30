@@ -23,7 +23,26 @@ namespace Proyecto_RadixWeb.Controllers
             var subempresa_cargo = db.subempresa_cargo.Include(s => s.cargos).Include(s => s.subempresas);
             return View(subempresa_cargo.Where(s => s.Sub_Id == subemp_id).ToList());
         }
+        //public ActionResult allCargos()
+        //{
 
+        //    string emp_nom = HttpContext.Session["Empresa"].ToString();
+
+        //    ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+        //    ViewBag.empresa = emp_nom;
+
+        //    List<empresa_cargo> listarc = db.empresa_cargo.ToList();
+        //    ViewBag.cargos = new SelectList(listarc, "Car_Id", "Car_Nom");
+
+
+        //    var empresa_cargo = db.empresa_cargo.Include(s => s.empresas).Include(s => s.cargos);
+        //    MultiplesClases multiples = new MultiplesClases
+        //    {
+        //        ObjEmpresa_Cargo = empresa_cargo.Where(s => s.empresas.Emp_Nom == emp_nom).ToList()
+        //    };
+
+        //    return View(multiples);
+        //}
         // GET: Subempresa_Cargo/Details/5
         public ActionResult Details(int? id)
         {

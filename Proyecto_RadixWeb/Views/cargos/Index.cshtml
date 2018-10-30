@@ -5,38 +5,50 @@
 }
 
 
-<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <p>
+                        @Html.ActionLink("Nuevo Cargo", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Car_Nom)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Car_Nom)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Car_Id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Car_Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Car_Id }) |
+                                    <a href="@Url.Action("HorarioSemanal", "horario_laboral", new { Car_Id = item.Car_Id })">
+                                        Sub Empresas
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
 
 
-    <p>
-        @Html.ActionLink("Nuevo Cargo", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Car_Nom)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Car_Nom)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Car_Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Car_Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Car_Id }) |
-                    <a href="@Url.Action("HorarioSemanal", "horario_laboral", new { Car_Id = item.Car_Id })">
-                        Sub Empresas
-                    </a>
-                </td>
-            </tr>
-        }
-
-    </table>
-
-
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
 </div>
+

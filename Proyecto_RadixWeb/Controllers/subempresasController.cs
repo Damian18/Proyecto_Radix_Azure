@@ -56,7 +56,26 @@ namespace Proyecto_RadixWeb.Controllers
             //ViewBag.Emp_Id = new SelectList(db.empresas, "Emp_Id", "Emp_Nom", subempresas.Emp_Id);
             return View(subempresas);
         }
+        public ActionResult VerSuc()
+        {
 
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
+
+            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+            ViewBag.empresa = emp_nom;
+
+            List<regiones> listaregiones = db.regiones.ToList();
+            ViewBag.regiones = new SelectList(listaregiones, "Reg_Id", "Reg_Nom");
+
+
+            var subempresas = db.subempresas.Include(s => s.comunas).Include(s => s.empresas);
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjESubEmpresas = subempresas.Where(s => s.empresas.Emp_Nom == emp_nom).ToList()
+            };
+
+            return View(multiples);
+        }
 
         // GET: subempresas/Details/5
         public ActionResult Details(int? id)

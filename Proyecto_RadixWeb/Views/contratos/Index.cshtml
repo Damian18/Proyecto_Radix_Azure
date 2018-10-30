@@ -2,89 +2,103 @@
 @{
     ViewBag.Title = "Index";
 }
-<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
-    <h3>
-        @Html.ActionLink("Nueva Persona", "RedirecionarPersonas", new { subemp_id = ViewBag.subemp_id })
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
-    </h3>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    RUT
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Apellidos
-                </th>
+                    <h3>
+                        @Html.ActionLink("Nueva Persona", "RedirecionarPersonas", new { subemp_id = ViewBag.subemp_id })
 
-                <th>
-                    Cargo
-                </th>
+                    </h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    RUT
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Apellidos
+                                </th>
 
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.ObjEContrato)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.personas.Per_Rut)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.personas.Per_Nom)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
-                        @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
-                    </td>
+                                <th>
+                                    Cargo
+                                </th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
-                    </td>
-                    <td>
-                        @if (item.personas.cargos.Car_Nom != "Agricola")
-                        {
-                            <a href="@Url.Action("RedirecionarCuenta", "Contratos", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut, car_nom = item.personas.cargos.Car_Nom})"
-                               class="btn btn-outline-success btn-sm m-0">
-                                Crear Cuenta
-                            </a>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ObjEContrato)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.Per_Rut)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
+                                        @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                                    </td>
 
-                        }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
+                                    </td>
+                                    <td>
+                                        @if (item.personas.cargos.Car_Nom != "Agricola")
+                                        {
+                                            <a href="@Url.Action("RedirecionarCuenta", "Contratos", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut, car_nom = item.personas.cargos.Car_Nom})"
+                                               class="btn btn-outline-success btn-sm m-0">
+                                                Crear Cuenta
+                                            </a>
 
-                        @if (item.Doc_Id == null)
-                        {
-                            <a class="btn btn-outline-success btn-sm m-0 documento" id="@item.Con_Id" href="#" data-toggle="modal" data-target="#MiDoc">
-                                Agregar Contrato
-                            </a>
-                        }
-                        else if (item.Doc_Id != null)
-                        {
+                                        }
 
-                            <a class="btn btn-success" href="@Url.Action("ViewPdf", "Contratos", new { id = item.Doc_Id })" target="_blank">Ver PDF</a>
+                                        @if (item.Doc_Id == null)
+                                        {
+                                            <a class="btn btn-outline-success btn-sm m-0 documento" id="@item.Con_Id" href="#" data-toggle="modal" data-target="#MiDoc">
+                                                Agregar Contrato
+                                            </a>
+                                        }
+                                        else if (item.Doc_Id != null)
+                                        {
 
-                            <a class="btn btn-success" href="@Url.Action("DescargarDocx","Contratos",new { id= item.Doc_Id})">Descargar Word</a>
+                                            <a class="btn btn-success" href="@Url.Action("ViewPdf", "Contratos", new { id = item.Doc_Id })" target="_blank">Ver PDF</a>
 
-                        }
+                                            <a class="btn btn-success" href="@Url.Action("DescargarDocx","Contratos",new { id= item.Doc_Id})">Descargar Word</a>
+
+                                        }
 
 
-                        @*<a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                                Editar
-                            </a>
-                            <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                                Eliminar
-                            </a>*@
+                                        @*<a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                                                Editar
+                                            </a>
+                                            <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                                                Eliminar
+                                            </a>*@
 
-                    </td>
+                                    </td>
 
-                </tr>
-            }
-        </tbody>
-    </table>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="MiDoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

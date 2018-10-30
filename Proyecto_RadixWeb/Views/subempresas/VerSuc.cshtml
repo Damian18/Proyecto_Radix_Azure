@@ -1,0 +1,90 @@
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h3 id="titulo">
+
+                    </h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Sucursales
+
+                                </th>
+                               
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ObjESubEmpresas)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sub_Nom)
+                                    </td>
+                                    
+
+                                    <td>
+                                        <a href="@Url.Action("verTodos", "Contratos", new { subemp_id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
+                                            Ver Trabajadores
+                                        </a>
+
+
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+
+
+    $(document).ready(function () {
+
+        $("#ObjRegiones_Reg_Id").change(function () {
+            $.get("/SubEmpresas/ObtenerProvincia", { Reg_Id: $("#ObjRegiones_Reg_Id").val() }, function (data) {
+                $("#ObjProvincias_Prov_Id").empty();
+                $.each(data, function (Create, row) {
+
+                    $("#ObjProvincias_Prov_Id").append("<option value='" + row.Prov_Id + "'>" + row.Prov_Nom + "</option>")
+                });
+            });
+        });
+
+        $("#ObjProvincias_Prov_Id").change(function () {
+            $.get("/SubEmpresas/ObtenerComuna", { Prov_Id: $("#ObjProvincias_Prov_Id").val() }, function (data) {
+                $("#Com_Id").empty();
+                $.each(data, function (Create, row) {
+
+                    $("#Com_Id").append("<option value='" + row.Com_Id + "'>" + row.Com_Nom + "</option>")
+                });
+            });
+        });
+    });
+
+
+
+</script>

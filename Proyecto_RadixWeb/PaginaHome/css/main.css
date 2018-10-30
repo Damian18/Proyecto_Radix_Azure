@@ -81,7 +81,7 @@ body {
  */
 
 a, a:visited {
-	color: #0087cc;
+	color: rgba(0, 0, 0, 0.45);
 	-moz-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
 	-webkit-transition: all 0.3s ease-in-out;
@@ -356,13 +356,11 @@ th:last-child, td:last-child {
  * -
  */
 
-button, .button {
-	margin-bottom: 1.2;
-}
+
 fieldset {
 	margin-bottom: 1.5rem;
 }
-input,
+
 textarea,
 select,
 pre,
@@ -373,7 +371,6 @@ p,
 ul,
 ol,
 dl,
-form,
 .fluid-video-wrapper,
 .iw-custom-select {
 	margin-bottom: 3rem;
@@ -584,18 +581,14 @@ label, legend {
 label span, legend span {
 	color: #05bca9;
 }
-input[type="checkbox"], input[type="radio"] {
-	display: inline;
-}
+
 
 /**
  * Style Placeholder Text  
  * -
  */
 
-::-webkit-input-placeholder {
-	color: #a1a1a1;
-}
+
 :-moz-placeholder {
 	/* Firefox 18- */
 	color: #a1a1a1;
@@ -611,104 +604,6 @@ input[type="checkbox"], input[type="radio"] {
 	color: #a1a1a1 !important;
 }
 
-
-/** 
- * ===================================================================
- * buttons
- *
- * ------------------------------------------------------------------- 
- */
-
-.button,
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"] {
-	display: inline-block;
-	font-family: "raleway-bold", sans-serif;
-	font-size: 1.6rem;
-	height: 5rem;
-	line-height: 5rem;
-	padding: 0 3rem;
-	margin: 0 .3rem 1rem 0;
-	background: #d8d8d8;
-	color: #252525;
-	text-decoration: none;
-	cursor: pointer;
-	text-align: center;
-	white-space: nowrap;
-	border: none;
-	border-radius: 1000px;
-	-moz-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
-	-ms-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
-}
-.button:hover,
-button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover,
-.button:focus,
-button:focus,
-input[type="submit"]:focus,
-input[type="reset"]:focus,
-input[type="button"]:focus {
-	background: #bebebe;
-	color: #FFFFFF;
-	outline: 0;
-}
-
-.button.button-primary,
-button.button-primary,
-input[type="submit"].button-primary,
-input[type="reset"].button-primary,
-input[type="button"].button-primary {
-	background: #05bca9;
-	color: #FFFFFF;
-}
-
-.button.button-primary:hover,
-button.button-primary:hover,
-input[type="submit"].button-primary:hover,
-input[type="reset"].button-primary:hover,
-input[type="button"].button-primary:hover,
-.button.button-primary:focus,
-button.button-primary:focus,
-input[type="submit"].button-primary:focus,
-input[type="reset"].button-primary:focus,
-input[type="button"].button-primary:focus {
-	background: #04998a;
-}
-button.full-width, .button.full-width {
-	width: 100%;
-	margin-right: 0;
-}
-button.medium, .button.medium {
-	height: 5.5rem !important;
-	line-height: 5.5rem !important;
-	padding: 0 1.8rem !important;
-}
-button.large, .button.large {
-	height: 6rem !important;
-	line-height: 6rem !important;
-	padding: 0rem 3rem !important;
-}
-button.round, .button.round {
-	padding-left: 3rem !important;
-	padding-right: 3rem !important;
-	border-radius: 1000px;
-}
-button.stroke, .button.stroke {
-	background: transparent !important;
-	border: 3px solid transparent;
-	line-height: 4.4rem;
-}
-button::-moz-focus-inner, input::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
 
 /** 
  * ===================================================================
@@ -1202,7 +1097,7 @@ a.menu-toggle {
 	margin-bottom: 4.2rem;
 	outline: none;
 }
-.intro-content .button {
+.intro-content  {
 	border-color: #FFFFFF;
 	color: #FFFFFF;
 	height: 6.6rem;
@@ -1214,7 +1109,7 @@ a.menu-toggle {
 	text-transform: uppercase;
 	letter-spacing: .4rem;
 }
-.intro-content .button:hover, .intro-content .button:focus {
+.intro-content , .intro-content  {
 	color: #05bca9;
 	border-color: #05bca9;
 }
@@ -1674,14 +1569,14 @@ a.menu-toggle {
 	color: rgba(255, 255, 255, 0.5);
 	line-height: 1.8rem;
 }
-.pricing-content .price-block .button {
+.pricing-content .price-block  {
 	color: #353F49;
 	padding: 0 5rem;
 	margin-left: auto;
 	margin-right: auto;
 }
-.pricing-content .price-block .button:hover,
-.pricing-content .price-block .button:focus {
+.pricing-content .price-block ,
+.pricing-content .price-block {
 	background: #58687b;
 	color: #FFFFFF;
 }
@@ -2049,11 +1944,11 @@ a.menu-toggle {
 .section-ads span {
 	color: #0087cc;
 }
-.section-ads .button {
+.section-ads  {
 	background: #05bca9;
 	color: #FFFFFF;
 }
-.section-ads .button:hover, .section-ads .button:focus {
+.section-ads , .section-ads  {
 	background: #05ad9c;
 }
 
@@ -2092,26 +1987,26 @@ a.menu-toggle {
 	padding: 0;
 	display: inline-block;
 }
-.cta-content .stores li .button {
+.cta-content .stores li  {
 	background: #04a393;
 	color: #FFFFFF;
 	margin-right: 12px;
 	display: block;
 	line-height: 60px;
 }
-.cta-content .stores li .button:hover,
-.cta-content .stores li .button:focus {
+.cta-content .stores li ,
+.cta-content .stores li {
 	background: #049485;
 }
-.cta-content .stores li .button i {
+.cta-content .stores li {
 	font-size: 18px;
 	line-height: inherit;
 	margin-right: 8px;
 }
-.cta-content .stores li .button i.ion-social-windows {
+.cta-content .stores li  {
 	font-size: 15px;
 }
-.cta-content .stores li:last-child .button {
+.cta-content .stores li:last-child {
 	margin-right: 0;
 }
 
@@ -2128,24 +2023,24 @@ a.menu-toggle {
 	.cta-content .stores li {
 		display: block;
 	}
-	.cta-content .stores li .button {
+	.cta-content .stores li  {
 		width: 300px;
 		display: block;
 		margin-left: auto !important;
 		margin-right: auto !important;
 		margin-bottom: 1.8rem;
 	}
-	.cta-content .stores li .button::before {
+	.cta-content .stores li {
 		display: none;
 	}
 }
 @media only screen and (max-width:600px) {
-	.cta-content .stores li .button {
+	.cta-content .stores li{
 		width: 70%;
 	}
 }
 @media only screen and (max-width:400px) {
-	.cta-content .stores li .button {
+	.cta-content .stores li  {
 		width: 80%;
 	}
 }

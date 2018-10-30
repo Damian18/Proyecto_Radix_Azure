@@ -38,7 +38,7 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(multiples);
         }
-
+       
 
         [HttpPost]
         [ValidateAntiForgeryToken]

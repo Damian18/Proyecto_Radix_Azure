@@ -3,67 +3,79 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
-<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+                    <h2>Asistencia</h2>
 
-    <h2>Asistencia</h2>
+                    <p>
+                        @Html.ActionLink("Agregar", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                R.U.T
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Apellidos
+                            </th>
 
-    <p>
-        @Html.ActionLink("Agregar", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                R.U.T
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Apellidos
-            </th>
-       
-            <th>
-                Asistencia
-            </th>
-            <th></th>
-        </tr>
+                            <th>
+                                Asistencia
+                            </th>
+                            <th></th>
+                        </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.contratos.Per_Rut)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.contratos.personas.Per_Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat)
-                    @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApeMat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.horario_laboral.Hl_Inicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.horario_laboral.Hl_Termino)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.asis_estado)
-                </td>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.contratos.Per_Rut)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.contratos.personas.Per_Nom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat)
+                                    @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApeMat)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.horario_laboral.Hl_Inicio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.horario_laboral.Hl_Termino)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.asis_estado)
+                                </td>
 
 
-                <td>
-                    <label class="switch">
-                        <input id="togBtn" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </td>
-            </tr>
-        }
+                                <td>
+                                    <label class="switch">
+                                        <input id="togBtn" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        }
 
-    </table>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
 </div>
+
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>

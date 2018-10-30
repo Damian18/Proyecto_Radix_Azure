@@ -1021,6 +1021,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpresa.cshtml" />
     <Content Include="Views\Shared\_LayoutSubEmpresa.cshtml" />
+    <Content Include="Views\Contratos\verTodos.cshtml" />
+    <Content Include="Views\SubEmpresas\VerSuc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,6 +24,7 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View();
         }
+     
         public ActionResult Horario_Personas(int? sub_Id, int? car_id)
         {
             var subempresa_cargo = db.subempresa_cargo.FirstOrDefault(s => s.Sub_Id == sub_Id && s.Car_Id == car_id);

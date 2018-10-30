@@ -3,67 +3,79 @@
 @{
     ViewBag.Title = "Index";
 }
-<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h3 id="titulo">
 
-    <h3 id="titulo">
+                        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#MiModal">Nueva</a>
 
-        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#MiModal">Nueva</a>
+                    </h3>
+                    <p>
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Cargo
+                            </th>
+                            <th>
+                                Empresa
+                            </th>
+                            <th>
+                                Plantilla Contrato
+                            </th>
+                            <th>
+                                Descargar
+                            </th>
+                            <th></th>
+                        </tr>
 
-    </h3>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Cargo
-            </th>
-            <th>
-                Empresa
-            </th>
-            <th>
-                Plantilla Contrato
-            </th>
-            <th>
-                Descargar
-            </th>
-            <th></th>
-        </tr>
+                        @foreach (var item in Model.ObjEEmpresa_Cargo)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
+                                </td>
 
-        @foreach (var item in Model.ObjEEmpresa_Cargo)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
-                </td>
+                                @if (item.PC_Id != null)
+                                {
 
-                @if (item.PC_Id != null)
-                {
+                                    <td>
+                                        <a class="btn btn-success" href="@Url.Action("ViewPdf", "Empresa_Cargo", new { id = item.PC_Id })" target="_blank">Ver PDF</a>
+                                    </td>
+                                    <td>
 
-                    <td>
-                        <a class="btn btn-success" href="@Url.Action("ViewPdf", "Empresa_Cargo", new { id = item.PC_Id })" target="_blank">Ver PDF</a>
-                    </td>
-                    <td>
+                                        <a class="btn btn-success" href="@Url.Action("DescargarDocx","Planillascontratos",new { id= item.PC_Id})">Descargar Word</a>
+                                    </td>
+                                }
+                                else
+                                {
 
-                        <a class="btn btn-success" href="@Url.Action("DescargarDocx","Planillascontratos",new { id= item.PC_Id})">Descargar Word</a>
-                    </td>
-                }
-                else
-                {
+                                    <td>
+                                        <a class="btn btn-success plantilla" id="@item.Empcar_id" href="#" data-toggle="modal" data-target="#MiPlantilla">Agregar Plantilla</a>
+                                    </td>
+                                }
+                                <td></td>
+                            </tr>
+                        }
 
-                    <td>
-                        <a class="btn btn-success plantilla" id="@item.Empcar_id" href="#" data-toggle="modal" data-target="#MiPlantilla">Agregar Plantilla</a>
-                    </td>
-                }
-                <td></td>
-            </tr>
-        }
-
-    </table>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="MiPlantilla" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

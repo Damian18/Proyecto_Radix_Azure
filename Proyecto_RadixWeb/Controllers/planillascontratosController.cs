@@ -40,8 +40,26 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(db.planillascontratos.ToList());
         }
+        public ActionResult allPlanillas()
+        {
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
 
-        
+            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+            ViewBag.empresa = emp_nom;
+
+            List<planillascontratos> listarc = db.planillascontratos.ToList();
+            ViewBag.contratos = new SelectList(listarc, "Cod_Id", "Sub_Id", "Per_Rut");
+
+
+            var contratos = db.contratos.Include(s => s.subempresas).Include(s => s.personas).Include(s => s.subempresas.empresas);
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjEContrato = contratos.Where(s => s.subempresas.empresas.Emp_Nom == emp_nom).ToList()
+            };
+
+            return View(multiples);
+        }
+
 
         public ActionResult DescargarDocx(int? id)
         {
