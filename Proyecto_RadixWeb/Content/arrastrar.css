@@ -1,0 +1,99 @@
+﻿/*#container {
+    width: 580px;
+    height: 250px;
+    margin: 0 auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.padre {
+    width: 580px;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tipo {
+    flex-grow: 1;
+}
+
+#fuego {
+    background-color: #ffd54c;
+}
+
+#agua {
+    background-color: #42ccff;
+}
+
+#resultado {
+    text-align: center;
+    font-size: 30px;
+}
+
+.pokemon {
+    margin: 10px;
+    height: 80px;
+    width: 80px;
+}*/
+/*#div1, #div2 {
+    float: left;
+    width: 100px;
+    height: 35px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}*/
+
+/*.upload-drop-zone {
+    height: 200px;
+    border-width: 2px;
+    margin-bottom: 20px;
+}
+
+.upload-drop-zone {
+    color: #ccc;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 200px;
+    text-align: center
+}
+
+    .upload-drop-zone.drop {
+        color: #222;
+        border-color: #222;
+    }*/
+.bfd-dropfield {
+    display: inline;
+    padding: 5px;
+}
+
+.bfd-dropfield-inner {
+    border: 5px dashed #888;
+    color: #888;
+    cursor: pointer;
+    font-size: 32px;
+    text-align: center;
+}
+
+    .bfd-dropfield-inner:hover, .bfd-dropfield-inner.bfd-dragover {
+        border-color: #bbb;
+        color: #bbb;
+    }
+
+.bfd-info {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.bfd-error-message {
+    text-align: center;
+}
+
+.bfd-remove {
+    cursor: pointer;
+}
+
+.dropzone{
+
+
+}

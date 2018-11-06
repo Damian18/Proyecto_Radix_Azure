@@ -137,7 +137,7 @@ namespace Proyecto_RadixWeb.Controllers
             {
                 //planillascontratos.PC_Ext =".docx";
                 db.planillascontratos.Add(planillascontratos);
-
+                
                
                 db.SaveChanges();
                 return RedirectToAction("Index");
