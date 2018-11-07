@@ -38,6 +38,23 @@ namespace Proyecto_RadixWeb.Controllers
             ViewBag.emp_id = Convert.ToInt32(emp_id);
             ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
+            try
+            {
+                ViewBag.sms = TempData["sms"].ToString();
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                ViewBag.smserror = TempData["smserror"].ToString();
+            }
+            catch 
+            {
+            }
+
+          
             return View(db.planillascontratos.ToList());
         }
         public ActionResult allPlanillas()
@@ -136,11 +153,25 @@ namespace Proyecto_RadixWeb.Controllers
             if (ModelState.IsValid)
             {
                 //planillascontratos.PC_Ext =".docx";
-                db.planillascontratos.Add(planillascontratos);
-                
-               
-                db.SaveChanges();
-                return RedirectToAction("Index");
+             
+
+                try
+                {
+                    db.planillascontratos.Add(planillascontratos);
+                    db.SaveChanges();
+
+                    TempData["sms"] = "Se guardo la plantilla";
+                    ViewBag.sms = TempData["sms"];
+                    return RedirectToAction("Index");
+                }
+                catch 
+                {
+
+                    TempData["smserror"] = "No se pudo guardar la plantilla";
+                    ViewBag.smserror = TempData["smserror"];
+                    return RedirectToAction("Index");
+                }
+              
             }
 
             return View(planillascontratos);

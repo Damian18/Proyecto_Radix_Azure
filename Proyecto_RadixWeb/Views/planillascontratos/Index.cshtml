@@ -11,6 +11,18 @@ c<div class="content-wrapper">
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    @if (ViewBag.sms != null)
+                    {
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Indicates a successful or positive action.@ViewBag.sms
+                        </div>
+                    }
+                    @if (ViewBag.smserror != null)
+                    {
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong> Indicates a warning that might need attention.@ViewBag.smserror
+                        </div>
+                    }
                     <h3>
                         @Html.ActionLink("Nueva Plantilla", "Create")
                     </h3>
@@ -46,7 +58,7 @@ c<div class="content-wrapper">
                             </tr>
                         }
 
-                       
+
                     </table>
                 </div>
             </div>
