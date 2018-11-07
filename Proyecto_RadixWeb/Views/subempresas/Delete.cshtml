@@ -12,69 +12,84 @@
     <title>Delete</title>
 </head>
 <body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>subempresas</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Sub_Nom)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Sub_Nom)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Sub_Cant)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Sub_Cant)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Sub_Estado)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Sub_Estado)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Sub_Dir)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Sub_Dir)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.comunas.Com_Nom)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.comunas.Com_Nom)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.empresas.Emp_Nom)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.empresas.Emp_Nom)
-            </dd>
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Proceso de eliminacion.
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <h3>Are you sure you want to delete this?</h3>
+                        <div>
+                            <h4>subempresas</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Sub_Nom)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Sub_Nom)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Sub_Cant)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Sub_Cant)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Sub_Estado)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Sub_Estado)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Sub_Dir)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Sub_Dir)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.comunas.Com_Nom)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.comunas.Com_Nom)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.empresas.Emp_Nom)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.empresas.Emp_Nom)
+                                </dd>
+
+                            </dl>
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                                    @Html.ActionLink("Back to List", "Index")
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">Updated yesterday</div>
             </div>
-        }
+        </div>
     </div>
 </body>
 </html>

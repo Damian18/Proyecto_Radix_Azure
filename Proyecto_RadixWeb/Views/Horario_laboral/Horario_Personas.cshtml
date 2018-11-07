@@ -5,26 +5,40 @@
 
 
 
-<div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
-    <div id="calender"></div>
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Horario de personal
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
-                    <p id="pDetails"></p>
-                </div>
-                <div class="modal-footer">
-                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+                    <div id="calender"></div>
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <p id="pDetails"></p>
+                                </div>
+                                <div class="modal-footer">
+                                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
         </div>
     </div>
 </div>
+
 
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />

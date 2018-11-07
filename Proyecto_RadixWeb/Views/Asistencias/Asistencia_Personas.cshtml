@@ -4,121 +4,134 @@
     ViewBag.Title = "Asistencia_Personas";
 }
 
-<div id="pagina" style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
-
-    <h2>Medir Asistencia Personas</h2>
-
-    <h2><button id="btn_medir" class="btn btn-outline-success btn-sm m-0"> Aplicar </button></h2>
-
-
-
-    <table class="table" id="tb_asistencia">
-
-        <thead>
-            <tr>
-
-                <th>
-                    R.U.T
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Apellidos
-                </th>
-
-                <th></th>
-            </tr>
-        </thead>
-        @if (ViewBag.contar == 0)
-        {
-            <tbody>
-                @foreach (var item in Model.ObjEContrato)
-                {
-
-                    <tr>
-                        <td style="display:none;">
-
-                            @Html.Hidden("item_asis_id", 0)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.personas.Per_Rut)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.personas.Per_Nom)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
-                            @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
-                        </td>
-                        <td>
-
-                            <label class="switch">
-                                <input class="checkbox" id="togBtn" value="@item.Con_Id" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
+<div id="pagina" class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Lista Sucursales
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
 
-                        </td>
-                    </tr>
+                    <h2>Medir Asistencia Personas</h2>
 
-                }
-            </tbody>
+                    <h2><button id="btn_medir" class="btn btn-outline-success btn-sm m-0"> Aplicar </button></h2>
 
 
-        }
-        else if (ViewBag.contar > 0)
-        {
-            <tbody>
-                @foreach (var item in Model.ObjEAsistencia)
-                {
 
-                    <tr>
-                        <td style="display:none;">
-                            @Html.HiddenFor(modelItem => item.asis_id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_Rut)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_Nom)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat)
-                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApeMat)
-                        </td>
-                        <td>
+                    <table class="table" id="tb_asistencia">
 
-                            <label class="switch">
-                                @if (item.asis_estado == false)
+                        <thead>
+                            <tr>
+
+                                <th>
+                                    R.U.T
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Apellidos
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @if (ViewBag.contar == 0)
+                        {
+                            <tbody>
+                                @foreach (var item in Model.ObjEContrato)
                                 {
-                                    <input class="checkbox" id="togBtn" value="@item.Con_Id" type="checkbox">
+
+                                    <tr>
+                                        <td style="display:none;">
+
+                                            @Html.Hidden("item_asis_id", 0)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.personas.Per_Rut)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
+                                            @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                                        </td>
+                                        <td>
+
+                                            <label class="switch">
+                                                <input class="checkbox" id="togBtn" value="@item.Con_Id" type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+
+
+                                        </td>
+                                    </tr>
 
                                 }
-                                else if (item.asis_estado == true)
+                            </tbody>
+
+
+                        }
+                        else if (ViewBag.contar > 0)
+                        {
+                            <tbody>
+                                @foreach (var item in Model.ObjEAsistencia)
                                 {
-                                    <input class="checkbox" id="togBtn" value="@item.Con_Id" type="checkbox" checked>
+
+                                    <tr>
+                                        <td style="display:none;">
+                                            @Html.HiddenFor(modelItem => item.asis_id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_Rut)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_Nom)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat)
+                                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApeMat)
+                                        </td>
+                                        <td>
+
+                                            <label class="switch">
+                                                @if (item.asis_estado == false)
+                                                {
+                                                    <input class="checkbox" id="togBtn" value="@item.Con_Id" type="checkbox">
+
+                                                }
+                                                else if (item.asis_estado == true)
+                                                {
+                                                    <input class="checkbox" id="togBtn" value="@item.Con_Id" type="checkbox" checked>
+
+                                                }
+                                                <span class="slider round"></span>
+                                            </label>
+
+
+                                        </td>
+                                    </tr>
 
                                 }
-                                <span class="slider round"></span>
-                            </label>
+                            </tbody>
 
-
-                        </td>
-                    </tr>
-
-                }
-            </tbody>
-
-        }
-    </table>
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
+        </div>
+    </div>
 </div>
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
 
     $(document).ready(function () {
-  
+
     $('#btn_medir').on('click', function () {
 
         var lista_asistencia = [];
@@ -153,7 +166,7 @@
                    lista.Con_Id = row.find("td .checkbox").val();
                    lista.Hl_Id = horario_id;
                    lista.asis_estado = "" + switchStatus + "";
-                  
+
 
                }
 

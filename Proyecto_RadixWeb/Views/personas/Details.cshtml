@@ -3,128 +3,142 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i>Detalles del personal
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
-<h2>Details</h2>
+                    <h2>Details</h2>
 
-<div>
-    <h4>personas</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Per_Nom)
-        </dt>
+                    <div>
+                        <h4>personas</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Per_Nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Per_Nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Per_Nom)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Per_ApePat)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Per_ApePat)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Per_ApePat)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Per_ApePat)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Per_ApeMat)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Per_ApeMat)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Per_ApeMat)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Per_ApeMat)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Per_Dir)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Per_Dir)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Per_Dir)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Per_Dir)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Per_Tel)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Per_Tel)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Per_Tel)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Per_Tel)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Per_Suel)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Per_Suel)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Per_Suel)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Per_Suel)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Per_Des)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Per_Des)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Per_Des)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.Per_Des)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.cargos.Car_Nom)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.cargos.Car_Nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.cargos.Car_Nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.cargos.Car_Nom)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.estadosciviles.EC_Nom)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.estadosciviles.EC_Nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.estadosciviles.EC_Nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.estadosciviles.EC_Nom)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fichadescuentos.Desc_Nom)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.fichadescuentos.Desc_Nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fichadescuentos.Desc_Nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.fichadescuentos.Desc_Nom)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.generos.Gen_Nom)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.generos.Gen_Nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.generos.Gen_Nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.generos.Gen_Nom)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nacionalidades.Nac_Nom)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.nacionalidades.Nac_Nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nacionalidades.Nac_Nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.nacionalidades.Nac_Nom)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tiposhorasextras.THor_Nom)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tiposhorasextras.THor_Nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tiposhorasextras.THor_Nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.tiposhorasextras.THor_Nom)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tipoimpuestos.TImp_nom)
-        </dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tipoimpuestos.TImp_nom)
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tipoimpuestos.TImp_nom)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.tipoimpuestos.TImp_nom)
+                            </dd>
 
-    </dl>
+                        </dl>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Per_Rut }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Per_Rut }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

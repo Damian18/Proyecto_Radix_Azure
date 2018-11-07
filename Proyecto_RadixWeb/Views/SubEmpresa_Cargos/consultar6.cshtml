@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.subempresa_cargo>
+
+@{
+    ViewBag.Title = "consultar6";
+}
+
+<h2>consultar6</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cargos.Car_Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subempresas.Sub_Nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Subempcar_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Subempcar_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Subempcar_id })
+        </td>
+    </tr>
+}
+
+</table>

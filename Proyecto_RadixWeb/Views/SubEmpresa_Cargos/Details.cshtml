@@ -6,29 +6,42 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>subempresa_cargo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.cargos.Car_Nom)
-        </dt>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Detalles de los cargos de la Sucursal
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h4>subempresa_cargo</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.cargos.Car_Nom)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.cargos.Car_Nom)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.cargos.Car_Nom)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.subempresas.Sub_Nom)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.subempresas.Sub_Nom)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.subempresas.Sub_Nom)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.subempresas.Sub_Nom)
+                        </dd>
 
-    </dl>
+                    </dl>
+
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Subempcar_id }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday</div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Subempcar_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
