@@ -32,8 +32,8 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<asistencias> asistencias { get; set; }
         public virtual documentos documentos { get; set; }
-        public virtual personas personas { get; set; }
         public virtual subempresas subempresas { get; set; }
         public virtual tiposcontratos tiposcontratos { get; set; }
+        public virtual personas personas { get; set; }
     }
 }

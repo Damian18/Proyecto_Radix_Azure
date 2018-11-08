@@ -27,10 +27,10 @@ namespace Proyecto_RadixWeb.Models
         public string Per_ApeMat { get; set; }
         public string Per_Dir { get; set; }
         public string Per_Tel { get; set; }
-        public int Nac_Id { get; set; }
-        public int Gen_Id { get; set; }
-        public int EC_Id { get; set; }
-        public int Car_Id { get; set; }
+        public Nullable<int> Nac_Id { get; set; }
+        public Nullable<int> Gen_Id { get; set; }
+        public Nullable<int> EC_Id { get; set; }
+        public Nullable<int> Car_Id { get; set; }
         public string Per_Suel { get; set; }
         public Nullable<int> TImp_Id { get; set; }
         public string Per_Des { get; set; }

@@ -24,8 +24,8 @@ namespace Proyecto_RadixWeb.Models
         public string TImp_nom { get; set; }
         public int TPer_Id { get; set; }
     
+        public virtual tiposperiodos tiposperiodos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<personas> personas { get; set; }
-        public virtual tiposperiodos tiposperiodos { get; set; }
     }
 }

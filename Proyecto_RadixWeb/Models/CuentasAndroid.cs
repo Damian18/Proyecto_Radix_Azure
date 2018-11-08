@@ -12,15 +12,12 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class login
+    public partial class CuentasAndroid
     {
-        public int log_id { get; set; }
-        public int Emp_Id { get; set; }
-        public string Per_Rut { get; set; }
-        public string Id { get; set; }
-    
-        public virtual empresas empresas { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual personas personas { get; set; }
+        public int ca_id { get; set; }
+        public string ca_empresa { get; set; }
+        public string ca_usuario { get; set; }
+        public string ca_password { get; set; }
+        public string ca_subempresa { get; set; }
     }
 }

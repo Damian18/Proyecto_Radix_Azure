@@ -349,6 +349,23 @@ namespace IdentitySample.Controllers
                 db.login.Add(log);
                 db.SaveChanges();
 
+                if (car_nom == "Jefe Cuadrilla")
+                {
+                    int sub_id = Convert.ToInt32( subemp_id);
+                    var subempresa = db.subempresas.FirstOrDefault(e => e.Sub_Id == sub_id);
+
+                    CuentasAndroid cuentas = new CuentasAndroid {
+                        ca_empresa= empresa,
+                        ca_usuario = model.ObjRegistrar.Email,
+                        ca_password = model.ObjRegistrar.Password,
+                        ca_subempresa=subempresa.Sub_Nom
+                    };
+
+                    db.CuentasAndroid.Add(cuentas);
+                    db.SaveChanges();
+                }
+
+
                 //contratos contratos = db.contratos.FirstOrDefault(c=>c.Per_Rut==per_rut);
 
                 //int subemp_id=contratos.Sub_Id;

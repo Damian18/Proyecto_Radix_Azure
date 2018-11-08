@@ -42,7 +42,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<login> login { get; set; }
         public virtual DbSet<nacionalidades> nacionalidades { get; set; }
         public virtual DbSet<pago> pago { get; set; }
-        public virtual DbSet<personas> personas { get; set; }
         public virtual DbSet<planillascontratos> planillascontratos { get; set; }
         public virtual DbSet<provincias> provincias { get; set; }
         public virtual DbSet<regiones> regiones { get; set; }
@@ -58,5 +57,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<personas> personas { get; set; }
+        public virtual DbSet<CuentasAndroid> CuentasAndroid { get; set; }
     }
 }
