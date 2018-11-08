@@ -1,34 +1,39 @@
 ﻿@model Proyecto_RadixWeb.Models.cargos
 
 @{
-    Layout = null;
+    ViewBag.Title = "Details";
 }
 
-<!DOCTYPE html>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Detalles de los cargos
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>cargos</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Car_Nom)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Car_Nom)
-            </dd>
-    
-        </dl>
+                    <div>
+                        <h4>cargos</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Car_Nom)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Car_Nom)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Car_Id }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Car_Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+</div>

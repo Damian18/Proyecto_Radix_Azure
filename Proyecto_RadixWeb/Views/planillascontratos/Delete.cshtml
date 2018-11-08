@@ -3,46 +3,60 @@
 @{
     ViewBag.Title = "Delete";
 }
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Eliminar plantillas de contratos
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h2>Delete</h2>
 
-<h2>Delete</h2>
+                    <h3>Are you sure you want to delete this?</h3>
+                    <div>
+                        <h4>planillascontratos</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PC_Nom)
+                            </dt>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>planillascontratos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PC_Nom)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PC_Nom)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PC_Nom)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PC_Ext)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PC_Ext)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PC_Ext)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PC_Ext)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PC_Binario)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PC_Binario)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PC_Binario)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PC_Binario)
-        </dd>
+                        </dl>
 
-    </dl>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" /> |
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
         </div>
-    }
+    </div>
 </div>

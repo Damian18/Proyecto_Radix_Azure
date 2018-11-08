@@ -11,13 +11,40 @@ namespace Proyecto_RadixWeb.Controllers
 {
     public class SubEmpresa_CargosController : Controller
     {
-        private radixEntities db = new radixEntities();
+         private radixEntities db = new radixEntities();
+        //ver si existe 
+        public subempresa_cargo consultar(int Car_Id)
+        {
+            try
+            {
+                var subempresa_cargo = from c in db.subempresa_cargo where c.cargos.Car_Id == Car_Id select c;
+                return subempresa_cargo.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+           }
 
+        public ActionResult consultar6(int? subemp_id)
+        {
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
+
+            subempresa_cargo modelo = new subempresa_cargo();
+            modelo = new SubEmpresa_CargosController().consultar(6);
+
+            return View(modelo);
+        }
         // GET: Subempresa_Cargo
         public ActionResult Index(int? subemp_id)
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();
 
+           
+            subempresa_cargo modelo = new subempresa_cargo();
+            modelo = new SubEmpresa_CargosController().consultar(6);
+            ViewBag.cargo =consultar(6);
+         
             ViewBag.subemp_id = subemp_id;
             ViewBag.empresa = emp_nom;
             var subempresa_cargo = db.subempresa_cargo.Include(s => s.cargos).Include(s => s.subempresas);

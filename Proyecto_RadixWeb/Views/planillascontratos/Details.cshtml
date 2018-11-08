@@ -3,40 +3,54 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Detalles de las plantillas
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h2>Details</h2>
 
-<h2>Details</h2>
+                    <div>
+                        <h4>plantillascontratos</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PC_Nom)
+                            </dt>
 
-<div>
-    <h4>planillascontratos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PC_Nom)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PC_Nom)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PC_Nom)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PC_Ext)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PC_Ext)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PC_Ext)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PC_Ext)
-        </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PC_Binario)
+                            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PC_Binario)
-        </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PC_Binario)
+                            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PC_Binario)
-        </dd>
-
-    </dl>
+                        </dl>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.PC_Id }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PC_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

@@ -57,45 +57,53 @@ namespace IdentitySample.Controllers
             {
                 return PartialView(model);
             }
-
-            var result = await SignInManager.PasswordSignInAsync(model.ObjLogin.Email, model.ObjLogin.Password, model.ObjLogin.RememberMe, shouldLockout: false);
-
-            var user = db.AspNetUsers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
-            var log = db.login.FirstOrDefault(l => l.Id == user.Id);
-
-            var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
-
-
-            // El if conciste en buscar la cuenta que corresponde a la empresa
-
-            if (emp.Emp_Nom == model.ObjEmpresas.Emp_Nom)
+            try
             {
+                var result = await SignInManager.PasswordSignInAsync(model.ObjLogin.Email, model.ObjLogin.Password, model.ObjLogin.RememberMe, shouldLockout: false);
 
-                switch (result)
+                var user = db.AspNetUsers.FirstOrDefault(r => r.Email == model.ObjLogin.Email);
+                var log = db.login.FirstOrDefault(l => l.Id == user.Id);
+
+                var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
+
+
+                // El if conciste en buscar la cuenta que corresponde a la empresa
+
+                if (emp.Emp_Nom == model.ObjEmpresas.Emp_Nom)
                 {
 
-                    case SignInStatus.Success:
+                    switch (result)
+                    {
 
-                        //Crear una variable de session 
-                        HttpContext.Session.Add("Rut", log.Per_Rut);
-                        HttpContext.Session.Add("Emp_id", emp.Emp_Id);
-                        HttpContext.Session.Add("Empresa", emp.Emp_Nom);
-                        HttpContext.Session.Add("Correo", log.Id);
+                        case SignInStatus.Success:
 
-                        return RedirectToLocal(returnUrl);
+                            //Crear una variable de session 
+                            HttpContext.Session.Add("Rut", log.Per_Rut);
+                            HttpContext.Session.Add("Emp_id", emp.Emp_Id);
+                            HttpContext.Session.Add("Empresa", emp.Emp_Nom);
+                            HttpContext.Session.Add("Correo", log.Id);
 
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return PartialView(model);
+                            return RedirectToLocal(returnUrl);
+
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return PartialView(model);
+                    }
+
                 }
-
+                return PartialView(model);
             }
-            return PartialView(model);
+            catch 
+            {
+
+                return PartialView(model);
+            }
+          
         }
 
         //

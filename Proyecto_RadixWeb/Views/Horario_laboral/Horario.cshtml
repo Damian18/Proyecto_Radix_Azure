@@ -1,117 +1,133 @@
 ﻿
 @{
-    ViewBag.Title = "Horario";
+                /**/
+
+                ViewBag.Title = "Horario";
 }
 
 
-<div style="height: 256px;width: 1000px;margin-left: 284px;margin-top: 65px;">
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Horarios
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
 
 
-    @*<div>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalSave">Crear</button>
-        </div>*@
-    <div id="calender"></div>
+                    @*<div>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalSave">Crear</button>
+                        </div>*@
+                    <div id="calender"></div>
 
 
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
 
-                    <p id="pDetails"></p>
+                                    <p id="pDetails"></p>
 
-                </div>
-                <div class="modal-footer">
-                    <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                        <span class="glyphicon glyphicon-remove"></span> Eliminar
-                    </button>
-                    <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                        <span class="glyphicon glyphicon-pencil"></span> Editar
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                                        <span class="glyphicon glyphicon-remove"></span> Eliminar
+                                    </button>
+                                    <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                                        <span class="glyphicon glyphicon-pencil"></span> Editar
+                                    </button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="myModalSave" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Save Event</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <input type="hidden" id="hdEventID" value="0" />
+                                        <div class="form-group">
+                                            <label>Titulo</label>
+                                            <input type="text" id="txtSubject" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Inicio</label>
+                                            <div class="input-group date" id="dtp1">
+
+                                                @*   <input type="datetime-local"  class="form-control" id="party-time" name="party-time" value="2018-06-26T19:30"/>*@
+                                                <input type="text" id="txtStart" class="form-control" />
+
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Si es Todo el dia</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="divEndDate" style="display:none">
+                                            <label>Termino</label>
+                                            <div class="input-group date" id="dtp2">
+                                                <input type="text" id="txtEnd" class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Color del Tema</label>
+                                            <select id="ddThemeColor" class="form-control">
+                                                <option value="">Default</option>
+                                                <option value="red">Rojo</option>
+                                                <option value="blue">Azul</option>
+                                                <option value="black">Negro</option>
+                                                <option value="green">Verde</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Dia Repeticion</label>
+                                            <select id="ddThemeColor" class="form-control">
+                                                <option value="1">Lunes</option>
+                                                <option value="2">Martes</option>
+                                                <option value="3">Miercoles</option>
+                                                <option value="4">Jueves</option>
+                                                <option value="5">Viernes</option>
+                                                <option value="6">Sabado</option>
+                                                <option value="0">Domingo</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" id="btnSave" class="btn btn-success">Guardar</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="myModalSave" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Save Event</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <input type="hidden" id="hdEventID" value="0" />
-                        <div class="form-group">
-                            <label>Titulo</label>
-                            <input type="text" id="txtSubject" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Inicio</label>
-                            <div class="input-group date" id="dtp1">
-
-                                @*   <input type="datetime-local"  class="form-control" id="party-time" name="party-time" value="2018-06-26T19:30"/>*@
-                                <input type="text" id="txtStart" class="form-control" />
-
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Si es Todo el dia</label>
-                            </div>
-                        </div>
-                        <div class="form-group" id="divEndDate" style="display:none">
-                            <label>Termino</label>
-                            <div class="input-group date" id="dtp2">
-                                <input type="text" id="txtEnd" class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Descripción</label>
-                            <textarea id="txtDescription" rows="3" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Color del Tema</label>
-                            <select id="ddThemeColor" class="form-control">
-                                <option value="">Default</option>
-                                <option value="red">Rojo</option>
-                                <option value="blue">Azul</option>
-                                <option value="black">Negro</option>
-                                <option value="green">Verde</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Dia Repeticion</label>
-                            <select id="ddThemeColor" class="form-control">
-                                <option value="1">Lunes</option>
-                                <option value="2">Martes</option>
-                                <option value="3">Miercoles</option>
-                                <option value="4">Jueves</option>
-                                <option value="5">Viernes</option>
-                                <option value="6">Sabado</option>
-                                <option value="0">Domingo</option>
-                            </select>
-                        </div>
-                        <button type="button" id="btnSave" class="btn btn-success">Guardar</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </form>
-                </div>
-            </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
         </div>
     </div>
 </div>
+
+
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
