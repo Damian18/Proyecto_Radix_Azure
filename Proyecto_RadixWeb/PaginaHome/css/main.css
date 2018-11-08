@@ -89,7 +89,7 @@ a, a:visited {
 	transition: all 0.3s ease-in-out;
 }
 a:hover, a:focus {
-	color: #ff7b29;
+	color: #b15a11;
 }
 
 /**
@@ -1331,16 +1331,17 @@ a.menu-toggle {
 .process-content .left-side {
 	left: 0;
 }
-.process-content .image-part {
-	margin: 0 auto;
-	height: 660px;
-	background-image: url("../images/appdesign.jpg");
-	background-repeat: no-repeat;
-	background-position: center;
-	-webkit-background-size: contain;
-	-moz-background-size: contain;
-	background-size: contain;
-}
+    .process-content .image-part {
+        margin: 0 auto;
+        height: 660px;
+        
+        background-image: url("../images/Inicio.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        background-size: contain;
+    }
 .process-content .item[data-item]::before {
 	background: #38424e;
 	color: #FFFFFF;

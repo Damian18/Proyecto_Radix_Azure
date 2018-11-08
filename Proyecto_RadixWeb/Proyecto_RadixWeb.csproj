@@ -482,6 +482,7 @@
     <Content Include="PaginaHome\css\main.css" />
     <Content Include="PaginaHome\css\micons\fonts\icomoon.svg" />
     <Content Include="PaginaHome\css\micons\micons.css" />
+    <Content Include="PaginaHome\css\planes.css" />
     <Content Include="PaginaHome\css\vendor.css" />
     <Content Include="PaginaHome\fonts\merriweather\merriweather-black-webfont.svg" />
     <Content Include="PaginaHome\fonts\merriweather\merriweather-bold-webfont.svg" />
@@ -507,10 +508,15 @@
     <Content Include="PaginaHome\images\avatars\2.png" />
     <Content Include="PaginaHome\images\fondo2.jpg" />
     <Content Include="PaginaHome\images\footer-logo.png" />
+    <Content Include="PaginaHome\images\Funciones.png" />
+    <Content Include="PaginaHome\images\Inicio.png" />
     <Content Include="PaginaHome\images\intro-bg.jpg" />
+    <Content Include="PaginaHome\images\Login.png" />
     <Content Include="PaginaHome\images\logo.png" />
     <Content Include="PaginaHome\images\moras.JPG" />
     <Content Include="PaginaHome\images\play-button.png" />
+    <Content Include="PaginaHome\images\qr.png" />
+    <Content Include="PaginaHome\images\favicon.png" />
     <Content Include="PaginaHome\js\favicon.png" />
     <Content Include="PaginaHome\js\jquery-1.11.3.min.js" />
     <Content Include="PaginaHome\js\jquery-migrate-1.2.1.min.js" />
