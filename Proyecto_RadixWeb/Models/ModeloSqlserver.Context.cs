@@ -30,7 +30,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<bancostiposcuentas> bancostiposcuentas { get; set; }
         public virtual DbSet<cargos> cargos { get; set; }
         public virtual DbSet<comunas> comunas { get; set; }
-        public virtual DbSet<contratos> contratos { get; set; }
         public virtual DbSet<documentos> documentos { get; set; }
         public virtual DbSet<empresa_cargo> empresa_cargo { get; set; }
         public virtual DbSet<empresas> empresas { get; set; }
@@ -57,7 +56,8 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<personas> personas { get; set; }
         public virtual DbSet<CuentasAndroid> CuentasAndroid { get; set; }
+        public virtual DbSet<personas> personas { get; set; }
+        public virtual DbSet<contratos> contratos { get; set; }
     }
 }

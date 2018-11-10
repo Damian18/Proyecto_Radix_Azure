@@ -57,7 +57,7 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveEvent(horario_laboral e, int? Subempcar_id)
+        public JsonResult GuardarEvento(horario_laboral e, int? Subempcar_id)
         {
             var status = false;
 

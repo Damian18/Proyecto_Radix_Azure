@@ -25,7 +25,6 @@ namespace Proyecto_RadixWeb.Models
         public string PC_Ext { get; set; }
         public byte[] PC_Binario { get; set; }
         public int empcar_id { get; set; }
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<empresa_cargo> empresa_cargo { get; set; }
     }

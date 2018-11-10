@@ -1,8 +1,8 @@
 ﻿
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Horario";
+    ViewBag.Title = "Horario";
 }
 
 
@@ -101,18 +101,18 @@
                                                 <option value="green">Verde</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Dia Repeticion</label>
-                                            <select id="ddThemeColor" class="form-control">
-                                                <option value="1">Lunes</option>
-                                                <option value="2">Martes</option>
-                                                <option value="3">Miercoles</option>
-                                                <option value="4">Jueves</option>
-                                                <option value="5">Viernes</option>
-                                                <option value="6">Sabado</option>
-                                                <option value="0">Domingo</option>
-                                            </select>
-                                        </div>
+                                        @*<div class="form-group">
+                                                <label>Dia Repeticion</label>
+                                                <select id="ddThemeColor" class="form-control">
+                                                    <option value="1">Lunes</option>
+                                                    <option value="2">Martes</option>
+                                                    <option value="3">Miercoles</option>
+                                                    <option value="4">Jueves</option>
+                                                    <option value="5">Viernes</option>
+                                                    <option value="6">Sabado</option>
+                                                    <option value="0">Domingo</option>
+                                                </select>
+                                            </div>*@
                                         <button type="button" id="btnSave" class="btn btn-success">Guardar</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     </form>
@@ -126,19 +126,21 @@
         </div>
     </div>
 </div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 
-
-<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
-<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+@*<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />*@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 @section Scripts{
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
 
     <script src="~/Scripts/locale-all.js"></script>
-
     <script>
 
         $(document).ready(function () {
@@ -362,7 +364,7 @@
                 function SaveEvent(data) {
                     $.ajax({
                         type: "POST",
-                        url: '@Url.Action("SaveEvent", "Horario_laboral", new { Subempcar_id = ViewBag.Subempcar_id })',
+                        url: '@Url.Action("GuardarEvento", "Horario_laboral", new { Subempcar_id = ViewBag.Subempcar_id })',
                         //url: '/Horario_laboral/SaveEvent',
                         data: data,
                         success: function (data) {

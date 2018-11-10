@@ -38,7 +38,7 @@ namespace Proyecto_RadixWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Sub_Id,Sub_Nom,Sub_Cant,Sub_Estado,Sub_Dir,Com_Id")]  subempresas subempresas)
+        public ActionResult Index([Bind(Include = "Sub_Id,Sub_Nom,Sub_Dir,Com_Id")]  subempresas subempresas)
         {
             if (ModelState.IsValid)
             {

@@ -93,7 +93,7 @@ namespace Proyecto_RadixWeb.Controllers
                 contratos.Per_Rut = personas.Per_Rut;
                 contratos.Sub_Id = subemp_id;
                 contratos.Con_FechaInicio = DateTime.Now.ToShortDateString();
-                contratos.Con_Estado = "Espera";
+                
 
                 db.contratos.Add(contratos);
                 db.SaveChanges();

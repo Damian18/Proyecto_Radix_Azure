@@ -12,44 +12,51 @@ namespace Proyecto_RadixWeb.Controllers
     public class SubEmpresa_CargosController : Controller
     {
          private radixEntities db = new radixEntities();
-        //ver si existe 
-        public subempresa_cargo consultar(int Car_Id)
-        {
-            try
-            {
-                var subempresa_cargo = from c in db.subempresa_cargo where c.cargos.Car_Id == Car_Id select c;
-                return subempresa_cargo.FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-           }
-
-        public ActionResult consultar6(int? subemp_id)
-        {
-            string emp_nom = HttpContext.Session["Empresa"].ToString();
-
-            subempresa_cargo modelo = new subempresa_cargo();
-            modelo = new SubEmpresa_CargosController().consultar(6);
-
-            return View(modelo);
-        }
+      
         // GET: Subempresa_Cargo
         public ActionResult Index(int? subemp_id)
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();
 
            
-            subempresa_cargo modelo = new subempresa_cargo();
-            modelo = new SubEmpresa_CargosController().consultar(6);
-            ViewBag.cargo =consultar(6);
+        
+            var cargos = db.cargos.FirstOrDefault(c => c.Car_Nom == "Administrador de sucursal");
+
+            int subcargos = db.subempresa_cargo.Count(s=>s.Car_Id==cargos.Car_Id && s.Sub_Id==subemp_id);
+
+
+            ViewBag.cargo = subcargos;
          
             ViewBag.subemp_id = subemp_id;
             ViewBag.empresa = emp_nom;
             var subempresa_cargo = db.subempresa_cargo.Include(s => s.cargos).Include(s => s.subempresas);
             return View(subempresa_cargo.Where(s => s.Sub_Id == subemp_id).ToList());
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(int subemp_id)
+        {
+
+            var sub = db.cargos.FirstOrDefault(c=>c.Car_Nom == "Administrador de sucursal");
+
+            subempresa_cargo subempresa_cargo=new subempresa_cargo();
+
+
+            if (ModelState.IsValid)
+            {
+                subempresa_cargo.Sub_Id = subemp_id;
+                subempresa_cargo.Car_Id = sub.Car_Id;
+                db.subempresa_cargo.Add(subempresa_cargo);
+                db.SaveChanges();
+                return RedirectToAction("Index", new { subemp_id });
+            }
+
+           
+            return View(subempresa_cargo);
+        }
+
+
         //public ActionResult allCargos()
         //{
 
@@ -96,7 +103,7 @@ namespace Proyecto_RadixWeb.Controllers
             //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
 
            
-            List<empresa_cargo> listacargos = db.empresa_cargo.ToList();
+            List<empresa_cargo> listacargos = db.empresa_cargo.Where(s=>s.empresas.Emp_Nom==emp_nom).ToList();
             ViewBag.listacargos = new SelectList(listacargos, "Car_Id", "cargos.Car_Nom");
 
             return View();

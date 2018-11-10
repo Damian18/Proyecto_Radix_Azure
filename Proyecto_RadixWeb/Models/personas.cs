@@ -36,7 +36,8 @@ namespace Proyecto_RadixWeb.Models
         public string Per_Des { get; set; }
         public Nullable<int> Desc_Id { get; set; }
         public Nullable<int> THor_Id { get; set; }
-    
+        
+
         public virtual cargos cargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contratos> contratos { get; set; }
