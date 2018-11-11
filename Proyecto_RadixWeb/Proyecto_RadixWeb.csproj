@@ -1039,6 +1039,7 @@
     <Content Include="Views\Contratos\verTodos.cshtml" />
     <Content Include="Views\SubEmpresas\VerSuc.cshtml" />
     <Content Include="Views\SubEmpresa_Cargos\consultar6.cshtml" />
+    <Content Include="Views\SubEmpresas\MenuSubempresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

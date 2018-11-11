@@ -30,9 +30,7 @@
 
 
 
-    <!-- script
-    ================================================== -->
-    <script src="~/PaginaHome/js/modernizr.js"></script>
+    
     <!-- favicons
      ================================================== -->
     <link rel="icon" type="image/png" href="~/PaginaHome/js/favicon.png">
@@ -55,11 +53,16 @@
                     </button>
                 </div>
                 <div class="modal-body" id="formulario_login">
-                    
+
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- script
+    ================================================== -->
+    <script src="~/PaginaHome/js/modernizr.js"></script>
+
     <script>
 
         $('#log').click(function () {
@@ -68,6 +71,7 @@
             $('#formulario_login').load('/Account/Modal_Login');
 
         });</script>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("Scripts", required: false)

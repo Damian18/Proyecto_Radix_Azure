@@ -38,21 +38,7 @@ namespace Proyecto_RadixWeb.Controllers
             return PartialView(model);
         }
 
-        // GET: contratos
-        public ActionResult Index(int? subemp_id)
-        {
-            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
-
-            ViewBag.subemp_id = subemp_id;
-
-
-            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
-            MultiplesClases multiple = new MultiplesClases
-            {
-                ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id).ToList()
-            };
-            return View(multiple);
-        }
+       
         public ActionResult verTodos()
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();
@@ -71,6 +57,22 @@ namespace Proyecto_RadixWeb.Controllers
             };
 
             return View(multiples);
+        }
+
+        // GET: contratos
+        public ActionResult Index(int? subemp_id)
+        {
+            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+            ViewBag.subemp_id = subemp_id;
+
+
+            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+            MultiplesClases multiple = new MultiplesClases
+            {
+                ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id).ToList()
+            };
+            return View(multiple);
         }
 
         [HttpPost]

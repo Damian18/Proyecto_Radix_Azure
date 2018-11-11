@@ -14,6 +14,13 @@ namespace Proyecto_RadixWeb.Controllers
     {
         private radixEntities db = new radixEntities();
 
+        public ActionResult MenuSubempresa()
+        {
+            return View();
+        }
+
+
+
         // GET: subempresas
         public ActionResult Index()
         {
