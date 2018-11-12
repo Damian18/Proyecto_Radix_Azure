@@ -20,11 +20,11 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: cargos
-        public ActionResult Index(string emp_nom, string emp_id)
+        public ActionResult Index()
         {
 
             ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
-            ViewBag.emp_id = Convert.ToInt32(emp_id);
+            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
            
 
             return View(db.cargos.ToList());

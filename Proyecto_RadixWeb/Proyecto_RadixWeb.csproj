@@ -1040,6 +1040,7 @@
     <Content Include="Views\SubEmpresas\VerSuc.cshtml" />
     <Content Include="Views\SubEmpresa_Cargos\consultar6.cshtml" />
     <Content Include="Views\SubEmpresas\MenuSubempresa.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmpresa_v2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,95 +6,17 @@
 <div class="content-wrapper">
     <div class="container-fluid">
 
-        @*<div class="card mb-3">
-                <div class="card-header">
-                    <i class="fa fa-table"></i> Lista Sucursales
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <h3 id="titulo">
-
-                            <a class="btn btn-success" href="#" data-toggle="modal" data-target="#MiModal">Nueva Sucursal</a>
-
-                        </h3>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Sucursales
-
-                                    </th>
-                                    <th>
-                                        Cant. RR.HH.
-
-                                    </th>
-
-                                    <th>
-                                        Dirección
-                                    </th>
-                                    <th>
-                                        Comuna
-                                    </th>
-
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.ObjESubEmpresas)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Sub_Nom)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Sub_Cant)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Sub_Dir)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.comunas.Com_Nom)
-                                        </td>
-
-                                        <td>
-                                            <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
-                                                Ver Información
-                                            </a>
-
-                                            <a href="@Url.Action("Edit", "SubEmpresas", new { id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
-                                                Editar
-                                            </a>
-                                           <a href="@Url.Action("Delete", "SubEmpresas", new { id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
-                                                Eliminar
-                                            </a>
-                                            <a href="@Url.Action("Index", "SubEmpresa_Cargos", new { subemp_id = item.Sub_Id })" class="btn btn-outline-success btn-sm m-0">
-                                                Ver Cargos de la sucursal
-
-                                            </a>
-
-
-
-
-                                        </td>
-
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-footer small text-muted">Updated yesterday</div>
-            </div>*@
-
         <div class="container mt-sm-5 m-md-5">
 
             <div class="col-sm-12 col-md-12">
                 <div class="row">
-                    <div class="border-success mt-3 mb-3 ">
+                    <div class="border-success mt-3 mb-3 col-sm-2 col-md-2 ">
                         <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Nueva Sucursal</a>
                     </div>
-                   
+                    <div class="border-success mt-3 mb-3 ">
+                        <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Ver Plantilla Empresa</a>
+                    </div>
+
                 </div>
             </div>
 

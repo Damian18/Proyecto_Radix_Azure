@@ -65,6 +65,11 @@ namespace Proyecto_RadixWeb.Controllers
             ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
             ViewBag.subemp_id = subemp_id;
+            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+            ViewBag.EC_Id = new SelectList(db.estadosciviles, "EC_Id", "EC_Nom");
+            ViewBag.Gen_Id = new SelectList(db.generos, "Gen_Id", "Gen_Nom");
+            ViewBag.Nac_Id = new SelectList(db.nacionalidades, "Nac_Id", "Nac_Nom");
+
 
 
             var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
@@ -83,6 +88,7 @@ namespace Proyecto_RadixWeb.Controllers
             {
                 var length = plantilla.InputStream.Length; 
 
+                
 
                 byte[] datoplantilla = null;
                 using (var binarydoc = new BinaryReader(plantilla.InputStream))
@@ -110,6 +116,38 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(documentos);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPersonas(MultiplesClases multiples,personas personas,contratos contratos, int? subemp_id)
+        {
+            if (ModelState.IsValid)
+            {
+                multiples.ObjPersonas.Car_Id = personas.Car_Id;
+                multiples.ObjPersonas.EC_Id = personas.EC_Id;
+                multiples.ObjPersonas.Nac_Id = personas.Nac_Id;
+                multiples.ObjPersonas.Gen_Id = personas.Gen_Id;
+
+                db.personas.Add(multiples.ObjPersonas);
+                db.SaveChanges();
+
+
+                contratos.Per_Rut = multiples.ObjPersonas.Per_Rut;
+
+                contratos.Sub_Id =Convert.ToInt32( subemp_id);
+                contratos.Con_FechaInicio = DateTime.Now.ToShortDateString();
+
+
+                db.contratos.Add(contratos);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", new { subemp_id });
+            }
+
+         
+            return View(multiples);
+        }
+
 
         public FileResult ViewPdf(int? id)
         {

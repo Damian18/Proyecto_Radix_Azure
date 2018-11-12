@@ -304,7 +304,7 @@ namespace IdentitySample.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CuentaPersonas(MultiplesClases model, string subemp_id, string per_rut, string car_nom)
+        public async Task<ActionResult> CuentaPersonas(MultiplesClases model, string subemp_id)
         {
 
 
@@ -323,6 +323,9 @@ namespace IdentitySample.Controllers
                 AddErrors(result);
 
                 string idcuenta = user.Id;
+                string per_rut = model.ObjPersonas.Per_Rut;
+                string car_nom = model.ObjCargos.Car_Nom;
+
                 personas personas = db.personas.FirstOrDefault(p => p.Per_Rut == per_rut);
                 //var cargos = db.cargos.FirstOrDefault(c => c.Car_Id == personas.Car_Id);
 
@@ -356,6 +359,8 @@ namespace IdentitySample.Controllers
 
                 db.login.Add(log);
                 db.SaveChanges();
+
+                
 
                 if (car_nom == "Jefe Cuadrilla")
                 {

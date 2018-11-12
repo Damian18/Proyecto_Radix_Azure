@@ -18,6 +18,7 @@ namespace IdentitySample.Controllers
 
         public ActionResult Index()
         {
+            
 
 
             if (User.IsInRole("Radix"))
