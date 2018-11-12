@@ -2,11 +2,13 @@
 @{
     ViewBag.Title = "Index";
 }
+  </br>
+    </br>
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> Data Table Example
+                <i class="fa fa-table"></i> Todos el Personal de la Empresa @ViewBag.empresa
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -35,32 +37,33 @@
                         <tbody>
                             @foreach (var item in Model.ObjEContrato)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.Per_Rut)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.Per_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
-                                    @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
-                                </td>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.Per_Rut)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
+                                        @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                                    </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom)
-                                </td>
-                            </tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom)
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        
     </div>
 
 </div>

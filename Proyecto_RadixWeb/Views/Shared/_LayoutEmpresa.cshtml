@@ -49,7 +49,7 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#trabajadores" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-group"></i>
-                        <span class="nav-link-text" >
+                        <span class="nav-link-text">
                             <!-- TRABAJADORES -->
                             Trabajadores
                             @*<span class="badge badge-pill badge-warning">0 Trabajador</span>*@
@@ -64,7 +64,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#car" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-table"></i>
@@ -88,20 +88,20 @@
 
                     </ul>
                 </li>
-                        @*<li>
-                    <a href="@Url.Action("Index", "Empresa_Cargo")">Cargos</a>
-                </li>*@
-                        @*<li>|
-                    <a href="@Url.Action("Horario", "Horario_laboral")">Horarios</a>
-                </li>*@
-                   
+                @*<li>
+                        <a href="@Url.Action("Index", "Empresa_Cargo")">Cargos</a>
+                    </li>*@
+                @*<li>|
+                        <a href="@Url.Action("Horario", "Horario_laboral")">Horarios</a>
+                    </li>*@
+
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#doc" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-file"></i>
                         <!-- DOCUMENTOS -->
 
                         <span class="nav-link-text">
-                    Documentos
+                            Documentos
                             @*<span class="badge badge-pill badge-warning">Sin Inventario</span>*@
                         </span>
                     </a>
@@ -112,7 +112,7 @@
                         <li>
                             <a href="@Url.Action("Index", "Planillascontratos")">Planillas</a>
                         </li>
-                    
+
                     </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
@@ -301,274 +301,143 @@
             </ul>
         </div>
     </nav>
+    </br>
+    </br>
     <div class="content-wrapper">
         <div class="container-fluid">
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-table"></i> Data Table Example
+                    <i class="fa fa-arrow-down"></i> Primera vez aqui? Sigue estos pasos para configurar todo - Tutorial
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-
-                        <script>
-                            //function allowDrop(ev) {
-                            //    ev.preventDefault();
-                            //}
-
-                            //function drag(ev) {
-                            //    ev.dataTransfer.setData("text", ev.target.id);
-                            //}
-
-                            //function drop(ev) {
-                            //    ev.preventDefault();
-                            //    var data = ev.dataTransfer.getData("text");
-                            //    ev.target.appendChild(document.getElementById(data));
-                            //    testing();
-                            //}
-
-                            //function testing() {
-                            //    var correcto = 1;
-                            //    var pokes = document.getElementsByClassName("pokemon");
-                            //    for (var i = 0; i < pokes.length; i++) {
-                            //        if (pokes[i].getAttribute("name") != pokes[i].parentNode.getAttribute("id")) {
-                            //            correcto = correcto * 0;
-                            //            break;
-                            //        }
-                            //    }
-                            //    if (correcto == 1) {
-                            //        document.getElementById("resultado").innerHTML = "CORRECTO";
-                            //    } else {
-                            //        document.getElementById("resultado").innerHTML = "INCOMPLETO";
-                            //    }
-
-                            //}
-                            //----------------------------------
-
-                            //function allowDrop(ev) {
-                            //    ev.preventDefault();
-                            //}
-
-                            //function drag(ev) {
-                            //    ev.dataTransfer.setData("text", ev.target.id);
-                            //}
-
-                            //function drop(ev) {
-                            //    ev.preventDefault();
-                            //    var data = ev.dataTransfer.getData("text");
-                            //    ev.target.appendChild(document.getElementById(data));
-                            //}
-                            //-------------------------------------
-
-                            //+ function ($) {
-                            //    'use strict';
-
-                            //    // UPLOAD CLASS DEFINITION
-                            //    // ======================
-
-                            //    var dropZone = document.getElementById('drop-zone');
-                            //    var uploadForm = document.getElementById('js-upload-form');
-
-                            //    var startUpload = function (files) {
-                            //        console.log(files)
-                            //    }
-
-                            //    uploadForm.addEventListener('submit', function (e) {
-                            //        var uploadFiles = document.getElementById('js-upload-files').files;
-                            //        e.preventDefault()
-
-                            //        startUpload(uploadFiles)
-                            //    })
-
-                            //    dropZone.ondrop = function (e) {
-                            //        e.preventDefault();
-                            //        this.className = 'upload-drop-zone';
-
-                            //        startUpload(e.dataTransfer.files)
-                            //    }
-
-                            //    dropZone.ondragover = function () {
-                            //        this.className = 'upload-drop-zone drop';
-                            //        return false;
-                            //    }
-
-                            //    dropZone.ondragleave = function () {
-                            //        this.className = 'upload-drop-zone';
-                            //        return false;
-                            //    }
-
-                            //}(jQuery);
-                        </script>
-
-
-                        @*<section id="container" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="padre">
-                <div class="tipo" id="fuego" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                <div class="tipo" id="agua" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            </div>
-            <img class="pokemon" src="http://i65.tinypic.com/j0itlk.png" draggable="true" ondragstart="drag(event)" id="drag1" name="fuego" />
-            <img class="pokemon" src="http://i65.tinypic.com/214vxts.png" draggable="true" ondragstart="drag(event)" id="drag2" name="agua" />
-            <img class="pokemon" src="http://i66.tinypic.com/ckf41.jpg" draggable="true" ondragstart="drag(event)" id="drag3" name="fuego" />
-            <img class="pokemon" src="http://i66.tinypic.com/2nq5pp3.png" draggable="true" ondragstart="drag(event)" id="drag4" name="agua" />
-        </section>
-        <div id="resultado">...</div>*@
-
-                        @*<div>
-            <h2>Drag and Drop</h2>
-            <p>Drag the image back and forth between the two div elements.</p>
-
-            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <img src="img_w3slogo.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
-            </div>
-
-            <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        </div>*@
-
-
-                        @*<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-        <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Upload Files</strong> <small>Bootstrap files upload</small></div>
-                <div class="panel-body">
-                    <!-- Standar Form -->
-                    <h4>Select files from your computer</h4>
-                    <form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <input type="file" name="files[]" id="js-upload-files" multiple>
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
-                        </div>
-                    </form>
-                    <!-- Drop Zone -->
-                    <h4>Or drag and drop files below</h4>
-                    <div class="upload-drop-zone" id="drop-zone">
-                        Just drag and drop files here
-                    </div>
-                    <!-- Progress Bar -->
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                            <span class="sr-only">60% Complete</span>
-                        </div>
-                    </div>
-                    <!-- Upload Finished -->
-                    <div class="js-upload-finished">
-                        <h3>Processed files</h3>
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
-                            <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
                         @*<iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiOTY2OWFjMTMtZWU3Zi00OTIwLTgyNWYtNWQ0ODVkNzhkOTcyIiwidCI6IjM4YTFlMGExLWI2YjEtNDJlOS1iM2E5LTU5NzYyNjY3MGIxNyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>*@
-                        <h1>rrastrar y soltar</h1>
-                        <br />
-                        @*<div class="jquery-script-ads">
-                                    <script type="text/javascript">
-        <!--
-                                        google_ad_client = "ca-pub-2783044520727903";
-                                        /* jQuery_demo */
-                                        google_ad_slot = "2780937993";
-                                        google_ad_width = 728;
-                                        google_ad_height = 90;
-                                        //-->
-                                    </script>
-                                    <script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
-                                    </script>
-                                </div>*@
+                        <h1>Realiza lo siguiente.</h1>
                         <br />
                         <br />
                         <br />
-                       
-                    </div>
-                     
-
-
-
-
+                        <br />
                     </div>
                 </div>
-
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            </div>
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fa fa-angle-up"></i>
-            </a>
-            <!-- Logout Modal-->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Quieres cerrar tu sesión?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Estas seguro de cerrar tu sesión?.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <a class="btn btn-primary" href="javascript:document.getElementById('logoutForm').submit()">Si.Cerrar Sesión</a>
+                <div class="card-footer small text-muted">
+                   
+                    <div style="float:left;">
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            function makeArray() {
+                                for (i = 0; i < makeArray.arguments.length; i++)
+                                    this[i + 1] = makeArray.arguments[i];
                             }
-                        </div>
+                            var months = new makeArray('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+                                'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+                            var date = new Date();
+                            var day = date.getDate();
+                            var month = date.getMonth() + 1;
+                            var yy = date.getYear();
+                            var year = (yy < 1000) ? yy + 1900 : yy;
+                            document.write("Hoy es " + day + " de " + months[month] + " del " + year);
+                            //]]>
+                        </script>
                     </div>
+                        <script type="text/javascript">
+                            function startTime() {
+                                today = new Date();
+                                h = today.getHours();
+                                m = today.getMinutes();
+                                s = today.getSeconds();
+                                m = checkTime(m);
+                                s = checkTime(s);
+                                document.getElementById('reloj').innerHTML = h + ":" + m + ":" + s;
+                                t = setTimeout('startTime()', 500);
+                            }
+                            function checkTime(i) { if (i < 10) { i = "0" + i; } return i; }
+                            window.onload = function () { startTime(); }
+                        </script>
+                        <div id="reloj" style="font-size:15px;float:right;" ></div>
+
+                    
+
+
                 </div>
+
             </div>
-            <!-- File Modal-->
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
-        <footer class="sticky-footer">
-            <div class="container">
-                <div class="text-center">
-                    <small>Copyright © Your Website 2018</small>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Quieres cerrar tu sesión?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Estas seguro de cerrar tu sesión?.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <a class="btn btn-primary" href="javascript:document.getElementById('logoutForm').submit()">Si.Cerrar Sesión</a>
+                        }
+                    </div>
                 </div>
             </div>
-        </footer>
-        <!-- Bootstrap core JavaScript-->
+        </div>
+        <!-- File Modal-->
 
-        <script src="~/Scripts/dashboard/sb-admin-charts.min.js"></script>
-        <script src="~/Scripts/dashboard/bootstrap.bundle.min.js"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="~/Scripts/dashboard/jquery.easing.min.js"></script>
-        <!-- Page level plugin JavaScript-->
-        <script src="~/Scripts/dashboard/Chart.min.js"></script>
-        <script src="~/Scripts/dashboard/jquery.dataTables.js"></script>
-        <script src="~/Scripts/dashboard/dataTables.bootstrap4.js"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="~/Scripts/dashboard/sb-admin.min.js"></script>
-        <!-- Custom scripts for this page-->
-        <script src="~/Scripts/dashboard/sb-admin-datatables.min.js"></script>
-        <script src="~/Scripts/dashboard/sb-admin-charts.min.js"></script>
 
-   
-                <script src="~/Scripts/jquery-3.3.1.js"></script>
 
-                <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright © Your Website 2018</small>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JavaScript-->
+
+    <script src="~/Scripts/dashboard/sb-admin-charts.min.js"></script>
+    <script src="~/Scripts/dashboard/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Scripts/dashboard/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Scripts/dashboard/Chart.min.js"></script>
+    <script src="~/Scripts/dashboard/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dashboard/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Scripts/dashboard/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Scripts/dashboard/sb-admin-datatables.min.js"></script>
+    <script src="~/Scripts/dashboard/sb-admin-charts.min.js"></script>
+
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <script>
 
             $(document).ready(function () {
 
@@ -601,9 +470,9 @@
 
        }
 
-                </script>}
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/bundles/bootstrap")
-                @RenderSection("Scripts", required: false)
+    </script>}
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

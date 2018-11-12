@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "Index";
 }
+  </br>
+    </br>
+
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> Cargos de la empresa
+                <i class="fa fa-table"></i> Cargos de la Empresa @ViewBag.emrpesa
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -16,7 +19,7 @@
                         <a class="btn btn-success" href="@Url.Action("Create","Empresa_Cargo")">Cargos General Empresa </a>
 
                     </h3>
-                
+
                     <table class="table">
                         <tr>
                             <th>
@@ -68,11 +71,11 @@
 
                     </table>
                 </div>
+
             </div>
-            <div class="card-footer small text-muted">Updated yesterday/div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Modal -->

@@ -31,12 +31,21 @@ namespace IdentitySample.Controllers
             }
             else if (User.IsInRole("Administrador"))
             {
-                string emp_nom = HttpContext.Session["Empresa"].ToString();
-                ViewBag.empresa = emp_nom;
-                //esto es temporal hasta que se logre hacer funcional el dashboard de administrador
-                return View("DashBoardAdmin");
-                //return RedirectToAction("Index", "subempresas", new { emp_nom = empresa, emp_id = emp_id });
+                try
+                {
+                    string emp_nom = HttpContext.Session["Empresa"].ToString();
+                    ViewBag.empresa = emp_nom;
+                    //esto es temporal hasta que se logre hacer funcional el dashboard de administrador
+                    return View("DashBoardAdmin");
+                    //return RedirectToAction("Index", "subempresas", new { emp_nom = empresa, emp_id = emp_id });
 
+                }
+                catch (Exception e)
+                {
+
+                    throw new Exception("Tiempo limite de sesion superada " + e.Message);
+                }
+               
             }
 
 

@@ -23,20 +23,28 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: Empresa_Cargo
         public ActionResult Index()
         {
-
-            string emp_nom = HttpContext.Session["Empresa"].ToString();
-
-            int emp_id =Convert.ToInt32( HttpContext.Session["Emp_id"].ToString());
-            ViewBag.empresa = emp_nom;
-            var empresa_cargo = db.empresa_cargo.Include(e => e.cargos).Include(e => e.empresas);
-
-            MultiplesClases multiples = new MultiplesClases
+            try
             {
-                ObjEEmpresa_Cargo = empresa_cargo.Where(e => e.Emp_Id == emp_id).ToList()
-            };
+                string emp_nom = HttpContext.Session["Empresa"].ToString();
+
+                int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+                ViewBag.empresa = emp_nom;
+                var empresa_cargo = db.empresa_cargo.Include(e => e.cargos).Include(e => e.empresas);
+
+                MultiplesClases multiples = new MultiplesClases
+                {
+                    ObjEEmpresa_Cargo = empresa_cargo.Where(e => e.Emp_Id == emp_id).ToList()
+                };
 
 
-            return View(multiples);
+                return View(multiples);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Tiempo limite de sesion superada " + ex.Message);
+            }
+          
         }
        
 
