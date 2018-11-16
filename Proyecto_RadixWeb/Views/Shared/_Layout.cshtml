@@ -1,80 +1,800 @@
-﻿@{
-    ViewBag.Title = "";
-}
+﻿<!DOCTYPE html>
+<html lang="es">
 
-<!DOCTYPE html>
-<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
 <head>
-
-    <!--- basic page needs
-    ================================================== -->
-    <meta charset="utf-8">
-    <title>Radix</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- mobile specific metas
-    ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!-- CSS
-    ================================================== -->
-    <link href="~/PaginaHome/css/base.css" rel="stylesheet" />
-    <link href="~/PaginaHome/css/main.css" rel="stylesheet" />
-    <link href="~/PaginaHome/css/vendor.css" rel="stylesheet" />
-
-
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+          crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
     
-    <!-- favicons
-     ================================================== -->
-    <link rel="icon" type="image/png" href="~/PaginaHome/js/favicon.png">
+    <title>RadixWeb</title>
+    <meta name="description" content="Control y Analisis - Pymes Agricolas">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="author" content="Damian Diaz-Michel Valenzuela">
+    <link href="~/PaginaHome/css/home.css" rel="stylesheet" />
+    <script>
+
+        var scroll = new SmoothScroll('a[href*="#"]', {
+            // Function. Custom easing pattern
+            // If this is set to anything other than null, will override the easing option above
+            customEasing: function (time) {
+
+                // return <your formulate with time as a multiplier>
+
+                // Example: easeInOut Quad
+                return time < 0.5 ? 2 * time * time : -1 + (4 - 2 * time) * time;
+
+            }
+        });
+
+
+    </script>
+    <style>
+    
+    </style>
 </head>
 
-<body id="top">
+<body data-spy="scroll" data-target="#menu1">
     @RenderBody()
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4893307.js"></script>
+    <!--NAV-->
+    <div id="menu1" class="container-fluid navbar-light fixed-top text-center" style="background-color: #0000008e;">
+        <nav id="menu" class="navbar navbar-expand-lg navbar-light bg-ligth sticky-top container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fas fa-align-justify ml-auto" style="color:white;"></span>
+            </button>
+            <a class="navbar-brand ml-auto d-sm-block d-md-block d-lg-none" href="#">
+                <img src="Logo_Radix_v3.png" width="120"
+                     height="50" class="d-incline-block align top" alt="">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto text-center ">
+                    <li id="btn" class="nav-item active">
+                        <a data-scroll class="nav-link text-white " href="#seccion1">Inicio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="btn1" class="nav-item">
+                        <a data-scroll class="nav-link text-white " href="#servicios" aria-pressed="true">Servicios</a>
+                    </li>
+                    <li id="btn2" class="nav-item">
+                        <a data-scroll class="nav-link text-white " href="#caracteristicas">Caracteristicas</a>
+                    </li>
+                    <li id="btn3" class="nav-item">
+                        <a data-scroll class="nav-link text-white " href="#precios">Precios</a>
+                    </li>
+                    <li id="btn4" class="nav-item">
+                        <a data-scroll class="nav-link text-white " href="#noticias">Novedades</a>
+                    </li>
+                </ul>
+                <a class="navbar-brand d-none d-xl-block d-lg-block" href="#">
+                    <img src="Logo_Radix_v3.png" width="120"
+                         height="50" class="d-incline-block align top" alt="">
+                </a>
+                <ul class="navbar-nav ml-auto text-center">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white mr-2 " href="#" data-toggle="modal" data-target="#exampleModal">
+                            Login
+                            / Register
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <form class="form-inline my-2 my-lg-0 justify-content-center">
+                        <button class="btn btn-success my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#contacto">
+                            Contactanos
+                        </button>
+                    </form>
+                </ul>
 
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
+            </div>
+        </nav>
+    </div>
+    <!--FIN NAV-->
+    <!-- slider-->
+    <section id="seccion1">
+        <div class="container-fluid slider d-flex flex-column justify-content-center align-items-center bg-dark">
+            <div class="text-center text-white">
+                <h3>Bienvenidos</h3>
+                <h1 class="display">Somos Radix</h1>
+                <p class="lead d-none d-sm-block"></p>Si quieres recibir noticas sobre nosotros suscrebete.</p>
+            </div>
+            <form action="" class="form-inline text-center d-flex flex-column flex-sm-row">
+                <div class="form-group mr-1">
+                    <input type="text" placeholder="Ingresa tu email" class="form-control text-center" required
+                           autofocus>
+                </div>
+                <div class="form-group mr-0">
+                    <input type="submit" value="Enviar" class="btn btn-danger ">
+                </div>
+            </form>
+        </div>
+        <!--fin slider    -->
+    </section>
+    <!--fin slider-->
+    <!--Servicios-->
+    <section id="servicios" class="mt-5 mb-5">
+        <!--main  id="services"-->
+        <div class="container">
+            <h3 class="text-center">Servicios</h3>
+            <p class="lead text-center">El servicio consistira en los siguientes puntos.</p>
+            <hr>
+            <div class="card-columns">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="item" data-item="1">
 
-    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <h5 class="card-title">Inicio de sesión</h5>
+                            <p class="card-text">
+                                El ingreso a la aplicacion sera de uso esclusivo para las empresas que
+                                nos
+                                hayan contratado, éste se realizara a traves de un inicio de sesión cuyas credenciales
+                                seran la
+                                empresa, su usuario y su contraseña.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-3 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Implementacion de QRs</h5>
+                        <p class="card-text">
+                            A la empresa contratista se le hara entrega de codigos Qr los cuales deben
+                            ser solicitados por
+                            la empresa con una cantidad en especifico, para asi luego utilizarls para identificar
+                            bandejas,
+                            bins o capachos. Logrando asi llevar el control total de las cosechas.
+                        </p>
+                    </div>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Capacitacion</h5>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aliquam
+                            officia esse qui iure. Nihil, similique, consequatur recusandae quae eos magni autem
+                            perferendis sed voluptatum excepturi commodi. Ipsam, commodi. Provident eum voluptates
+                            porro alias, maiores a nobis nostrum incidunt cupiditate delectus eveniet pariatur quisquam
+                            soluta, dolores qui quos similique? Enim.
+                        </p>
+                    </div>
+                </div>
+                <div class="card d-flex justify-content-center">
+                    <img class="card-img-top" src="~/PaginaHome/images/Inicio.png" alt="Card image cap">
+                    <div class="card-body text-center ">
+                        <h5 class="card-title ">Aplicacion Movil</h5>
+                        <p class="card-text">
+                            La aplicacion podras er utilizada solo cuando se haya contratado el
+                            servicio, esta solo se preocupara de los procesos de recoleccion de fruta.
+                        </p>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Horarios y Asistencia</h5>
+                        <p class="card-text">
+                            La aplicacion movil llevara el control de asistencia de los trabajadres
+                            que esten cosechando.
+                            Esto se llevara a cabo siempre y cuando el trabajador haga su primera entrega del día.
+                        </p>
+                    </div>
+                </div>
+                <div class="card p-3 text-right text-center">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Personal</h5>
+                        <p class="card-text">
+                            Se llevara el control de los trabajdores que esten realizando cosechas,
+                            con esto se podra ver
+                            cuantas bandejas lleva, donde esta ubicado y si tiene contrato.
+                        </p>
+                    </div>
+                </div>
+                <div class="card p-6 text-right text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Asesoria</h5>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aliquam
+                            officia esse qui iure. Nihil, similique, consequatur recusandae quae eos magni autem
+                            perferendis sed voluptatum excepturi commodi. Ipsam, commodi. Provident eum voluptates
+                            porro alias, maiores a nobis nostrum incidunt cupiditate delectus eveniet pariatur quisquam
+                            soluta, dolores qui quos similique? Enim.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--fin main  -->
+    </section>
+    <!--Fin servicios-->
+    <!--caracteristicas-->
+    <section id="caracteristicas" class="mt-5 mb-5">
+        <!--CARD CON FOTO-->
+        <div class="container">
+            <h3 class="mt-5 text-center">Caracteristicas</h3>
+            <p class="lead text-center">Las principales carateristicas del uestro servicios se basa en.</p>
+            <hr>
+        </div>
+        <div class="container">
+            <h3 class="mt-5 text-center">Equipo de trabajo</h3>
+            <p class="lead text-center">El equipo de consta de los siguientes integrantes</p>
+            <hr>
+            <div class="card-deck ">
+                <div class="card">
+                    <img class="card-img-top" src="~/PaginaHome/images/fondo-1.png" alt="Card image cap">
+                    <div class="text-center">
+                        <img src="~/PaginaHome/images/avatars/1.png" alt="" class="img-fluid team rounded-circle img-thumbnail" height="100px"
+                             width="100px">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Damian Diaz</h5>
+                        <p class="card-text text-center"><small class="text-muted ">Desarrollador/DBA/Analista</small></p>
+                        <p class="card-text text-center">
+                            This is a longer card with supporting text below as a natural
+                            lead-in to
+                            additional content. This content is a little bit longer.
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#"><i class="fab fa-facebook-f mx-2"></i></a>
+                        <a href="#"><i class="fab fa-youtube mx-2"></i></a>
+                        <a href="#"><i class="fab fa-twitter mx-2"></i></a>
+                        <a href="#"><i class="fab fa-instagram mx-2"></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="~/PaginaHome/images/fondo-1.png" alt="Card image cap">
+                    <div class="text-center">
+                        <img src="~/PaginaHome/images/avatars/1.png" alt="" class="img-fluid team rounded-circle img-thumbnail" height="100px"
+                             width="100px">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Michel Valenzuela</h5>
+                        <p class="card-text text-center">
+                            <small class="text-muted ">
+                                Jefe de
+                                proyecto/Analista/Desarollador
+                            </small>
+                        </p>
+
+                        <p class="card-text text-center">
+                            This is a longer card with supporting text below as a natural
+                            lead-in to
+                            additional content. This content is a little bit longer.
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#"><i class="fab fa-facebook-f mx-2"></i></a>
+                        <a href="#"><i class="fab fa-youtube mx-2"></i></a>
+                        <a href="#"><i class="fab fa-twitter mx-2"></i></a>
+                        <a href="#"><i class="fab fa-instagram mx-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--FIN CARD CON FOTO-->
+    </section>
+    <!--fin caracteristicas -->
+    <!--precios-->
+    <section id="precios">
+
+        <div class="container-fluid bg-gradient p-5">
+            <div class="row m-auto text-center w-75">
+
+                <div class="col-4 princing-item red">
+                    <div class="pricing-divider ">
+                        <h3 class="text-light">Basico</h3>
+                        <h5 class="my-2 display-2 text-light font-weight-normal mb-3">
+                            <span class="h1">$ 49.990</span>
+                            <span class="h5">/mes</span>
+                        </h5>
+                        <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1'
+                             preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px'
+                             xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'
+                             y='0px'>
+                        <path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+          c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z'
+                              fill='#FFFFFF' opacity='0.6'></path>
+                        <path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+          c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z'
+                              fill='#FFFFFF' opacity='0.6'></path>
+                        <path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+          H42.401L43.415,98.342z'
+                              fill='#FFFFFF' opacity='0.7'></path>
+                        <path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+          c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z'
+                              fill='#FFFFFF'></path>
+                        </svg>
+                    </div>
+                    <div class="card-body bg-white mt-0 shadow">
+                        <ul class="list-unstyled mb-5 position-relative">
+
+                            <li><b>100 </b> Documentos</li>
+                            <li><b>15 Horas </b> Capacitacion</li>
+                            <li><b>30 </b>Cuentas de trabajadores</li>
+                            <li><b>130 </b>Codigos Qr</li>
+                            <li><b>1 </b>Empresa administrada</li>
+                            <li><b>Acceso a la aplicacion movil</b></li>
+                            <li><b>Asesoria</b></li>
+
+                        </ul>
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" value="Me interesa" class="btn btn-success" style="font-size: 22px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 princing-item blue">
+                    <div class="pricing-divider ">
+                        <h3 class="text-light">Estandar</h3>
+                        <h5 class="my-2 display-2 text-light font-weight-normal mb-3">
+                            <span class="h1">$ 99.990</span>
+                            <span class="h5">/mes</span>
+                        </h5>
+                        <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1'
+                             preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px'
+                             xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'
+                             y='0px'>
+                        <path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+          c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z'
+                              fill='#FFFFFF' opacity='0.6'></path>
+                        <path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+          c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z'
+                              fill='#FFFFFF' opacity='0.6'></path>
+                        <path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+          H42.401L43.415,98.342z'
+                              fill='#FFFFFF' opacity='0.7'></path>
+                        <path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+          c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z'
+                              fill='#FFFFFF'></path>
+                        </svg>
+                    </div>
+
+                    <div class="card-body bg-white mt-0 shadow">
+                        <ul class="list-unstyled mb-5 position-relative">
+                            <li><b>300 </b> Documentos</li>
+                            <li><b>30 Horas </b> Capacitacion</li>
+                            <li><b>60 </b>Cuentas de trabajadores</li>
+                            <li><b>260 </b>Codigos Qr</li>
+                            <li><b>2 </b>Empresas administrada</li>
+                            <li><b>Acceso a la aplicacion movil</b></li>
+                            <li><b>Asesoria</b></li>
+
+                        </ul>
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" value="Me interesa" class="btn btn-success" style="font-size: 22px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 princing-item green">
+                    <div class="pricing-divider ">
+                        <h3 class="text-light">Premium</h3>
+                        <h5 class="my-2 display-2 text-light font-weight-normal mb-3">
+                            <span class="h1">$ 149.990</span>
+                            <span class="h5">/mes</span>
+                        </h5>
+                        <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1'
+                             preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px'
+                             xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'
+                             y='0px'>
+                        <path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+          c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z'
+                              fill='#FFFFFF' opacity='0.6'></path>
+                        <path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+          c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z'
+                              fill='#FFFFFF' opacity='0.6'></path>
+                        <path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+          H42.401L43.415,98.342z'
+                              fill='#FFFFFF' opacity='0.7'></path>
+                        <path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+          c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z'
+                              fill='#FFFFFF'></path>
+                        </svg>
+                    </div>
+                    <div class="card-body bg-white mt-0 shadow">
+                        <ul class="list-unstyled mb-5 position-relative">
+                            <li><b>600 </b> Documentos</li>
+                            <li><b>50 Horas </b> Capacitacion</li>
+                            <li><b>100 </b>Cuentas de trabajadores</li>
+                            <li><b>400 </b>Codigos Qr</li>
+                            <li><b>3 </b>Empresas administrada</li>
+                            <li><b>Acceso a la aplicacion movil</b></li>
+                            <li><b>Asesoria</b></li>
+                        </ul>
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" value="Me interesa" class="btn btn-success" style="font-size: 22px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!--fin precios-->
+    <!--novedades-->
+    <section id="noticias" class="mb-5 mt-5">
+        <!--main  id="services"-->
+        <div class="container">
+            <h3 class="mt-5 text-center">Noticias</h3>
+            <p class="lead text-center">El servicio consistira en los siguientes puntos.</p>
+            <hr>
+            <div class="row">
+                <!--Lista de servicios-->
+                <div class="col-12 col-md-9">
+                    <!--1 articulo-->
+                    <div class="row mb-5">
+                        <div class="col-3">
+                            <img src="fondo.jpg" class="img-fluid" alt="">
+                            <p class="lead text-center">Fecha</p>
+                        </div>
+                        <div class="col-9">
+                            <a href="#">
+                                <h3>Lorem ipsum dolor sit amet consectetur.</h3>
+                            </a>
+
+                            <a href="#"><span class="badge badge-primary">Primary</span></a>
+                            <a href="#"><span class="badge badge-secondary">Secondary</span></a>
+                            <a href="#"><span class="badge badge-success">Success</span> </a>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quibusdam fuga expedita.
+                                Error obcaecati blanditiis nisi vero cupiditate molestias iusto dolor! Ad minima animi
+                                autem,
+                                quam nisi corporis placeat officiis in nobis odit similique libero provident earum
+                                laboriosam
+                                eaque nostrum vel fugit ratione debitis iure! Rem laborum ducimus impedit ipsa.
+                            </p>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis, eum.</p>
+
+                            <a href="" class="btn btn-warning btn btn-sm">Leer más...</a>
+                        </div>
+                    </div>
+                    <!--2 articulo-->
+                    <div class="row mb-5">
+                        <div class="col-3">
+                            <img src="fondo.jpg" class="img-fluid" alt="">
+                            <p class="lead text-center">Fecha</p>
+                        </div>
+                        <div class="col-9">
+                            <a href="#">
+                                <h3>Lorem ipsum dolor sit amet consectetur.</h3>
+                            </a>
+
+                            <a href="#"><span class="badge badge-primary">Primary</span></a>
+                            <a href="#"><span class="badge badge-secondary">Secondary</span></a>
+                            <a href="#"><span class="badge badge-success">Success</span> </a>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quibusdam fuga expedita.
+                                Error obcaecati blanditiis nisi vero cupiditate molestias iusto dolor! Ad minima animi
+                                autem,
+                                quam nisi corporis placeat officiis in nobis odit similique libero provident earum
+                                laboriosam
+                                eaque nostrum vel fugit ratione debitis iure! Rem laborum ducimus impedit ipsa.
+                            </p>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis, eum.</p>
+
+                            <a href="" class="btn btn-warning btn btn-sm">Leer más...</a>
+                        </div>
+                    </div>
+
+                    <!--Cambio de paginas-->
+
+                    <div class="btn-toolbar d-flex justify-content-center mb-3 " role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-secondary active">Inicio</button>
+                            <button type="button" class="btn btn-secondary ">1</button>
+                            <button type="button" class="btn btn-secondary">2</button>
+                            <button type="button" class="btn btn-secondary">3</button>
+                            <button type="button" class="btn btn-secondary">4</button>
+                            <button type="button" class="btn btn-secondary">5</button>
+                            <button type="button" class="btn btn-secondary">6</button>
+                            <button type="button" class="btn btn-secondary">7</button>
+                            <button type="button" class="btn btn-secondary">8</button>
+                            <button type="button" class="btn btn-secondary">9</button>
+                            <button type="button" class="btn btn-secondary active">Final</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--aside-->
+                <div class="col-12 col-md-3">
+                    <!--cards-->
+                    <div class="card bg-primary text-white text-center p-3 mb-5">
+                        <blockquote class="blockquote mb-0">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+                            <footer class="blockquote-footer">
+                                <small>
+                                    Someone famous in <cite title="Source Title">Source Title</cite>
+                                </small>
+                            </footer>
+                        </blockquote>
+                    </div>
+                    <div class="card bg-success text-white text-center p-3 mb-5">
+                        <blockquote class="blockquote mb-0">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+                            <footer class="blockquote-footer">
+                                <small>
+                                    Someone famous in <cite title="Source Title">Source Title</cite>
+                                </small>
+                            </footer>
+                        </blockquote>
+                    </div>
+                    <div class="card bg-danger text-white text-center p-3 mb-5">
+                        <blockquote class="blockquote mb-0">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+                            <footer class="blockquote-footer">
+                                <small>
+                                    Someone famous in <cite title="Source Title">Source Title</cite>
+                                </small>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <!--fin cards-->
+                </div>
+                <!--din aside-->
+            </div>
+        </div>
+        <!--fin main  -->
+    </section>
+    <!--fin novedades-->
+    <!--preguntas y respuestas-->
+    <section id="faq">
+        <div class="container">
+            <h3 class="mt-5 text-center">Faq</h3>
+            <p class="lead text-center">Preguntas y Respuestas.</p>
+            <p class="lead">
+                Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi
+                aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.
+            </p>
+            <hr>
+            <div class="row mb-5 mt-5">
+                <div class="col-lg-6 col-sm-12 col-md-6">
+
+                    <h3>Que hace la aplicacion movil?</h3>
+
+                    <p>
+                        Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud
+                        anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit
+                        adipisicing cupidatat.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-6 col-sm-12 col-md-6">
+
+                    <h3>Como es su servicio post-venta?</h3>
+
+                    <p>
+                        Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud
+                        anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit
+                        adipisicing cupidatat.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-6 col-sm-12 col-md-6">
+
+                    <h3>Cual es la version de Android necesaria?</h3>
+
+                    <p>
+                        Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud
+                        anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit
+                        adipisicing cupidatat.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-6 col-sm-12 col-md-6">
+
+                    <h3>Puedo contratar el plan basico y luego contratar le plan premium?</h3>
+
+                    <p>
+                        Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud
+                        anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit
+                        adipisicing cupidatat.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-6 col-sm-12 col-md-6">
+
+                    <h3>Cuanto tiempo puedo estar sin pagar?</h3>
+
+                    <p>
+                        Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud
+                        anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit
+                        adipisicing cupidatat.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-6 col-sm-12 col-md-6">
+
+                    <h3>Que asesoria prestan o como funciona eso?</h3>
+
+                    <p>
+                        Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud
+                        anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit
+                        adipisicing cupidatat.
+                    </p>
+
+                </div>
+
+
+
+            </div> <!-- /faq-content -->
+        </div>
+    </section>
+    <!-- fin faq -->
+    
+    <!--MODAL LOGIN-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h4>
+
+                <div class="modal-body text-center">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
-                <div class="modal-body" id="formulario_login">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">Inicio Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                               aria-controls="contact" aria-selected="false">Recuperar Cuenta</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <form class="form-signin">
+                                    <img class="mb-5 mt-5" src="~/PaginaHome/images/Logo_Radix_v3.png" alt="" width="200" height="80">
+
+                                    <label for="inputEmpresa" class="sr-only ">Empresa</label>
+                                    <input type="text" id="ObjEmpresas_Emp_Nom" name="ObjEmpresas.Emp_Nom"  class="form-control mb-3" placeholder="Empresa"
+                                           required autofocus>
+                                    <label for="inputCorreo" class="sr-only ">Correo electronico</label>
+                                    <input type="email" id="ObjLogin_Email" name="ObjLogin.Email" class="form-control mb-3" placeholder="Correo electronico"
+                                           required autofocus>
+                                    <label for="inputContraseña" class="sr-only">Contraseña</label>
+                                    <input type="password" id="ObjLogin_Password" name="ObjLogin.Password" class="form-control mb-3" placeholder="Contraseña"
+                                           required>
+                                    <div class="checkbox mb-3">
+                                        <label>
+                                            <input id="ObjLogin_RememberMe" name="ObjLogin.RememberMe" type="checkbox" value="remember-me"> Remember me
+                                        </label>
+                                    </div>
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
+                                    <p class="mt-3 mb-3 text-muted">&copy; 2018-2019</p>
+                                </form>
+                            }
+                            </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+
+                                @Html.AntiForgeryToken()
+                                <form class="form-signin">
+                                    <img class="mb-5 mt-5" src="~/PaginaHome/images/Logo_Radix_v3.png" alt="" width="200" height="80">
+
+                                    <label for="inputEmp" class="sr-only ">Empresa</label>
+                                    <input type="text" id="ObjEmpresas_Emp_Nom" name="ObjEmpresas.Emp_Nom" class="form-control mb-3" placeholder="Empresa"
+                                           required autofocus>
+                                    <label for="inputEmail" class="sr-only ">Correo electronico</label>
+                                    <input type="email" id="ObjRegistrar_Email" name="ObjRegistrar.Email" class="form-control mb-3" placeholder="Correo electronico"
+                                           required autofocus>
+                                    <label for="inputPass" class="sr-only">Contraseña</label>
+                                    <input type="password" id="ObjRegistrar_Password" name="ObjRegistrar.Password" class="form-control mb-3" placeholder="Contraseña"
+                                           required>
+                                    <label for="inputConfPass" class="sr-only">Confirmar Contraseña</label>
+                                    <input type="password" id="ObjRegistrar_ConfirmPassword" name="ObjRegistrar.ConfirmPassword" class="form-control mb-3" placeholder="Confirmar Contraseña"
+                                           required>
+                                 
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+                                    <p class="mt-3 mb-3 text-muted">&copy; 2018-2019</p>
+                                </form>
+                            }
+                            </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                    </div>
 
                 </div>
+
             </div>
         </div>
     </div>
 
-    <!-- script
-    ================================================== -->
-    <script src="~/PaginaHome/js/modernizr.js"></script>
+   
+    <!--modal contactanos-->
+    <div class="modal fade " id="contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contactar a Radix</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="email" class="form-control" id="recipient-name" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text" required autofocus></textarea>
+                        </div>
+                        <div class="container text-center">
+                            <button class="btn col-lg-5 col-md-5 btn-primary" type="submit">Enviar</button>
+                            <button type="submit" class="btn btn-secondary col-lg-5 col-md-5" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- <a href="#" id="scrollarrow">Scroll up this page</a>  -->
+    <div id="go-top" style="display: none;">
+        <a class="smoothscroll" title="Back to Top" href="#top"><i class="fas fa-chevron-circle-up"></i></a>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4893307.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
 
     <script>
+        $(window).scroll(function () {
+            if ($("#menu1").offset().top > 105) {
+                document.getElementById("go-top").style = "display: block"
+            } else {
+                document.getElementById("go-top").style = "display: none;"
+            }
+        });
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($("#menu").offset().top > 56) {
+                $("#menu").addClass("bg-dark");
+                $("#menu1").addClass("bg-dark")
 
-        $('#log').click(function () {
+            } else {
+                $("#menu").removeClass("bg-dark");
+                $("#menu1").removeClass("bg-dark");
+            }
+        });
+    </script>
 
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 
-            $('#formulario_login').load('/Account/Modal_Login');
+    <!--footer fixed-bottom-->
+    <footer id="menuabajo" class="container-fluid bg-dark text-white py-1 text-center ">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, provident!</p>
+    </footer>
 
-        });</script>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("Scripts", required: false)
+    <!--fin footer-->
 </body>
 
-</html >
+</html>

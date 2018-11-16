@@ -479,6 +479,7 @@
     <Content Include="PaginaDashB\vendor.js" />
     <Content Include="PaginaHome\css\base.css" />
     <Content Include="PaginaHome\css\fonts.css" />
+    <Content Include="PaginaHome\css\home.css" />
     <Content Include="PaginaHome\css\ionicons\css\ionicons.css" />
     <Content Include="PaginaHome\css\ionicons\css\ionicons.min.css" />
     <Content Include="PaginaHome\css\ionicons\fonts\ionicons.svg" />
@@ -509,6 +510,8 @@
     <Content Include="PaginaHome\images\appdesign.jpg" />
     <Content Include="PaginaHome\images\avatars\1.png" />
     <Content Include="PaginaHome\images\avatars\2.png" />
+    <Content Include="PaginaHome\images\bg.jpg" />
+    <Content Include="PaginaHome\images\fondo-1.png" />
     <Content Include="PaginaHome\images\fondo2.jpg" />
     <Content Include="PaginaHome\images\footer-logo.png" />
     <Content Include="PaginaHome\images\Funciones.png" />
@@ -516,6 +519,7 @@
     <Content Include="PaginaHome\images\intro-bg.jpg" />
     <Content Include="PaginaHome\images\Login.png" />
     <Content Include="PaginaHome\images\logo.png" />
+    <Content Include="PaginaHome\images\Logo_Radix_v3.png" />
     <Content Include="PaginaHome\images\moras.JPG" />
     <Content Include="PaginaHome\images\play-button.png" />
     <Content Include="PaginaHome\images\qr.png" />
@@ -1041,6 +1045,8 @@
     <Content Include="Views\SubEmpresa_Cargos\consultar6.cshtml" />
     <Content Include="Views\SubEmpresas\MenuSubempresa.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpresa_v2.cshtml" />
+    <Content Include="Views\Home\indexguardado.cshtml" />
+    <Content Include="Views\RolesAdmin\_LayoutRespaldo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

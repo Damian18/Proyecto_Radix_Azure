@@ -1,0 +1,232 @@
+﻿.slider {
+    background: url("../images/bg.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0F1215;
+    z-index: 9999999;
+    height: 100%;
+    width: 100%;
+}
+
+.no-js #preloader, .oldie #preloader {
+    display: none;
+}
+
+#loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    margin-top: -30px;
+    padding: 0;
+    background-color: #31aa1f;
+    border-radius: 100%;
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.team {
+    margin-top: -50px;
+    border: 2px solid #ddd;
+}
+
+.navbar-light {
+    transition: all 1s ease;
+}
+
+@media (min-width:992px) {
+    .caras {
+        position: relative;
+        margin-top: -110px;
+    }
+}
+
+body {
+    position: relative;
+}
+
+#scrollarrow {
+    /* display: none; */
+    text-indent: -9999px;
+    width: 42px;
+    height: 42px;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background: url("arrowup.png") no-repeat;
+    background-size: 42px 42px;
+}
+/*boton GO top*/
+#go-top {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 600;
+    display: none;
+}
+
+    #go-top a {
+        text-decoration: none;
+        border: 0 none;
+        display: block;
+        height: 66px;
+        width: 60px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        line-height: 66px;
+        text-align: center;
+        background: #048a7c;
+        color: #FFFFFF;
+        text-align: center;
+        text-transform: uppercase;
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+        #go-top a i {
+            font-size: 20px;
+            line-height: inherit;
+        }
+/*Hover en el menu*/
+#menu1 {
+    background: #0000008e;
+}
+
+    #menu1 li.active {
+        border-bottom: 2px solid #0b9706;
+        ;
+    }
+
+.nav-item::after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 2px;
+    background: #0b9706;
+    transition: 0.2s;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+
+/*Precios*/
+.bg-gradient {
+    background: #C9D6FF;
+    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+    background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+}
+
+ul li {
+    margin-bottom: 1.4rem;
+}
+
+.pricing-divider {
+    border-radius: 20px;
+    background: #C64545;
+    padding: 1em 0 4em;
+    position: relative;
+}
+
+.blue .pricing-divider {
+    background: #2D5772;
+}
+
+.green .pricing-divider {
+    background: #1AA85C;
+}
+
+.red b {
+    color: #C64545
+}
+
+.blue b {
+    color: #2D5772
+}
+
+.green b {
+    color: #1AA85C
+}
+
+.pricing-divider-img {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+}
+
+.deco-layer {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.btn-custom {
+    background: #C64545;
+    color: #fff;
+    border-radius: 20px
+}
+
+.img-float {
+    width: 50px;
+    position: absolute;
+    top: -3.5rem;
+    right: 1rem
+}
+
+.princing-item {
+    transition: all 150ms ease-out;
+}
+
+    .princing-item:hover {
+        transform: scale(1.05);
+    }
+
+        .princing-item:hover .deco-layer--1 {
+            -webkit-transform: translate3d(15px, 0, 0);
+            transform: translate3d(15px, 0, 0);
+        }
+
+        .princing-item:hover .deco-layer--2 {
+            -webkit-transform: translate3d(-15px, 0, 0);
+            transform: translate3d(-15px, 0, 0);
+        }
