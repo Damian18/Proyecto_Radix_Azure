@@ -521,6 +521,8 @@
     <Content Include="PaginaHome\images\logo.png" />
     <Content Include="PaginaHome\images\Logo_Radix_v3.png" />
     <Content Include="PaginaHome\images\moras.JPG" />
+    <Content Include="PaginaHome\images\numero1.jpg" />
+    <Content Include="PaginaHome\images\numero2.png" />
     <Content Include="PaginaHome\images\play-button.png" />
     <Content Include="PaginaHome\images\qr.png" />
     <Content Include="PaginaHome\images\favicon.png" />
