@@ -265,6 +265,7 @@
     <Compile Include="Models\bancostiposcuentas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CanvasjsSubEmpresa.cs" />
     <Compile Include="Models\cargos.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
@@ -1041,6 +1042,8 @@
     <Content Include="Views\SubEmpresa_Cargos\consultar6.cshtml" />
     <Content Include="Views\SubEmpresas\MenuSubempresa.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpresa_v2.cshtml" />
+    <Content Include="Views\SubEmpresas\ListaPlantilla.cshtml" />
+    <Content Include="Views\Horario_laboral\HorarioTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,6 +14,11 @@ namespace Proyecto_RadixWeb.Controllers
     {
         private radixEntities db = new radixEntities();
 
+        public ActionResult HorarioTest()
+        {
+            return View();
+        }
+
         public ActionResult Horario(int? Subempcar_id)
         {
 
@@ -42,12 +47,23 @@ namespace Proyecto_RadixWeb.Controllers
 
             db.Configuration.ProxyCreationEnabled = false;
             List<horario_laboral> events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
+            
             //var events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
 
             return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
         }
+        public JsonResult GetHorario()
+        {
 
+            db.Configuration.ProxyCreationEnabled = false;
+           // List<horario_laboral> events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
+
+            var events = db.horario_laboral.ToList();
+
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
 
         // GET: Horario_laboral
         public ActionResult Index(int? Subempcar_id)
@@ -57,7 +73,36 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         [HttpPost]
-        public JsonResult GuardarEvento(horario_laboral e, int? Subempcar_id)
+        public JsonResult SaveEvent(horario_laboral e)
+        {
+            var status = false;
+
+            if (e.Hl_Id > 0)
+            {
+                //Update
+                var v = db.horario_laboral.Where(a => a.Hl_Id == e.Hl_Id).FirstOrDefault();
+                if (v != null)
+                {
+                    v.Hl_Titulo = e.Hl_Titulo;
+                    v.Hl_Inicio = e.Hl_Inicio;
+                    v.Hl_Termino = e.Hl_Termino;
+                    v.Hl_Descripcion = e.Hl_Descripcion;
+                    v.Hl_TodoDia = e.Hl_TodoDia;
+                    v.Hl_ColorTema = e.Hl_ColorTema;
+                }
+            }
+            else
+            {
+            
+                db.horario_laboral.Add(e);
+            }
+            db.SaveChanges();
+            status = true;
+
+            return new JsonResult { Data = new { status } };
+        }
+        [HttpPost]
+        public JsonResult GuardarEvento(horario_laboral e, int Subempcar_id)
         {
             var status = false;
 

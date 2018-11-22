@@ -12,7 +12,7 @@
           <Property Name="asis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Con_Id" Type="int" />
           <Property Name="Hl_Id" Type="int" />
-          <Property Name="asis_estado" Type="binary" MaxLength="1" />
+          <Property Name="asis_estado" Type="bit" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -172,10 +172,10 @@
           <Property Name="Hl_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Hl_Titulo" Type="nvarchar" MaxLength="100" />
           <Property Name="Hl_Descripcion" Type="nvarchar" MaxLength="300" />
-          <Property Name="Hl_Inicio" Type="datetime2" Precision="0" />
-          <Property Name="Hl_Termino" Type="datetime2" Precision="0" />
+          <Property Name="Hl_Inicio" Type="datetime" />
+          <Property Name="Hl_Termino" Type="datetime" />
           <Property Name="Hl_ColorTema" Type="nvarchar" MaxLength="10" />
-          <Property Name="Hl_TodoDia" Type="binary" MaxLength="1" />
+          <Property Name="Hl_TodoDia" Type="bit" />
           <Property Name="Subempcar_id" Type="int" />
         </EntityType>
         <EntityType Name="login">
@@ -956,17 +956,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="radixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="asistencias">
-          <Key>
-            <PropertyRef Name="asis_id" />
-          </Key>
-          <Property Name="asis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Con_Id" Type="Int32" />
-          <Property Name="Hl_Id" Type="Int32" />
-          <Property Name="asis_estado" Type="Binary" MaxLength="1" FixedLength="true" />
-          <NavigationProperty Name="horario_laboral" Relationship="Self.asistencias_asis_horario" FromRole="asistencias" ToRole="horario_laboral" />
-          <NavigationProperty Name="contratos" Relationship="radixModel.asistencias_asis_contrato" FromRole="asistencias" ToRole="contratos" />
-        </EntityType>
         <EntityType Name="bancos">
           <Key>
             <PropertyRef Name="Ban_Id" />
@@ -1083,21 +1072,6 @@
           <Property Name="Gen_Nom" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="personas" Relationship="radixModel.personas_fk_personas_sexo" FromRole="generos" ToRole="personas" />
         </EntityType>
-        <EntityType Name="horario_laboral">
-          <Key>
-            <PropertyRef Name="Hl_Id" />
-          </Key>
-          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Hl_Inicio" Type="DateTime" Precision="0" />
-          <Property Name="Hl_Termino" Type="DateTime" Precision="0" />
-          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Hl_TodoDia" Type="Binary" MaxLength="1" FixedLength="true" />
-          <Property Name="Subempcar_id" Type="Int32" />
-          <NavigationProperty Name="asistencias" Relationship="Self.asistencias_asis_horario" FromRole="horario_laboral" ToRole="asistencias" />
-          <NavigationProperty Name="subempresa_cargo" Relationship="Self.horario_laboral_horario_subempresa_cargo" FromRole="horario_laboral" ToRole="subempresa_cargo" />
-        </EntityType>
         <EntityType Name="login">
           <Key>
             <PropertyRef Name="log_id" />
@@ -1169,8 +1143,8 @@
           <Property Name="Sub_Id" Type="Int32" />
           <Property Name="Car_Id" Type="Int32" />
           <NavigationProperty Name="cargos" Relationship="Self.subempresa_cargo_cargo_subempresa" FromRole="subempresa_cargo" ToRole="cargos" />
-          <NavigationProperty Name="horario_laboral" Relationship="Self.horario_laboral_horario_subempresa_cargo" FromRole="subempresa_cargo" ToRole="horario_laboral" />
           <NavigationProperty Name="subempresas" Relationship="Self.subempresa_cargo_subempresa_cargo" FromRole="subempresa_cargo" ToRole="subempresas" />
+          <NavigationProperty Name="horario_laboral" Relationship="radixModel.FK_horario_laboral_subempresa_cargo" FromRole="subempresa_cargo" ToRole="horario_laboral" />
         </EntityType>
         <EntityType Name="subempresas">
           <Key>
@@ -1249,18 +1223,6 @@
           <Property Name="TPer_Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tipoimpuestos" Relationship="Self.tipoimpuestos_FK_tipoimpuesto_tipoperiodo" FromRole="tiposperiodos" ToRole="tipoimpuestos" />
         </EntityType>
-        <Association Name="asistencias_asis_horario">
-          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="0..1" />
-          <End Role="asistencias" Type="Self.asistencias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="horario_laboral">
-              <PropertyRef Name="Hl_Id" />
-            </Principal>
-            <Dependent Role="asistencias">
-              <PropertyRef Name="Hl_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1">
           <End Role="bancos" Type="Self.bancos" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1419,18 +1381,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="horario_laboral_horario_subempresa_cargo">
-          <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="0..1" />
-          <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subempresa_cargo">
-              <PropertyRef Name="Subempcar_id" />
-            </Principal>
-            <Dependent Role="horario_laboral">
-              <PropertyRef Name="Subempcar_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="pago_fk_FormasDePago_TipoFormasPago1">
           <End Role="tipoformaspago" Type="Self.tipoformaspago" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1486,7 +1436,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="radixEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="asistencias" EntityType="Self.asistencias" />
           <EntitySet Name="bancos" EntityType="Self.bancos" />
           <EntitySet Name="bancostiposcuentas" EntityType="Self.bancostiposcuentas" />
           <EntitySet Name="cargos" EntityType="Self.cargos" />
@@ -1498,7 +1447,6 @@
           <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" />
           <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" />
           <EntitySet Name="generos" EntityType="Self.generos" />
-          <EntitySet Name="horario_laboral" EntityType="Self.horario_laboral" />
           <EntitySet Name="login" EntityType="Self.login" />
           <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" />
           <EntitySet Name="pago" EntityType="Self.pago" />
@@ -1514,10 +1462,6 @@
           <EntitySet Name="tiposdescuentos" EntityType="Self.tiposdescuentos" />
           <EntitySet Name="tiposhorasextras" EntityType="Self.tiposhorasextras" />
           <EntitySet Name="tiposperiodos" EntityType="Self.tiposperiodos" />
-          <AssociationSet Name="asistencias_asis_horario" Association="Self.asistencias_asis_horario">
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
-            <End Role="asistencias" EntitySet="asistencias" />
-          </AssociationSet>
           <AssociationSet Name="bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1" Association="Self.bancostiposcuentas_fk_Bancos_has_TiposCuentas_Bancos1">
             <End Role="bancos" EntitySet="bancos" />
             <End Role="bancostiposcuentas" EntitySet="bancostiposcuentas" />
@@ -1565,10 +1509,6 @@
           <AssociationSet Name="fichadescuentos_FK_fichadescuentos_tipodescuento" Association="Self.fichadescuentos_FK_fichadescuentos_tipodescuento">
             <End Role="tiposdescuentos" EntitySet="tiposdescuentos" />
             <End Role="fichadescuentos" EntitySet="fichadescuentos" />
-          </AssociationSet>
-          <AssociationSet Name="horario_laboral_horario_subempresa_cargo" Association="Self.horario_laboral_horario_subempresa_cargo">
-            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
           </AssociationSet>
           <AssociationSet Name="pago_fk_FormasDePago_TipoFormasPago1" Association="Self.pago_fk_FormasDePago_TipoFormasPago1">
             <End Role="tipoformaspago" EntitySet="tipoformaspago" />
@@ -1636,10 +1576,6 @@
             <End Role="personas" EntitySet="personas" />
           </AssociationSet>
           <EntitySet Name="contratos" EntityType="radixModel.contratos" />
-          <AssociationSet Name="asistencias_asis_contrato" Association="radixModel.asistencias_asis_contrato">
-            <End Role="contratos" EntitySet="contratos" />
-            <End Role="asistencias" EntitySet="asistencias" />
-          </AssociationSet>
           <AssociationSet Name="contratos_FK_contratos_Documentos" Association="radixModel.contratos_FK_contratos_Documentos">
             <End Role="documentos" EntitySet="documentos" />
             <End Role="contratos" EntitySet="contratos" />
@@ -1655,6 +1591,20 @@
           <AssociationSet Name="contratos_fk_Contratos_TiposContratos1" Association="radixModel.contratos_fk_Contratos_TiposContratos1">
             <End Role="tiposcontratos" EntitySet="tiposcontratos" />
             <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
+          <AssociationSet Name="FK_horario_laboral_subempresa_cargo" Association="radixModel.FK_horario_laboral_subempresa_cargo">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+          </AssociationSet>
+          <EntitySet Name="asistencias" EntityType="radixModel.asistencias" />
+          <AssociationSet Name="asistencias_asis_contrato" Association="radixModel.asistencias_asis_contrato">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
+          <AssociationSet Name="asistencias_asis_horario" Association="radixModel.asistencias_asis_horario">
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="asistencias" EntitySet="asistencias" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUserRoles">
@@ -1897,24 +1847,12 @@
           <Property Name="Con_FechaInicio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Con_FechaFin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Con_Estado" Type="Binary" MaxLength="1" FixedLength="true" />
-          <NavigationProperty Name="asistencias" Relationship="radixModel.asistencias_asis_contrato" FromRole="contratos" ToRole="asistencias" />
           <NavigationProperty Name="documentos" Relationship="radixModel.contratos_FK_contratos_Documentos" FromRole="contratos" ToRole="documentos" />
           <NavigationProperty Name="personas" Relationship="radixModel.contratos_fk_Contratos_Personas" FromRole="contratos" ToRole="personas" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.contratos_FK_contratos_subempresas" FromRole="contratos" ToRole="subempresas" />
           <NavigationProperty Name="tiposcontratos" Relationship="radixModel.contratos_fk_Contratos_TiposContratos1" FromRole="contratos" ToRole="tiposcontratos" />
+          <NavigationProperty Name="asistencias" Relationship="radixModel.asistencias_asis_contrato" FromRole="contratos" ToRole="asistencias" />
         </EntityType>
-        <Association Name="asistencias_asis_contrato">
-          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
-          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="contratos">
-              <PropertyRef Name="Con_Id" />
-            </Principal>
-            <Dependent Role="asistencias">
-              <PropertyRef Name="Con_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="contratos_FK_contratos_Documentos">
           <End Type="radixModel.documentos" Role="documentos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1971,22 +1909,74 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="horario_laboral">
+          <Key>
+            <PropertyRef Name="Hl_Id" />
+          </Key>
+          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_Inicio" Type="DateTime" Precision="3" />
+          <Property Name="Hl_Termino" Type="DateTime" Precision="3" />
+          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_TodoDia" Type="Boolean" />
+          <Property Name="Subempcar_id" Type="Int32" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.FK_horario_laboral_subempresa_cargo" FromRole="horario_laboral" ToRole="subempresa_cargo" />
+          <NavigationProperty Name="asistencias" Relationship="radixModel.asistencias_asis_horario" FromRole="horario_laboral" ToRole="asistencias" />
+        </EntityType>
+        <Association Name="FK_horario_laboral_subempresa_cargo">
+          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="0..1" />
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
+            </Principal>
+            <Dependent Role="horario_laboral">
+              <PropertyRef Name="Subempcar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="asistencias">
+          <Key>
+            <PropertyRef Name="asis_id" />
+          </Key>
+          <Property Name="asis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Con_Id" Type="Int32" />
+          <Property Name="Hl_Id" Type="Int32" />
+          <Property Name="asis_estado" Type="Boolean" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.asistencias_asis_contrato" FromRole="asistencias" ToRole="contratos" />
+          <NavigationProperty Name="horario_laboral" Relationship="radixModel.asistencias_asis_horario" FromRole="asistencias" ToRole="horario_laboral" />
+        </EntityType>
+        <Association Name="asistencias_asis_contrato">
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
+          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Con_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asistencias_asis_horario">
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="0..1" />
+          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Hl_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="radixModelStoreContainer" CdmEntityContainer="radixEntities">
-          <EntitySetMapping Name="asistencias">
-            <EntityTypeMapping TypeName="radixModel.asistencias">
-              <MappingFragment StoreEntitySet="asistencias">
-                <ScalarProperty Name="asis_id" ColumnName="asis_id" />
-                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
-                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
-                <ScalarProperty Name="asis_estado" ColumnName="asis_estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="bancos">
             <EntityTypeMapping TypeName="radixModel.bancos">
               <MappingFragment StoreEntitySet="bancos">
@@ -2091,20 +2081,6 @@
               <MappingFragment StoreEntitySet="generos">
                 <ScalarProperty Name="Gen_Id" ColumnName="Gen_Id" />
                 <ScalarProperty Name="Gen_Nom" ColumnName="Gen_Nom" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="horario_laboral">
-            <EntityTypeMapping TypeName="radixModel.horario_laboral">
-              <MappingFragment StoreEntitySet="horario_laboral">
-                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
-                <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
-                <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
-                <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
-                <ScalarProperty Name="Hl_Termino" ColumnName="Hl_Termino" />
-                <ScalarProperty Name="Hl_ColorTema" ColumnName="Hl_ColorTema" />
-                <ScalarProperty Name="Hl_TodoDia" ColumnName="Hl_TodoDia" />
-                <ScalarProperty Name="Subempcar_id" ColumnName="Subempcar_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2326,6 +2302,30 @@
                 <ScalarProperty Name="Doc_Id" ColumnName="Doc_Id" />
                 <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
                 <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horario_laboral">
+            <EntityTypeMapping TypeName="radixModel.horario_laboral">
+              <MappingFragment StoreEntitySet="horario_laboral">
+                <ScalarProperty Name="Subempcar_id" ColumnName="Subempcar_id" />
+                <ScalarProperty Name="Hl_TodoDia" ColumnName="Hl_TodoDia" />
+                <ScalarProperty Name="Hl_ColorTema" ColumnName="Hl_ColorTema" />
+                <ScalarProperty Name="Hl_Termino" ColumnName="Hl_Termino" />
+                <ScalarProperty Name="Hl_Inicio" ColumnName="Hl_Inicio" />
+                <ScalarProperty Name="Hl_Descripcion" ColumnName="Hl_Descripcion" />
+                <ScalarProperty Name="Hl_Titulo" ColumnName="Hl_Titulo" />
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="asistencias">
+            <EntityTypeMapping TypeName="radixModel.asistencias">
+              <MappingFragment StoreEntitySet="asistencias">
+                <ScalarProperty Name="asis_estado" ColumnName="asis_estado" />
+                <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
+                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+                <ScalarProperty Name="asis_id" ColumnName="asis_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

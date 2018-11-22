@@ -114,19 +114,19 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Subempcar_id,Car_Id")] subempresa_cargo subempresa_cargo, int subemp_id)
+        public ActionResult Create([Bind(Include = "Subempcar_id,Sub_Id,Car_Id")]subempresa_cargo subempresa_Cargo,cargos cargos, int subemp_id)
         {
             if (ModelState.IsValid)
             {
-                subempresa_cargo.Sub_Id = subemp_id;
-                db.subempresa_cargo.Add(subempresa_cargo);
+              
+                subempresa_Cargo.Sub_Id = subemp_id;
+                subempresa_Cargo.Car_Id = cargos.Car_Id;
+                db.subempresa_cargo.Add(subempresa_Cargo);
                 db.SaveChanges();
                 return RedirectToAction("Index",new { subemp_id });
             }
 
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom", subempresa_cargo.Car_Id);
-            ViewBag.Sub_Id = new SelectList(db.subempresas, "Sub_Id", "Sub_Nom", subempresa_cargo.Sub_Id);
-            return View(subempresa_cargo);
+            return View(subempresa_Cargo);
         }
 
         // GET: Subempresa_Cargo/Edit/5

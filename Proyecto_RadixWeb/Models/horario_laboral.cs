@@ -26,11 +26,11 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<System.DateTime> Hl_Inicio { get; set; }
         public Nullable<System.DateTime> Hl_Termino { get; set; }
         public string Hl_ColorTema { get; set; }
-        public byte[] Hl_TodoDia { get; set; }
+        public Nullable<bool> Hl_TodoDia { get; set; }
         public Nullable<int> Subempcar_id { get; set; }
     
+        public virtual subempresa_cargo subempresa_cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<asistencias> asistencias { get; set; }
-        public virtual subempresa_cargo subempresa_cargo { get; set; }
     }
 }

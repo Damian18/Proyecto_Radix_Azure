@@ -17,8 +17,8 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public personas()
         {
-            this.contratos = new HashSet<contratos>();
             this.login = new HashSet<login>();
+            this.contratos = new HashSet<contratos>();
         }
     
         public string Per_Rut { get; set; }
@@ -36,11 +36,8 @@ namespace Proyecto_RadixWeb.Models
         public string Per_Des { get; set; }
         public Nullable<int> Desc_Id { get; set; }
         public Nullable<int> THor_Id { get; set; }
-        
-
+    
         public virtual cargos cargos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<contratos> contratos { get; set; }
         public virtual estadosciviles estadosciviles { get; set; }
         public virtual fichadescuentos fichadescuentos { get; set; }
         public virtual generos generos { get; set; }
@@ -49,5 +46,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual nacionalidades nacionalidades { get; set; }
         public virtual tiposhorasextras tiposhorasextras { get; set; }
         public virtual tipoimpuestos tipoimpuestos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<contratos> contratos { get; set; }
     }
 }
