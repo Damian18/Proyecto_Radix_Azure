@@ -492,6 +492,7 @@
     <Content Include="PaginaDashB\vendor.js" />
     <Content Include="PaginaHome\css\base.css" />
     <Content Include="PaginaHome\css\fonts.css" />
+    <Content Include="PaginaHome\css\home.css" />
     <Content Include="PaginaHome\css\ionicons\css\ionicons.css" />
     <Content Include="PaginaHome\css\ionicons\css\ionicons.min.css" />
     <Content Include="PaginaHome\css\ionicons\fonts\ionicons.svg" />
@@ -1057,6 +1058,8 @@
     <Content Include="Views\Shared\_LayoutEmpresa_v2.cshtml" />
     <Content Include="Views\SubEmpresas\ListaPlantilla.cshtml" />
     <Content Include="Views\Horario_laboral\HorarioTest.cshtml" />
+    <Content Include="Views\Home\indexguardado.cshtml" />
+    <Content Include="Views\Home\dash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
