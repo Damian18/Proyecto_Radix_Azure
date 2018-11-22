@@ -3,26 +3,26 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="content-wrapper">
-    <div class="container-fluid">
 
-        <div class="container mt-sm-5 m-md-5">
+    <div id="contenido_vista">
+
+        
 
             <div class="col-sm-12 col-md-12">
                 <div class="row">
                     <div class="border-success mt-3 mb-3 col-sm-2 col-md-2 ">
                         <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Nueva Sucursal</a>
                     </div>
-                    <div class="border-success mt-3 mb-3 ">
-                        <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Ver Plantilla Empresa</a>
-                    </div>
+                    @*<div class="border-success mt-3 mb-3 ">
+                        <a class="btn btn-success ml-3" href="@Url.Action("ListaPlantilla","SubEmpresas")">Ver Plantilla Empresa</a>
+                    </div>*@
 
                 </div>
             </div>
 
 
 
-            <div class="col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-12 col-lg-12 ml-5">
                 <div class="row">
                     @foreach (var item in Model.ObjESubEmpresas)
                     {
@@ -39,7 +39,7 @@
                         <div class="col-sm-1 col-md-1"></div>
                     }
                 </div>
-            </div>
+           
 
 
         </div>
@@ -105,15 +105,18 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
 
-
+    
+    
 
     $(document).ready(function () {
+
+        $('#contenido_vista').appendTo('#contenido_general');
 
         $("#ObjRegiones_Reg_Id").change(function () {
             $.get("/SubEmpresas/ObtenerProvincia", { Reg_Id: $("#ObjRegiones_Reg_Id").val() }, function (data) {

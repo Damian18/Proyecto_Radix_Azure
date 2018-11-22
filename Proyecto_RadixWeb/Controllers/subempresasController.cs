@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,7 +20,128 @@ namespace Proyecto_RadixWeb.Controllers
             return View();
         }
 
+        public JsonResult GetDatos()
+        {
 
+            db.Configuration.ProxyCreationEnabled = false;
+            List<empresas> events = db.empresas.ToList();
+            
+            //var events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
+
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
+
+        public JsonResult GetSubEmpresaDatos()
+        {
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var lista_empresa = db.empresas.ToList();
+            List<CanvasjsSubEmpresa> events=new List<CanvasjsSubEmpresa>();
+            foreach (var item in lista_empresa)
+            {
+                int contar = db.subempresas.Count(s=>s.Emp_Id==item.Emp_Id);
+
+                CanvasjsSubEmpresa canvasjs = new CanvasjsSubEmpresa
+                {
+                    Emp_nom=item.Emp_Nom,
+                    Contar_SubEmpresa=contar
+
+                };
+
+                events.Add(canvasjs);
+            }
+
+            //List<empresas> events = db.empresas.ToList();
+
+            //var events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
+
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
+
+        public JsonResult GetEmpresaCargosDatos()
+        {
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var lista_empresa = db.empresas.ToList();
+            List<CanvasjsSubEmpresa> events = new List<CanvasjsSubEmpresa>();
+            foreach (var item in lista_empresa)
+            {
+                int contar = db.empresa_cargo.Count(s => s.Emp_Id == item.Emp_Id);
+
+                CanvasjsSubEmpresa canvasjs = new CanvasjsSubEmpresa
+                {
+                    Emp_nom = item.Emp_Nom,
+                    Contar_SubEmpresa = contar
+
+                };
+
+                events.Add(canvasjs);
+            }
+
+            //List<empresas> events = db.empresas.ToList();
+
+            //var events = db.horario_laboral.Where(h => h.Subempcar_id == Subempcar_id).ToList();
+
+            return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
+
+
+
+
+        public ActionResult ListaPlantilla()
+        {
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
+            int empresa_id= Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+            ViewBag.emp_id = empresa_id;
+            ViewBag.empresa = emp_nom;
+
+            var listaPlantilla = db.empresa_cargo.Include(e=>e.empresas).Include(e=>e.cargos).Include(e=>e.planillascontratos);
+
+            listaPlantilla.Where(l=>l.Emp_Id==empresa_id).ToList();
+
+            return View(listaPlantilla);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListaPlantilla([Bind(Include = "PC_Id,PC_Nom")] planillascontratos planillascontratos, HttpPostedFileBase plantilla)
+        {
+            if (plantilla != null && plantilla.ContentLength > 0)
+            {
+                var length = plantilla.InputStream.Length;
+
+
+
+                byte[] datoplantilla = null;
+
+                using (var binarydoc = new BinaryReader(plantilla.InputStream))
+                {
+                    datoplantilla = binarydoc.ReadBytes(plantilla.ContentLength);
+                }
+                planillascontratos.PC_Binario = datoplantilla;
+                planillascontratos.PC_Ext = Path.GetExtension(plantilla.FileName);
+            }
+
+            
+
+            if (ModelState.IsValid)
+            {
+                //planillascontratos.PC_Ext =".docx";
+                db.planillascontratos.Add(planillascontratos);
+
+               
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+
+            return View(planillascontratos);
+        }
 
         // GET: subempresas
         public ActionResult Index()

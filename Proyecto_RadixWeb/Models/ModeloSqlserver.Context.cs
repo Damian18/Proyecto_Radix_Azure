@@ -25,7 +25,6 @@ namespace Proyecto_RadixWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<asistencias> asistencias { get; set; }
         public virtual DbSet<bancos> bancos { get; set; }
         public virtual DbSet<bancostiposcuentas> bancostiposcuentas { get; set; }
         public virtual DbSet<cargos> cargos { get; set; }
@@ -37,7 +36,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<fichadescuentos> fichadescuentos { get; set; }
         public virtual DbSet<fichasasistencias> fichasasistencias { get; set; }
         public virtual DbSet<generos> generos { get; set; }
-        public virtual DbSet<horario_laboral> horario_laboral { get; set; }
         public virtual DbSet<login> login { get; set; }
         public virtual DbSet<nacionalidades> nacionalidades { get; set; }
         public virtual DbSet<pago> pago { get; set; }
@@ -59,5 +57,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<CuentasAndroid> CuentasAndroid { get; set; }
         public virtual DbSet<personas> personas { get; set; }
         public virtual DbSet<contratos> contratos { get; set; }
+        public virtual DbSet<horario_laboral> horario_laboral { get; set; }
+        public virtual DbSet<asistencias> asistencias { get; set; }
     }
 }

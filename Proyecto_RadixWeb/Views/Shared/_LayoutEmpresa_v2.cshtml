@@ -1,27 +1,220 @@
-﻿
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Radix</title>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
 </head>
 <body>
+    @RenderBody()
+
+    <!--  NavBar Inicia    -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light  border-success " style="background-color: #43a047">
+
+        <div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand text-light ml-5" href="@Url.Action("Index", "Home")">Empresa @ViewBag.empresa</a>
+
+        </div>
 
 
+        <!-- Lado Derecho  -->
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto  ">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#" data-toggle="collapse" data-target="#notificar">Notificación</a>
+
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="nav-link  text-light" data-toggle="modal" data-target="#modal_cs" href="javascript:document.getElementById('logoutForm').submit()">
+
+                            <i class="fa fa-fw fa-sign-out"></i>Cerrar Sesión
+                        </a>
+                    }
+                </li>
+
+            </ul>
+
+        </div>
+
+
+    </nav>
+
+    <!--  NavBar Finaliza    -->
+    <!--  Modal Cerrar sesion-->
+
+    <div class="modal fade" id="modal_cs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Quieres cerrar tu sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">¿Estas seguro de cerrar tu sesión?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <a class="btn btn-primary" href="javascript:document.getElementById('logoutForm').submit()">Si.Cerrar Sesión</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Finaliza MOdal Cerrar Sesion-->
+    <!--  Lista Notificacion    -->
+
+    <div style="left: 780px;top: 60px;width: 400px;height: 400px; position: absolute;">
+        <ul class="nav flex-column collapse" id="notificar">
+            <li class="nav-item list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small>Donec id elit non mi porta.</small>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small class="text-muted">3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small class="text-muted">Donec id elit non mi porta.</small>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small class="text-muted">3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small class="text-muted">Donec id elit non mi porta.</small>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--  Lista notificacion Finaliza   -->
 
     
 
+        <!--   Lista Vertical-->
+    <div  class="row" style="margin-top: 4%;max-width:100%;">
+        <div class="lista_scroll col-sm-12 col-md-3 col-lg-3" style="background-color: #263238;height: 100vh;">
+
+            <ul class="nav flex-column ml-2 mr-2 mt-2 mb-2 text-center" style="background-color: #263238">
+                <li class="nav-item border-top border-left border-right border-secondary rounded-top">
+                    <a class="nav-link text-light font-weight-bold" href="@Url.Action("Index", "subempresas")">
+                        <span class="nav-link-text">Ver Todas Sucursales</span>
+                    </a>
+                </li>
+                <li class="nav-item border-top border-bottom border-left border-right border-secondary">
+                    <a class="nav-link text-light font-weight-bold" href="#" data-toggle="collapse" data-target="#listaSucursal">
+                        <span class="nav-link-text">Mis Sucursales</span>
+                    </a>
+                    <ul class="nav flex-column collapse border-top border-bottom border-left border-right border-secondary" id="listaSucursal"
+                        style="background-color: #9e9e9e;">
+                        <li class="nav-item border-bottom border-secondary">
+                            <a class="nav-link text-light" href="#"> Hola</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item border-top border-bottom border-left border-right border-secondary">
+                    <a class="nav-link text-light font-weight-bold" href="#">Link</a>
+                </li>
+                <li class="nav-item border border-secondary">
+                    <a class="nav-link text-light font-weight-bold" href="#">Link</a>
+                </li>
+                <li class="nav-item border-top border-bottom border-left border-right border-secondary rounded-bottom">
+                    <a class="nav-link text-light font-weight-bold disabled " href="#">Disabled</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!--  Finaliza Lista Vertical-->
+       
+        <!--  Vista de listas-->
+        <div id="contenido_general" class="col-sm-12 col-md-9 col-lg-9">
+
+        </div>
+
+    </div>
 
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+        <style>
+            .lista_scroll {
+                overflow-y: scroll;
+            }
+        </style>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <script>
+
+            $(document).ready(function () {
+
+                Cargar();
+
+
+        });
+
+            function Cargar() {
+
+                $.ajax({
+                    url: '@Url.Action("ObtenerSubEmpresa","Home")',
+                    dataType: 'json',
+                    data: {},
+                    success: function (data) {
+                        var $lista;
+                        $.each(data, function (i, item) {
+
+
+                            var row = '<li class="nav-item border-bottom border-secondary"><a class="nav-link text-light" id="link' + item.SubEmp+' "  href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
+                            //var row = '<li><a class="li_subemp" id="' + item.SubEmp + '" href="#">' + item.Nombre + '</a></li>';
+                            row = row.replace("SubEmp", item.SubEmp);
+
+                            $('#listaSucursal').append(row);
+
+                        });
+
+                    }
+                });
+
+       }
+
+        </script>
+
+        @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.empresa_cargo>
+
+@{
+    ViewBag.Title = "ListaPlantilla";
+}
+<div class="content-wrapper">
+    <div class="container-fluid">
+
+        <div class="container mt-sm-5 m-md-5">
+
+            <div class="col-sm-12 col-md-12">
+                <div class="row">
+                    <div class="border-success mt-3 mb-3 col-sm-2 col-md-2 ">
+                        <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiPlan">Nueva Plantilla</a>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.planillascontratos.PC_Nom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.planillascontratos.PC_Ext)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model=>model.cargos.Car_Nom)
+                    </th>
+                    <th>
+                        Descargar
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.planillascontratos.PC_Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.planillascontratos.PC_Ext)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem=> item.cargos.Car_Nom)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Descargar Docx", "DescargarDocx", "Planillascontratos", new { id = item.PC_Id })  |
+                            @Html.ActionLink("Descargar Pdf", "DescargarPdf", "Planillascontratos", new { id = item.PC_Id })
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="MiPlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm("Index", "Contratos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            @Html.AntiForgeryToken()
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva Plantilla</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Contenido del centro-->
+                <div class="modal-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                    @Html.Hidden("Con_id")
+
+                    <div class="form-group">
+                        @Html.Label("Plantilla")
+                        @Html.Editor("Doc_Nom", new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.Editor("PC_Nom", new { htmlAttributes = new { @class = "form-control" } })*@
+
+
+                    </div>
+
+                    <div class="input-group">
+                        Estado
+                        <div class="col-md-10">
+                            <input type="file" name="plantilla" />
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
