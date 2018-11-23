@@ -87,7 +87,26 @@
           <Property Name="Per_Rut" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="Con_FechaInicio" Type="nvarchar" MaxLength="10" />
           <Property Name="Con_FechaFin" Type="nvarchar" MaxLength="10" />
-          <Property Name="Con_Estado" Type="binary" MaxLength="1" />
+          <Property Name="Con_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Cosechas">
+          <Key>
+            <PropertyRef Name="cosec_id" />
+          </Key>
+          <Property Name="cosec_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cosec_fecha" Type="varchar" MaxLength="10" />
+          <Property Name="Con_Id" Type="int" />
+          <Property Name="cosec_preciodia" Type="int" />
+          <Property Name="tc_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Cuarteles">
+          <Key>
+            <PropertyRef Name="cuar_id" />
+          </Key>
+          <Property Name="cuar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cuar_nom" Type="varchar" MaxLength="20" />
+          <Property Name="frut_id" Type="int" />
+          <Property Name="sect_id" Type="int" />
         </EntityType>
         <EntityType Name="CuentasAndroid">
           <Key>
@@ -158,12 +177,28 @@
           <Property Name="Cos_Id" Type="nvarchar" MaxLength="20" />
           <Property Name="FAsi_Fecha" Type="date" />
         </EntityType>
+        <EntityType Name="Frutas">
+          <Key>
+            <PropertyRef Name="frut_id" />
+          </Key>
+          <Property Name="frut_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="frut_nom" Type="varchar" MaxLength="30" />
+          <Property Name="var_id" Type="int" />
+        </EntityType>
         <EntityType Name="generos">
           <Key>
             <PropertyRef Name="Gen_Id" />
           </Key>
           <Property Name="Gen_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gen_Nom" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="GruposCuarteles">
+          <Key>
+            <PropertyRef Name="gc_id" />
+          </Key>
+          <Property Name="gc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cuar_id" Type="int" />
+          <Property Name="Con_id" Type="int" />
         </EntityType>
         <EntityType Name="horario_laboral">
           <Key>
@@ -251,6 +286,14 @@
           <Property Name="Reg_Nom" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Reg_NomOrig" Type="nvarchar" MaxLength="8" Nullable="false" />
         </EntityType>
+        <EntityType Name="Sectores">
+          <Key>
+            <PropertyRef Name="sect_id" />
+          </Key>
+          <Property Name="sect_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sect_nom" Type="varchar" MaxLength="30" />
+          <Property Name="Sub_Id" Type="int" />
+        </EntityType>
         <EntityType Name="subempresa_cargo">
           <Key>
             <PropertyRef Name="Subempcar_id" />
@@ -270,6 +313,13 @@
           <Property Name="Sub_Estado" Type="nvarchar" MaxLength="20" />
           <Property Name="Sub_Dir" Type="nvarchar" MaxLength="100" />
           <Property Name="Com_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCosechas">
+          <Key>
+            <PropertyRef Name="tc_id" />
+          </Key>
+          <Property Name="tc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tc_nom" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="tipoformaspago">
           <Key>
@@ -323,6 +373,13 @@
           </Key>
           <Property Name="TPer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TPer_Nom" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Variedades">
+          <Key>
+            <PropertyRef Name="var_id" />
+          </Key>
+          <Property Name="var_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="var_nom" Type="varchar" MaxLength="20" />
         </EntityType>
         <Association Name="asistencias$asis_contrato">
           <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
@@ -496,6 +553,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cosechas_contratos">
+          <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
+          <End Role="Cosechas" Type="Self.Cosechas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="Cosechas">
+              <PropertyRef Name="Con_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cosechas_TipoCosechas">
+          <End Role="TipoCosechas" Type="Self.TipoCosechas" Multiplicity="0..1" />
+          <End Role="Cosechas" Type="Self.Cosechas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCosechas">
+              <PropertyRef Name="tc_id" />
+            </Principal>
+            <Dependent Role="Cosechas">
+              <PropertyRef Name="tc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuarteles_Frutas1">
+          <End Role="Frutas" Type="Self.Frutas" Multiplicity="0..1" />
+          <End Role="Cuarteles" Type="Self.Cuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frutas">
+              <PropertyRef Name="frut_id" />
+            </Principal>
+            <Dependent Role="Cuarteles">
+              <PropertyRef Name="frut_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuarteles_Sectores1">
+          <End Role="Sectores" Type="Self.Sectores" Multiplicity="0..1" />
+          <End Role="Cuarteles" Type="Self.Cuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectores">
+              <PropertyRef Name="sect_id" />
+            </Principal>
+            <Dependent Role="Cuarteles">
+              <PropertyRef Name="sect_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -524,6 +629,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Frutas_Variedades">
+          <End Role="Variedades" Type="Self.Variedades" Multiplicity="0..1" />
+          <End Role="Frutas" Type="Self.Frutas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variedades">
+              <PropertyRef Name="var_id" />
+            </Principal>
+            <Dependent Role="Frutas">
+              <PropertyRef Name="var_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposCuarteles_contratos">
+          <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
+          <End Role="GruposCuarteles" Type="Self.GruposCuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="GruposCuarteles">
+              <PropertyRef Name="Con_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposCuarteles_Cuarteles">
+          <End Role="Cuarteles" Type="Self.Cuarteles" Multiplicity="0..1" />
+          <End Role="GruposCuarteles" Type="Self.GruposCuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuarteles">
+              <PropertyRef Name="cuar_id" />
+            </Principal>
+            <Dependent Role="GruposCuarteles">
+              <PropertyRef Name="cuar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_horario_laboral_subempresa_cargo">
           <End Role="subempresa_cargo" Type="Self.subempresa_cargo" Multiplicity="0..1" />
           <End Role="horario_laboral" Type="Self.horario_laboral" Multiplicity="*" />
@@ -545,6 +686,18 @@
             </Principal>
             <Dependent Role="login">
               <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sectores_subempresas">
+          <End Role="subempresas" Type="Self.subempresas" Multiplicity="0..1" />
+          <End Role="Sectores" Type="Self.Sectores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="Sectores">
+              <PropertyRef Name="Sub_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -790,6 +943,8 @@
           <EntitySet Name="cargos" EntityType="Self.cargos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comunas" EntityType="Self.comunas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contratos" EntityType="Self.contratos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cosechas" EntityType="Self.Cosechas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuarteles" EntityType="Self.Cuarteles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasAndroid" EntityType="Self.CuentasAndroid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="documentos" EntityType="Self.documentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="empresa_cargo" EntityType="Self.empresa_cargo" Schema="dbo" store:Type="Tables" />
@@ -797,7 +952,9 @@
           <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Frutas" EntityType="Self.Frutas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="generos" EntityType="Self.generos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GruposCuarteles" EntityType="Self.GruposCuarteles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="horario_laboral" EntityType="Self.horario_laboral" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" Schema="dbo" store:Type="Tables" />
@@ -806,8 +963,10 @@
           <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="provincias" EntityType="Self.provincias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="regiones" EntityType="Self.regiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subempresa_cargo" EntityType="Self.subempresa_cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subempresas" EntityType="Self.subempresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCosechas" EntityType="Self.TipoCosechas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipoformaspago" EntityType="Self.tipoformaspago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipoimpuestos" EntityType="Self.tipoimpuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tiposcontratos" EntityType="Self.tiposcontratos" Schema="dbo" store:Type="Tables" />
@@ -815,6 +974,7 @@
           <EntitySet Name="tiposdescuentos" EntityType="Self.tiposdescuentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tiposhorasextras" EntityType="Self.tiposhorasextras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tiposperiodos" EntityType="Self.tiposperiodos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Variedades" EntityType="Self.Variedades" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="asistencias$asis_contrato" Association="Self.asistencias$asis_contrato">
             <End Role="contratos" EntitySet="contratos" />
             <End Role="asistencias" EntitySet="asistencias" />
@@ -867,6 +1027,22 @@
             <End Role="tiposdescuentos" EntitySet="tiposdescuentos" />
             <End Role="fichadescuentos" EntitySet="fichadescuentos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cosechas_contratos" Association="Self.FK_Cosechas_contratos">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="Cosechas" EntitySet="Cosechas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cosechas_TipoCosechas" Association="Self.FK_Cosechas_TipoCosechas">
+            <End Role="TipoCosechas" EntitySet="TipoCosechas" />
+            <End Role="Cosechas" EntitySet="Cosechas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuarteles_Frutas1" Association="Self.FK_Cuarteles_Frutas1">
+            <End Role="Frutas" EntitySet="Frutas" />
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuarteles_Sectores1" Association="Self.FK_Cuarteles_Sectores1">
+            <End Role="Sectores" EntitySet="Sectores" />
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -875,6 +1051,18 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Frutas_Variedades" Association="Self.FK_Frutas_Variedades">
+            <End Role="Variedades" EntitySet="Variedades" />
+            <End Role="Frutas" EntitySet="Frutas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposCuarteles_contratos" Association="Self.FK_GruposCuarteles_contratos">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposCuarteles_Cuarteles" Association="Self.FK_GruposCuarteles_Cuarteles">
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
+          </AssociationSet>
           <AssociationSet Name="FK_horario_laboral_subempresa_cargo" Association="Self.FK_horario_laboral_subempresa_cargo">
             <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
             <End Role="horario_laboral" EntitySet="horario_laboral" />
@@ -882,6 +1070,10 @@
           <AssociationSet Name="FK_login_AspNetUsers" Association="Self.FK_login_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sectores_subempresas" Association="Self.FK_Sectores_subempresas">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="Sectores" EntitySet="Sectores" />
           </AssociationSet>
           <AssociationSet Name="login$fk_Login_Empresa1" Association="Self.login$fk_Login_Empresa1">
             <End Role="empresas" EntitySet="empresas" />
@@ -1161,6 +1353,7 @@
           <NavigationProperty Name="empresas" Relationship="Self.subempresas_FK_subempresas_empresas" FromRole="subempresas" ToRole="empresas" />
           <NavigationProperty Name="subempresa_cargo" Relationship="Self.subempresa_cargo_subempresa_cargo" FromRole="subempresas" ToRole="subempresa_cargo" />
           <NavigationProperty Name="contratos" Relationship="radixModel.contratos_FK_contratos_subempresas" FromRole="subempresas" ToRole="contratos" />
+          <NavigationProperty Name="Sectores" Relationship="radixModel.FK_Sectores_subempresas" FromRole="subempresas" ToRole="Sectores" />
         </EntityType>
         <EntityType Name="tipoformaspago">
           <Key>
@@ -1575,7 +1768,21 @@
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
             <End Role="personas" EntitySet="personas" />
           </AssociationSet>
+          <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
+          <AssociationSet Name="FK_horario_laboral_subempresa_cargo" Association="radixModel.FK_horario_laboral_subempresa_cargo">
+            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+          </AssociationSet>
+          <EntitySet Name="asistencias" EntityType="radixModel.asistencias" />
+          <AssociationSet Name="asistencias_asis_horario" Association="radixModel.asistencias_asis_horario">
+            <End Role="horario_laboral" EntitySet="horario_laboral" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
           <EntitySet Name="contratos" EntityType="radixModel.contratos" />
+          <AssociationSet Name="asistencias_asis_contrato" Association="radixModel.asistencias_asis_contrato">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="asistencias" EntitySet="asistencias" />
+          </AssociationSet>
           <AssociationSet Name="contratos_FK_contratos_Documentos" Association="radixModel.contratos_FK_contratos_Documentos">
             <End Role="documentos" EntitySet="documentos" />
             <End Role="contratos" EntitySet="contratos" />
@@ -1592,19 +1799,44 @@
             <End Role="tiposcontratos" EntitySet="tiposcontratos" />
             <End Role="contratos" EntitySet="contratos" />
           </AssociationSet>
-          <EntitySet Name="horario_laboral" EntityType="radixModel.horario_laboral" />
-          <AssociationSet Name="FK_horario_laboral_subempresa_cargo" Association="radixModel.FK_horario_laboral_subempresa_cargo">
-            <End Role="subempresa_cargo" EntitySet="subempresa_cargo" />
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
-          </AssociationSet>
-          <EntitySet Name="asistencias" EntityType="radixModel.asistencias" />
-          <AssociationSet Name="asistencias_asis_contrato" Association="radixModel.asistencias_asis_contrato">
+          <EntitySet Name="Cosechas" EntityType="radixModel.Cosechas" />
+          <EntitySet Name="Cuarteles" EntityType="radixModel.Cuarteles" />
+          <EntitySet Name="Frutas" EntityType="radixModel.Frutas" />
+          <EntitySet Name="GruposCuarteles" EntityType="radixModel.GruposCuarteles" />
+          <EntitySet Name="Sectores" EntityType="radixModel.Sectores" />
+          <EntitySet Name="TipoCosechas" EntityType="radixModel.TipoCosechas" />
+          <EntitySet Name="Variedades" EntityType="radixModel.Variedades" />
+          <AssociationSet Name="FK_Cosechas_contratos" Association="radixModel.FK_Cosechas_contratos">
             <End Role="contratos" EntitySet="contratos" />
-            <End Role="asistencias" EntitySet="asistencias" />
+            <End Role="Cosechas" EntitySet="Cosechas" />
           </AssociationSet>
-          <AssociationSet Name="asistencias_asis_horario" Association="radixModel.asistencias_asis_horario">
-            <End Role="horario_laboral" EntitySet="horario_laboral" />
-            <End Role="asistencias" EntitySet="asistencias" />
+          <AssociationSet Name="FK_GruposCuarteles_contratos" Association="radixModel.FK_GruposCuarteles_contratos">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cosechas_TipoCosechas" Association="radixModel.FK_Cosechas_TipoCosechas">
+            <End Role="TipoCosechas" EntitySet="TipoCosechas" />
+            <End Role="Cosechas" EntitySet="Cosechas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuarteles_Frutas1" Association="radixModel.FK_Cuarteles_Frutas1">
+            <End Role="Frutas" EntitySet="Frutas" />
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuarteles_Sectores1" Association="radixModel.FK_Cuarteles_Sectores1">
+            <End Role="Sectores" EntitySet="Sectores" />
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposCuarteles_Cuarteles" Association="radixModel.FK_GruposCuarteles_Cuarteles">
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Frutas_Variedades" Association="radixModel.FK_Frutas_Variedades">
+            <End Role="Variedades" EntitySet="Variedades" />
+            <End Role="Frutas" EntitySet="Frutas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sectores_subempresas" Association="radixModel.FK_Sectores_subempresas">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="Sectores" EntitySet="Sectores" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUserRoles">
@@ -1835,6 +2067,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="horario_laboral">
+          <Key>
+            <PropertyRef Name="Hl_Id" />
+          </Key>
+          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_Inicio" Type="DateTime" Precision="3" />
+          <Property Name="Hl_Termino" Type="DateTime" Precision="3" />
+          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Hl_TodoDia" Type="Boolean" />
+          <Property Name="Subempcar_id" Type="Int32" />
+          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.FK_horario_laboral_subempresa_cargo" FromRole="horario_laboral" ToRole="subempresa_cargo" />
+          <NavigationProperty Name="asistencias" Relationship="radixModel.asistencias_asis_horario" FromRole="horario_laboral" ToRole="asistencias" />
+        </EntityType>
+        <Association Name="FK_horario_laboral_subempresa_cargo">
+          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="0..1" />
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresa_cargo">
+              <PropertyRef Name="Subempcar_id" />
+            </Principal>
+            <Dependent Role="horario_laboral">
+              <PropertyRef Name="Subempcar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="asistencias">
+          <Key>
+            <PropertyRef Name="asis_id" />
+          </Key>
+          <Property Name="asis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Con_Id" Type="Int32" />
+          <Property Name="Hl_Id" Type="Int32" />
+          <Property Name="asis_estado" Type="Boolean" />
+          <NavigationProperty Name="horario_laboral" Relationship="radixModel.asistencias_asis_horario" FromRole="asistencias" ToRole="horario_laboral" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.asistencias_asis_contrato" FromRole="asistencias" ToRole="contratos" />
+        </EntityType>
+        <Association Name="asistencias_asis_horario">
+          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="0..1" />
+          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario_laboral">
+              <PropertyRef Name="Hl_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Hl_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="contratos">
           <Key>
             <PropertyRef Name="Con_Id" />
@@ -1846,13 +2128,27 @@
           <Property Name="Per_Rut" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Con_FechaInicio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Con_FechaFin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Con_Estado" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="Con_Estado" Type="Boolean" />
+          <NavigationProperty Name="asistencias" Relationship="radixModel.asistencias_asis_contrato" FromRole="contratos" ToRole="asistencias" />
           <NavigationProperty Name="documentos" Relationship="radixModel.contratos_FK_contratos_Documentos" FromRole="contratos" ToRole="documentos" />
           <NavigationProperty Name="personas" Relationship="radixModel.contratos_fk_Contratos_Personas" FromRole="contratos" ToRole="personas" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.contratos_FK_contratos_subempresas" FromRole="contratos" ToRole="subempresas" />
           <NavigationProperty Name="tiposcontratos" Relationship="radixModel.contratos_fk_Contratos_TiposContratos1" FromRole="contratos" ToRole="tiposcontratos" />
-          <NavigationProperty Name="asistencias" Relationship="radixModel.asistencias_asis_contrato" FromRole="contratos" ToRole="asistencias" />
+          <NavigationProperty Name="Cosechas" Relationship="radixModel.FK_Cosechas_contratos" FromRole="contratos" ToRole="Cosechas" />
+          <NavigationProperty Name="GruposCuarteles" Relationship="radixModel.FK_GruposCuarteles_contratos" FromRole="contratos" ToRole="GruposCuarteles" />
         </EntityType>
+        <Association Name="asistencias_asis_contrato">
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
+          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="asistencias">
+              <PropertyRef Name="Con_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="contratos_FK_contratos_Documentos">
           <End Type="radixModel.documentos" Role="documentos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1909,65 +2205,169 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="horario_laboral">
+        <EntityType Name="Cosechas">
           <Key>
-            <PropertyRef Name="Hl_Id" />
+            <PropertyRef Name="cosec_id" />
           </Key>
-          <Property Name="Hl_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Hl_Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Hl_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Hl_Inicio" Type="DateTime" Precision="3" />
-          <Property Name="Hl_Termino" Type="DateTime" Precision="3" />
-          <Property Name="Hl_ColorTema" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Hl_TodoDia" Type="Boolean" />
-          <Property Name="Subempcar_id" Type="Int32" />
-          <NavigationProperty Name="subempresa_cargo" Relationship="radixModel.FK_horario_laboral_subempresa_cargo" FromRole="horario_laboral" ToRole="subempresa_cargo" />
-          <NavigationProperty Name="asistencias" Relationship="radixModel.asistencias_asis_horario" FromRole="horario_laboral" ToRole="asistencias" />
-        </EntityType>
-        <Association Name="FK_horario_laboral_subempresa_cargo">
-          <End Type="radixModel.subempresa_cargo" Role="subempresa_cargo" Multiplicity="0..1" />
-          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subempresa_cargo">
-              <PropertyRef Name="Subempcar_id" />
-            </Principal>
-            <Dependent Role="horario_laboral">
-              <PropertyRef Name="Subempcar_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="asistencias">
-          <Key>
-            <PropertyRef Name="asis_id" />
-          </Key>
-          <Property Name="asis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cosec_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cosec_fecha" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Con_Id" Type="Int32" />
-          <Property Name="Hl_Id" Type="Int32" />
-          <Property Name="asis_estado" Type="Boolean" />
-          <NavigationProperty Name="contratos" Relationship="radixModel.asistencias_asis_contrato" FromRole="asistencias" ToRole="contratos" />
-          <NavigationProperty Name="horario_laboral" Relationship="radixModel.asistencias_asis_horario" FromRole="asistencias" ToRole="horario_laboral" />
+          <Property Name="cosec_preciodia" Type="Int32" />
+          <Property Name="tc_id" Type="Int32" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.FK_Cosechas_contratos" FromRole="Cosechas" ToRole="contratos" />
+          <NavigationProperty Name="TipoCosechas" Relationship="radixModel.FK_Cosechas_TipoCosechas" FromRole="Cosechas" ToRole="TipoCosechas" />
         </EntityType>
-        <Association Name="asistencias_asis_contrato">
+        <EntityType Name="Cuarteles">
+          <Key>
+            <PropertyRef Name="cuar_id" />
+          </Key>
+          <Property Name="cuar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cuar_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="frut_id" Type="Int32" />
+          <Property Name="sect_id" Type="Int32" />
+          <NavigationProperty Name="Frutas" Relationship="radixModel.FK_Cuarteles_Frutas1" FromRole="Cuarteles" ToRole="Frutas" />
+          <NavigationProperty Name="Sectores" Relationship="radixModel.FK_Cuarteles_Sectores1" FromRole="Cuarteles" ToRole="Sectores" />
+          <NavigationProperty Name="GruposCuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="Cuarteles" ToRole="GruposCuarteles" />
+        </EntityType>
+        <EntityType Name="Frutas">
+          <Key>
+            <PropertyRef Name="frut_id" />
+          </Key>
+          <Property Name="frut_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="frut_nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="var_id" Type="Int32" />
+          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_Cuarteles_Frutas1" FromRole="Frutas" ToRole="Cuarteles" />
+          <NavigationProperty Name="Variedades" Relationship="radixModel.FK_Frutas_Variedades" FromRole="Frutas" ToRole="Variedades" />
+        </EntityType>
+        <EntityType Name="GruposCuarteles">
+          <Key>
+            <PropertyRef Name="gc_id" />
+          </Key>
+          <Property Name="gc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cuar_id" Type="Int32" />
+          <Property Name="Con_id" Type="Int32" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.FK_GruposCuarteles_contratos" FromRole="GruposCuarteles" ToRole="contratos" />
+          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="GruposCuarteles" ToRole="Cuarteles" />
+        </EntityType>
+        <EntityType Name="Sectores">
+          <Key>
+            <PropertyRef Name="sect_id" />
+          </Key>
+          <Property Name="sect_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sect_nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Sub_Id" Type="Int32" />
+          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_Cuarteles_Sectores1" FromRole="Sectores" ToRole="Cuarteles" />
+          <NavigationProperty Name="subempresas" Relationship="radixModel.FK_Sectores_subempresas" FromRole="Sectores" ToRole="subempresas" />
+        </EntityType>
+        <EntityType Name="TipoCosechas">
+          <Key>
+            <PropertyRef Name="tc_id" />
+          </Key>
+          <Property Name="tc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tc_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cosechas" Relationship="radixModel.FK_Cosechas_TipoCosechas" FromRole="TipoCosechas" ToRole="Cosechas" />
+        </EntityType>
+        <EntityType Name="Variedades">
+          <Key>
+            <PropertyRef Name="var_id" />
+          </Key>
+          <Property Name="var_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="var_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Frutas" Relationship="radixModel.FK_Frutas_Variedades" FromRole="Variedades" ToRole="Frutas" />
+        </EntityType>
+        <Association Name="FK_Cosechas_contratos">
           <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
-          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+          <End Type="radixModel.Cosechas" Role="Cosechas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="contratos">
               <PropertyRef Name="Con_Id" />
             </Principal>
-            <Dependent Role="asistencias">
+            <Dependent Role="Cosechas">
               <PropertyRef Name="Con_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="asistencias_asis_horario">
-          <End Type="radixModel.horario_laboral" Role="horario_laboral" Multiplicity="0..1" />
-          <End Type="radixModel.asistencias" Role="asistencias" Multiplicity="*" />
+        <Association Name="FK_GruposCuarteles_contratos">
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
+          <End Type="radixModel.GruposCuarteles" Role="GruposCuarteles" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="horario_laboral">
-              <PropertyRef Name="Hl_Id" />
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
             </Principal>
-            <Dependent Role="asistencias">
-              <PropertyRef Name="Hl_Id" />
+            <Dependent Role="GruposCuarteles">
+              <PropertyRef Name="Con_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cosechas_TipoCosechas">
+          <End Type="radixModel.TipoCosechas" Role="TipoCosechas" Multiplicity="0..1" />
+          <End Type="radixModel.Cosechas" Role="Cosechas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCosechas">
+              <PropertyRef Name="tc_id" />
+            </Principal>
+            <Dependent Role="Cosechas">
+              <PropertyRef Name="tc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuarteles_Frutas1">
+          <End Type="radixModel.Frutas" Role="Frutas" Multiplicity="0..1" />
+          <End Type="radixModel.Cuarteles" Role="Cuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frutas">
+              <PropertyRef Name="frut_id" />
+            </Principal>
+            <Dependent Role="Cuarteles">
+              <PropertyRef Name="frut_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuarteles_Sectores1">
+          <End Type="radixModel.Sectores" Role="Sectores" Multiplicity="0..1" />
+          <End Type="radixModel.Cuarteles" Role="Cuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectores">
+              <PropertyRef Name="sect_id" />
+            </Principal>
+            <Dependent Role="Cuarteles">
+              <PropertyRef Name="sect_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposCuarteles_Cuarteles">
+          <End Type="radixModel.Cuarteles" Role="Cuarteles" Multiplicity="0..1" />
+          <End Type="radixModel.GruposCuarteles" Role="GruposCuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuarteles">
+              <PropertyRef Name="cuar_id" />
+            </Principal>
+            <Dependent Role="GruposCuarteles">
+              <PropertyRef Name="cuar_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Frutas_Variedades">
+          <End Type="radixModel.Variedades" Role="Variedades" Multiplicity="0..1" />
+          <End Type="radixModel.Frutas" Role="Frutas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variedades">
+              <PropertyRef Name="var_id" />
+            </Principal>
+            <Dependent Role="Frutas">
+              <PropertyRef Name="var_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sectores_subempresas">
+          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="0..1" />
+          <End Type="radixModel.Sectores" Role="Sectores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="Sectores">
+              <PropertyRef Name="Sub_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2291,20 +2691,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="contratos">
-            <EntityTypeMapping TypeName="radixModel.contratos">
-              <MappingFragment StoreEntitySet="contratos">
-                <ScalarProperty Name="Con_Estado" ColumnName="Con_Estado" />
-                <ScalarProperty Name="Con_FechaFin" ColumnName="Con_FechaFin" />
-                <ScalarProperty Name="Con_FechaInicio" ColumnName="Con_FechaInicio" />
-                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
-                <ScalarProperty Name="TCon_Id" ColumnName="TCon_Id" />
-                <ScalarProperty Name="Doc_Id" ColumnName="Doc_Id" />
-                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
-                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="horario_laboral">
             <EntityTypeMapping TypeName="radixModel.horario_laboral">
               <MappingFragment StoreEntitySet="horario_laboral">
@@ -2326,6 +2712,84 @@
                 <ScalarProperty Name="Hl_Id" ColumnName="Hl_Id" />
                 <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
                 <ScalarProperty Name="asis_id" ColumnName="asis_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contratos">
+            <EntityTypeMapping TypeName="radixModel.contratos">
+              <MappingFragment StoreEntitySet="contratos">
+                <ScalarProperty Name="Con_Estado" ColumnName="Con_Estado" />
+                <ScalarProperty Name="Con_FechaFin" ColumnName="Con_FechaFin" />
+                <ScalarProperty Name="Con_FechaInicio" ColumnName="Con_FechaInicio" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+                <ScalarProperty Name="TCon_Id" ColumnName="TCon_Id" />
+                <ScalarProperty Name="Doc_Id" ColumnName="Doc_Id" />
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cosechas">
+            <EntityTypeMapping TypeName="radixModel.Cosechas">
+              <MappingFragment StoreEntitySet="Cosechas">
+                <ScalarProperty Name="tc_id" ColumnName="tc_id" />
+                <ScalarProperty Name="cosec_preciodia" ColumnName="cosec_preciodia" />
+                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+                <ScalarProperty Name="cosec_fecha" ColumnName="cosec_fecha" />
+                <ScalarProperty Name="cosec_id" ColumnName="cosec_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuarteles">
+            <EntityTypeMapping TypeName="radixModel.Cuarteles">
+              <MappingFragment StoreEntitySet="Cuarteles">
+                <ScalarProperty Name="sect_id" ColumnName="sect_id" />
+                <ScalarProperty Name="frut_id" ColumnName="frut_id" />
+                <ScalarProperty Name="cuar_nom" ColumnName="cuar_nom" />
+                <ScalarProperty Name="cuar_id" ColumnName="cuar_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Frutas">
+            <EntityTypeMapping TypeName="radixModel.Frutas">
+              <MappingFragment StoreEntitySet="Frutas">
+                <ScalarProperty Name="var_id" ColumnName="var_id" />
+                <ScalarProperty Name="frut_nom" ColumnName="frut_nom" />
+                <ScalarProperty Name="frut_id" ColumnName="frut_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GruposCuarteles">
+            <EntityTypeMapping TypeName="radixModel.GruposCuarteles">
+              <MappingFragment StoreEntitySet="GruposCuarteles">
+                <ScalarProperty Name="Con_id" ColumnName="Con_id" />
+                <ScalarProperty Name="cuar_id" ColumnName="cuar_id" />
+                <ScalarProperty Name="gc_id" ColumnName="gc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectores">
+            <EntityTypeMapping TypeName="radixModel.Sectores">
+              <MappingFragment StoreEntitySet="Sectores">
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="sect_nom" ColumnName="sect_nom" />
+                <ScalarProperty Name="sect_id" ColumnName="sect_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCosechas">
+            <EntityTypeMapping TypeName="radixModel.TipoCosechas">
+              <MappingFragment StoreEntitySet="TipoCosechas">
+                <ScalarProperty Name="tc_nom" ColumnName="tc_nom" />
+                <ScalarProperty Name="tc_id" ColumnName="tc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Variedades">
+            <EntityTypeMapping TypeName="radixModel.Variedades">
+              <MappingFragment StoreEntitySet="Variedades">
+                <ScalarProperty Name="var_nom" ColumnName="var_nom" />
+                <ScalarProperty Name="var_id" ColumnName="var_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

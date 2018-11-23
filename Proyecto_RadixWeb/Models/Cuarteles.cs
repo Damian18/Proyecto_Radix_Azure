@@ -12,21 +12,22 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class documentos
+    public partial class Cuarteles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public documentos()
+        public Cuarteles()
         {
-            this.contratos = new HashSet<contratos>();
+            this.GruposCuarteles = new HashSet<GruposCuarteles>();
         }
     
-        public int Doc_Id { get; set; }
-        public string Doc_Nom { get; set; }
-        public string Doc_Ext { get; set; }
-        public byte[] Doc_Binario { get; set; }
-        public int Con_Id { get; set; }
-
+        public int cuar_id { get; set; }
+        public string cuar_nom { get; set; }
+        public Nullable<int> frut_id { get; set; }
+        public Nullable<int> sect_id { get; set; }
+    
+        public virtual Frutas Frutas { get; set; }
+        public virtual Sectores Sectores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<contratos> contratos { get; set; }
+        public virtual ICollection<GruposCuarteles> GruposCuarteles { get; set; }
     }
 }

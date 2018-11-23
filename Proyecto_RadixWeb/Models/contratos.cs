@@ -18,6 +18,8 @@ namespace Proyecto_RadixWeb.Models
         public contratos()
         {
             this.asistencias = new HashSet<asistencias>();
+            this.Cosechas = new HashSet<Cosechas>();
+            this.GruposCuarteles = new HashSet<GruposCuarteles>();
         }
     
         public int Con_Id { get; set; }
@@ -27,13 +29,17 @@ namespace Proyecto_RadixWeb.Models
         public string Per_Rut { get; set; }
         public string Con_FechaInicio { get; set; }
         public string Con_FechaFin { get; set; }
-        public byte[] Con_Estado { get; set; }
+        public Nullable<bool> Con_Estado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<asistencias> asistencias { get; set; }
         public virtual documentos documentos { get; set; }
         public virtual personas personas { get; set; }
         public virtual subempresas subempresas { get; set; }
         public virtual tiposcontratos tiposcontratos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<asistencias> asistencias { get; set; }
+        public virtual ICollection<Cosechas> Cosechas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GruposCuarteles> GruposCuarteles { get; set; }
     }
 }

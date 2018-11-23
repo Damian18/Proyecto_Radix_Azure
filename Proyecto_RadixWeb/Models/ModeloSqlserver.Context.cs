@@ -56,8 +56,15 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<CuentasAndroid> CuentasAndroid { get; set; }
         public virtual DbSet<personas> personas { get; set; }
-        public virtual DbSet<contratos> contratos { get; set; }
         public virtual DbSet<horario_laboral> horario_laboral { get; set; }
         public virtual DbSet<asistencias> asistencias { get; set; }
+        public virtual DbSet<contratos> contratos { get; set; }
+        public virtual DbSet<Cosechas> Cosechas { get; set; }
+        public virtual DbSet<Cuarteles> Cuarteles { get; set; }
+        public virtual DbSet<Frutas> Frutas { get; set; }
+        public virtual DbSet<GruposCuarteles> GruposCuarteles { get; set; }
+        public virtual DbSet<Sectores> Sectores { get; set; }
+        public virtual DbSet<TipoCosechas> TipoCosechas { get; set; }
+        public virtual DbSet<Variedades> Variedades { get; set; }
     }
 }

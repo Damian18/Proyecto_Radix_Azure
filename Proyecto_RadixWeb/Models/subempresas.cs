@@ -19,6 +19,7 @@ namespace Proyecto_RadixWeb.Models
         {
             this.subempresa_cargo = new HashSet<subempresa_cargo>();
             this.contratos = new HashSet<contratos>();
+            this.Sectores = new HashSet<Sectores>();
         }
     
         public int Sub_Id { get; set; }
@@ -35,5 +36,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual ICollection<subempresa_cargo> subempresa_cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contratos> contratos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sectores> Sectores { get; set; }
     }
 }

@@ -180,21 +180,40 @@ body {
     background: #0000008e;
 }
 
-    #menu1 li.active {
+    /*#menu1  li.active {
         border-bottom: 2px solid #0b9706;
-        ;
-    }
+        
+    }*/
 
-.nav-item::after {
+
+#navbarSupportedContent #btn.active {
+    border-bottom: 2px solid #0b9706;
+}
+
+#navbarSupportedContent #btn:hover {
+    border-bottom: 0px solid #0b9706;
+}
+
+
+
+/*.nav-item::after {
     content: '';
     display: block;
     width: 0px;
     height: 2px;
     background: #0b9706;
     transition: 0.2s;
-}
+    border-bottom: 2px solid #0b9706;
+}*/
 
 .nav-item:hover::after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 2px;
+    background: #0b9706;
+    transition: 0.2s;
+    border-bottom: 2px solid #0b9706;
     width: 100%;
 }
 

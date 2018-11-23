@@ -275,6 +275,12 @@
     <Compile Include="Models\contratos.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cosechas.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cuarteles.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CuentasAndroid.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
@@ -296,7 +302,13 @@
     <Compile Include="Models\fichasasistencias.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Frutas.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\generos.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GruposCuarteles.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\horario_laboral.cs">
@@ -343,10 +355,16 @@
     <Compile Include="Models\regiones.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sectores.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\subempresas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\subempresa_cargo.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoCosechas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipoformaspago.cs">
@@ -368,6 +386,9 @@
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tiposperiodos.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Variedades.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -480,6 +501,7 @@
     <Content Include="PaginaDashB\vendor.js" />
     <Content Include="PaginaHome\css\base.css" />
     <Content Include="PaginaHome\css\fonts.css" />
+    <Content Include="PaginaHome\css\home.css" />
     <Content Include="PaginaHome\css\ionicons\css\ionicons.css" />
     <Content Include="PaginaHome\css\ionicons\css\ionicons.min.css" />
     <Content Include="PaginaHome\css\ionicons\fonts\ionicons.svg" />

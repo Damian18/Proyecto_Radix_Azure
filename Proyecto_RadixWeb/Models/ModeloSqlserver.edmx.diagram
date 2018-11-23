@@ -63,16 +63,31 @@
         <AssociationConnector Association="radixModel.personas_fk_personas_nac" />
         <AssociationConnector Association="radixModel.personas_fk_personas_thora" />
         <AssociationConnector Association="radixModel.personas_fk_personas_tipoimpuesto" />
+        <EntityTypeShape EntityType="radixModel.horario_laboral" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="radixModel.FK_horario_laboral_subempresa_cargo" />
+        <EntityTypeShape EntityType="radixModel.asistencias" Width="1.5" PointX="10.5" PointY="3.25" />
+        <AssociationConnector Association="radixModel.asistencias_asis_horario" />
         <EntityTypeShape EntityType="radixModel.contratos" Width="1.5" PointX="8.25" PointY="10.5" />
+        <AssociationConnector Association="radixModel.asistencias_asis_contrato" />
         <AssociationConnector Association="radixModel.contratos_FK_contratos_Documentos" />
         <AssociationConnector Association="radixModel.contratos_fk_Contratos_Personas" />
         <AssociationConnector Association="radixModel.contratos_FK_contratos_subempresas" />
         <AssociationConnector Association="radixModel.contratos_fk_Contratos_TiposContratos1" />
-        <EntityTypeShape EntityType="radixModel.horario_laboral" Width="1.5" PointX="5.25" PointY="0.75" />
-        <AssociationConnector Association="radixModel.FK_horario_laboral_subempresa_cargo" />
-        <EntityTypeShape EntityType="radixModel.asistencias" Width="1.5" PointX="10.5" PointY="3.25" />
-        <AssociationConnector Association="radixModel.asistencias_asis_contrato" />
-        <AssociationConnector Association="radixModel.asistencias_asis_horario" />
+        <EntityTypeShape EntityType="radixModel.Cosechas" Width="1.5" PointX="14.5" PointY="15.25" />
+        <EntityTypeShape EntityType="radixModel.Cuarteles" Width="1.5" PointX="8.25" PointY="4.125" />
+        <EntityTypeShape EntityType="radixModel.Frutas" Width="1.5" PointX="6" PointY="34.25" />
+        <EntityTypeShape EntityType="radixModel.GruposCuarteles" Width="1.5" PointX="13.5" PointY="5.25" />
+        <EntityTypeShape EntityType="radixModel.Sectores" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="radixModel.TipoCosechas" Width="1.5" PointX="12.25" PointY="17.625" />
+        <EntityTypeShape EntityType="radixModel.Variedades" Width="1.5" PointX="3.75" PointY="34.5" />
+        <AssociationConnector Association="radixModel.FK_Cosechas_contratos" />
+        <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos" />
+        <AssociationConnector Association="radixModel.FK_Cosechas_TipoCosechas" />
+        <AssociationConnector Association="radixModel.FK_Cuarteles_Frutas1" />
+        <AssociationConnector Association="radixModel.FK_Cuarteles_Sectores1" />
+        <AssociationConnector Association="radixModel.FK_GruposCuarteles_Cuarteles" />
+        <AssociationConnector Association="radixModel.FK_Frutas_Variedades" />
+        <AssociationConnector Association="radixModel.FK_Sectores_subempresas" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

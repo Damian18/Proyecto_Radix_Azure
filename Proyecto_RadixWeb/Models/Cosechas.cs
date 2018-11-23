@@ -12,14 +12,15 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class asistencias
+    public partial class Cosechas
     {
-        public int asis_id { get; set; }
+        public int cosec_id { get; set; }
+        public string cosec_fecha { get; set; }
         public Nullable<int> Con_Id { get; set; }
-        public Nullable<int> Hl_Id { get; set; }
-        public Nullable<bool> asis_estado { get; set; }
+        public Nullable<int> cosec_preciodia { get; set; }
+        public Nullable<int> tc_id { get; set; }
     
-        public virtual horario_laboral horario_laboral { get; set; }
         public virtual contratos contratos { get; set; }
+        public virtual TipoCosechas TipoCosechas { get; set; }
     }
 }
