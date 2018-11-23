@@ -4,35 +4,29 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Radix</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+    @*<link href="~/PaginaDashB/tour/css/bootstrap-tour-standalone.min.css" rel="stylesheet" />*@
+    <link href="~/PaginaHome/tour2/css/hopscotch.css" rel="stylesheet" />
 
 </head>
 <body>
     @RenderBody()
-
     <!--  NavBar Inicia    -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-light  border-success " style="background-color: #43a047">
-
         <div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand text-light ml-5" href="@Url.Action("Index", "Home")">Empresa @ViewBag.empresa</a>
-
         </div>
 
-
         <!-- Lado Derecho  -->
-
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto  ">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto ">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#" data-toggle="collapse" data-target="#notificar">Notificación</a>
-
+                    <a id="paso2" class="nav-link text-light" href="#" data-toggle="collapse" data-target="#notificar">Notificación</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
@@ -40,28 +34,21 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="#">Link</a>
                 </li>
-                <li class="nav-item">
-
+                <li id="paso1" class="nav-item">
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                     {
                         @Html.AntiForgeryToken()
                         <a class="nav-link  text-light" data-toggle="modal" data-target="#modal_cs" href="javascript:document.getElementById('logoutForm').submit()">
-
                             <i class="fa fa-fw fa-sign-out"></i>Cerrar Sesión
                         </a>
                     }
                 </li>
-
             </ul>
-
         </div>
 
-
     </nav>
-
     <!--  NavBar Finaliza    -->
     <!--  Modal Cerrar sesion-->
-
     <div class="modal fade" id="modal_cs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -84,10 +71,8 @@
             </div>
         </div>
     </div>
-
     <!--  Finaliza MOdal Cerrar Sesion-->
     <!--  Lista Notificacion    -->
-
     <div style="left: 780px;top: 60px;width: 400px;height: 400px; position: absolute;">
         <ul class="nav flex-column collapse" id="notificar">
             <li class="nav-item list-group">
@@ -119,29 +104,24 @@
         </ul>
     </div>
     <!--  Lista notificacion Finaliza   -->
-
-    
-
-        <!--   Lista Vertical-->
-    <div  class="row" style="margin-top: 4%;max-width:100%;">
+    <!--   Lista Vertical-->
+    <div class="row " style="margin-top: 4%;max-width:100%;">
         <div class="lista_scroll col-sm-12 col-md-3 col-lg-3" style="background-color: #263238;height: 100vh;">
-
             <ul class="nav flex-column ml-2 mr-2 mt-2 mb-2 text-center" style="background-color: #263238">
                 <li class="nav-item border-top border-left border-right border-secondary rounded-top">
                     <a class="nav-link text-light font-weight-bold" href="@Url.Action("Index", "subempresas")">
-                        <span class="nav-link-text">Ver Todas Sucursales</span>
+                        <span class="nav-link-text" id="paso3">Ver Todas Sucursales</span>
                     </a>
                 </li>
                 <li class="nav-item border-top border-bottom border-left border-right border-secondary">
                     <a class="nav-link text-light font-weight-bold" href="#" data-toggle="collapse" data-target="#listaSucursal">
-                        <span class="nav-link-text">Mis Sucursales</span>
+                        <span class="nav-link-text" id="paso4">Mis Sucursales</span>
                     </a>
                     <ul class="nav flex-column collapse border-top border-bottom border-left border-right border-secondary" id="listaSucursal"
                         style="background-color: #9e9e9e;">
                         <li class="nav-item border-bottom border-secondary">
                             <a class="nav-link text-light" href="#"> Hola</a>
                         </li>
-
                     </ul>
                 </li>
                 <li class="nav-item border-top border-bottom border-left border-right border-secondary">
@@ -153,44 +133,40 @@
                 <li class="nav-item border-top border-bottom border-left border-right border-secondary rounded-bottom">
                     <a class="nav-link text-light font-weight-bold disabled " href="#">Disabled</a>
                 </li>
-
             </ul>
         </div>
-
         <!--  Finaliza Lista Vertical-->
-       
         <!--  Vista de listas-->
         <div id="contenido_general" class="col-sm-12 col-md-9 col-lg-9">
+            <hr />
+            <hr />
 
+            <button id="startTourBtn" class="btn btn-warning">INICAR</button>
         </div>
-
     </div>
 
+    <style>
 
-
-        <style>
-            .lista_scroll {
-                overflow-y: scroll;
-            }
-        </style>
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-        <script>
-
+        .lista_scroll {
+            overflow-y: scroll;
+        }
+    </style>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    @*<script src="~/PaginaDashB/tour/js/bootstrap-tour-standalone.min.js"></script>*@
+    <script src="~/PaginaHome/tour2/js/hopscotch.js"></script>
+    <script src="~/PaginaHome/tour2/js/my_first_tour.js"></script>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4893307.js"></script>
+    <!-- End of HubSpot Embed Code -->
+    <script>
             $(document).ready(function () {
-
                 Cargar();
-
-
         });
-
             function Cargar() {
-
                 $.ajax({
                     url: '@Url.Action("ObtenerSubEmpresa","Home")',
                     dataType: 'json',
@@ -198,23 +174,40 @@
                     success: function (data) {
                         var $lista;
                         $.each(data, function (i, item) {
-
-
                             var row = '<li class="nav-item border-bottom border-secondary"><a class="nav-link text-light" id="link' + item.SubEmp+' "  href="@Url.Action("Index", "Contratos",new { subemp_id = "SubEmp" })"> ' + item.Nombre + '</a> </li>';
                             //var row = '<li><a class="li_subemp" id="' + item.SubEmp + '" href="#">' + item.Nombre + '</a></li>';
                             row = row.replace("SubEmp", item.SubEmp);
-
                             $('#listaSucursal').append(row);
-
                         });
-
                     }
                 });
-
        }
-
-        </script>
-
-        @RenderSection("Scripts", required: false)
+    </script>
+    <script>
+        $(document).ready(function () {
+            var tour = new Tour({
+                steps: [
+                    {
+                        element: ".paso1",
+                        title: "Title of my step",
+                        content: "Content of my step"
+                    },
+                    {
+                        element: ".paso2",
+                        title: "Title of my step",
+                        content: "Content of my step",
+                    }
+                ],
+                backdrop: true,
+                backdropContainer: '.paso1',
+                backdropContainer: '.paso2',
+            });
+            // Initialize the tour
+            tour.init();
+            // Start the tour
+            tour.start();
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

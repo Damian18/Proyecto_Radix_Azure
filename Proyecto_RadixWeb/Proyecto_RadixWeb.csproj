@@ -541,6 +541,13 @@
     <Content Include="PaginaHome\js\modernizr.js" />
     <Content Include="PaginaHome\js\plugins.js" />
     <Content Include="PaginaHome\js\styles.html" />
+    <Content Include="PaginaHome\tour2\css\hopscotch.css" />
+    <Content Include="PaginaHome\tour2\css\hopscotch.min.css" />
+    <Content Include="PaginaHome\tour2\js\hopscotch.js" />
+    <Content Include="PaginaHome\tour2\js\hopscotch.min.js" />
+    <Content Include="PaginaHome\tour2\js\hopscotch_amd.js" />
+    <Content Include="PaginaHome\tour2\js\hopscotch_amd.min.js" />
+    <Content Include="PaginaHome\tour2\js\my_first_tour.js" />
     <Content Include="Scripts\dashboard\1.js" />
     <Content Include="Scripts\dashboard\2.js" />
     <Content Include="Scripts\dashboard\bootstrap.bundle.min.js" />

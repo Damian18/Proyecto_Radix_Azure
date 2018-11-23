@@ -8,10 +8,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
-    @*<link href="~/PaginaDashB/tour/css/bootstrap-tour-standalone.min.css" rel="stylesheet" />*@
-    @*   <link href="~/PaginaDashB/tour/bootstrap-tour.min.css" rel="stylesheet" />
-        <script src="~/PaginaDashB/tour/bootstrap.min.js"></script>
-    *@
+ 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
           crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -24,21 +21,15 @@
     <meta name="author" content="Damian Diaz-Michel Valenzuela">
     <link href="~/PaginaHome/css/home.css" rel="stylesheet" />
     <script>
-
         var scroll = new SmoothScroll('a[href*="#"]', {
             // Function. Custom easing pattern
             // If this is set to anything other than null, will override the easing option above
             customEasing: function (time) {
-
                 // return <your formulate with time as a multiplier>
-
                 // Example: easeInOut Quad
                 return time < 0.5 ? 2 * time * time : -1 + (4 - 2 * time) * time;
-
             }
         });
-
-
     </script>
 
 </head>
@@ -861,7 +852,7 @@
                         </a>
                         <p>Somos una empresa desarrolladora de plataformas orientadas a las pequeñas y medianas empresas agricolas.</p>
                         <!-- Rights-->
-                        <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Radix</span><span>. </span><span>Todos los derechos resevados.</span></p>
+                        <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Radix</span><span>. </span><span>Todos los derechos resevados.</span></p>
                     </div>
                 </div>
                 <div class="col-md-3 col-xl-3 col-sm-12">
@@ -908,7 +899,7 @@
         <a class="smoothscroll" title="Back to Top" href="#top"><i class="fas fa-chevron-circle-up"></i></a>
     </div>
     <!--fin footer-->
-
+ 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7"
             crossorigin="anonymous"></script>
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4893307.js"></script>
@@ -918,7 +909,6 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-    @*<script src="~/PaginaDashB/tour/js/bootstrap-tour-standalone.min.js"></script>*@
     <script>
         $(window).scroll(function () {
             if ($("#menu1").offset().top > 105) {
@@ -933,7 +923,6 @@
             if ($("#menu").offset().top > 56) {
                 $("#menu").addClass("bg-dark");
                 $("#menu1").addClass("bg-dark")
-
             } else {
                 $("#menu").removeClass("bg-dark");
                 $("#menu1").removeClass("bg-dark");
@@ -950,7 +939,6 @@
         $(window).scroll(function () {
             if ($("#menu1").offset().top > 120) {
                 $("#btn").removeClass("active");
-
             } else {
                 $("#btn").addClass("active");
             }
@@ -960,45 +948,12 @@
         $(document).ready(function () {
             $('.pass_show').append('<span class="ptxt">Mostrar</span>');
         });
-
-
         $(document).on('click', '.pass_show .ptxt', function () {
-
             $(this).text($(this).text() == "Mostrar" ? "Ocultar" : "Mostrar");
-
             $(this).prev().attr('type', function (index, attr) { return attr == 'password' ? 'text' : 'password'; });
-
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            var tour = new Tour({
-                steps: [
-                    {
-                        element: ".paso1",
-                        title: "Title of my step",
-                        content: "Content of my step"
 
-                    },
-                    {
-                        element: ".paso2",
-                        title: "Title of my step",
-                        content: "Content of my step",
-                    }
-                ],
-                backdrop: true,
-                backdropContainer: '.paso1',
-
-
-            });
-
-            // Initialize the tour
-            tour.init();
-
-            // Start the tour
-            tour.start();
-        });
-    </script>
 </body>
 
-</html >
+</html>
