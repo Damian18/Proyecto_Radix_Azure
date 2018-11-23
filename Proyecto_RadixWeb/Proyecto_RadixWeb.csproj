@@ -497,6 +497,18 @@
     <Content Include="PaginaDashB\all.css" />
     <Content Include="PaginaDashB\app.css" />
     <Content Include="PaginaDashB\app.js" />
+    <Content Include="PaginaDashB\tour\bootstrap-tour.min.css" />
+    <Content Include="PaginaDashB\tour\bootstrap-tour.min.js" />
+    <Content Include="PaginaDashB\tour\bootstrap.min.css" />
+    <Content Include="PaginaDashB\tour\bootstrap.min.js" />
+    <Content Include="PaginaDashB\tour\css\bootstrap-tour-standalone.css" />
+    <Content Include="PaginaDashB\tour\css\bootstrap-tour-standalone.min.css" />
+    <Content Include="PaginaDashB\tour\css\bootstrap-tour.css" />
+    <Content Include="PaginaDashB\tour\css\bootstrap-tour.min.css" />
+    <Content Include="PaginaDashB\tour\js\bootstrap-tour-standalone.js" />
+    <Content Include="PaginaDashB\tour\js\bootstrap-tour-standalone.min.js" />
+    <Content Include="PaginaDashB\tour\js\bootstrap-tour.js" />
+    <Content Include="PaginaDashB\tour\js\bootstrap-tour.min.js" />
     <Content Include="PaginaDashB\vendor.css" />
     <Content Include="PaginaDashB\vendor.js" />
     <Content Include="PaginaHome\css\base.css" />
@@ -550,6 +562,13 @@
     <Content Include="PaginaHome\js\modernizr.js" />
     <Content Include="PaginaHome\js\plugins.js" />
     <Content Include="PaginaHome\js\styles.html" />
+    <Content Include="PaginaHome\tour2\css\hopscotch.css" />
+    <Content Include="PaginaHome\tour2\css\hopscotch.min.css" />
+    <Content Include="PaginaHome\tour2\js\hopscotch.js" />
+    <Content Include="PaginaHome\tour2\js\hopscotch.min.js" />
+    <Content Include="PaginaHome\tour2\js\hopscotch_amd.js" />
+    <Content Include="PaginaHome\tour2\js\hopscotch_amd.min.js" />
+    <Content Include="PaginaHome\tour2\js\my_first_tour.js" />
     <Content Include="Scripts\dashboard\1.js" />
     <Content Include="Scripts\dashboard\2.js" />
     <Content Include="Scripts\dashboard\bootstrap.bundle.min.js" />
@@ -731,6 +750,7 @@
     <Content Include="PaginaHome\fonts\raleway\raleway-thin-webfont.woff" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
     <None Include="Properties\PublishProfiles\ProyectoRadixWeb - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
@@ -1066,6 +1086,8 @@
     <Content Include="Views\Shared\_LayoutEmpresa_v2.cshtml" />
     <Content Include="Views\SubEmpresas\ListaPlantilla.cshtml" />
     <Content Include="Views\Horario_laboral\HorarioTest.cshtml" />
+    <Content Include="Views\Home\indexguardado.cshtml" />
+    <Content Include="Views\Home\dash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

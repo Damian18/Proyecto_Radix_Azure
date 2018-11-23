@@ -1,4 +1,23 @@
-﻿/*separador*/
+﻿/*password*/
+.pass_show {
+    position: relative
+}
+
+    .pass_show .ptxt {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        z-index: 1;
+        color: #f36c01;
+        margin-top: -10px;
+        cursor: pointer;
+        transition: .3s ease all;
+    }
+
+        .pass_show .ptxt:hover {
+            color: #333333;
+        } 
+/*separador*/
 .sep {
     padding: 60px 0;
 }
@@ -144,7 +163,7 @@ body {
 #go-top {
     position: fixed;
     bottom: 0;
-    right: 0;
+    left: 2px;
     z-index: 600;
     display: none;
 }
@@ -169,6 +188,9 @@ body {
         -ms-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
     }
+        #go-top a:hover {
+            background: #e67e22;
+        }
 
         #go-top a i {
             font-size: 20px;
