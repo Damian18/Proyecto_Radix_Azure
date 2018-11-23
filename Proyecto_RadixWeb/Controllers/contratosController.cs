@@ -62,22 +62,31 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: contratos
         public ActionResult Index(int? subemp_id)
         {
-            ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
-
-            ViewBag.subemp_id = subemp_id;
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
-            ViewBag.EC_Id = new SelectList(db.estadosciviles, "EC_Id", "EC_Nom");
-            ViewBag.Gen_Id = new SelectList(db.generos, "Gen_Id", "Gen_Nom");
-            ViewBag.Nac_Id = new SelectList(db.nacionalidades, "Nac_Id", "Nac_Nom");
-
-
-
-            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
-            MultiplesClases multiple = new MultiplesClases
+            try
             {
-                ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id).ToList()
-            };
-            return View(multiple);
+                ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+                ViewBag.subemp_id = subemp_id;
+                ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+                ViewBag.EC_Id = new SelectList(db.estadosciviles, "EC_Id", "EC_Nom");
+                ViewBag.Gen_Id = new SelectList(db.generos, "Gen_Id", "Gen_Nom");
+                ViewBag.Nac_Id = new SelectList(db.nacionalidades, "Nac_Id", "Nac_Nom");
+
+
+
+                var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+                MultiplesClases multiple = new MultiplesClases
+                {
+                    ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id).ToList()
+                };
+                return View(multiple);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        
         }
 
         [HttpPost]

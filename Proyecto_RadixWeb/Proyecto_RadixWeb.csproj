@@ -497,6 +497,7 @@
     <Content Include="PaginaDashB\all.css" />
     <Content Include="PaginaDashB\app.css" />
     <Content Include="PaginaDashB\app.js" />
+    <Content Include="PaginaDashB\tablas\css\tablas.css" />
     <Content Include="PaginaDashB\tour\bootstrap-tour.min.css" />
     <Content Include="PaginaDashB\tour\bootstrap-tour.min.js" />
     <Content Include="PaginaDashB\tour\bootstrap.min.css" />
