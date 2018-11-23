@@ -45,7 +45,7 @@ namespace IdentitySample.Controllers
                         ViewBag.idcookie = "Usuario no activo";
                         HttpCookie cook = new HttpCookie("Cookie");
                         cook.Value = "Usuario Activo";
-                        cook.Expires = DateTime.Now.AddDays(7);
+                        cook.Expires = DateTime.Now.AddMonths(1);
                         Response.Cookies.Add(cook);
                     }
                     //esto es temporal hasta que se logre hacer funcional el dashboard de administrador
