@@ -105,7 +105,7 @@
           </Key>
           <Property Name="cuar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cuar_nom" Type="varchar" MaxLength="20" />
-          <Property Name="frut_id" Type="int" />
+          <Property Name="varfrut_id" Type="int" />
           <Property Name="sect_id" Type="int" />
         </EntityType>
         <EntityType Name="CuentasAndroid">
@@ -117,6 +117,14 @@
           <Property Name="ca_usuario" Type="varchar" MaxLength="50" />
           <Property Name="ca_password" Type="varchar" MaxLength="50" />
           <Property Name="ca_subempresa" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DetalleCosechas">
+          <Key>
+            <PropertyRef Name="dc_id" />
+          </Key>
+          <Property Name="dc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cosec_id" Type="int" />
+          <Property Name="dc_peso" Type="int" />
         </EntityType>
         <EntityType Name="documentos">
           <Key>
@@ -183,7 +191,6 @@
           </Key>
           <Property Name="frut_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="frut_nom" Type="varchar" MaxLength="30" />
-          <Property Name="var_id" Type="int" />
         </EntityType>
         <EntityType Name="generos">
           <Key>
@@ -199,6 +206,7 @@
           <Property Name="gc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cuar_id" Type="int" />
           <Property Name="Con_id" Type="int" />
+          <Property Name="ConJefe_id" Type="int" />
         </EntityType>
         <EntityType Name="horario_laboral">
           <Key>
@@ -374,12 +382,13 @@
           <Property Name="TPer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TPer_Nom" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <EntityType Name="Variedades">
+        <EntityType Name="VariedadesFrutas">
           <Key>
-            <PropertyRef Name="var_id" />
+            <PropertyRef Name="varfrut_id" />
           </Key>
-          <Property Name="var_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="varfrut_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="var_nom" Type="varchar" MaxLength="20" />
+          <Property Name="frut_id" Type="int" />
         </EntityType>
         <Association Name="asistencias$asis_contrato">
           <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
@@ -577,18 +586,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cuarteles_Frutas1">
-          <End Role="Frutas" Type="Self.Frutas" Multiplicity="0..1" />
-          <End Role="Cuarteles" Type="Self.Cuarteles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Frutas">
-              <PropertyRef Name="frut_id" />
-            </Principal>
-            <Dependent Role="Cuarteles">
-              <PropertyRef Name="frut_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cuarteles_Sectores1">
           <End Role="Sectores" Type="Self.Sectores" Multiplicity="0..1" />
           <End Role="Cuarteles" Type="Self.Cuarteles" Multiplicity="*" />
@@ -598,6 +595,18 @@
             </Principal>
             <Dependent Role="Cuarteles">
               <PropertyRef Name="sect_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuarteles_VariedadesFrutas">
+          <End Role="VariedadesFrutas" Type="Self.VariedadesFrutas" Multiplicity="0..1" />
+          <End Role="Cuarteles" Type="Self.Cuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VariedadesFrutas">
+              <PropertyRef Name="varfrut_id" />
+            </Principal>
+            <Dependent Role="Cuarteles">
+              <PropertyRef Name="varfrut_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -629,15 +638,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Frutas_Variedades">
-          <End Role="Variedades" Type="Self.Variedades" Multiplicity="0..1" />
-          <End Role="Frutas" Type="Self.Frutas" Multiplicity="*" />
+        <Association Name="FK_DetalleCosechas_Cosechas">
+          <End Role="Cosechas" Type="Self.Cosechas" Multiplicity="0..1" />
+          <End Role="DetalleCosechas" Type="Self.DetalleCosechas" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Variedades">
-              <PropertyRef Name="var_id" />
+            <Principal Role="Cosechas">
+              <PropertyRef Name="cosec_id" />
             </Principal>
-            <Dependent Role="Frutas">
-              <PropertyRef Name="var_id" />
+            <Dependent Role="DetalleCosechas">
+              <PropertyRef Name="cosec_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -650,6 +659,18 @@
             </Principal>
             <Dependent Role="GruposCuarteles">
               <PropertyRef Name="Con_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposCuarteles_contratos1">
+          <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
+          <End Role="GruposCuarteles" Type="Self.GruposCuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="GruposCuarteles">
+              <PropertyRef Name="ConJefe_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -698,6 +719,18 @@
             </Principal>
             <Dependent Role="Sectores">
               <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VariedadesFrutas_Frutas">
+          <End Role="Frutas" Type="Self.Frutas" Multiplicity="0..1" />
+          <End Role="VariedadesFrutas" Type="Self.VariedadesFrutas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frutas">
+              <PropertyRef Name="frut_id" />
+            </Principal>
+            <Dependent Role="VariedadesFrutas">
+              <PropertyRef Name="frut_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -946,6 +979,7 @@
           <EntitySet Name="Cosechas" EntityType="Self.Cosechas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuarteles" EntityType="Self.Cuarteles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasAndroid" EntityType="Self.CuentasAndroid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleCosechas" EntityType="Self.DetalleCosechas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="documentos" EntityType="Self.documentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="empresa_cargo" EntityType="Self.empresa_cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="empresas" EntityType="Self.empresas" Schema="dbo" store:Type="Tables" />
@@ -974,7 +1008,7 @@
           <EntitySet Name="tiposdescuentos" EntityType="Self.tiposdescuentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tiposhorasextras" EntityType="Self.tiposhorasextras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tiposperiodos" EntityType="Self.tiposperiodos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Variedades" EntityType="Self.Variedades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VariedadesFrutas" EntityType="Self.VariedadesFrutas" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="asistencias$asis_contrato" Association="Self.asistencias$asis_contrato">
             <End Role="contratos" EntitySet="contratos" />
             <End Role="asistencias" EntitySet="asistencias" />
@@ -1035,12 +1069,12 @@
             <End Role="TipoCosechas" EntitySet="TipoCosechas" />
             <End Role="Cosechas" EntitySet="Cosechas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cuarteles_Frutas1" Association="Self.FK_Cuarteles_Frutas1">
-            <End Role="Frutas" EntitySet="Frutas" />
-            <End Role="Cuarteles" EntitySet="Cuarteles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cuarteles_Sectores1" Association="Self.FK_Cuarteles_Sectores1">
             <End Role="Sectores" EntitySet="Sectores" />
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuarteles_VariedadesFrutas" Association="Self.FK_Cuarteles_VariedadesFrutas">
+            <End Role="VariedadesFrutas" EntitySet="VariedadesFrutas" />
             <End Role="Cuarteles" EntitySet="Cuarteles" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
@@ -1051,11 +1085,15 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Frutas_Variedades" Association="Self.FK_Frutas_Variedades">
-            <End Role="Variedades" EntitySet="Variedades" />
-            <End Role="Frutas" EntitySet="Frutas" />
+          <AssociationSet Name="FK_DetalleCosechas_Cosechas" Association="Self.FK_DetalleCosechas_Cosechas">
+            <End Role="Cosechas" EntitySet="Cosechas" />
+            <End Role="DetalleCosechas" EntitySet="DetalleCosechas" />
           </AssociationSet>
           <AssociationSet Name="FK_GruposCuarteles_contratos" Association="Self.FK_GruposCuarteles_contratos">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposCuarteles_contratos1" Association="Self.FK_GruposCuarteles_contratos1">
             <End Role="contratos" EntitySet="contratos" />
             <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
           </AssociationSet>
@@ -1074,6 +1112,10 @@
           <AssociationSet Name="FK_Sectores_subempresas" Association="Self.FK_Sectores_subempresas">
             <End Role="subempresas" EntitySet="subempresas" />
             <End Role="Sectores" EntitySet="Sectores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VariedadesFrutas_Frutas" Association="Self.FK_VariedadesFrutas_Frutas">
+            <End Role="Frutas" EntitySet="Frutas" />
+            <End Role="VariedadesFrutas" EntitySet="VariedadesFrutas" />
           </AssociationSet>
           <AssociationSet Name="login$fk_Login_Empresa1" Association="Self.login$fk_Login_Empresa1">
             <End Role="empresas" EntitySet="empresas" />
@@ -1800,43 +1842,52 @@
             <End Role="contratos" EntitySet="contratos" />
           </AssociationSet>
           <EntitySet Name="Cosechas" EntityType="radixModel.Cosechas" />
-          <EntitySet Name="Cuarteles" EntityType="radixModel.Cuarteles" />
-          <EntitySet Name="Frutas" EntityType="radixModel.Frutas" />
-          <EntitySet Name="GruposCuarteles" EntityType="radixModel.GruposCuarteles" />
           <EntitySet Name="Sectores" EntityType="radixModel.Sectores" />
           <EntitySet Name="TipoCosechas" EntityType="radixModel.TipoCosechas" />
-          <EntitySet Name="Variedades" EntityType="radixModel.Variedades" />
           <AssociationSet Name="FK_Cosechas_contratos" Association="radixModel.FK_Cosechas_contratos">
             <End Role="contratos" EntitySet="contratos" />
             <End Role="Cosechas" EntitySet="Cosechas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GruposCuarteles_contratos" Association="radixModel.FK_GruposCuarteles_contratos">
-            <End Role="contratos" EntitySet="contratos" />
-            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
           </AssociationSet>
           <AssociationSet Name="FK_Cosechas_TipoCosechas" Association="radixModel.FK_Cosechas_TipoCosechas">
             <End Role="TipoCosechas" EntitySet="TipoCosechas" />
             <End Role="Cosechas" EntitySet="Cosechas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cuarteles_Frutas1" Association="radixModel.FK_Cuarteles_Frutas1">
-            <End Role="Frutas" EntitySet="Frutas" />
-            <End Role="Cuarteles" EntitySet="Cuarteles" />
+          <AssociationSet Name="FK_Sectores_subempresas" Association="radixModel.FK_Sectores_subempresas">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="Sectores" EntitySet="Sectores" />
           </AssociationSet>
+          <EntitySet Name="Cuarteles" EntityType="radixModel.Cuarteles" />
+          <EntitySet Name="Frutas" EntityType="radixModel.Frutas" />
+          <EntitySet Name="VariedadesFrutas" EntityType="radixModel.VariedadesFrutas" />
           <AssociationSet Name="FK_Cuarteles_Sectores1" Association="radixModel.FK_Cuarteles_Sectores1">
             <End Role="Sectores" EntitySet="Sectores" />
             <End Role="Cuarteles" EntitySet="Cuarteles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cuarteles_VariedadesFrutas" Association="radixModel.FK_Cuarteles_VariedadesFrutas">
+            <End Role="VariedadesFrutas" EntitySet="VariedadesFrutas" />
+            <End Role="Cuarteles" EntitySet="Cuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VariedadesFrutas_Frutas" Association="radixModel.FK_VariedadesFrutas_Frutas">
+            <End Role="Frutas" EntitySet="Frutas" />
+            <End Role="VariedadesFrutas" EntitySet="VariedadesFrutas" />
+          </AssociationSet>
+          <EntitySet Name="DetalleCosechas" EntityType="radixModel.DetalleCosechas" />
+          <EntitySet Name="GruposCuarteles" EntityType="radixModel.GruposCuarteles" />
+          <AssociationSet Name="FK_GruposCuarteles_contratos" Association="radixModel.FK_GruposCuarteles_contratos">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposCuarteles_contratos1" Association="radixModel.FK_GruposCuarteles_contratos1">
+            <End Role="contratos" EntitySet="contratos" />
+            <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCosechas_Cosechas" Association="radixModel.FK_DetalleCosechas_Cosechas">
+            <End Role="Cosechas" EntitySet="Cosechas" />
+            <End Role="DetalleCosechas" EntitySet="DetalleCosechas" />
+          </AssociationSet>
           <AssociationSet Name="FK_GruposCuarteles_Cuarteles" Association="radixModel.FK_GruposCuarteles_Cuarteles">
             <End Role="Cuarteles" EntitySet="Cuarteles" />
             <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Frutas_Variedades" Association="radixModel.FK_Frutas_Variedades">
-            <End Role="Variedades" EntitySet="Variedades" />
-            <End Role="Frutas" EntitySet="Frutas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sectores_subempresas" Association="radixModel.FK_Sectores_subempresas">
-            <End Role="subempresas" EntitySet="subempresas" />
-            <End Role="Sectores" EntitySet="Sectores" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUserRoles">
@@ -2136,6 +2187,7 @@
           <NavigationProperty Name="tiposcontratos" Relationship="radixModel.contratos_fk_Contratos_TiposContratos1" FromRole="contratos" ToRole="tiposcontratos" />
           <NavigationProperty Name="Cosechas" Relationship="radixModel.FK_Cosechas_contratos" FromRole="contratos" ToRole="Cosechas" />
           <NavigationProperty Name="GruposCuarteles" Relationship="radixModel.FK_GruposCuarteles_contratos" FromRole="contratos" ToRole="GruposCuarteles" />
+          <NavigationProperty Name="GruposCuarteles1" Relationship="radixModel.FK_GruposCuarteles_contratos1" FromRole="contratos" ToRole="GruposCuarteles" />
         </EntityType>
         <Association Name="asistencias_asis_contrato">
           <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
@@ -2216,38 +2268,7 @@
           <Property Name="tc_id" Type="Int32" />
           <NavigationProperty Name="contratos" Relationship="radixModel.FK_Cosechas_contratos" FromRole="Cosechas" ToRole="contratos" />
           <NavigationProperty Name="TipoCosechas" Relationship="radixModel.FK_Cosechas_TipoCosechas" FromRole="Cosechas" ToRole="TipoCosechas" />
-        </EntityType>
-        <EntityType Name="Cuarteles">
-          <Key>
-            <PropertyRef Name="cuar_id" />
-          </Key>
-          <Property Name="cuar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cuar_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="frut_id" Type="Int32" />
-          <Property Name="sect_id" Type="Int32" />
-          <NavigationProperty Name="Frutas" Relationship="radixModel.FK_Cuarteles_Frutas1" FromRole="Cuarteles" ToRole="Frutas" />
-          <NavigationProperty Name="Sectores" Relationship="radixModel.FK_Cuarteles_Sectores1" FromRole="Cuarteles" ToRole="Sectores" />
-          <NavigationProperty Name="GruposCuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="Cuarteles" ToRole="GruposCuarteles" />
-        </EntityType>
-        <EntityType Name="Frutas">
-          <Key>
-            <PropertyRef Name="frut_id" />
-          </Key>
-          <Property Name="frut_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="frut_nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="var_id" Type="Int32" />
-          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_Cuarteles_Frutas1" FromRole="Frutas" ToRole="Cuarteles" />
-          <NavigationProperty Name="Variedades" Relationship="radixModel.FK_Frutas_Variedades" FromRole="Frutas" ToRole="Variedades" />
-        </EntityType>
-        <EntityType Name="GruposCuarteles">
-          <Key>
-            <PropertyRef Name="gc_id" />
-          </Key>
-          <Property Name="gc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cuar_id" Type="Int32" />
-          <Property Name="Con_id" Type="Int32" />
-          <NavigationProperty Name="contratos" Relationship="radixModel.FK_GruposCuarteles_contratos" FromRole="GruposCuarteles" ToRole="contratos" />
-          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="GruposCuarteles" ToRole="Cuarteles" />
+          <NavigationProperty Name="DetalleCosechas" Relationship="radixModel.FK_DetalleCosechas_Cosechas" FromRole="Cosechas" ToRole="DetalleCosechas" />
         </EntityType>
         <EntityType Name="Sectores">
           <Key>
@@ -2256,8 +2277,8 @@
           <Property Name="sect_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sect_nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Sub_Id" Type="Int32" />
-          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_Cuarteles_Sectores1" FromRole="Sectores" ToRole="Cuarteles" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.FK_Sectores_subempresas" FromRole="Sectores" ToRole="subempresas" />
+          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_Cuarteles_Sectores1" FromRole="Sectores" ToRole="Cuarteles" />
         </EntityType>
         <EntityType Name="TipoCosechas">
           <Key>
@@ -2266,14 +2287,6 @@
           <Property Name="tc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tc_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cosechas" Relationship="radixModel.FK_Cosechas_TipoCosechas" FromRole="TipoCosechas" ToRole="Cosechas" />
-        </EntityType>
-        <EntityType Name="Variedades">
-          <Key>
-            <PropertyRef Name="var_id" />
-          </Key>
-          <Property Name="var_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="var_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Frutas" Relationship="radixModel.FK_Frutas_Variedades" FromRole="Variedades" ToRole="Frutas" />
         </EntityType>
         <Association Name="FK_Cosechas_contratos">
           <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
@@ -2284,18 +2297,6 @@
             </Principal>
             <Dependent Role="Cosechas">
               <PropertyRef Name="Con_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GruposCuarteles_contratos">
-          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
-          <End Type="radixModel.GruposCuarteles" Role="GruposCuarteles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="contratos">
-              <PropertyRef Name="Con_Id" />
-            </Principal>
-            <Dependent Role="GruposCuarteles">
-              <PropertyRef Name="Con_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2311,18 +2312,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cuarteles_Frutas1">
-          <End Type="radixModel.Frutas" Role="Frutas" Multiplicity="0..1" />
-          <End Type="radixModel.Cuarteles" Role="Cuarteles" Multiplicity="*" />
+        <Association Name="FK_Sectores_subempresas">
+          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="0..1" />
+          <End Type="radixModel.Sectores" Role="Sectores" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Frutas">
-              <PropertyRef Name="frut_id" />
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
             </Principal>
-            <Dependent Role="Cuarteles">
-              <PropertyRef Name="frut_id" />
+            <Dependent Role="Sectores">
+              <PropertyRef Name="Sub_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cuarteles">
+          <Key>
+            <PropertyRef Name="cuar_id" />
+          </Key>
+          <Property Name="cuar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cuar_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="varfrut_id" Type="Int32" />
+          <Property Name="sect_id" Type="Int32" />
+          <NavigationProperty Name="Sectores" Relationship="radixModel.FK_Cuarteles_Sectores1" FromRole="Cuarteles" ToRole="Sectores" />
+          <NavigationProperty Name="VariedadesFrutas" Relationship="radixModel.FK_Cuarteles_VariedadesFrutas" FromRole="Cuarteles" ToRole="VariedadesFrutas" />
+          <NavigationProperty Name="GruposCuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="Cuarteles" ToRole="GruposCuarteles" />
+        </EntityType>
+        <EntityType Name="Frutas">
+          <Key>
+            <PropertyRef Name="frut_id" />
+          </Key>
+          <Property Name="frut_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="frut_nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="VariedadesFrutas" Relationship="radixModel.FK_VariedadesFrutas_Frutas" FromRole="Frutas" ToRole="VariedadesFrutas" />
+        </EntityType>
+        <EntityType Name="VariedadesFrutas">
+          <Key>
+            <PropertyRef Name="varfrut_id" />
+          </Key>
+          <Property Name="varfrut_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="var_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="frut_id" Type="Int32" />
+          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_Cuarteles_VariedadesFrutas" FromRole="VariedadesFrutas" ToRole="Cuarteles" />
+          <NavigationProperty Name="Frutas" Relationship="radixModel.FK_VariedadesFrutas_Frutas" FromRole="VariedadesFrutas" ToRole="Frutas" />
+        </EntityType>
         <Association Name="FK_Cuarteles_Sectores1">
           <End Type="radixModel.Sectores" Role="Sectores" Multiplicity="0..1" />
           <End Type="radixModel.Cuarteles" Role="Cuarteles" Multiplicity="*" />
@@ -2335,6 +2366,87 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cuarteles_VariedadesFrutas">
+          <End Type="radixModel.VariedadesFrutas" Role="VariedadesFrutas" Multiplicity="0..1" />
+          <End Type="radixModel.Cuarteles" Role="Cuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VariedadesFrutas">
+              <PropertyRef Name="varfrut_id" />
+            </Principal>
+            <Dependent Role="Cuarteles">
+              <PropertyRef Name="varfrut_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VariedadesFrutas_Frutas">
+          <End Type="radixModel.Frutas" Role="Frutas" Multiplicity="0..1" />
+          <End Type="radixModel.VariedadesFrutas" Role="VariedadesFrutas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frutas">
+              <PropertyRef Name="frut_id" />
+            </Principal>
+            <Dependent Role="VariedadesFrutas">
+              <PropertyRef Name="frut_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DetalleCosechas">
+          <Key>
+            <PropertyRef Name="dc_id" />
+          </Key>
+          <Property Name="dc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cosec_id" Type="Int32" />
+          <Property Name="dc_peso" Type="Int32" />
+          <NavigationProperty Name="Cosechas" Relationship="radixModel.FK_DetalleCosechas_Cosechas" FromRole="DetalleCosechas" ToRole="Cosechas" />
+        </EntityType>
+        <EntityType Name="GruposCuarteles">
+          <Key>
+            <PropertyRef Name="gc_id" />
+          </Key>
+          <Property Name="gc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cuar_id" Type="Int32" />
+          <Property Name="Con_id" Type="Int32" />
+          <Property Name="ConJefe_id" Type="Int32" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.FK_GruposCuarteles_contratos" FromRole="GruposCuarteles" ToRole="contratos" />
+          <NavigationProperty Name="contratos1" Relationship="radixModel.FK_GruposCuarteles_contratos1" FromRole="GruposCuarteles" ToRole="contratos" />
+          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="GruposCuarteles" ToRole="Cuarteles" />
+        </EntityType>
+        <Association Name="FK_GruposCuarteles_contratos">
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
+          <End Type="radixModel.GruposCuarteles" Role="GruposCuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="GruposCuarteles">
+              <PropertyRef Name="Con_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposCuarteles_contratos1">
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
+          <End Type="radixModel.GruposCuarteles" Role="GruposCuarteles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contratos">
+              <PropertyRef Name="Con_Id" />
+            </Principal>
+            <Dependent Role="GruposCuarteles">
+              <PropertyRef Name="ConJefe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCosechas_Cosechas">
+          <End Type="radixModel.Cosechas" Role="Cosechas" Multiplicity="0..1" />
+          <End Type="radixModel.DetalleCosechas" Role="DetalleCosechas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cosechas">
+              <PropertyRef Name="cosec_id" />
+            </Principal>
+            <Dependent Role="DetalleCosechas">
+              <PropertyRef Name="cosec_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GruposCuarteles_Cuarteles">
           <End Type="radixModel.Cuarteles" Role="Cuarteles" Multiplicity="0..1" />
           <End Type="radixModel.GruposCuarteles" Role="GruposCuarteles" Multiplicity="*" />
@@ -2344,30 +2456,6 @@
             </Principal>
             <Dependent Role="GruposCuarteles">
               <PropertyRef Name="cuar_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Frutas_Variedades">
-          <End Type="radixModel.Variedades" Role="Variedades" Multiplicity="0..1" />
-          <End Type="radixModel.Frutas" Role="Frutas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Variedades">
-              <PropertyRef Name="var_id" />
-            </Principal>
-            <Dependent Role="Frutas">
-              <PropertyRef Name="var_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sectores_subempresas">
-          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="0..1" />
-          <End Type="radixModel.Sectores" Role="Sectores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subempresas">
-              <PropertyRef Name="Sub_Id" />
-            </Principal>
-            <Dependent Role="Sectores">
-              <PropertyRef Name="Sub_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2740,34 +2828,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cuarteles">
-            <EntityTypeMapping TypeName="radixModel.Cuarteles">
-              <MappingFragment StoreEntitySet="Cuarteles">
-                <ScalarProperty Name="sect_id" ColumnName="sect_id" />
-                <ScalarProperty Name="frut_id" ColumnName="frut_id" />
-                <ScalarProperty Name="cuar_nom" ColumnName="cuar_nom" />
-                <ScalarProperty Name="cuar_id" ColumnName="cuar_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Frutas">
-            <EntityTypeMapping TypeName="radixModel.Frutas">
-              <MappingFragment StoreEntitySet="Frutas">
-                <ScalarProperty Name="var_id" ColumnName="var_id" />
-                <ScalarProperty Name="frut_nom" ColumnName="frut_nom" />
-                <ScalarProperty Name="frut_id" ColumnName="frut_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GruposCuarteles">
-            <EntityTypeMapping TypeName="radixModel.GruposCuarteles">
-              <MappingFragment StoreEntitySet="GruposCuarteles">
-                <ScalarProperty Name="Con_id" ColumnName="Con_id" />
-                <ScalarProperty Name="cuar_id" ColumnName="cuar_id" />
-                <ScalarProperty Name="gc_id" ColumnName="gc_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sectores">
             <EntityTypeMapping TypeName="radixModel.Sectores">
               <MappingFragment StoreEntitySet="Sectores">
@@ -2785,11 +2845,49 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Variedades">
-            <EntityTypeMapping TypeName="radixModel.Variedades">
-              <MappingFragment StoreEntitySet="Variedades">
+          <EntitySetMapping Name="Cuarteles">
+            <EntityTypeMapping TypeName="radixModel.Cuarteles">
+              <MappingFragment StoreEntitySet="Cuarteles">
+                <ScalarProperty Name="sect_id" ColumnName="sect_id" />
+                <ScalarProperty Name="varfrut_id" ColumnName="varfrut_id" />
+                <ScalarProperty Name="cuar_nom" ColumnName="cuar_nom" />
+                <ScalarProperty Name="cuar_id" ColumnName="cuar_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Frutas">
+            <EntityTypeMapping TypeName="radixModel.Frutas">
+              <MappingFragment StoreEntitySet="Frutas">
+                <ScalarProperty Name="frut_nom" ColumnName="frut_nom" />
+                <ScalarProperty Name="frut_id" ColumnName="frut_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VariedadesFrutas">
+            <EntityTypeMapping TypeName="radixModel.VariedadesFrutas">
+              <MappingFragment StoreEntitySet="VariedadesFrutas">
+                <ScalarProperty Name="frut_id" ColumnName="frut_id" />
                 <ScalarProperty Name="var_nom" ColumnName="var_nom" />
-                <ScalarProperty Name="var_id" ColumnName="var_id" />
+                <ScalarProperty Name="varfrut_id" ColumnName="varfrut_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleCosechas">
+            <EntityTypeMapping TypeName="radixModel.DetalleCosechas">
+              <MappingFragment StoreEntitySet="DetalleCosechas">
+                <ScalarProperty Name="dc_peso" ColumnName="dc_peso" />
+                <ScalarProperty Name="cosec_id" ColumnName="cosec_id" />
+                <ScalarProperty Name="dc_id" ColumnName="dc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GruposCuarteles">
+            <EntityTypeMapping TypeName="radixModel.GruposCuarteles">
+              <MappingFragment StoreEntitySet="GruposCuarteles">
+                <ScalarProperty Name="ConJefe_id" ColumnName="ConJefe_id" />
+                <ScalarProperty Name="Con_id" ColumnName="Con_id" />
+                <ScalarProperty Name="cuar_id" ColumnName="cuar_id" />
+                <ScalarProperty Name="gc_id" ColumnName="gc_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

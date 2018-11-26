@@ -17,15 +17,13 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Frutas()
         {
-            this.Cuarteles = new HashSet<Cuarteles>();
+            this.VariedadesFrutas = new HashSet<VariedadesFrutas>();
         }
     
         public int frut_id { get; set; }
         public string frut_nom { get; set; }
-        public Nullable<int> var_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cuarteles> Cuarteles { get; set; }
-        public virtual Variedades Variedades { get; set; }
+        public virtual ICollection<VariedadesFrutas> VariedadesFrutas { get; set; }
     }
 }

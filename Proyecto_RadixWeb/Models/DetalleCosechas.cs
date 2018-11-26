@@ -12,15 +12,12 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GruposCuarteles
+    public partial class DetalleCosechas
     {
-        public int gc_id { get; set; }
-        public Nullable<int> cuar_id { get; set; }
-        public Nullable<int> Con_id { get; set; }
-        public Nullable<int> ConJefe_id { get; set; }
+        public int dc_id { get; set; }
+        public Nullable<int> cosec_id { get; set; }
+        public Nullable<int> dc_peso { get; set; }
     
-        public virtual contratos contratos { get; set; }
-        public virtual contratos contratos1 { get; set; }
-        public virtual Cuarteles Cuarteles { get; set; }
+        public virtual Cosechas Cosechas { get; set; }
     }
 }

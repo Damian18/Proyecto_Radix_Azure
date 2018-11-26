@@ -14,6 +14,12 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class Cosechas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cosechas()
+        {
+            this.DetalleCosechas = new HashSet<DetalleCosechas>();
+        }
+    
         public int cosec_id { get; set; }
         public string cosec_fecha { get; set; }
         public Nullable<int> Con_Id { get; set; }
@@ -22,5 +28,7 @@ namespace Proyecto_RadixWeb.Models
     
         public virtual contratos contratos { get; set; }
         public virtual TipoCosechas TipoCosechas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleCosechas> DetalleCosechas { get; set; }
     }
 }

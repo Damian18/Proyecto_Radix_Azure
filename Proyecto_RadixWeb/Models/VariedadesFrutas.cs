@@ -12,18 +12,20 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Variedades
+    public partial class VariedadesFrutas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Variedades()
+        public VariedadesFrutas()
         {
-            this.Frutas = new HashSet<Frutas>();
+            this.Cuarteles = new HashSet<Cuarteles>();
         }
     
-        public int var_id { get; set; }
+        public int varfrut_id { get; set; }
         public string var_nom { get; set; }
+        public Nullable<int> frut_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Frutas> Frutas { get; set; }
+        public virtual ICollection<Cuarteles> Cuarteles { get; set; }
+        public virtual Frutas Frutas { get; set; }
     }
 }

@@ -15,8 +15,9 @@ namespace Proyecto_RadixWeb.Controllers
     {
         private radixEntities db = new radixEntities();
 
-        public ActionResult MenuSubempresa()
+        public ActionResult MenuSubempresa(string subemp_id)
         {
+            ViewBag.subemp_id = subemp_id;
             return View();
         }
 

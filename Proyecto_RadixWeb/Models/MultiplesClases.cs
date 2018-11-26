@@ -29,12 +29,15 @@ namespace Proyecto_RadixWeb.Models
         public Proyecto_RadixWeb.Models.empresa_cargo ObjEmpresa_Cargo { get; set; }
         public Proyecto_RadixWeb.Models.planillascontratos ObjPlantillascontratos { get; set; }
         public Proyecto_RadixWeb.Models.documentos ObjDocumentos { get; set; }
+        public Proyecto_RadixWeb.Models.Sectores ObjSectores { get; set; }
+
 
         public IEnumerable<Proyecto_RadixWeb.Models.subempresas> ObjESubEmpresas { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.personas> ObjEPersonas { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.asistencias> ObjEAsistencia { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.contratos> ObjEContrato { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.empresa_cargo> ObjEEmpresa_Cargo { get; set; }
+        public IEnumerable<Proyecto_RadixWeb.Models.Sectores> ObjESectores { get; set; }
 
     }
 }

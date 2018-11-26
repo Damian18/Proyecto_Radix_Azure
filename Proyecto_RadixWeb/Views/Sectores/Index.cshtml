@@ -1,0 +1,91 @@
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="contenido_vista">
+
+
+
+    <div class="col-sm-12 col-md-12">
+        <div class="row">
+            <div class="border-success mt-3 mb-3 col-sm-2 col-md-2 ">
+                <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Nuevo Sector</a>
+            </div>
+            @*<div class="border-success mt-3 mb-3 ">
+                    <a class="btn btn-success ml-3" href="@Url.Action("ListaPlantilla","SubEmpresas")">Ver Plantilla Empresa</a>
+                </div>*@
+
+        </div>
+    </div>
+
+
+
+    <div class="col-sm-12 col-md-12 col-lg-12 ml-5">
+        <div class="row">
+            @foreach (var item in Model.ObjESectores)
+            {
+                <div class="card col-sm-3 col-md-3 border-success mb-3">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.sect_nom)</h5>
+                        <p class="card-text">Ubicado en @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom).</p>
+                        @*<a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })" class="btn btn-success col-sm-12 col-md-12 mt-1">Ver Información</a>
+                            <a href="@Url.Action("Index", "SubEmpresa_Cargos", new { subemp_id = item.Sub_Id })" class="btn btn-success col-sm-12 col-md-12 mt-1">Ver Cargos</a>*@
+
+                    </div>
+                </div>
+                <div class="col-sm-1 col-md-1"></div>
+            }
+        </div>
+
+
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("Create", "Sectores", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nuevo Sector</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+                    <div class="modal-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.Label("Sector")
+                            @Html.Editor("sect_nom", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#contenido_vista').appendTo('#contenido_general');
+    });
+
+</script>

@@ -22,11 +22,11 @@ namespace Proyecto_RadixWeb.Models
     
         public int cuar_id { get; set; }
         public string cuar_nom { get; set; }
-        public Nullable<int> frut_id { get; set; }
+        public Nullable<int> varfrut_id { get; set; }
         public Nullable<int> sect_id { get; set; }
     
-        public virtual Frutas Frutas { get; set; }
         public virtual Sectores Sectores { get; set; }
+        public virtual VariedadesFrutas VariedadesFrutas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GruposCuarteles> GruposCuarteles { get; set; }
     }

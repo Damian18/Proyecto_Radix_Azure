@@ -231,6 +231,7 @@
     <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\ContratosController.cs" />
+    <Compile Include="Controllers\CuartelesController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\Empresa_CargoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PlanillascontratosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\SectoresController.cs" />
     <Compile Include="Controllers\SubEmpresasController.cs" />
     <Compile Include="Controllers\SubEmpresa_CargosController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -282,6 +284,9 @@
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CuentasAndroid.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleCosechas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\documentos.cs">
@@ -388,7 +393,7 @@
     <Compile Include="Models\tiposperiodos.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Variedades.cs">
+    <Compile Include="Models\VariedadesFrutas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1088,6 +1093,16 @@
     <Content Include="Views\Horario_laboral\HorarioTest.cshtml" />
     <Content Include="Views\Home\indexguardado.cshtml" />
     <Content Include="Views\Home\dash.cshtml" />
+    <Content Include="Views\Sectores\Create.cshtml" />
+    <Content Include="Views\Sectores\Delete.cshtml" />
+    <Content Include="Views\Sectores\Details.cshtml" />
+    <Content Include="Views\Sectores\Edit.cshtml" />
+    <Content Include="Views\Sectores\Index.cshtml" />
+    <Content Include="Views\Cuarteles\Create.cshtml" />
+    <Content Include="Views\Cuarteles\Delete.cshtml" />
+    <Content Include="Views\Cuarteles\Details.cshtml" />
+    <Content Include="Views\Cuarteles\Edit.cshtml" />
+    <Content Include="Views\Cuarteles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

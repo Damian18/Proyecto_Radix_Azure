@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.Cuarteles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cuar_nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sectores.sect_nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VariedadesFrutas.var_nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cuar_nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sectores.sect_nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VariedadesFrutas.var_nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.cuar_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.cuar_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.cuar_id })
+        </td>
+    </tr>
+}
+
+</table>
