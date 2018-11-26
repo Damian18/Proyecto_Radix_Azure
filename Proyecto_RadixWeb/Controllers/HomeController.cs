@@ -18,8 +18,8 @@ namespace IdentitySample.Controllers
 
         public ActionResult Index()
         {
-            
 
+        
 
             if (User.IsInRole("Radix"))
             {
@@ -35,6 +35,19 @@ namespace IdentitySample.Controllers
                 {
                     string emp_nom = HttpContext.Session["Empresa"].ToString();
                     ViewBag.empresa = emp_nom;
+                    if (Request.Cookies["Cookie"] != null)
+                    {
+                        ViewBag.idcookie = Request.Cookies["Cookie"].Value;
+                        
+                    }
+                    else
+                    {
+                        ViewBag.idcookie = "Usuario no activo";
+                        HttpCookie cook = new HttpCookie("Cookie");
+                        cook.Value = "Usuario Activo";
+                        cook.Expires = DateTime.Now.AddMonths(1);
+                        Response.Cookies.Add(cook);
+                    }
                     //esto es temporal hasta que se logre hacer funcional el dashboard de administrador
                     return View("DashBoardAdmin");
                     //return RedirectToAction("Index", "subempresas", new { emp_nom = empresa, emp_id = emp_id });
