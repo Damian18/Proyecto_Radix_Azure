@@ -91,6 +91,10 @@
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos1" />
         <AssociationConnector Association="radixModel.FK_DetalleCosechas_Cosechas" />
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_Cuarteles" />
+        <EntityTypeShape EntityType="radixModel.LoginPrivilegiosCuentas" Width="1.5" PointX="16.5" PointY="7.25" />
+        <EntityTypeShape EntityType="radixModel.PrivilegiosCuentas" Width="1.5" PointX="14.25" PointY="2.5" />
+        <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_login" />
+        <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

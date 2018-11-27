@@ -323,6 +323,9 @@
     <Compile Include="Models\login.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginPrivilegiosCuentas.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="App_Start\MySqlConfiguration.cs" />
     <Compile Include="App_Start\MySqlHistoryContext.cs" />
@@ -352,6 +355,9 @@
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\planillascontratos.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PrivilegiosCuentas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\provincias.cs">
@@ -550,6 +556,7 @@
     <Content Include="PaginaHome\images\appdesign.jpg" />
     <Content Include="PaginaHome\images\avatars\1.png" />
     <Content Include="PaginaHome\images\avatars\2.png" />
+    <Content Include="PaginaHome\images\bg.jpg" />
     <Content Include="PaginaHome\images\fondo2.jpg" />
     <Content Include="PaginaHome\images\footer-logo.png" />
     <Content Include="PaginaHome\images\Funciones.png" />
@@ -557,7 +564,10 @@
     <Content Include="PaginaHome\images\intro-bg.jpg" />
     <Content Include="PaginaHome\images\Login.png" />
     <Content Include="PaginaHome\images\logo.png" />
+    <Content Include="PaginaHome\images\Logo_Radix_v3.png" />
     <Content Include="PaginaHome\images\moras.JPG" />
+    <Content Include="PaginaHome\images\numero1.jpg" />
+    <Content Include="PaginaHome\images\numero2.png" />
     <Content Include="PaginaHome\images\play-button.png" />
     <Content Include="PaginaHome\images\qr.png" />
     <Content Include="PaginaHome\images\favicon.png" />

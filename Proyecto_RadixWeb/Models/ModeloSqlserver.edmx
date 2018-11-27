@@ -230,6 +230,14 @@
           <Property Name="Per_Rut" Type="nvarchar" MaxLength="12" />
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <EntityType Name="LoginPrivilegiosCuentas">
+          <Key>
+            <PropertyRef Name="lpc_id" />
+          </Key>
+          <Property Name="lpc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="log_id" Type="int" />
+          <Property Name="pc_id" Type="int" />
+        </EntityType>
         <EntityType Name="nacionalidades">
           <Key>
             <PropertyRef Name="Nac_Id" />
@@ -277,6 +285,13 @@
           <Property Name="PC_Nom" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="PC_Ext" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="PC_Binario" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrivilegiosCuentas">
+          <Key>
+            <PropertyRef Name="pc_id" />
+          </Key>
+          <Property Name="pc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pc_nom" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="provincias">
           <Key>
@@ -710,6 +725,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LoginPrivilegiosCuentas_login">
+          <End Role="login" Type="Self.login" Multiplicity="0..1" />
+          <End Role="LoginPrivilegiosCuentas" Type="Self.LoginPrivilegiosCuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="log_id" />
+            </Principal>
+            <Dependent Role="LoginPrivilegiosCuentas">
+              <PropertyRef Name="log_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginPrivilegiosCuentas_PrivilegiosCuentas">
+          <End Role="PrivilegiosCuentas" Type="Self.PrivilegiosCuentas" Multiplicity="0..1" />
+          <End Role="LoginPrivilegiosCuentas" Type="Self.LoginPrivilegiosCuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrivilegiosCuentas">
+              <PropertyRef Name="pc_id" />
+            </Principal>
+            <Dependent Role="LoginPrivilegiosCuentas">
+              <PropertyRef Name="pc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sectores_subempresas">
           <End Role="subempresas" Type="Self.subempresas" Multiplicity="0..1" />
           <End Role="Sectores" Type="Self.Sectores" Multiplicity="*" />
@@ -991,10 +1030,12 @@
           <EntitySet Name="GruposCuarteles" EntityType="Self.GruposCuarteles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="horario_laboral" EntityType="Self.horario_laboral" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginPrivilegiosCuentas" EntityType="Self.LoginPrivilegiosCuentas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pago" EntityType="Self.pago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="personas" EntityType="Self.personas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrivilegiosCuentas" EntityType="Self.PrivilegiosCuentas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="provincias" EntityType="Self.provincias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="regiones" EntityType="Self.regiones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" />
@@ -1108,6 +1149,14 @@
           <AssociationSet Name="FK_login_AspNetUsers" Association="Self.FK_login_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginPrivilegiosCuentas_login" Association="Self.FK_LoginPrivilegiosCuentas_login">
+            <End Role="login" EntitySet="login" />
+            <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" Association="Self.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas">
+            <End Role="PrivilegiosCuentas" EntitySet="PrivilegiosCuentas" />
+            <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
           </AssociationSet>
           <AssociationSet Name="FK_Sectores_subempresas" Association="Self.FK_Sectores_subempresas">
             <End Role="subempresas" EntitySet="subempresas" />
@@ -1317,6 +1366,7 @@
           <NavigationProperty Name="empresas" Relationship="Self.login_fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
           <NavigationProperty Name="AspNetUsers" Relationship="radixModel.login_fk_Login_CuentaAsp" FromRole="login" ToRole="AspNetUsers" />
           <NavigationProperty Name="personas" Relationship="radixModel.login_FK_login_Persona1" FromRole="login" ToRole="personas" />
+          <NavigationProperty Name="LoginPrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_login" FromRole="login" ToRole="LoginPrivilegiosCuentas" />
         </EntityType>
         <EntityType Name="nacionalidades">
           <Key>
@@ -1889,6 +1939,16 @@
             <End Role="Cuarteles" EntitySet="Cuarteles" />
             <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
           </AssociationSet>
+          <EntitySet Name="LoginPrivilegiosCuentas" EntityType="radixModel.LoginPrivilegiosCuentas" />
+          <EntitySet Name="PrivilegiosCuentas" EntityType="radixModel.PrivilegiosCuentas" />
+          <AssociationSet Name="FK_LoginPrivilegiosCuentas_login" Association="radixModel.FK_LoginPrivilegiosCuentas_login">
+            <End Role="login" EntitySet="login" />
+            <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" Association="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas">
+            <End Role="PrivilegiosCuentas" EntitySet="PrivilegiosCuentas" />
+            <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUserRoles">
           <Key>
@@ -2459,6 +2519,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LoginPrivilegiosCuentas">
+          <Key>
+            <PropertyRef Name="lpc_id" />
+          </Key>
+          <Property Name="lpc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="log_id" Type="Int32" />
+          <Property Name="pc_id" Type="Int32" />
+          <NavigationProperty Name="login" Relationship="radixModel.FK_LoginPrivilegiosCuentas_login" FromRole="LoginPrivilegiosCuentas" ToRole="login" />
+          <NavigationProperty Name="PrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" FromRole="LoginPrivilegiosCuentas" ToRole="PrivilegiosCuentas" />
+        </EntityType>
+        <EntityType Name="PrivilegiosCuentas">
+          <Key>
+            <PropertyRef Name="pc_id" />
+          </Key>
+          <Property Name="pc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pc_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LoginPrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" FromRole="PrivilegiosCuentas" ToRole="LoginPrivilegiosCuentas" />
+        </EntityType>
+        <Association Name="FK_LoginPrivilegiosCuentas_login">
+          <End Type="radixModel.login" Role="login" Multiplicity="0..1" />
+          <End Type="radixModel.LoginPrivilegiosCuentas" Role="LoginPrivilegiosCuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="log_id" />
+            </Principal>
+            <Dependent Role="LoginPrivilegiosCuentas">
+              <PropertyRef Name="log_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginPrivilegiosCuentas_PrivilegiosCuentas">
+          <End Type="radixModel.PrivilegiosCuentas" Role="PrivilegiosCuentas" Multiplicity="0..1" />
+          <End Type="radixModel.LoginPrivilegiosCuentas" Role="LoginPrivilegiosCuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrivilegiosCuentas">
+              <PropertyRef Name="pc_id" />
+            </Principal>
+            <Dependent Role="LoginPrivilegiosCuentas">
+              <PropertyRef Name="pc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2888,6 +2990,23 @@
                 <ScalarProperty Name="Con_id" ColumnName="Con_id" />
                 <ScalarProperty Name="cuar_id" ColumnName="cuar_id" />
                 <ScalarProperty Name="gc_id" ColumnName="gc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginPrivilegiosCuentas">
+            <EntityTypeMapping TypeName="radixModel.LoginPrivilegiosCuentas">
+              <MappingFragment StoreEntitySet="LoginPrivilegiosCuentas">
+                <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+                <ScalarProperty Name="lpc_id" ColumnName="lpc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrivilegiosCuentas">
+            <EntityTypeMapping TypeName="radixModel.PrivilegiosCuentas">
+              <MappingFragment StoreEntitySet="PrivilegiosCuentas">
+                <ScalarProperty Name="pc_nom" ColumnName="pc_nom" />
+                <ScalarProperty Name="pc_id" ColumnName="pc_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

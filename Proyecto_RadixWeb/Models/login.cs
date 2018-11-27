@@ -14,6 +14,12 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class login
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public login()
+        {
+            this.LoginPrivilegiosCuentas = new HashSet<LoginPrivilegiosCuentas>();
+        }
+    
         public int log_id { get; set; }
         public int Emp_Id { get; set; }
         public string Per_Rut { get; set; }
@@ -22,5 +28,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual empresas empresas { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual personas personas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoginPrivilegiosCuentas> LoginPrivilegiosCuentas { get; set; }
     }
 }

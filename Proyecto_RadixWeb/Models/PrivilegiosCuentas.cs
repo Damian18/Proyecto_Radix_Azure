@@ -12,20 +12,18 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class documentos
+    public partial class PrivilegiosCuentas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public documentos()
+        public PrivilegiosCuentas()
         {
-            this.contratos = new HashSet<contratos>();
+            this.LoginPrivilegiosCuentas = new HashSet<LoginPrivilegiosCuentas>();
         }
     
-        public int Doc_Id { get; set; }
-        public string Doc_Nom { get; set; }
-        public string Doc_Ext { get; set; }
-        public byte[] Doc_Binario { get; set; }
-        public int Con_Id { get; set; }
+        public int pc_id { get; set; }
+        public string pc_nom { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<contratos> contratos { get; set; }
+        public virtual ICollection<LoginPrivilegiosCuentas> LoginPrivilegiosCuentas { get; set; }
     }
 }

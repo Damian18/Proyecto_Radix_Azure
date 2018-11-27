@@ -67,5 +67,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<VariedadesFrutas> VariedadesFrutas { get; set; }
         public virtual DbSet<DetalleCosechas> DetalleCosechas { get; set; }
         public virtual DbSet<GruposCuarteles> GruposCuarteles { get; set; }
+        public virtual DbSet<LoginPrivilegiosCuentas> LoginPrivilegiosCuentas { get; set; }
+        public virtual DbSet<PrivilegiosCuentas> PrivilegiosCuentas { get; set; }
     }
 }
