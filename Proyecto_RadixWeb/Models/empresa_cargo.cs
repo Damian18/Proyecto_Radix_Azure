@@ -20,7 +20,7 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<int> PC_Id { get; set; }
     
         public virtual cargos cargos { get; set; }
-        public virtual empresas empresas { get; set; }
         public virtual planillascontratos planillascontratos { get; set; }
+        public virtual empresas empresas { get; set; }
     }
 }

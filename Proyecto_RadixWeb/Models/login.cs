@@ -25,10 +25,10 @@ namespace Proyecto_RadixWeb.Models
         public string Per_Rut { get; set; }
         public string Id { get; set; }
     
-        public virtual empresas empresas { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual personas personas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoginPrivilegiosCuentas> LoginPrivilegiosCuentas { get; set; }
+        public virtual empresas empresas { get; set; }
     }
 }

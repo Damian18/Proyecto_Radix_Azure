@@ -31,12 +31,12 @@ namespace Proyecto_RadixWeb.Models
         public int Com_Id { get; set; }
     
         public virtual comunas comunas { get; set; }
-        public virtual empresas empresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subempresa_cargo> subempresa_cargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contratos> contratos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sectores> Sectores { get; set; }
+        public virtual empresas empresas { get; set; }
     }
 }

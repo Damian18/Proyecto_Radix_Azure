@@ -27,9 +27,14 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<int> Emp_Cant { get; set; }
         public string Emp_Estado { get; set; }
         public string Emp_Dir { get; set; }
+        public Nullable<int> plan_id { get; set; }
+        public Nullable<bool> plan_estado { get; set; }
+        public Nullable<System.DateTime> plan_FechaInicio { get; set; }
+        public Nullable<System.DateTime> plan_FechaFin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<empresa_cargo> empresa_cargo { get; set; }
+        public virtual PlanesEmpresas PlanesEmpresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<login> login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

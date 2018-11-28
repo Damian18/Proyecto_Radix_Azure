@@ -153,6 +153,10 @@
           <Property Name="Emp_Cant" Type="int" />
           <Property Name="Emp_Estado" Type="nvarchar" MaxLength="20" />
           <Property Name="Emp_Dir" Type="nvarchar" MaxLength="100" />
+          <Property Name="plan_id" Type="int" />
+          <Property Name="plan_estado" Type="bit" />
+          <Property Name="plan_FechaInicio" Type="date" />
+          <Property Name="plan_FechaFin" Type="date" />
         </EntityType>
         <EntityType Name="estadosciviles">
           <Key>
@@ -276,6 +280,13 @@
           <Property Name="Per_Des" Type="nvarchar" MaxLength="100" />
           <Property Name="Desc_Id" Type="int" />
           <Property Name="THor_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="PlanesEmpresas">
+          <Key>
+            <PropertyRef Name="plan_id" />
+          </Key>
+          <Property Name="plan_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plan_nom" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="planillascontratos">
           <Key>
@@ -665,6 +676,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_empresas_PlanesEmpresas">
+          <End Role="PlanesEmpresas" Type="Self.PlanesEmpresas" Multiplicity="0..1" />
+          <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanesEmpresas">
+              <PropertyRef Name="plan_id" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GruposCuarteles_contratos">
           <End Role="contratos" Type="Self.contratos" Multiplicity="0..1" />
           <End Role="GruposCuarteles" Type="Self.GruposCuarteles" Multiplicity="*" />
@@ -1034,6 +1057,7 @@
           <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pago" EntityType="Self.pago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="personas" EntityType="Self.personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanesEmpresas" EntityType="Self.PlanesEmpresas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PrivilegiosCuentas" EntityType="Self.PrivilegiosCuentas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="provincias" EntityType="Self.provincias" Schema="dbo" store:Type="Tables" />
@@ -1129,6 +1153,10 @@
           <AssociationSet Name="FK_DetalleCosechas_Cosechas" Association="Self.FK_DetalleCosechas_Cosechas">
             <End Role="Cosechas" EntitySet="Cosechas" />
             <End Role="DetalleCosechas" EntitySet="DetalleCosechas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empresas_PlanesEmpresas" Association="Self.FK_empresas_PlanesEmpresas">
+            <End Role="PlanesEmpresas" EntitySet="PlanesEmpresas" />
+            <End Role="empresas" EntitySet="empresas" />
           </AssociationSet>
           <AssociationSet Name="FK_GruposCuarteles_contratos" Association="Self.FK_GruposCuarteles_contratos">
             <End Role="contratos" EntitySet="contratos" />
@@ -1297,21 +1325,8 @@
           <Property Name="Car_Id" Type="Int32" />
           <Property Name="PC_Id" Type="Int32" />
           <NavigationProperty Name="cargos" Relationship="Self.empresa_cargo_cargo" FromRole="empresa_cargo" ToRole="cargos" />
-          <NavigationProperty Name="empresas" Relationship="Self.empresa_cargo_empresa" FromRole="empresa_cargo" ToRole="empresas" />
           <NavigationProperty Name="planillascontratos" Relationship="Self.empresa_cargo_plantilla" FromRole="empresa_cargo" ToRole="planillascontratos" />
-        </EntityType>
-        <EntityType Name="empresas">
-          <Key>
-            <PropertyRef Name="Emp_Id" />
-          </Key>
-          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Emp_Cant" Type="Int32" />
-          <Property Name="Emp_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Emp_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="empresa_cargo" Relationship="Self.empresa_cargo_empresa" FromRole="empresas" ToRole="empresa_cargo" />
-          <NavigationProperty Name="login" Relationship="Self.login_fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
-          <NavigationProperty Name="subempresas" Relationship="Self.subempresas_FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.empresa_cargo_empresa" FromRole="empresa_cargo" ToRole="empresas" />
         </EntityType>
         <EntityType Name="estadosciviles">
           <Key>
@@ -1363,10 +1378,10 @@
           <Property Name="Emp_Id" Type="Int32" Nullable="false" />
           <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="empresas" Relationship="Self.login_fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
           <NavigationProperty Name="AspNetUsers" Relationship="radixModel.login_fk_Login_CuentaAsp" FromRole="login" ToRole="AspNetUsers" />
           <NavigationProperty Name="personas" Relationship="radixModel.login_FK_login_Persona1" FromRole="login" ToRole="personas" />
           <NavigationProperty Name="LoginPrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_login" FromRole="login" ToRole="LoginPrivilegiosCuentas" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.login_fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
         </EntityType>
         <EntityType Name="nacionalidades">
           <Key>
@@ -1442,10 +1457,10 @@
           <Property Name="Sub_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Com_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="comunas" Relationship="Self.subempresas_FK_subempresas_comunas" FromRole="subempresas" ToRole="comunas" />
-          <NavigationProperty Name="empresas" Relationship="Self.subempresas_FK_subempresas_empresas" FromRole="subempresas" ToRole="empresas" />
           <NavigationProperty Name="subempresa_cargo" Relationship="Self.subempresa_cargo_subempresa_cargo" FromRole="subempresas" ToRole="subempresa_cargo" />
           <NavigationProperty Name="contratos" Relationship="radixModel.contratos_FK_contratos_subempresas" FromRole="subempresas" ToRole="contratos" />
           <NavigationProperty Name="Sectores" Relationship="radixModel.FK_Sectores_subempresas" FromRole="subempresas" ToRole="Sectores" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.subempresas_FK_subempresas_empresas" FromRole="subempresas" ToRole="empresas" />
         </EntityType>
         <EntityType Name="tipoformaspago">
           <Key>
@@ -1602,18 +1617,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="empresa_cargo_empresa">
-          <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
-          <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="empresas">
-              <PropertyRef Name="Emp_Id" />
-            </Principal>
-            <Dependent Role="empresa_cargo">
-              <PropertyRef Name="Emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="empresa_cargo_plantilla">
           <End Role="planillascontratos" Type="Self.planillascontratos" Multiplicity="0..1" />
           <End Role="empresa_cargo" Type="Self.empresa_cargo" Multiplicity="*" />
@@ -1623,32 +1626,6 @@
             </Principal>
             <Dependent Role="empresa_cargo">
               <PropertyRef Name="PC_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="login_fk_Login_Empresa1">
-          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
-          <End Role="login" Type="Self.login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="empresas">
-              <PropertyRef Name="Emp_Id" />
-            </Principal>
-            <Dependent Role="login">
-              <PropertyRef Name="Emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="subempresas_FK_subempresas_empresas">
-          <End Role="empresas" Type="Self.empresas" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="subempresas" Type="Self.subempresas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="empresas">
-              <PropertyRef Name="Emp_Id" />
-            </Principal>
-            <Dependent Role="subempresas">
-              <PropertyRef Name="Emp_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1727,7 +1704,6 @@
           <EntitySet Name="comunas" EntityType="Self.comunas" />
           <EntitySet Name="documentos" EntityType="Self.documentos" />
           <EntitySet Name="empresa_cargo" EntityType="Self.empresa_cargo" />
-          <EntitySet Name="empresas" EntityType="Self.empresas" />
           <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" />
           <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" />
           <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" />
@@ -1775,21 +1751,9 @@
             <End Role="comunas" EntitySet="comunas" />
             <End Role="subempresas" EntitySet="subempresas" />
           </AssociationSet>
-          <AssociationSet Name="empresa_cargo_empresa" Association="Self.empresa_cargo_empresa">
-            <End Role="empresas" EntitySet="empresas" />
-            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
-          </AssociationSet>
           <AssociationSet Name="empresa_cargo_plantilla" Association="Self.empresa_cargo_plantilla">
             <End Role="planillascontratos" EntitySet="planillascontratos" />
             <End Role="empresa_cargo" EntitySet="empresa_cargo" />
-          </AssociationSet>
-          <AssociationSet Name="login_fk_Login_Empresa1" Association="Self.login_fk_Login_Empresa1">
-            <End Role="empresas" EntitySet="empresas" />
-            <End Role="login" EntitySet="login" />
-          </AssociationSet>
-          <AssociationSet Name="subempresas_FK_subempresas_empresas" Association="Self.subempresas_FK_subempresas_empresas">
-            <End Role="empresas" EntitySet="empresas" />
-            <End Role="subempresas" EntitySet="subempresas" />
           </AssociationSet>
           <AssociationSet Name="fichadescuentos_FK_fichadescuentos_tipodescuento" Association="Self.fichadescuentos_FK_fichadescuentos_tipodescuento">
             <End Role="tiposdescuentos" EntitySet="tiposdescuentos" />
@@ -1948,6 +1912,24 @@
           <AssociationSet Name="FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" Association="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas">
             <End Role="PrivilegiosCuentas" EntitySet="PrivilegiosCuentas" />
             <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
+          </AssociationSet>
+          <EntitySet Name="empresas" EntityType="radixModel.empresas" />
+          <EntitySet Name="PlanesEmpresas" EntityType="radixModel.PlanesEmpresas" />
+          <AssociationSet Name="empresa_cargo_empresa" Association="radixModel.empresa_cargo_empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="empresa_cargo" EntitySet="empresa_cargo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empresas_PlanesEmpresas" Association="radixModel.FK_empresas_PlanesEmpresas">
+            <End Role="PlanesEmpresas" EntitySet="PlanesEmpresas" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <AssociationSet Name="login_fk_Login_Empresa1" Association="radixModel.login_fk_Login_Empresa1">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="subempresas_FK_subempresas_empresas" Association="radixModel.subempresas_FK_subempresas_empresas">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="subempresas" EntitySet="subempresas" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUserRoles">
@@ -2561,6 +2543,82 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Nom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Cant" Type="Int32" />
+          <Property Name="Emp_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="plan_id" Type="Int32" />
+          <Property Name="plan_estado" Type="Boolean" />
+          <Property Name="plan_FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="plan_FechaFin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="empresa_cargo" Relationship="radixModel.empresa_cargo_empresa" FromRole="empresas" ToRole="empresa_cargo" />
+          <NavigationProperty Name="PlanesEmpresas" Relationship="radixModel.FK_empresas_PlanesEmpresas" FromRole="empresas" ToRole="PlanesEmpresas" />
+          <NavigationProperty Name="login" Relationship="radixModel.login_fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
+          <NavigationProperty Name="subempresas" Relationship="radixModel.subempresas_FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
+        </EntityType>
+        <EntityType Name="PlanesEmpresas">
+          <Key>
+            <PropertyRef Name="plan_id" />
+          </Key>
+          <Property Name="plan_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plan_nom" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.FK_empresas_PlanesEmpresas" FromRole="PlanesEmpresas" ToRole="empresas" />
+        </EntityType>
+        <Association Name="empresa_cargo_empresa">
+          <End Type="radixModel.empresas" Role="empresas" Multiplicity="0..1" />
+          <End Type="radixModel.empresa_cargo" Role="empresa_cargo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="empresa_cargo">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empresas_PlanesEmpresas">
+          <End Type="radixModel.PlanesEmpresas" Role="PlanesEmpresas" Multiplicity="0..1" />
+          <End Type="radixModel.empresas" Role="empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanesEmpresas">
+              <PropertyRef Name="plan_id" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login_fk_Login_Empresa1">
+          <End Type="radixModel.empresas" Role="empresas" Multiplicity="1" />
+          <End Type="radixModel.login" Role="login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subempresas_FK_subempresas_empresas">
+          <End Type="radixModel.empresas" Role="empresas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="subempresas">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2618,17 +2676,6 @@
                 <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
                 <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
                 <ScalarProperty Name="PC_Id" ColumnName="PC_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="empresas">
-            <EntityTypeMapping TypeName="radixModel.empresas">
-              <MappingFragment StoreEntitySet="empresas">
-                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-                <ScalarProperty Name="Emp_Nom" ColumnName="Emp_Nom" />
-                <ScalarProperty Name="Emp_Cant" ColumnName="Emp_Cant" />
-                <ScalarProperty Name="Emp_Estado" ColumnName="Emp_Estado" />
-                <ScalarProperty Name="Emp_Dir" ColumnName="Emp_Dir" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3007,6 +3054,29 @@
               <MappingFragment StoreEntitySet="PrivilegiosCuentas">
                 <ScalarProperty Name="pc_nom" ColumnName="pc_nom" />
                 <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresas">
+            <EntityTypeMapping TypeName="radixModel.empresas">
+              <MappingFragment StoreEntitySet="empresas">
+                <ScalarProperty Name="plan_FechaFin" ColumnName="plan_FechaFin" />
+                <ScalarProperty Name="plan_FechaInicio" ColumnName="plan_FechaInicio" />
+                <ScalarProperty Name="plan_estado" ColumnName="plan_estado" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+                <ScalarProperty Name="Emp_Dir" ColumnName="Emp_Dir" />
+                <ScalarProperty Name="Emp_Estado" ColumnName="Emp_Estado" />
+                <ScalarProperty Name="Emp_Cant" ColumnName="Emp_Cant" />
+                <ScalarProperty Name="Emp_Nom" ColumnName="Emp_Nom" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanesEmpresas">
+            <EntityTypeMapping TypeName="radixModel.PlanesEmpresas">
+              <MappingFragment StoreEntitySet="PlanesEmpresas">
+                <ScalarProperty Name="plan_nom" ColumnName="plan_nom" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

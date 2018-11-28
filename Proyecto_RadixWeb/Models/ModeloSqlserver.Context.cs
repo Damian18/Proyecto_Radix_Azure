@@ -31,7 +31,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<comunas> comunas { get; set; }
         public virtual DbSet<documentos> documentos { get; set; }
         public virtual DbSet<empresa_cargo> empresa_cargo { get; set; }
-        public virtual DbSet<empresas> empresas { get; set; }
         public virtual DbSet<estadosciviles> estadosciviles { get; set; }
         public virtual DbSet<fichadescuentos> fichadescuentos { get; set; }
         public virtual DbSet<fichasasistencias> fichasasistencias { get; set; }
@@ -69,5 +68,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<GruposCuarteles> GruposCuarteles { get; set; }
         public virtual DbSet<LoginPrivilegiosCuentas> LoginPrivilegiosCuentas { get; set; }
         public virtual DbSet<PrivilegiosCuentas> PrivilegiosCuentas { get; set; }
+        public virtual DbSet<empresas> empresas { get; set; }
+        public virtual DbSet<PlanesEmpresas> PlanesEmpresas { get; set; }
     }
 }

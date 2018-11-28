@@ -354,6 +354,9 @@
     <Compile Include="Models\personas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanesEmpresas.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\planillascontratos.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
