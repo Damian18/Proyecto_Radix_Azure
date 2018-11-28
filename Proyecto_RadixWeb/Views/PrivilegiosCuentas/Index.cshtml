@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.PrivilegiosCuentas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Lista privilegios y/o permisos
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <p>
+                        @Html.ActionLink("Nuevo Privilegio", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.pc_nom)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pc_nom)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.pc_id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.pc_id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.pc_id })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday</div>
+        </div>
+    </div>
+</div>

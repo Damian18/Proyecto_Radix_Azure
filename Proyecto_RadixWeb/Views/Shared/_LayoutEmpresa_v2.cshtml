@@ -26,6 +26,12 @@
         <!-- Lado Derecho  -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto ">
+                @if (ViewBag.idcookie == "Usuario no activo")
+                {
+                <li class="nav-item">
+                    <button id="startTourBtn" class="btn btn-warning">Iniciar Tutorial</button>
+                </li>
+                }
                 <li class="nav-item">
                     <a id="paso2" class="nav-link text-light" href="#" data-toggle="collapse" data-target="#notificar">Notificación</a>
                 </li>
@@ -107,7 +113,7 @@
     <!--  Lista notificacion Finaliza   -->
     <!--   Lista Vertical-->
     <div class="row " style="margin-top: 4%;max-width:100%;">
-        <div class="lista_scroll col-sm-12 col-md-3 col-lg-3" style="background-color: #263238;height: 100vh;">
+        <div class="lista_scroll col-sm-5 col-md-3 col-lg-3 col-xs-12 mt-1" style="background-color: #263238;height: 90vh;">
             <ul class="nav flex-column ml-2 mr-2 mt-2 mb-2 text-center" style="background-color: #263238">
                 <li class="nav-item border-top border-left border-right border-secondary rounded-top">
                     <a class="nav-link text-light font-weight-bold" href="@Url.Action("Index", "subempresas")">
@@ -124,7 +130,7 @@
                     </ul>
                 </li>
                 <li class="nav-item border-top border-bottom border-left border-right border-secondary">
-                    <a class="nav-link text-light font-weight-bold" href="#">Link</a>
+                    <a class="nav-link text-light font-weight-bold"  href="@Url.Action("Index", "PrivilegiosCuentas")">Privilegios</a>
                 </li>
                 <li class="nav-item border border-secondary">
                     <a class="nav-link text-light font-weight-bold" href="#">Link</a>
@@ -140,10 +146,7 @@
             <br />
             <br />
             <br />
-            @if (ViewBag.idcookie == "Usuario no activo")
-            {
-                <button id="startTourBtn" class="btn btn-warning">INICAR</button>
-            }
+           
             <form>
                 <label id="idcookie">@ViewBag.idcookie</label>
             </form>
@@ -161,7 +164,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    @*<script src="~/PaginaDashB/tour/js/bootstrap-tour-standalone.min.js"></script>*@
+
     <script src="~/PaginaHome/tour2/js/hopscotch.js"></script>
     <script src="~/PaginaHome/tour2/js/my_first_tour.js"></script>
     <!-- Start of HubSpot Embed Code -->
@@ -188,31 +191,7 @@
                 });
        }
     </script>
-    <script>
-        $(document).ready(function () {
-            var tour = new Tour({
-                steps: [
-                    {
-                        element: ".paso1",
-                        title: "Title of my step",
-                        content: "Content of my step"
-                    },
-                    {
-                        element: ".paso2",
-                        title: "Title of my step",
-                        content: "Content of my step",
-                    }
-                ],
-                backdrop: true,
-                backdropContainer: '.paso1',
-                backdropContainer: '.paso2',
-            });
-            // Initialize the tour
-            tour.init();
-            // Start the tour
-            tour.start();
-        });
-    </script>
+   
     @RenderSection("Scripts", required: false)
 </body>
 </html>

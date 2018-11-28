@@ -26,7 +26,8 @@
                 <table class="table table-striped table-bordered table-list">
                     <thead>
                         <tr class="text-center">
-                            <th><i class="fas fa-users-cog"></i></th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                             <th>
                                 RUT
                             </th>
@@ -45,60 +46,62 @@
                     <tbody>
                         @foreach (var item in Model.ObjEContrato)
                         {
-                            <tr class="text-center">
-                                <td align="center">
-                                    <a class="btn btn-outline-secondary"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.Per_Rut)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.Per_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
-                                    @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
-                                </td>
-                                <td>
-                                    @if (item.personas.cargos.Car_Nom != "Agricola")
-                                    {
-                                        <a class="btn btn-outline-success btn-sm m-0 cuenta" id="@item.personas.cargos.Car_Nom" name="@item.Per_Rut" href="#" data-toggle="modal" data-target="#NewCuenta">
-                                            Crear Cuenta
-                                        </a>
-                                        @*<a href="@Url.Action("RedirecionarCuenta", "Contratos", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut, car_nom = item.personas.cargos.Car_Nom})"
-                                   class="btn btn-outline-success btn-sm m-0">
-                                    Crear Cuenta
-                                </a>*@
+                        <tr>
+                            <td align="center">
+                                <a class="btn btn-outline-secondary"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <td align="center">
+                                <a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.personas.Per_Rut)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.personas.Per_ApePat)
+                                @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
+                            </td>
+                            <td>
+                                @if (item.personas.cargos.Car_Nom != "Agricola")
+                                {
+                                    <a class="btn btn-outline-success btn-sm m-0 cuenta" id="@item.personas.cargos.Car_Nom" name="@item.Per_Rut" href="#" data-toggle="modal" data-target="#NewCuenta">
+                                        Crear Cuenta
+                                    </a>
+                                    @*<a href="@Url.Action("RedirecionarCuenta", "Contratos", new { subemp_id = ViewBag.subemp_id, per_rut = item.Per_Rut, car_nom = item.personas.cargos.Car_Nom})"
+                   class="btn btn-outline-success btn-sm m-0">
+                    Crear Cuenta
+                </a>*@
 
-                                    }
-                                    @if (item.Doc_Id == null)
-                                    {
-                                        <a class="btn btn-outline-success btn-sm m-0" id="@item.Con_Id" href="#" data-toggle="modal" data-target="#MiDoc">
-                                            Agregar Contrato
-                                        </a>
-                                    }
-                                    else if (item.Doc_Id != null)
-                                    {
+                                }
+                                @if (item.Doc_Id == null)
+                                {
+                                    <a class="btn btn-outline-success btn-sm m-0" id="@item.Con_Id" href="#" data-toggle="modal" data-target="#MiDoc">
+                                        Agregar Contrato
+                                    </a>
+                                }
+                                else if (item.Doc_Id != null)
+                                {
 
-                                        <a class="btn btn-success" href="@Url.Action("ViewPdf", "Contratos", new { id = item.Doc_Id })" target="_blank">Ver PDF</a>
+                                    <a class="btn btn-success" href="@Url.Action("ViewPdf", "Contratos", new { id = item.Doc_Id })" target="_blank">Ver PDF</a>
 
-                                        <a class="btn btn-success" href="@Url.Action("DescargarDocx","Contratos",new { id= item.Doc_Id})">Descargar Word</a>
+                                    <a class="btn btn-success" href="@Url.Action("DescargarDocx","Contratos",new { id= item.Doc_Id})">Descargar Word</a>
 
-                                    }
+                                }
 
 
-                                    @*<a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                                Editar
-                            </a>
-                            <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
-                                Eliminar
-                            </a>*@
-                                </td>
-                            </tr>
+                                @*<a href="@Url.Action("Edit", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                Editar
+            </a>
+            <a href="@Url.Action("Delete", "Contratos", new { id = item.Con_Id })" class="btn btn-outline-success btn-sm m-0">
+                Eliminar
+            </a>*@
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
