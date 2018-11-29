@@ -598,6 +598,7 @@
     <Content Include="PaginaHome\tour2\js\my_first_tour.js" />
     <Content Include="Scripts\dashboard\1.js" />
     <Content Include="Scripts\dashboard\2.js" />
+    <Content Include="Scripts\dashboard\app.js" />
     <Content Include="Scripts\dashboard\bootstrap.bundle.min.js" />
     <Content Include="Scripts\dashboard\bootstrap.fd.js" />
     <Content Include="Scripts\dashboard\Chart.min.js" />
@@ -608,6 +609,7 @@
     <Content Include="Scripts\dashboard\sb-admin-charts.min.js" />
     <Content Include="Scripts\dashboard\sb-admin-datatables.min.js" />
     <Content Include="Scripts\dashboard\sb-admin.min.js" />
+    <Content Include="Scripts\dashboard\vendor.js" />
     <Content Include="Scripts\Layout\agency.js" />
     <Content Include="Scripts\Layout\agency.min.js" />
     <Content Include="Scripts\Layout\contact_me.js" />
@@ -987,6 +989,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Shared\item-editor.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1130,6 +1133,7 @@
     <Content Include="Views\PrivilegiosCuentas\Details.cshtml" />
     <Content Include="Views\PrivilegiosCuentas\Edit.cshtml" />
     <Content Include="Views\PrivilegiosCuentas\Index.cshtml" />
+    <Content Include="Views\Shared\EDIT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
