@@ -11,7 +11,7 @@ namespace Proyecto_RadixWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class planillascontratos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,7 @@ namespace Proyecto_RadixWeb.Models
         {
             this.empresa_cargo = new HashSet<empresa_cargo>();
         }
-    
+
         public int PC_Id { get; set; }
         public string PC_Nom { get; set; }
         public string PC_Ext { get; set; }
