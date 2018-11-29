@@ -65,6 +65,14 @@ namespace IdentitySample.Controllers
             return View();
         }
 
+        public JsonResult ListarPlanes()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<PlanesEmpresas> listaplanes = db.PlanesEmpresas.ToList();
+
+            return Json(listaplanes, JsonRequestBehavior.AllowGet);
+
+        }
 
 
 
