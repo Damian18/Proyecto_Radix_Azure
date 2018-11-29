@@ -266,8 +266,12 @@ namespace IdentitySample.Controllers
 
                 var emp = new empresas
                 {
-                    Emp_Nom = model.ObjEmpresas.Emp_Nom
-                };
+                    Emp_Nom = model.ObjEmpresas.Emp_Nom,
+                    plan_id= model.ObjEmpresas.plan_id,
+                    plan_estado=true,
+                    plan_FechaInicio= DateTime.Now.ToShortDateString()
+
+            };
                 db.empresas.Add(emp);
                 db.SaveChanges();
 

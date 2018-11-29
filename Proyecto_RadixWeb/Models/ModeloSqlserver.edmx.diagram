@@ -91,8 +91,8 @@
         <EntityTypeShape EntityType="radixModel.PrivilegiosCuentas" Width="1.5" PointX="14.25" PointY="2.5" />
         <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_login" />
         <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" />
-        <EntityTypeShape EntityType="radixModel.empresas" Width="1.5" PointX="20.375" PointY="1" />
         <EntityTypeShape EntityType="radixModel.PlanesEmpresas" Width="1.5" PointX="18.125" PointY="2" />
+        <EntityTypeShape EntityType="radixModel.empresas" Width="1.5" PointX="20.375" PointY="1" />
         <AssociationConnector Association="radixModel.empresa_cargo_empresa" />
         <AssociationConnector Association="radixModel.FK_empresas_PlanesEmpresas" />
         <AssociationConnector Association="radixModel.login_fk_Login_Empresa1" />

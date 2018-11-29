@@ -75,7 +75,7 @@
                     <li class="nav-item ">
                         <a class="nav-link text-white mr-2 " href="#" data-toggle="modal" data-target="#exampleModal">
                             Login
-                            / Register
+                            / Registrar
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -801,7 +801,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="inputplan" class="sr-only ">Plan</label>
-                                    @Html.DropDownList("plan_id", new SelectList(" "), "--- Seleccionar Plan ---", new { @class = "form-control" })
+                                    <select class="form-control" id="ObjEmpresas_plan_id" name="ObjEmpresas.plan_id">----Seleccione-----</select>
+                                  @*  @Html.DropDownList("ObjEmpresas_plan_id", new SelectList(" "), "--- Seleccionar Plan ---", new { @class = "form-control"})*@
                                 </div>
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
                                     <p class="mt-3 mb-3 text-muted">&copy; 2018-2019</p>
@@ -898,7 +899,7 @@
                                 <li><span class="fa fa-times text-danger"></span>   Asesoria </li>
 
                             </ul>
-                            <p><a href="#profile" class="btn btn-success btn-block" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#registrar">Registrarse ahora!</a></p>
+                            <p><a id="gratis" href="#profile" class="btn btn-success btn-block" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#exampleModal">Registrarse ahora!</a></p>
                         </div>
                     </div>
                 </div>
@@ -906,97 +907,7 @@
             </div>
         </div>
     </div>
-    <!--MODAL LOGIN para plan gratis momentaneo-->
-    <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="registrar"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-body text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link " id="home-tab" data-toggle="tab" href="#home2" role="tab"
-                               aria-controls="home2" aria-selected="true">Inicio Sesión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile2" role="tab"
-                               aria-controls="profile2" aria-selected="false">Registrarse</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact2" role="tab"
-                               aria-controls="contact2" aria-selected="false">Recuperar Cuenta</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade " id="home2" role="tabpanel" aria-labelledby="home-tab">
-                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <form class="form-signin">
-                                    <img class="mb-5 mt-5" src="~/PaginaHome/images/Logo_Radix_v3.png" alt="" width="200" height="80">
-
-                                    <label for="inputEmpresa" class="sr-only ">Empresa</label>
-                                    <input type="text" id="ObjEmpresas_Emp_Nom" name="ObjEmpresas.Emp_Nom" class="form-control mb-3" placeholder="Empresa"
-                                           required autofocus>
-                                    <label for="inputCorreo" class="sr-only ">Correo electronico</label>
-                                    <input type="email" id="ObjLogin_Email" name="ObjLogin.Email" class="form-control mb-3" placeholder="Correo electronico"
-                                           required autofocus>
-                                    <div class="pass_show">
-                                        <label for="inputContraseña" class="sr-only">Contraseña</label>
-                                        <input type="password" id="ObjLogin_Password" name="ObjLogin.Password" class="form-control mb-3" placeholder="Contraseña"
-                                               required>
-                                    </div>
-                                    <div class="checkbox mb-3">
-                                        <label>
-                                            <input id="ObjLogin_RememberMe" name="ObjLogin.RememberMe" type="checkbox" value="remember-me"> Remember me
-                                        </label>
-                                    </div>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
-                                    <p class="mt-3 mb-3 text-muted">&copy; 2018-2019</p>
-                                </form>
-                            }
-                        </div>
-                        <div class="tab-pane fade show active" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
-                            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                            {
-
-                                @Html.AntiForgeryToken()
-                                <form class="form-signin">
-                                    <img class="mb-5 mt-5" src="~/PaginaHome/images/Logo_Radix_v3.png" alt="" width="200" height="80">
-
-                                    <label for="inputEmp" class="sr-only ">Empresa</label>
-                                    <input type="text" id="ObjEmpresas_Emp_Nom" name="ObjEmpresas.Emp_Nom" class="form-control mb-3" placeholder="Empresa"
-                                           required autofocus>
-                                    <label for="inputEmail" class="sr-only ">Correo electronico</label>
-                                    <input type="email" id="ObjRegistrar_Email" name="ObjRegistrar.Email" class="form-control mb-3" placeholder="Correo electronico"
-                                           required autofocus>
-                                    <div class="pass_show">
-                                        <label for="inputPass" class="sr-only">Contraseña</label>
-                                        <input type="password" id="ObjRegistrar_Password" name="ObjRegistrar.Password" class="form-control mb-3" placeholder="Contraseña"
-                                               required>
-                                    </div>
-                                    <div class="pass_show">
-                                        <label for="inputConfPass" class="sr-only">Confirmar Contraseña</label>
-                                        <input type="password" id="ObjRegistrar_ConfirmPassword" name="ObjRegistrar.ConfirmPassword" class="form-control mb-3" placeholder="Confirmar Contraseña"
-                                               required>
-                                    </div>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
-                                    <p class="mt-3 mb-3 text-muted">&copy; 2018-2019</p>
-                                </form>
-                            }
-                        </div>
-                        <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab">...</div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
+    
     <!-- <a href="#" id="scrollarrow">Scroll up this page</a>  -->
     <div id="go-top" style="display: none;">
         <a class="smoothscroll" title="Back to Top" href="#top"><i class="fas fa-chevron-circle-up"></i></a>
@@ -1091,6 +1002,20 @@
             }
         });
     </script>
+    <script>
+        $("#gratis").click(function () {
+
+            $("#home-tab").removeClass("active");
+            $("#home").removeClass("show active");
+
+            $("#profile-tab").addClass("active");
+            $("#profile").addClass("show active");
+
+        });
+
+
+
+    </script>
 
     <script>
         $(function () {
@@ -1120,10 +1045,10 @@
 
           
                 $.get("/Home/ListarPlanes", function (data) {
-                    $("#plan_id").empty();
+                    $("#ObjEmpresas_plan_id").empty();
                     $.each(data, function (Create, row) {
 
-                        $("#plan_id").append("<option value='" + row.plan_id + "'>" + row.plan_nom, + "</option>")
+                        $("#ObjEmpresas_plan_id").append("<option value='" + row.plan_id + "'>" + row.plan_nom, + "</option>")
                     });
                 });
          

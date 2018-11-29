@@ -155,8 +155,8 @@
           <Property Name="Emp_Dir" Type="nvarchar" MaxLength="100" />
           <Property Name="plan_id" Type="int" />
           <Property Name="plan_estado" Type="bit" />
-          <Property Name="plan_FechaInicio" Type="date" />
-          <Property Name="plan_FechaFin" Type="date" />
+          <Property Name="plan_FechaInicio" Type="nvarchar" MaxLength="10" />
+          <Property Name="plan_FechaFin" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="estadosciviles">
           <Key>
@@ -1913,8 +1913,8 @@
             <End Role="PrivilegiosCuentas" EntitySet="PrivilegiosCuentas" />
             <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
           </AssociationSet>
-          <EntitySet Name="empresas" EntityType="radixModel.empresas" />
           <EntitySet Name="PlanesEmpresas" EntityType="radixModel.PlanesEmpresas" />
+          <EntitySet Name="empresas" EntityType="radixModel.empresas" />
           <AssociationSet Name="empresa_cargo_empresa" Association="radixModel.empresa_cargo_empresa">
             <End Role="empresas" EntitySet="empresas" />
             <End Role="empresa_cargo" EntitySet="empresa_cargo" />
@@ -2543,6 +2543,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PlanesEmpresas">
+          <Key>
+            <PropertyRef Name="plan_id" />
+          </Key>
+          <Property Name="plan_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plan_nom" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.FK_empresas_PlanesEmpresas" FromRole="PlanesEmpresas" ToRole="empresas" />
+        </EntityType>
         <EntityType Name="empresas">
           <Key>
             <PropertyRef Name="Emp_Id" />
@@ -2554,20 +2562,12 @@
           <Property Name="Emp_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="plan_id" Type="Int32" />
           <Property Name="plan_estado" Type="Boolean" />
-          <Property Name="plan_FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="plan_FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="plan_FechaInicio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="plan_FechaFin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="empresa_cargo" Relationship="radixModel.empresa_cargo_empresa" FromRole="empresas" ToRole="empresa_cargo" />
           <NavigationProperty Name="PlanesEmpresas" Relationship="radixModel.FK_empresas_PlanesEmpresas" FromRole="empresas" ToRole="PlanesEmpresas" />
           <NavigationProperty Name="login" Relationship="radixModel.login_fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.subempresas_FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
-        </EntityType>
-        <EntityType Name="PlanesEmpresas">
-          <Key>
-            <PropertyRef Name="plan_id" />
-          </Key>
-          <Property Name="plan_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="plan_nom" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="empresas" Relationship="radixModel.FK_empresas_PlanesEmpresas" FromRole="PlanesEmpresas" ToRole="empresas" />
         </EntityType>
         <Association Name="empresa_cargo_empresa">
           <End Type="radixModel.empresas" Role="empresas" Multiplicity="0..1" />
@@ -3057,6 +3057,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PlanesEmpresas">
+            <EntityTypeMapping TypeName="radixModel.PlanesEmpresas">
+              <MappingFragment StoreEntitySet="PlanesEmpresas">
+                <ScalarProperty Name="plan_nom" ColumnName="plan_nom" />
+                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="empresas">
             <EntityTypeMapping TypeName="radixModel.empresas">
               <MappingFragment StoreEntitySet="empresas">
@@ -3069,14 +3077,6 @@
                 <ScalarProperty Name="Emp_Cant" ColumnName="Emp_Cant" />
                 <ScalarProperty Name="Emp_Nom" ColumnName="Emp_Nom" />
                 <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PlanesEmpresas">
-            <EntityTypeMapping TypeName="radixModel.PlanesEmpresas">
-              <MappingFragment StoreEntitySet="PlanesEmpresas">
-                <ScalarProperty Name="plan_nom" ColumnName="plan_nom" />
-                <ScalarProperty Name="plan_id" ColumnName="plan_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
