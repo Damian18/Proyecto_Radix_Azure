@@ -56,18 +56,21 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cuar_id,cuar_nom,varfrut_id,sect_id")] Cuarteles cuarteles)
+        public ActionResult Create(MultiplesClases multiples,string sect_id)
         {
             if (ModelState.IsValid)
             {
-                db.Cuarteles.Add(cuarteles);
+                multiples.ObjCuarteles.sect_id = Convert.ToInt32(sect_id);
+                db.Cuarteles.Add(multiples.ObjCuarteles);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { sect_id });
             }
+            ViewBag.sect_id = new SelectList(db.Sectores, "sect_id", "sect_nom", multiples.ObjCuarteles.sect_id);
+            ViewBag.varfrut_id = new SelectList(db.VariedadesFrutas, "varfrut_id", "var_nom", multiples.ObjCuarteles.varfrut_id);
+            return View(multiples);
 
-            ViewBag.sect_id = new SelectList(db.Sectores, "sect_id", "sect_nom", cuarteles.sect_id);
-            ViewBag.varfrut_id = new SelectList(db.VariedadesFrutas, "varfrut_id", "var_nom", cuarteles.varfrut_id);
-            return View(cuarteles);
+        
+          
         }
 
         // GET: Cuarteles/Edit/5
