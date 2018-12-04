@@ -15,14 +15,17 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: Cuarteles
-        public ActionResult Index(string subemp_id)
+        public ActionResult Index(string sect_id)
         {
-            int sub_id = Convert.ToInt32(subemp_id);
-
-            ViewBag.subemp_id = subemp_id;
-
+         
+            ViewBag.sect_id = sect_id;
+            int sec = Convert.ToInt32(sect_id.ToString());
             var cuarteles = db.Cuarteles.Include(c => c.Sectores).Include(c => c.VariedadesFrutas);
-            return View(cuarteles.Where(c=>c.Sectores.Sub_Id==sub_id).ToList());
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjECuarteles = cuarteles.Where(e => e.sect_id == sec).ToList()
+            };
+            return View(multiples);
         }
 
         // GET: Cuarteles/Details/5

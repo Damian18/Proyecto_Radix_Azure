@@ -31,9 +31,9 @@ namespace Proyecto_RadixWeb.Models
         public Proyecto_RadixWeb.Models.planillascontratos ObjPlantillascontratos { get; set; }
         public Proyecto_RadixWeb.Models.documentos ObjDocumentos { get; set; }
         public Proyecto_RadixWeb.Models.Sectores ObjSectores { get; set; }
-        public Proyecto_RadixWeb.Models.PrivilegiosCuentas ObjPrivilegios { get; set; }
         public Proyecto_RadixWeb.Models.PlanesEmpresas ObjPlanesEmpresa { get; set; }
-
+        public Proyecto_RadixWeb.Models.PrivilegiosCuentas ObjPrivilegiosCuentas { get; set; }
+        public Proyecto_RadixWeb.Models.Cuarteles ObjCuarteles { get; set; }
         //listar
         public IEnumerable<Proyecto_RadixWeb.Models.subempresas> ObjESubEmpresas { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.personas> ObjEPersonas { get; set; }
@@ -42,9 +42,10 @@ namespace Proyecto_RadixWeb.Models
         public IEnumerable<Proyecto_RadixWeb.Models.empresa_cargo> ObjEEmpresa_Cargo { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.Sectores> ObjESectores { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.cargos> ObjECargos { get; set; }
-        public Proyecto_RadixWeb.Models.PrivilegiosCuentas ObjEPrivilegios { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.planillascontratos> ObjEPlantillascontratos { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.PlanesEmpresas> ObjEPlanesEmpresas { get; set; }
         public IEnumerable<Proyecto_RadixWeb.Models.empresas> ObjEEmpresas { get; set; }
+        public IEnumerable<Proyecto_RadixWeb.Models.PrivilegiosCuentas> ObjEPrivilegiosCuentas { get; set; }
+        public IEnumerable<Proyecto_RadixWeb.Models.Cuarteles> ObjECuarteles { get; set; }
     }
 }

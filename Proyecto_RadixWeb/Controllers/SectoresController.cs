@@ -19,11 +19,12 @@ namespace Proyecto_RadixWeb.Controllers
         {
 
             ViewBag.subemp_id = subemp_id;
+            int sub = Convert.ToInt32(subemp_id.ToString());
             var sectores = db.Sectores.Include(s => s.subempresas);
 
             MultiplesClases multiples = new MultiplesClases
             {
-                ObjESectores= sectores.ToList()
+                ObjESectores = sectores.Where(e => e.Sub_Id == sub).ToList()
             };
 
             return View(multiples);
@@ -118,10 +119,9 @@ namespace Proyecto_RadixWeb.Controllers
             return View(sectores);
         }
        [HttpPost]
-        public ActionResult borrar(string id, string subemp_id) {
-
-            int ide = Convert.ToInt32(id);
-            Sectores sectores = db.Sectores.Find(ide);
+        public ActionResult borrar(int id) {
+       
+            Sectores sectores = db.Sectores.Find(id);
             db.Sectores.Remove(sectores);
             db.SaveChanges();
 

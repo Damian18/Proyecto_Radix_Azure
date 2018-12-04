@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Proyecto_RadixWeb.Models.Cuarteles>
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
 
 @{
     ViewBag.Title = "Index";
@@ -25,19 +26,19 @@
                 <table class="table table-hover table-bordered table-condensed">
                     <tr style="background-color:#d7d6d6">
                         <th>
-                            @Html.DisplayNameFor(model => model.cuar_nom)
+                            Nombre
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Sectores.sect_nom)
+                           Sector
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.VariedadesFrutas.var_nom)
+                            Variedad
                         </th>
                         <th></th>
                         <th></th>
                     </tr>
 
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.ObjECuarteles)
                     {
                         <tr>
                             <td>

@@ -4,51 +4,72 @@
     ViewBag.Title = "Index Sectores";
 }
 @*<link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />*@
-<div id="contenido_vista" style="margin-top: 10%;margin-left:20%">
-    <div class="col-sm-12 col-md-12">
-        <div class="row">
-            <div class="border-success mt-3 mb-3 col-sm-2 col-md-2 ">
-                <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Nuevo Sector</a>
+
+<div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
+        <div class="card-header">
+            <div class="col col-xs-1 col-md-1 col-lg-1">
+                <i class="fas fa-table"></i>
             </div>
-            @*<div class="border-success mt-3 mb-3 ">
-                    <a class="btn btn-success ml-3" href="@Url.Action("ListaPlantilla","SubEmpresas")">Ver Plantilla Empresa</a>
-                </div>*@
+            <div class="col col-xs-8 col-md-8 col-lg-8">
+                <h5 class="panel-title" style="text-align:center"><b>Privilegios</b> </h5>
+            </div>
+            <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
+                <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Nuevo Sector</a>
 
+            </div>
         </div>
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered table-condensed">
+                    <tr style="background-color:#d7d6d6">
+                        <th>
+                            Nombre
+                        </th>
+                        <th>Ubicacion</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.ObjESectores)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sect_nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom)
+                        </td>
+                        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.pc_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.pc_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.pc_id })
+        </td>*@
+                        <td align="center">
+
+                            <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                        </td>
+                        <td align="center">
+                            <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                        <th>
+                            <a href="@Url.Action("Index", "Cuarteles", new { sect_id = item.sect_id })" class="mt-2"><i class="fas fa-map-marker-alt btn btn-lg btn-info" style="margin-left: 25%;"> Cuarteles</i></a>
 
 
+                        </th>
+                    </tr>
+                    }
 
-    <div class="col-sm-12 col-md-12 col-lg-12 ml-5">
-        <div class="row">
-            @foreach (var item in Model.ObjESectores)
-            {
-                <div class="card col-sm-3 col-md-3 border-success mb-3">
+                </table>
 
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.sect_nom)</h5>
-                        <p class="card-text">Ubicado en @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom).</p>
-                        @*<a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })" class="btn btn-success col-sm-12 col-md-12 mt-1">Ver Información</a>
-                            <a href="@Url.Action("Index", "SubEmpresa_Cargos", new { subemp_id = item.Sub_Id })" class="btn btn-success col-sm-12 col-md-12 mt-1">Ver Cargos</a>*@
-                        <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
-                            <a class="btn btn-outline-secondary" href="@Url.Action("borrar", "Sectores", new { id = item.sect_id })"><i class="fas fa-edit"></i></a>
-                          
-                        </div>
-                        <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
-
-                            <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-1 col-md-1"></div>
-            }
+            </div>
         </div>
 
-
-
     </div>
-
-    <!-- Modal -->
+</div>
+    <!-- Create -->
     <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             @using (Html.BeginForm("Create", "Sectores", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
@@ -78,43 +99,16 @@
             }
         </div>
     </div>
-
-    <!--EDITAR-->
-    <div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Editar sector</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Contenido del centro-->
-                    <div class="modal-body">
-
-                    </div>
-
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Editar</button>
-                    </div>
-                </div>
-            
-        </div>
-    </div>
-    <!--ELIMINAR-->
+    <!--Eliminar-->
     <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Delete", "Sectores", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Quieres eliminar este sector?</h4>
+                        <h4 class="modal-title">Nuevo Sector</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -123,18 +117,17 @@
                     <div class="modal-body">
 
                     </div>
-
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" >Eliminar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
             }
         </div>
-            
     </div>
-</div>
+
+
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function () {

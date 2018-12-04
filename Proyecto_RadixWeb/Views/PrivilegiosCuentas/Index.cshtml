@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Proyecto_RadixWeb.Models.PrivilegiosCuentas>
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
 
 @{
     ViewBag.Title = "Index PrivilegiosCuentas";
@@ -14,7 +15,7 @@
                 <h5 class="panel-title" style="text-align:center"><b>Privilegios</b> </h5>
             </div>
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
-                <a class="btn btn-sm btn-danger" href="@Url.Action("Create", "PrivilegiosCuentas")">Agregar Privilegio </a>
+                <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Nuevo Privilegio</a>
             </div>
         </div>
         <div class="card-body">
@@ -23,13 +24,13 @@
                 <table class="table table-hover table-bordered table-condensed">
                     <tr style="background-color:#d7d6d6">
                         <th>
-                            @Html.DisplayNameFor(model => model.pc_nom)
+                            Nombre
                         </th>
                         <th></th>
                         <th></th>
                     </tr>
 
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.ObjEPrivilegiosCuentas)
                     {
                         <tr>
                             <td>
@@ -58,49 +59,62 @@
     </div>
 </div>
 
-<!--editar-->
-<!-- Modal -->
-<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<!-- Create -->
+<div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm("Create", "PrivilegiosCuentas", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo Sector</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Contenido del centro-->
+                <div class="modal-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.Label("Privilegio")
+                        @Html.EditorFor(model => model.ObjPrivilegiosCuentas.pc_nom, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+        }
     </div>
 </div>
-
-<!--eliminar--><!-- Modal -->
+<!--Eliminar-->
 <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm("Delete", "PrivilegiosCuentas", new { id = ViewBag   .pc_id }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo Sector</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Contenido del centro-->
+                <div class="modal-body">
+                    @Html.LabelFor(model => model.ObjPrivilegiosCuentas.pc_nom)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+        }
     </div>
 </div>
-
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
