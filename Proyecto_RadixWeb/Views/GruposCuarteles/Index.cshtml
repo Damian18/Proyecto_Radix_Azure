@@ -1,0 +1,86 @@
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
+@{
+    ViewBag.Title = "Index grupos";
+}
+
+@*<link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />*@
+
+
+<div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
+        <div class="card-header">
+            <div class="col col-xs-1 col-md-1 col-lg-1">
+                <i class="fas fa-table"></i>
+            </div>
+            <div class="col col-xs-8 col-md-8 col-lg-8">
+                <h5 class="panel-title" style="text-align:center"><b>Grupos</b> </h5>
+            </div>
+            <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
+                <a class="btn btn-success ml-3" href="#" data-toggle="modal" data-target="#MiModal">Nuevo Grupo</a>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered table-condensed">
+                    <tr style="background-color:#d7d6d6">
+                        <th>
+                            Responsable
+                        </th>
+                        <th>
+                            Agricola Asiganado
+                        </th>
+                        <th>
+                            Cuadrilla
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.ObjEGruposCuarteles)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_Nom)
+                            @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.contratos1.personas.Per_Nom)
+                            @Html.DisplayFor(modelItem => item.contratos1.personas.Per_ApePat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cuarteles.cuar_nom)
+                        </td>
+                        <td align="center">
+
+                            <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                        </td>
+                        <td align="center">
+                            <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.gc_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.gc_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.gc_id })
+        </td>*@
+                    </tr>
+                    }
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#contenido_vista').appendTo('#contenido_general');
+    });
+
+</script>
+

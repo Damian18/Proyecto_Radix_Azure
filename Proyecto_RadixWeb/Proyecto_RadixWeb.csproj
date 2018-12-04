@@ -245,6 +245,7 @@
     <Compile Include="Controllers\CuentasAndroidsController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\Empresa_CargoController.cs" />
+    <Compile Include="Controllers\GruposCuartelesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Horario_laboralController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1163,6 +1164,11 @@
     <Content Include="Views\PlanesEmpresas\Details.cshtml" />
     <Content Include="Views\PlanesEmpresas\Edit.cshtml" />
     <Content Include="Views\PlanesEmpresas\Index.cshtml" />
+    <Content Include="Views\GruposCuarteles\Create.cshtml" />
+    <Content Include="Views\GruposCuarteles\Delete.cshtml" />
+    <Content Include="Views\GruposCuarteles\Details.cshtml" />
+    <Content Include="Views\GruposCuarteles\Edit.cshtml" />
+    <Content Include="Views\GruposCuarteles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

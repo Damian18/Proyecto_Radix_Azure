@@ -1,0 +1,50 @@
+﻿@model Proyecto_RadixWeb.Models.GruposCuarteles
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>GruposCuarteles</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.contratos.Per_Rut)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.contratos.Per_Rut)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.contratos1.Per_Rut)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.contratos1.Per_Rut)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Cuarteles.cuar_nom)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Cuarteles.cuar_nom)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.gc_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
