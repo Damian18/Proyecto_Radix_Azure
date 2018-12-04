@@ -3,17 +3,17 @@
 }
 
 .table-responsive {
-    height: 200px;
+    height: 450px;
 }
 
 .panel-table .panel-body .table-bordered {
-    border-style: none;
+  
     margin: 0;
 }
 
     .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
         text-align: center;
-        width: 100px;
+        width: 200px;
     }
 
     .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
@@ -47,8 +47,8 @@ used to vertically center elements, may need modification if you're not using de
 }
 
 .panel-table .panel-heading .col h3 {
-    line-height: 30px;
-    height: 30px;
+    line-height: 60px;
+    height: 60px;
 }
 
 .panel-table .panel-body .table-bordered > tbody > tr > td {

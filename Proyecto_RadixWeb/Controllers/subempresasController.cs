@@ -148,10 +148,12 @@ namespace Proyecto_RadixWeb.Controllers
         public ActionResult Index()
         {
 
-            string emp_nom= HttpContext.Session["Empresa"].ToString(); 
+            string emp_nom= HttpContext.Session["Empresa"].ToString();
 
             ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+
             ViewBag.empresa = emp_nom;
+
 
             List<regiones> listaregiones = db.regiones.ToList();
             ViewBag.regiones = new SelectList(listaregiones, "Reg_Id", "Reg_Nom");

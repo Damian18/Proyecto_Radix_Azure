@@ -3,68 +3,132 @@
 @{
     ViewBag.Title = "Index";
 }
-  </br>
-    </br>
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-table"></i> Planillas de contratos de la empresa.
+
+<div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
+        <div class="card-header">
+            <div class="col col-xs-1 col-md-1 col-lg-1">
+                <i class="fas fa-table"></i>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    @if (ViewBag.sms != null)
+            <div class="col col-xs-8 col-md-8 col-lg-8">
+                <h5 class="panel-title" style="text-align:center"><b>Documentos</b> </h5>
+            </div>
+            <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
+                <button class="btn btn-sm btn-danger" href="@Url.Action("Create", "planillascontratos")">Agregar Documento </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @if (ViewBag.sms != null)
+                {
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> Indicates a successful or positive action.@ViewBag.sms
+                    </div>
+                }
+                @if (ViewBag.smserror != null)
+                {
+                    <div class="alert alert-warning">
+                        <strong>Warning!</strong> Indicates a warning that might need attention.@ViewBag.smserror
+                    </div>
+                }
+
+                <table class="table table-hover table-bordered table-condensed">
+                    <tr style="background-color:#d7d6d6">
+                        <th>
+                            Nombre Documento
+                        </th>
+                        <th>
+                            Extension
+                        </th>
+                        <th>
+                            Descargar
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
                     {
-                        <div class="alert alert-success">
-                            <strong>Success!</strong> Indicates a successful or positive action.@ViewBag.sms
-                        </div>
-                    }
-                    @if (ViewBag.smserror != null)
-                    {
-                        <div class="alert alert-warning">
-                            <strong>Warning!</strong> Indicates a warning that might need attention.@ViewBag.smserror
-                        </div>
-                    }
-                    <h3>
-                        @Html.ActionLink("Nueva Plantilla", "Create")
-                    </h3>
-                    <table class="table">
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PC_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PC_Ext)
-                            </th>
-                            <th>
-                                Descargar
-                            </th>
-                            <th></th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PC_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PC_Ext)
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Descargar Docx", "DescargarDocx", new { id = item.PC_Id })  |
+                                @Html.ActionLink("Descargar Pdf", "DescargarPdf", new { id = item.PC_Id })
+                            </td>
+                            <td align="center">
+
+                                <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <td align="center">
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PC_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PC_Ext)
-                                </td>
-
-                                <td>
-                                    @Html.ActionLink("Descargar Docx", "DescargarDocx", new { id = item.PC_Id })  |
-                                    @Html.ActionLink("Descargar Pdf", "DescargarPdf", new { id = item.PC_Id })
-                                </td>
-
-                            </tr>
-                        }
+                    }
 
 
-                    </table>
-                </div>
+                </table>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday </div>
         </div>
     </div>
 </div>
+
+<!--editar-->
+<!-- Modal -->
+<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--eliminar--><!-- Modal -->
+<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#contenido_vista').appendTo('#contenido_general');
+    });
+
+</script>
+

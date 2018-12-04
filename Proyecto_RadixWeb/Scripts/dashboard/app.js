@@ -1294,10 +1294,10 @@ $(function () {
     function setThemeState() {
         // set theme type
         if (themeSettings.themeName) {
-            $styleLink.attr('href', 'css/app-' + themeSettings.themeName + '.css');
+            $styleLink.attr('href', 'Content/css/dashboard/app-green.css');
         }
         else {
-            $styleLink.attr('href', 'css/app.css');
+            $styleLink.attr('href', 'Content/css/dashboard/app.css');
         }
 
         // App classes
@@ -1321,14 +1321,7 @@ $(function () {
 
     function setThemeControlsState() {
         // set color switcher
-        $customizeMenuColorBtns.each(function () {
-            if ($(this).data('theme') === themeSettings.themeName) {
-                $(this).addClass('active');
-            }
-            else {
-                $(this).removeClass('active');
-            }
-        });
+       
 
         // set radio buttons
         $customizeMenuRadioBtns.each(function () {

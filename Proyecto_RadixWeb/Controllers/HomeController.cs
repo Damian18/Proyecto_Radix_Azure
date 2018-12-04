@@ -14,6 +14,19 @@ namespace IdentitySample.Controllers
     {
         private radixEntities db = new radixEntities();
 
+        public ActionResult Estadisticas_cantidad()
+        {
+                    return View("Estadisticas_cantidad");          
+   }
+        public ActionResult Estadisticas_genero()
+        {
+            return View("Estadisticas_genero");
+        }
+        public ActionResult Estadisticas_forma()
+        {
+            return View("Estadisticas_forma");
+        }
+
 
 
         public ActionResult Index()
@@ -35,18 +48,27 @@ namespace IdentitySample.Controllers
                 {
                     string emp_nom = HttpContext.Session["Empresa"].ToString();
                     ViewBag.empresa = emp_nom;
+
+
+
+                    string prob = "1";
+                    ViewBag.prob = prob;
                     if (Request.Cookies["Cookie"] != null)
                     {
                         ViewBag.idcookie = Request.Cookies["Cookie"].Value;
-                        
                     }
                     else
                     {
                         ViewBag.idcookie = "Usuario no activo";
+             
                         HttpCookie cook = new HttpCookie("Cookie");
+             
                         cook.Value = "Usuario Activo";
+                  
                         cook.Expires = DateTime.Now.AddMonths(1);
+                
                         Response.Cookies.Add(cook);
+             
                     }
                     //esto es temporal hasta que se logre hacer funcional el dashboard de administrador
                     return View("DashBoardAdmin");
@@ -55,8 +77,9 @@ namespace IdentitySample.Controllers
                 }
                 catch (Exception e)
                 {
-
-                    throw new Exception("Tiempo limite de sesion superada " + e.Message);
+                   
+                    ViewBag.prob = "2";
+                    return (ViewBag.prob);
                 }
                
             }

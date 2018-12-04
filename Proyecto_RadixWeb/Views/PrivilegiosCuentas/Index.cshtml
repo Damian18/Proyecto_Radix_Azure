@@ -1,47 +1,114 @@
 ﻿@model IEnumerable<Proyecto_RadixWeb.Models.PrivilegiosCuentas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index PrivilegiosCuentas";
 }
-
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-table"></i> Lista privilegios y/o permisos
+@*<link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />*@
+<div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
+        <div class="card-header">
+            <div class="col col-xs-1 col-md-1 col-lg-1">
+                <i class="fas fa-table"></i>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <p>
-                        @Html.ActionLink("Nuevo Privilegio", "Create")
-                    </p>
-                    <table class="table">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.pc_nom)
-                            </th>
-                            <th></th>
-                        </tr>
+            <div class="col col-xs-8 col-md-8 col-lg-8">
+                <h5 class="panel-title" style="text-align:center"><b>Privilegios</b> </h5>
+            </div>
+            <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
+                <a class="btn btn-sm btn-danger" href="@Url.Action("Create", "PrivilegiosCuentas")">Agregar Privilegio </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
 
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.pc_nom)
-                                </td>
-                                <td>
+                <table class="table table-hover table-bordered table-condensed">
+                    <tr style="background-color:#d7d6d6">
+                        <th>
+                            @Html.DisplayNameFor(model => model.pc_nom)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.pc_nom)
+                            </td>
+                            @*<td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.pc_id }) |
                                     @Html.ActionLink("Details", "Details", new { id = item.pc_id }) |
                                     @Html.ActionLink("Delete", "Delete", new { id = item.pc_id })
-                                </td>
-                            </tr>
-                        }
+                                </td>*@
+                            <td align="center">
 
-                    </table>
+                                <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <td align="center">
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
 
-                </div>
+                </table>
+
             </div>
-            <div class="card-footer small text-muted">Updated yesterday</div>
+        </div>
+
+    </div>
+</div>
+
+<!--editar-->
+<!-- Modal -->
+<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
+
+<!--eliminar--><!-- Modal -->
+<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#contenido_vista').appendTo('#contenido_general');
+    });
+
+</script>
+

@@ -1,13 +1,10 @@
 ﻿@model Proyecto_RadixWeb.Models.MultiplesClases
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index Sectores";
 }
-
-<div id="contenido_vista">
-
-
-
+@*<link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />*@
+<div id="contenido_vista" style="margin-top: 10%;margin-left:20%">
     <div class="col-sm-12 col-md-12">
         <div class="row">
             <div class="border-success mt-3 mb-3 col-sm-2 col-md-2 ">
@@ -33,7 +30,14 @@
                         <p class="card-text">Ubicado en @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom).</p>
                         @*<a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })" class="btn btn-success col-sm-12 col-md-12 mt-1">Ver Información</a>
                             <a href="@Url.Action("Index", "SubEmpresa_Cargos", new { subemp_id = item.Sub_Id })" class="btn btn-success col-sm-12 col-md-12 mt-1">Ver Cargos</a>*@
+                        <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
+                            <a class="btn btn-outline-secondary" href="@Url.Action("borrar", "Sectores", new { id = item.sect_id })"><i class="fas fa-edit"></i></a>
+                          
+                        </div>
+                        <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
 
+                            <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-1 col-md-1"></div>
@@ -45,12 +49,11 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             @using (Html.BeginForm("Create", "Sectores", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -64,13 +67,9 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             @Html.Label("Sector")
-                            @Html.Editor("sect_nom", new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.ObjSectores.sect_nom, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-
-
                     </div>
-
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -79,8 +78,63 @@
             }
         </div>
     </div>
-</div>
 
+    <!--EDITAR-->
+    <div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar sector</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+                    <div class="modal-body">
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    <!--ELIMINAR-->
+    <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Quieres eliminar este sector?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+                    <div class="modal-body">
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" >Eliminar</button>
+                    </div>
+                </div>
+            }
+        </div>
+            
+    </div>
+</div>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function () {

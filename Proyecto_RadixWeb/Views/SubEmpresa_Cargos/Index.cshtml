@@ -1,68 +1,73 @@
 ﻿@model IEnumerable<Proyecto_RadixWeb.Models.subempresa_cargo>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index SubEmpresaCargos";
 }
-
-<div id="contenido_vista">
-    <div class="card mb-3 mt-2">
+@*<link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />*@
+<div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
         <div class="card-header">
-            <i class="fa fa-table"></i> Cargos de la sucursal.
+            <div class="col col-xs-1 col-md-1 col-lg-1">
+                <i class="fas fa-table"></i>
+            </div>
+            <div class="col col-xs-8 col-md-8 col-lg-8">
+                <h5 class="panel-title" style="text-align:center"><b>Cargos</b> </h5>
+            </div>
+            <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
+                <button type="button" class="btn btn-danger btn-sm m-0 documento" href="#" data-toggle="modal" data-target="#NewPersona">  Nuevo Trabajador</button>
+                <a class="btn btn-success" style="margin-left:5%" href="@Url.Action("Create","SubEmpresa_Cargos",new { subemp_id = ViewBag.subemp_id })">Agregar Cargos</a>
+                @if (ViewBag.cargo == 0)
+                {
+
+                    @*@Html.ActionLink("Crear Cuenta Administrador Sucursal", "Create", new { subemp_id = ViewBag.subemp_id })*@
+                    //  <a class="btn btn-success" href="#" data-toggle="modal" data-target="#MiModal">Crear Cargo de Administrador de Sucursal</a>
+                    using (Html.BeginForm("Index", "SubEmpresa_Cargos", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <button style="margin-left: 73%;margin-top: -9.5%;" type="submit" class="btn btn-warning">Agregar Administrador se Sucursal</button>
+                    }
+                }
+            </div>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <h2>Cargos de la sucursal @ViewBag.subemp_id</h2>
 
-                <p>
-
-                    @*  @Html.ActionLink("Crear Cargo nuevo", "Create", new { subemp_id = ViewBag.subemp_id })*@
-                    <a class="btn btn-success" href="@Url.Action("Create","SubEmpresa_Cargos",new { subemp_id = ViewBag.subemp_id })">Agregar Cargos</a>
-
-
-
-
-
-                    @*   <div style="margin-left:65%;margin-right:5%">*@
-                    @if (ViewBag.cargo == 0)
-                    {
-
-                        @*@Html.ActionLink("Crear Cuenta Administrador Sucursal", "Create", new { subemp_id = ViewBag.subemp_id })*@
-                        //  <a class="btn btn-success" href="#" data-toggle="modal" data-target="#MiModal">Crear Cargo de Administrador de Sucursal</a>
-                        using (Html.BeginForm("Index", "SubEmpresa_Cargos", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <button style="margin-left: 73%;margin-top: -9.5%;" type="submit" class="btn btn-warning">Agregar Administrador se Sucursal</button>
-                        }
-                    }
-                    @* </div>*@
-                </p>
-                <table class="table">
-                    <tr>
+                <table class="table table-hover table-bordered table-condensed">
+                    <tr style="background-color:#d7d6d6">
                         <th>
                             @Html.DisplayName("Cargo")
                         </th>
 
                         <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
 
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Horario", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
-                                    Horario
-                                </a>
-                                <a href="@Url.Action("Index", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
-                                    Asistencia
-                                </a>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Horario", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
+                                Horario
+                            </a>
+                            <a href="@Url.Action("Index", "Horario_laboral", new { Subempcar_id = item.Subempcar_id })" class="btn btn-outline-success btn-sm m-0">
+                                Asistencia
+                            </a>
 
-                            </td>
+                        </td>
+                        <td align="center">
 
-                        </tr>
+                            <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                        </td>
+                        <td align="center">
+                            <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
                     }
 
                 </table>
@@ -108,9 +113,57 @@
     </div>
 </div>
 
+<!--editar-->
+<!-- Modal -->
+<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--eliminar--><!-- Modal -->
+<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
+
     $(document).ready(function () {
         $('#contenido_vista').appendTo('#contenido_general');
     });
+
 </script>
+

@@ -56,18 +56,18 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "sect_id,sect_nom")] Sectores sectores,string subemp_id)
+        public ActionResult Create(MultiplesClases multiples, string subemp_id)
         {
             if (ModelState.IsValid)
             {
-                sectores.Sub_Id = Convert.ToInt32(subemp_id);
-                db.Sectores.Add(sectores);
+                multiples.ObjSectores.Sub_Id = Convert.ToInt32(subemp_id);
+                db.Sectores.Add(multiples.ObjSectores);
                 db.SaveChanges();
                 return RedirectToAction("Index",new { subemp_id });
             }
 
-            ViewBag.Sub_Id = new SelectList(db.subempresas, "Sub_Id", "Sub_Nom", sectores.Sub_Id);
-            return View(sectores);
+            ViewBag.Sub_Id = new SelectList(db.subempresas, "Sub_Id", "Sub_Nom", multiples.ObjSectores.Sub_Id);
+            return View(multiples);
         }
 
         // GET: Sectores/Edit/5
@@ -117,7 +117,16 @@ namespace Proyecto_RadixWeb.Controllers
             }
             return View(sectores);
         }
+       [HttpPost]
+        public ActionResult borrar(string id, string subemp_id) {
 
+            int ide = Convert.ToInt32(id);
+            Sectores sectores = db.Sectores.Find(ide);
+            db.Sectores.Remove(sectores);
+            db.SaveChanges();
+
+            return View("Index");
+        }
         // POST: Sectores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

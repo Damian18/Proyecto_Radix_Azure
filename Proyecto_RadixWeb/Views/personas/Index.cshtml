@@ -3,126 +3,196 @@
 @{
     ViewBag.Title = "Index";
 }
-  </br>
-    </br>
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-table"></i> Lista del personal
+<link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />
+<div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
+        <div class="card-header">
+
+
+            <div class="col col-xs-1 col-md-1 col-lg-1">
+                <i class="fas fa-table"></i>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <p>
-                        @Html.ActionLink("Create New", "Create")
-                    </p>
-                    <table class="table">
+            <div class="col col-xs-8 col-md-8 col-lg-8">
+                <h5 class="panel-title" style="text-align:center"><b>Personas</b> </h5>
+            </div>
+            <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
+                <button type="button" class="btn btn-danger btn-sm m-0 documento" href="#" data-toggle="modal" data-target="#NewPersona">  Nuevo Trabajador</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered table-condensed">
+                    <tr style="background-color:#d7d6d6">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Per_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Per_ApePat)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Per_ApeMat)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Per_Dir)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Per_Tel)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Per_Suel)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Per_Des)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.cargos.Car_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.estadosciviles.EC_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.fichadescuentos.Desc_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.generos.Gen_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nacionalidades.Nac_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tiposhorasextras.THor_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tipoimpuestos.TImp_nom)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Per_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Per_ApePat)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Per_ApeMat)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Per_Dir)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Per_Tel)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Per_Suel)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Per_Des)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.cargos.Car_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.estadosciviles.EC_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.fichadescuentos.Desc_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.generos.Gen_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.nacionalidades.Nac_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.tiposhorasextras.THor_Nom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.tipoimpuestos.TImp_nom)
-                            </th>
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Per_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Per_ApePat)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Per_ApeMat)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Per_Dir)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Per_Tel)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Per_Suel)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Per_Des)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.estadosciviles.EC_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.fichadescuentos.Desc_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.generos.Gen_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.nacionalidades.Nac_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.tiposhorasextras.THor_Nom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.tipoimpuestos.TImp_nom)
-                                </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Per_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Per_ApePat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Per_ApeMat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Per_Dir)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Per_Tel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Per_Suel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Per_Des)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.cargos.Car_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.estadosciviles.EC_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fichadescuentos.Desc_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.generos.Gen_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nacionalidades.Nac_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tiposhorasextras.THor_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tipoimpuestos.TImp_nom)
+                            </td>
 
 
-                                <td>
+                            @*<td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.Per_Rut }) |
                                     @Html.ActionLink("Details", "Details", new { id = item.Per_Rut }) |
                                     @Html.ActionLink("Delete", "Delete", new { id = item.Per_Rut })
-                                </td>
+                                </td>*@
 
-                            </tr>
-                        }
+                            <td align="center">
 
-                    </table>
-                </div>
+                                <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <td align="center">
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
             </div>
-            <div class="card-footer small text-muted">Updated yesterday</div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--editar-->
+<!-- Modal -->
+<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
+
+<!--eliminar--><!-- Modal -->
+<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#contenido_vista').appendTo('#contenido_general');
+    });
+
+</script>
+

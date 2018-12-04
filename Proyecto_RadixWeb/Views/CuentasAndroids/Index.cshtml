@@ -1,37 +1,38 @@
-﻿@model IEnumerable<Proyecto_RadixWeb.Models.Cuarteles>
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.CuentasAndroid>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index CunetasAndroids";
 }
 <link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />
 <div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
-    <div class="card mb-3 mt-2" style="border: 1px solid;">
+    <div class="card mb-3 mt-2" style="border: 1px solid; height: 503px;">
         <div class="card-header">
-
-            @*@Html.ActionLink("Create New", "Create")*@
-
             <div class="col col-xs-1 col-md-1 col-lg-1">
                 <i class="fas fa-table"></i>
             </div>
             <div class="col col-xs-8 col-md-8 col-lg-8">
-                <h5 class="panel-title" style="text-align:center"><b>Cuarteles</b> </h5>
+                <h5 class="panel-title" style="text-align:center"><b>Cuentas Android</b> </h5>
             </div>
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
-                <button type="button" class="btn btn-danger btn-sm m-0 documento" href="#" data-toggle="modal" data-target="#NewPersona">  Nuevo Trabajador</button>
+                <a class="btn btn-sm btn-danger" href="@Url.Action("Create", "CuentasAndroids")">Agregar Cuenta </a>
             </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
+
                 <table class="table table-hover table-bordered table-condensed">
                     <tr style="background-color:#d7d6d6">
                         <th>
-                            @Html.DisplayNameFor(model => model.cuar_nom)
+                            Empresa
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Sectores.sect_nom)
+                            Usuario
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.VariedadesFrutas.var_nom)
+                            Contraseña
+                        </th>
+                        <th>
+                            Sucursal
                         </th>
                         <th></th>
                         <th></th>
@@ -41,15 +42,22 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.cuar_nom)
+                                @Html.DisplayFor(modelItem => item.ca_empresa)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Sectores.sect_nom)
+                                @Html.DisplayFor(modelItem => item.ca_usuario)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.VariedadesFrutas.var_nom)
+                                @Html.DisplayFor(modelItem => item.ca_password)
                             </td>
-
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ca_subempresa)
+                            </td>
+                            @*<td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ca_id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ca_id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ca_id })
+                                </td>*@
                             <td align="center">
 
                                 <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
@@ -57,11 +65,6 @@
                             <td align="center">
                                 <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
                             </td>
-                            @*<td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.cuar_id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.cuar_id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.cuar_id })
-                                </td>*@
                         </tr>
                     }
 
@@ -124,6 +127,5 @@
     $(document).ready(function () {
         $('#contenido_vista').appendTo('#contenido_general');
     });
-
+    
 </script>
-

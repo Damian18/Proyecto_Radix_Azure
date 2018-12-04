@@ -1,0 +1,354 @@
+﻿<article class="content dashboard-page">
+
+    @if (ViewBag.idcookie2 == "1" || ViewBag.idcookie2 != "2")
+    { }
+
+
+    <section class="section">
+        <div class="row sameheight-container">
+            <!--Sistema actual-->
+            <div class="col col-xs-12 col-sm-12 col-md-8 col-xl-8 stats-col">
+                <div class="card sameheight-item stats" data-exclude="xs" style="height: 322px;">
+                    <div class="card-block">
+                        <div class="title-block">
+                            <h4 class="title"> Empresa @ViewBag.empresa </h4>
+                            <p class="title-description">
+                                En estos momentos tu sistema tiene los siguientes recursos:
+                            </p>
+                        </div>
+                        <div class="row row-sm stats-container">
+                            <div class="col-xs-12 col-sm-6 stat-col">
+                                <div class="stat-icon"> <i class="fa fa-rocket"></i> </div>
+                                <div class="stat">
+                                    <div class="value"> 1 </div>
+                                    <div class="name"> Sucursales</div>
+                                </div>
+                                <progress class="progress stat-progress" value="100" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 100%;"></span>
+                                    </div>
+                                </progress>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 stat-col">
+                                <div class="stat-icon"> <i class="fa fa-shopping-cart"></i> </div>
+                                <div class="stat">
+                                    <div class="value"> 0 </div>
+                                    <div class="name"> Trabajador </div>
+                                </div> <progress class="progress stat-progress" value="0" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 0%;"></span>
+                                    </div>
+                                </progress>
+                            </div>
+                            <div class="col-xs-12 col-sm-6  stat-col">
+                                <div class="stat-icon"> <i class="fa fa-line-chart"></i> </div>
+                                <div class="stat">
+                                    <div class="value"> 1 </div>
+                                    <div class="name"> Cargo </div>
+                                </div> <progress class="progress stat-progress" value="5" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 5%;"></span>
+                                    </div>
+                                </progress>
+                            </div>
+                            <div class="col-xs-12 col-sm-6  stat-col">
+                                <div class="stat-icon"> <i class="fa fa-users"></i> </div>
+                                <div class="stat">
+                                    <div class="value"> 0 </div>
+                                    <div class="name"> Documentos </div>
+                                </div> <progress class="progress stat-progress" value="0" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 0%;"></span>
+                                    </div>
+                                </progress>
+                            </div>
+                            <div class="col-xs-12 col-sm-6  stat-col">
+                                <div class="stat-icon"> <i class="fa fa-list-alt"></i> </div>
+                                <div class="stat">
+                                    <div class="value"> 0 </div>
+                                    <div class="name"> Estadistica </div>
+                                </div> <progress class="progress stat-progress" value="0" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 0%;"></span>
+                                    </div>
+                                </progress>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 stat-col">
+                                <div class="stat-icon"> <i class="fa fa-dollar"></i> </div>
+                                <div class="stat">
+                                    <div class="value"> 0 </div>
+                                    <div class="name"> Horarios </div>
+                                </div> <progress class="progress stat-progress" value="0" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 0%;"></span>
+                                    </div>
+                                </progress>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--GRAFICO HYSTORI ( LINEAL)-->
+            <div class="col col-xs-12 col-sm-12 col-md-4 col-xl-4 history-col">
+                <div class="card sameheight-item sales-breakdown" data-exclude="xs,sm,lg" style="height: 400px;">
+                    <div class="card-header">
+                        <div class="header-block">
+                            <h3 class="title"> Empresa @ViewBag.empresa </h3>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="row sameheight-container">
+            <!--ITEMS-->
+            <div class="col-xl-12">
+                <div class="card sameheight-item items" data-exclude="xs,sm,lg" style="height: 400px;">
+                    <div class="card-header bordered">
+                        <div class="header-block">
+                            <h3 class="title"> Mis Recursos </h3>
+                        </div>
+                        <div class="header-block pull-right">
+                            @*<label class="search">
+                                    <input class="search-input" placeholder="search...">
+                                    <i class="fa fa-search search-icon"></i>
+                                </label>*@
+                            <div class="pagination">
+                                <a href="" class="btn btn-primary btn-sm rounded">
+                                    <i class="fa fa-angle-up"></i>
+                                </a> <a href="" class="btn btn-primary btn-sm rounded">
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="item-list striped">
+                        <!--titulos tabla-->
+                        <li class="item item-list-header hidden-sm-down">
+                            <div class="item-row">
+                                <div class="item-col item-col-header fixed item-col-img xs"></div>
+                                <div class="item-col item-col-header item-col-title">
+                                    <div> <span>Nombre</span> </div>
+                                </div>
+                                <div class="item-col item-col-header item-col-sales">
+                                    <div> <span>Opciones</span> </div>
+                                </div>
+                                <div class="item-col item-col-header item-col-stats">
+                                    <div class="no-overflow"> <span>Registros</span> </div>
+                                </div>
+                                <div class="item-col item-col-header item-col-date">
+                                    <div> <span>Ultima modificacion</span> </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--item 1-->
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col fixed item-col-img xs">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="item-col item-col-title no-overflow">
+                                    <div>
+                                        <a href="@Url.Action("Index", "subempresas")" class="">
+                                            <h4 class="item-title no-wrap"> No existen sucursales </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-sales">
+                                    <div class="item-heading">opciones</div>
+                                    <div>
+                                        <a href="#" class="btn btn-primary btn-sm rounded">
+                                            Agregar sucursal
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-stats">
+                                    <div class="item-heading">Registros</div>
+                                    <div class="no-overflow">
+                                        <div class="item-stats text-center">
+                                            0
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-date">
+                                    <div class="item-heading">Ultima modifiacion</div>
+                                    <div> 30/11/2018 </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--item 2-->
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col fixed item-col-img xs">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="item-col item-col-title no-overflow">
+                                    <div>
+                                        <a href="#" class="">
+                                            <h4 class="item-title no-wrap"> No existen Cargos</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-sales">
+                                    <div class="item-heading">opciones</div>
+                                    <div>
+                                        <a href="#" class="btn btn-primary btn-sm rounded">
+                                            Agregar Cargo
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-stats">
+                                    <div class="item-heading">Registros</div>
+                                    <div class="no-overflow">
+                                        <div class="item-stats text-center">
+                                            0
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-date">
+                                    <div class="item-heading">Ultima modifiacion</div>
+                                    <div> 30/11/2018 </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--item 3-->
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col fixed item-col-img xs">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="item-col item-col-title no-overflow">
+                                    <div>
+                                        <a href="#" class="">
+                                            <h4 class="item-title no-wrap"> No existen Trabajadores </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-sales">
+                                    <div class="item-heading">opciones</div>
+                                    <div>
+                                        <a href="#" class="btn btn-primary btn-sm rounded">
+                                            Agregar Trabajador
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-stats">
+                                    <div class="item-heading">Registros</div>
+                                    <div class="no-overflow">
+                                        <div class="item-stats text-center">
+                                            0
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-date">
+                                    <div class="item-heading">Ultima modifiacion</div>
+                                    <div> 30/11/2018 </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--item 4-->
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col fixed item-col-img xs">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="item-col item-col-title no-overflow">
+                                    <div>
+                                        <a href="#" class="">
+                                            <h4 class="item-title no-wrap"> No existen horarios </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-sales">
+                                    <div class="item-heading">opciones</div>
+                                    <div>
+                                        <a href="#" class="btn btn-primary btn-sm rounded">
+                                            Agregar horarios
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-stats">
+                                    <div class="item-heading">Registros</div>
+                                    <div class="no-overflow">
+                                        <div class="item-stats text-center">
+                                            0
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-date">
+                                    <div class="item-heading">Ultima modifiacion</div>
+                                    <div> 30/11/2018 </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--item 5-->
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col fixed item-col-img xs">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="item-col item-col-title no-overflow">
+                                    <div>
+                                        <a href="#" class="">
+                                            <h4 class="item-title no-wrap"> No exiten documentos </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-sales">
+                                    <div class="item-heading">opciones</div>
+                                    <div>
+                                        <a href="#" class="btn btn-primary btn-sm rounded">
+                                            Agregar documento
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-stats">
+                                    <div class="item-heading">Registros</div>
+                                    <div class="no-overflow">
+                                        <div class="item-stats text-center">
+                                            0
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-col item-col-date">
+                                    <div class="item-heading">Ultima modifiacion</div>
+                                    <div> 30/11/2018 </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <!--GRAFICO CIRCULAR
+            <div class="col-xl-4">
+
+            </div>-->
+        </div>
+    </section>
+    <section class="section">
+        <div class="row sameheight-container">
+
+        </div>
+    </section>
+</article>

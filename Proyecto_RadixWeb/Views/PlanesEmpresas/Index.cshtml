@@ -1,8 +1,9 @@
-﻿@model IEnumerable<Proyecto_RadixWeb.Models.Cuarteles>
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.PlanesEmpresas>
 
 @{
     ViewBag.Title = "Index";
 }
+
 <link href="~/PaginaDashB/tablas/css/tablas.css" rel="stylesheet" />
 <div id="contenido_vista" style="margin-top: 10%;margin-left:10%">
     <div class="card mb-3 mt-2" style="border: 1px solid;">
@@ -14,7 +15,7 @@
                 <i class="fas fa-table"></i>
             </div>
             <div class="col col-xs-8 col-md-8 col-lg-8">
-                <h5 class="panel-title" style="text-align:center"><b>Cuarteles</b> </h5>
+                <h5 class="panel-title" style="text-align:center"><b>Planes</b> </h5>
             </div>
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
                 <button type="button" class="btn btn-danger btn-sm m-0 documento" href="#" data-toggle="modal" data-target="#NewPersona">  Nuevo Trabajador</button>
@@ -24,14 +25,9 @@
             <div class="table-responsive">
                 <table class="table table-hover table-bordered table-condensed">
                     <tr style="background-color:#d7d6d6">
+                    <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.cuar_nom)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Sectores.sect_nom)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.VariedadesFrutas.var_nom)
+                            @Html.DisplayNameFor(model => model.plan_nom)
                         </th>
                         <th></th>
                         <th></th>
@@ -39,30 +35,23 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.cuar_nom)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Sectores.sect_nom)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.VariedadesFrutas.var_nom)
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.plan_nom)
+                        </td>
+                        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.plan_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.plan_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.plan_id })
+        </td>*@
+                        <td align="center">
 
-                            <td align="center">
-
-                                <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
-                            </td>
-                            <td align="center">
-                                <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                            @*<td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.cuar_id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.cuar_id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.cuar_id })
-                                </td>*@
-                        </tr>
+                            <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                        </td>
+                        <td align="center">
+                            <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
                     }
 
                 </table>
@@ -72,7 +61,6 @@
 
     </div>
 </div>
-
 <!--editar-->
 <!-- Modal -->
 <div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">

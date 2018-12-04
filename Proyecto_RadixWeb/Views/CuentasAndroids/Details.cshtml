@@ -1,0 +1,58 @@
+﻿@model Proyecto_RadixWeb.Models.CuentasAndroid
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>CuentasAndroid</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ca_empresa)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ca_empresa)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ca_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ca_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ca_password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ca_password)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ca_subempresa)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ca_subempresa)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ca_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

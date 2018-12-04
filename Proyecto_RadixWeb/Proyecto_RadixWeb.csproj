@@ -242,12 +242,14 @@
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\ContratosController.cs" />
     <Compile Include="Controllers\CuartelesController.cs" />
+    <Compile Include="Controllers\CuentasAndroidsController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\Empresa_CargoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Horario_laboralController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="Controllers\PlanesEmpresasController.cs" />
     <Compile Include="Controllers\PlanillascontratosController.cs" />
     <Compile Include="Controllers\PrivilegiosCuentasController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -449,9 +451,11 @@
     <Content Include="Content\css\dashboard\bootstrap.min.css" />
     <Content Include="Content\css\dashboard\dataTables.bootstrap4.css" />
     <Content Include="Content\css\dashboard\font-awesome.min.css" />
+    <Content Include="Content\css\dashboard\fontawesome-webfont.svg" />
     <Content Include="Content\css\dashboard\sb-admin.css" />
     <Content Include="Content\css\dashboard\vendor.css" />
     <Content Include="Content\css\dashboard\x.css" />
+    <Content Include="Content\css\fontawesome-webfont.svg" />
     <Content Include="Content\css\Home.min.css" />
     <Content Include="Content\css\Home3_A.min.css" />
     <Content Include="Content\css\Home_FA.min.css" />
@@ -522,6 +526,7 @@
     <Content Include="PaginaDashB\all.css" />
     <Content Include="PaginaDashB\app.css" />
     <Content Include="PaginaDashB\app.js" />
+    <Content Include="PaginaDashB\tablas\css\sucursales.css" />
     <Content Include="PaginaDashB\tablas\css\tablas.css" />
     <Content Include="PaginaDashB\tour\bootstrap-tour.min.css" />
     <Content Include="PaginaDashB\tour\bootstrap-tour.min.js" />
@@ -612,6 +617,7 @@
     <Content Include="Scripts\dashboard\sb-admin-charts.min.js" />
     <Content Include="Scripts\dashboard\sb-admin-datatables.min.js" />
     <Content Include="Scripts\dashboard\sb-admin.min.js" />
+    <Content Include="Scripts\dashboard\sucursales.js" />
     <Content Include="Scripts\dashboard\vendor.js" />
     <Content Include="Scripts\Layout\agency.js" />
     <Content Include="Scripts\Layout\agency.min.js" />
@@ -780,6 +786,11 @@
     <Content Include="PaginaHome\fonts\raleway\raleway-thin-webfont.eot" />
     <Content Include="PaginaHome\fonts\raleway\raleway-thin-webfont.ttf" />
     <Content Include="PaginaHome\fonts\raleway\raleway-thin-webfont.woff" />
+    <Content Include="Content\css\FontAwesome.otf" />
+    <Content Include="Content\css\fontawesome-webfont.eot" />
+    <Content Include="Content\css\fontawesome-webfont.ttf" />
+    <Content Include="Content\css\fontawesome-webfont.woff" />
+    <Content Include="Content\css\fontawesome-webfont.woff2" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
@@ -1137,10 +1148,24 @@
     <Content Include="Views\PrivilegiosCuentas\Edit.cshtml" />
     <Content Include="Views\PrivilegiosCuentas\Index.cshtml" />
     <Content Include="Views\Shared\EDIT.cshtml" />
+    <Content Include="Views\Shared\1.cshtml" />
+    <Content Include="Views\Shared\_LayoutCONTENIDO.cshtml" />
+    <Content Include="Views\CuentasAndroids\Create.cshtml" />
+    <Content Include="Views\CuentasAndroids\Delete.cshtml" />
+    <Content Include="Views\CuentasAndroids\Details.cshtml" />
+    <Content Include="Views\CuentasAndroids\Edit.cshtml" />
+    <Content Include="Views\CuentasAndroids\Index.cshtml" />
+    <Content Include="Views\Home\Estadisticas_cantidad.cshtml" />
+    <Content Include="Views\Home\Estadisticas_genero.cshtml" />
+    <Content Include="Views\Home\Estadisticas_forma.cshtml" />
+    <Content Include="Views\PlanesEmpresas\Create.cshtml" />
+    <Content Include="Views\PlanesEmpresas\Delete.cshtml" />
+    <Content Include="Views\PlanesEmpresas\Details.cshtml" />
+    <Content Include="Views\PlanesEmpresas\Edit.cshtml" />
+    <Content Include="Views\PlanesEmpresas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Privilegios\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
