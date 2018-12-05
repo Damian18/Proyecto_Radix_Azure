@@ -67,9 +67,7 @@ namespace Proyecto_RadixWeb.Controllers
                 ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
                 ViewBag.subemp_id = subemp_id;
-                int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
-                //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
-                ViewBag.Car_Id = new SelectList(db.empresa_cargo.Where(ec=>ec.Emp_Id==emp_id), "Car_Id", "Cargos.Car_Nom");
+                ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
                 ViewBag.EC_Id = new SelectList(db.estadosciviles, "EC_Id", "EC_Nom");
                 ViewBag.Gen_Id = new SelectList(db.generos, "Gen_Id", "Gen_Nom");
                 ViewBag.Nac_Id = new SelectList(db.nacionalidades, "Nac_Id", "Nac_Nom");
