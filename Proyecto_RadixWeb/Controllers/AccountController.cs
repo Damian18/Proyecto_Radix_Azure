@@ -145,6 +145,7 @@ namespace IdentitySample.Controllers
 
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
 
+            var subempresa = db.subempresas.FirstOrDefault(s=>s.Sub_Id==log.Sub_Id);
             
             // El if conciste en buscar la cuenta que corresponde a la empresa
 
@@ -161,7 +162,12 @@ namespace IdentitySample.Controllers
                         HttpContext.Session.Add("Emp_id", emp.Emp_Id);
                         HttpContext.Session.Add("Empresa", emp.Emp_Nom);
                         HttpContext.Session.Add("Correo", log.Id);
-
+                        if (log.Sub_Id!=null)
+                        {
+                            HttpContext.Session.Add("SubEmpresa", log.Sub_Id);
+                            HttpContext.Session.Add("SubEmpresa_nombre", subempresa.Sub_Nom);
+                        }
+                        
                         return RedirectToLocal(returnUrl);
 
                     case SignInStatus.LockedOut:

@@ -35,7 +35,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<fichadescuentos> fichadescuentos { get; set; }
         public virtual DbSet<fichasasistencias> fichasasistencias { get; set; }
         public virtual DbSet<generos> generos { get; set; }
-        public virtual DbSet<login> login { get; set; }
         public virtual DbSet<nacionalidades> nacionalidades { get; set; }
         public virtual DbSet<pago> pago { get; set; }
         public virtual DbSet<planillascontratos> planillascontratos { get; set; }
@@ -70,5 +69,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<PrivilegiosCuentas> PrivilegiosCuentas { get; set; }
         public virtual DbSet<PlanesEmpresas> PlanesEmpresas { get; set; }
         public virtual DbSet<empresas> empresas { get; set; }
+        public virtual DbSet<login> login { get; set; }
     }
 }

@@ -18,8 +18,8 @@ namespace Proyecto_RadixWeb.Models
         public empresas()
         {
             this.empresa_cargo = new HashSet<empresa_cargo>();
-            this.login = new HashSet<login>();
             this.subempresas = new HashSet<subempresas>();
+            this.login = new HashSet<login>();
         }
     
         public int Emp_Id { get; set; }
@@ -36,8 +36,8 @@ namespace Proyecto_RadixWeb.Models
         public virtual ICollection<empresa_cargo> empresa_cargo { get; set; }
         public virtual PlanesEmpresas PlanesEmpresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<login> login { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subempresas> subempresas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<login> login { get; set; }
     }
 }

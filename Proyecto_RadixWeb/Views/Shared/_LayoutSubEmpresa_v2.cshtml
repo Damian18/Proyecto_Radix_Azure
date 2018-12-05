@@ -1,0 +1,526 @@
+﻿<!doctype html>
+<html lang="es-cl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Radix-Administrador de sucursal </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="~/Content/css/dashboard/vendor.css">
+    <!-- Theme initialization -->
+    <link rel="stylesheet" id="theme-style" href="~/Content/css/dashboard/app.css">
+
+
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 28px;
+            height: 26px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e6351c;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 8px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #20be0e;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(12px);
+        }
+    </style>
+
+</head>
+<body class="loaded">
+    @RenderBody()
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <!--CABECERA-->
+            <header class="header">
+                <div class="header-block header-block-collapse hidden-lg-up">
+                    <button class="collapse-btn" id="sidebar-collapse-btn">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="header-block header-block-search hidden-sm-down">
+                    <form role="search">
+                        <div class="input-container">
+                            <i class="fa fa-search"></i> <input type="search" placeholder="Buscar...">
+                            <div class="underline"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="header-block header-block-buttons">
+                    @if (ViewBag.idcookie == "Usuario no activo")
+                    {
+                        <a href="#" class="btn btn-sm header-btn">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Empezar Tutorial</span>
+                        </a>}
+                </div>
+                <div class="header-block header-block-nav">
+                    <ul class="nav-profile">
+                        <!--NOTIFICACIONES-->
+                        <li class="notifications new">
+                            <a href="" data-toggle="dropdown">
+                                <i class="fas fa-bell"></i>
+                                <sup>
+                                    <span class="counter">8</span>
+                                </sup>
+                            </a>
+                            <div class="dropdown-menu notifications-dropdown-menu">
+                                <ul class="notifications-container">
+                                    <li>
+                                        <a href="" class="notification-item">
+                                            <div class="img-col">
+                                                <div class="img" style="background-image: url('assets/faces/3.jpg')"></div>
+                                            </div>
+                                            <div class="body-col">
+                                                <p> <span class="accent">Zack Alien</span> pushed new commit: <span class="accent">Fix page load performance issue</span>. </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="notification-item">
+                                            <div class="img-col">
+                                                <div class="img" style="background-image: url('assets/faces/5.jpg')"></div>
+                                            </div>
+                                            <div class="body-col">
+                                                <p> <span class="accent">Amaya Hatsumi</span> started new task: <span class="accent">Dashboard UI design.</span>. </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="notification-item">
+                                            <div class="img-col">
+                                                <div class="img" style="background-image: url('assets/faces/8.jpg')"></div>
+                                            </div>
+                                            <div class="body-col">
+                                                <p> <span class="accent">Andy Nouman</span> deployed new version of <span class="accent">NodeJS REST Api V3</span> </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <footer>
+                                    <ul>
+                                        <li>
+                                            <a href="">
+                                                View All
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </div>
+                        </li>
+                        <!--OPCIONES DE PROFILE-->
+                        <li class="profile dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&amp;s=40')"> </div>
+                                @ViewBag.prob
+
+
+                            </a>
+                            <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa fa-user icon"></i>
+                                    Mi perfil
+                                </a> <a class="dropdown-item" href="#">
+                                    <i class="fa fa-bell icon"></i>
+                                    Notificacion
+                                </a> <a class="dropdown-item" href="#">
+                                    <i class="fa fa-gear icon"></i>
+                                    Configuracion
+                                </a>
+                                <div class="dropdown-divider"></div> <a class="dropdown-item" data-toggle="modal" data-target="#modal_cs" href="javascript:document.getElementById('logoutForm').submit()">
+                                    <i class="fa fa-power-off icon"></i>
+                                    Cerrar Sesion
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <div class="row">
+                <!--BARRA-->
+                <aside class="sidebar">
+                    <div class="sidebar-container">
+                        <div class="sidebar-header">
+                            <div class="brand">
+                                <div><b> @Session["SubEmpresa_nombre"].ToString() </b></div>
+                            </div>
+                        </div>
+                        <nav class="menu">
+                            <ul class="nav metismenu" id="sidebar-menu">
+                                <li class="active">
+                                    <a href="@Url.Action("index", "Home")">
+                                        <i class="fa fa-home"></i> Inicio
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="@Url.Action("Index", "Sectores",new {subemp_id= Session["SubEmpresa"].ToString() })">
+                                        <i class="fa fa-th-large"></i> Sectores
+                                        <i class="fa arrow"></i>
+                                    </a>
+                             
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Contratos",new {subemp_id= Session["SubEmpresa"].ToString() })">
+                                        <i class="fa fa-table"></i> Mis Trabajadores
+                                        <i class="fa arrow"></i>
+                                    </a>
+                            
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-group"></i> Cuentas
+                                        <i class="fa arrow"></i>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li>
+                                            <a href="#">
+                                                Pagina Web
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "CuentasAndroids")">
+                                                Aplicacion Android
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-user"></i> Cargos
+                                        <i class="fa arrow"></i>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li>
+                                            <a href="@Url.Action("Index", "Empresa_Cargo")">
+                                                Cargos Generales
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "PrivilegiosCuentas")">
+                                                Privilegios
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-bar-chart"></i> Estadistcas
+                                        <i class="fa arrow"></i>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li>
+                                            <a href="@Url.Action("Estadisticas_cantidad", "Home")">
+                                                Estadisticas por Cantidad
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Estadisticas_genero", "Home")">
+                                                Estadisticas por Genero
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Estadisticas_forma", "Home")">
+                                                Estadisticas por Forma de trabajar
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-file"></i> Documentos Generales
+                                        <i class="fa arrow"></i>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li>
+                                            <a href="@Url.Action("Index", "Planillascontratos")">
+                                                Documentos
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="forms.html">
+                                        <i class="fa fa-pencil-square-o"></i> Solicitud de QRs
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+
+                    </div>
+                    <!--perzonalizar-->
+                    <footer class="sidebar-footer">
+                        <ul class="nav metismenu" id="customize-menu">
+                            <li>
+                                <ul>
+                                    <li class="customize">
+                                        <div class="customize-item">
+                                            <div class="row customize-header">
+                                                <div class="col-xs-4"> </div>
+                                                <div class="col-xs-4"> <label class="title">fixed</label> </div>
+                                                <div class="col-xs-4"> <label class="title">static</label> </div>
+                                            </div>
+                                            <div class="row hidden-md-down">
+                                                <div class="col-xs-4"> <label class="title">Sidebar:</label> </div>
+                                                <div class="col-xs-4">
+                                                    <label>
+                                                        <input class="radio" type="radio" name="sidebarPosition" value="sidebar-fixed">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>
+                                                        <input class="radio" type="radio" name="sidebarPosition" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4"> <label class="title">Header:</label> </div>
+                                                <div class="col-xs-4">
+                                                    <label>
+                                                        <input class="radio" type="radio" name="headerPosition" value="header-fixed">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>
+                                                        <input class="radio" type="radio" name="headerPosition" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4"> <label class="title">Footer:</label> </div>
+                                                <div class="col-xs-4">
+                                                    <label>
+                                                        <input class="radio" type="radio" name="footerPosition" value="footer-fixed">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>
+                                                        <input class="radio" type="radio" name="footerPosition" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul> <a href="">
+                                    <i class="fa fa-cog"></i> Perzonalizar
+                                </a>
+                            </li>
+                        </ul>
+                    </footer>
+                </aside>
+                <div id="contenido_general" class="col-sm-12 col-md-9 col-lg-11 mt-5">
+                    <!--CONTENIDO GENERAL-->
+                    <div class="sidebar-overlay" id="sidebar-overlay">
+
+
+
+                    </div>
+
+                </div>
+            </div>
+            <!--FOOTER-->
+            <footer class="footer">
+                <div class="footer-block author">
+                    <ul>
+                        <li> created by <a href="">ModularCode</a> </li>
+                        <li> <a href="">get in touch</a> </li>
+                    </ul>
+                </div>
+            </footer>
+            <!--ADD NEW ITEM CON DROPZONE-->
+            <div class="modal fade" id="modal-media">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title">Media Library</h4>
+                        </div>
+                        <div class="modal-body modal-tab-container">
+                            <ul class="nav nav-tabs modal-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link" href="#gallery" data-toggle="tab" role="tab">Gallery</a> </li>
+                                <li class="nav-item"> <a class="nav-link active" href="#upload" data-toggle="tab" role="tab">Upload</a> </li>
+                            </ul>
+                            <div class="tab-content modal-tab-content">
+                                <div class="tab-pane fade" id="gallery" role="tabpanel">
+                                    <div class="images-container">
+                                        <div class="row"> </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active in" id="upload" role="tabpanel">
+                                    <div class="upload-container">
+                                        <div id="dropzone">
+                                            <form action="/" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                                <div class="dz-message-block">
+                                                    <div class="dz-message needsclick"> Drop files here or click to upload. </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Insert Selected</button> </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <div class="modal fade" id="confirm-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title"><i class="fa fa-warning"></i> Alert</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure want to do this?</p>
+                        </div>
+                        <div class="modal-footer"> <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        </div>
+    </div>
+    <!--  Modal Cerrar sesion-->
+    <div class="modal fade" id="modal_cs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">¿Estas seguro de cerrar tu sesión?</div>
+                <div class="modal-footer">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col col-lg-3 col-sm-3 col-md-3">
+                                <button class="btn btn-secondary " type="button" data-dismiss="modal">Cancelar</button>
+                            </div>
+                            <div class="col col-lg-9 col-sm-9 col-md-9">
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <a class="btn btn-primary" href="javascript:document.getElementById('logoutForm').submit()">Si.Cerrar Sesión</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  Finaliza MOdal Cerrar Sesion-->
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+    <script src="~/Scripts/dashboard/vendor.js"></script>
+    <script src="~/Scripts/dashboard/app.js"></script>
+    @*<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>*@
+
+    <div class="responsive-bootstrap-toolkit">
+        <div class="device-xs hidden-sm-up"></div>
+        <div class="device-sm hidden-xs-down hidden-md-up"></div>
+        <div class="device-md hidden-sm-down hidden-lg-up"></div>
+        <div class="device-lg hidden-md-down hidden-xl-up"></div>
+        <div class="device-xl hidden-lg-down"></div>
+    </div>
+    <div class="jqvmap-label" style="display: none;"></div>
+    <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
+    <div class="jqvmap-label" style="display: none;"></div>
+
+    <script>
+            $(document).ready(function () {
+
+                $("#modal_css").modal("show");
+            });
+
+            $(document).ready(function () {
+                $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
+                    e.preventDefault();
+                    $(this).siblings('a.active').removeClass("active");
+                    $(this).addClass("active");
+                    var index = $(this).index();
+                    $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+                    $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+                });
+            });
+    </script>
+
+
+</body>
+</html>
+
+
+

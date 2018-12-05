@@ -22,6 +22,8 @@ namespace Proyecto_RadixWeb.Models
     
         public int plan_id { get; set; }
         public string plan_nom { get; set; }
+        public Nullable<double> plan_precio { get; set; }
+        public Nullable<double> plan_descuento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<empresas> empresas { get; set; }

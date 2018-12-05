@@ -233,6 +233,7 @@
           <Property Name="Emp_Id" Type="int" Nullable="false" />
           <Property Name="Per_Rut" Type="nvarchar" MaxLength="12" />
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Sub_Id" Type="int" />
         </EntityType>
         <EntityType Name="LoginPrivilegiosCuentas">
           <Key>
@@ -287,6 +288,8 @@
           </Key>
           <Property Name="plan_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="plan_nom" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="plan_precio" Type="float" />
+          <Property Name="plan_descuento" Type="float" />
         </EntityType>
         <EntityType Name="planillascontratos">
           <Key>
@@ -1370,19 +1373,6 @@
           <Property Name="Gen_Nom" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="personas" Relationship="radixModel.personas_fk_personas_sexo" FromRole="generos" ToRole="personas" />
         </EntityType>
-        <EntityType Name="login">
-          <Key>
-            <PropertyRef Name="log_id" />
-          </Key>
-          <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="radixModel.login_fk_Login_CuentaAsp" FromRole="login" ToRole="AspNetUsers" />
-          <NavigationProperty Name="personas" Relationship="radixModel.login_FK_login_Persona1" FromRole="login" ToRole="personas" />
-          <NavigationProperty Name="LoginPrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_login" FromRole="login" ToRole="LoginPrivilegiosCuentas" />
-          <NavigationProperty Name="empresas" Relationship="radixModel.login_fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
-        </EntityType>
         <EntityType Name="nacionalidades">
           <Key>
             <PropertyRef Name="Nac_Id" />
@@ -1708,7 +1698,6 @@
           <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" />
           <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" />
           <EntitySet Name="generos" EntityType="Self.generos" />
-          <EntitySet Name="login" EntityType="Self.login" />
           <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" />
           <EntitySet Name="pago" EntityType="Self.pago" />
           <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" />
@@ -1781,10 +1770,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="login_fk_Login_CuentaAsp" Association="radixModel.login_fk_Login_CuentaAsp">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="login" EntitySet="login" />
-          </AssociationSet>
           <EntitySet Name="AspNetRoles" EntityType="radixModel.AspNetRoles" />
           <AssociationSet Name="AspNetRolesAspNetUserRoles" Association="radixModel.AspNetRolesAspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1807,10 +1792,6 @@
           <AssociationSet Name="personas_fk_personas_sexo" Association="radixModel.personas_fk_personas_sexo">
             <End Role="generos" EntitySet="generos" />
             <End Role="personas" EntitySet="personas" />
-          </AssociationSet>
-          <AssociationSet Name="login_FK_login_Persona1" Association="radixModel.login_FK_login_Persona1">
-            <End Role="personas" EntitySet="personas" />
-            <End Role="login" EntitySet="login" />
           </AssociationSet>
           <AssociationSet Name="personas_fk_personas_nac" Association="radixModel.personas_fk_personas_nac">
             <End Role="nacionalidades" EntitySet="nacionalidades" />
@@ -1905,10 +1886,6 @@
           </AssociationSet>
           <EntitySet Name="LoginPrivilegiosCuentas" EntityType="radixModel.LoginPrivilegiosCuentas" />
           <EntitySet Name="PrivilegiosCuentas" EntityType="radixModel.PrivilegiosCuentas" />
-          <AssociationSet Name="FK_LoginPrivilegiosCuentas_login" Association="radixModel.FK_LoginPrivilegiosCuentas_login">
-            <End Role="login" EntitySet="login" />
-            <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
-          </AssociationSet>
           <AssociationSet Name="FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" Association="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas">
             <End Role="PrivilegiosCuentas" EntitySet="PrivilegiosCuentas" />
             <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
@@ -1923,13 +1900,26 @@
             <End Role="PlanesEmpresas" EntitySet="PlanesEmpresas" />
             <End Role="empresas" EntitySet="empresas" />
           </AssociationSet>
+          <AssociationSet Name="subempresas_FK_subempresas_empresas" Association="radixModel.subempresas_FK_subempresas_empresas">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="subempresas" EntitySet="subempresas" />
+          </AssociationSet>
+          <EntitySet Name="login" EntityType="radixModel.login" />
+          <AssociationSet Name="FK_login_AspNetUsers" Association="radixModel.FK_login_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
           <AssociationSet Name="login_fk_Login_Empresa1" Association="radixModel.login_fk_Login_Empresa1">
             <End Role="empresas" EntitySet="empresas" />
             <End Role="login" EntitySet="login" />
           </AssociationSet>
-          <AssociationSet Name="subempresas_FK_subempresas_empresas" Association="radixModel.subempresas_FK_subempresas_empresas">
-            <End Role="empresas" EntitySet="empresas" />
-            <End Role="subempresas" EntitySet="subempresas" />
+          <AssociationSet Name="FK_LoginPrivilegiosCuentas_login" Association="radixModel.FK_LoginPrivilegiosCuentas_login">
+            <End Role="login" EntitySet="login" />
+            <End Role="LoginPrivilegiosCuentas" EntitySet="LoginPrivilegiosCuentas" />
+          </AssociationSet>
+          <AssociationSet Name="login_FK_login_Persona1" Association="radixModel.login_FK_login_Persona1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="login" EntitySet="login" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetUserRoles">
@@ -1959,7 +1949,7 @@
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserRoles" Relationship="radixModel.aspnetuserroles_ApplicationUser_Roles" FromRole="AspNetUsers" ToRole="AspNetUserRoles" />
-          <NavigationProperty Name="login" Relationship="radixModel.login_fk_Login_CuentaAsp" FromRole="AspNetUsers" ToRole="login" />
+          <NavigationProperty Name="login" Relationship="radixModel.FK_login_AspNetUsers" FromRole="AspNetUsers" ToRole="login" />
         </EntityType>
         <Association Name="aspnetuserroles_ApplicationUser_Roles">
           <End Type="radixModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
@@ -1972,20 +1962,6 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="login_fk_Login_CuentaAsp">
-          <End Type="radixModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.login" Role="login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="login">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2042,11 +2018,11 @@
           <NavigationProperty Name="estadosciviles" Relationship="radixModel.personas_fk_personas_estadocivil" FromRole="personas" ToRole="estadosciviles" />
           <NavigationProperty Name="fichadescuentos" Relationship="radixModel.personas_fk_personas_descuentos" FromRole="personas" ToRole="fichadescuentos" />
           <NavigationProperty Name="generos" Relationship="radixModel.personas_fk_personas_sexo" FromRole="personas" ToRole="generos" />
-          <NavigationProperty Name="login" Relationship="radixModel.login_FK_login_Persona1" FromRole="personas" ToRole="login" />
           <NavigationProperty Name="nacionalidades" Relationship="radixModel.personas_fk_personas_nac" FromRole="personas" ToRole="nacionalidades" />
           <NavigationProperty Name="tiposhorasextras" Relationship="radixModel.personas_fk_personas_thora" FromRole="personas" ToRole="tiposhorasextras" />
           <NavigationProperty Name="tipoimpuestos" Relationship="radixModel.personas_fk_personas_tipoimpuesto" FromRole="personas" ToRole="tipoimpuestos" />
           <NavigationProperty Name="contratos" Relationship="radixModel.contratos_fk_Contratos_Personas" FromRole="personas" ToRole="contratos" />
+          <NavigationProperty Name="login" Relationship="radixModel.login_FK_login_Persona1" FromRole="personas" ToRole="login" />
         </EntityType>
         <Association Name="personas_fk_Personas_cargos1">
           <End Type="radixModel.cargos" Role="cargos" Multiplicity="0..1">
@@ -2101,20 +2077,6 @@
             </Principal>
             <Dependent Role="personas">
               <PropertyRef Name="Gen_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="login_FK_login_Persona1">
-          <End Type="radixModel.personas" Role="personas" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.login" Role="login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personas">
-              <PropertyRef Name="Per_Rut" />
-            </Principal>
-            <Dependent Role="login">
-              <PropertyRef Name="Per_Rut" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2508,8 +2470,8 @@
           <Property Name="lpc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="log_id" Type="Int32" />
           <Property Name="pc_id" Type="Int32" />
-          <NavigationProperty Name="login" Relationship="radixModel.FK_LoginPrivilegiosCuentas_login" FromRole="LoginPrivilegiosCuentas" ToRole="login" />
           <NavigationProperty Name="PrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" FromRole="LoginPrivilegiosCuentas" ToRole="PrivilegiosCuentas" />
+          <NavigationProperty Name="login" Relationship="radixModel.FK_LoginPrivilegiosCuentas_login" FromRole="LoginPrivilegiosCuentas" ToRole="login" />
         </EntityType>
         <EntityType Name="PrivilegiosCuentas">
           <Key>
@@ -2519,18 +2481,6 @@
           <Property Name="pc_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="LoginPrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" FromRole="PrivilegiosCuentas" ToRole="LoginPrivilegiosCuentas" />
         </EntityType>
-        <Association Name="FK_LoginPrivilegiosCuentas_login">
-          <End Type="radixModel.login" Role="login" Multiplicity="0..1" />
-          <End Type="radixModel.LoginPrivilegiosCuentas" Role="LoginPrivilegiosCuentas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="login">
-              <PropertyRef Name="log_id" />
-            </Principal>
-            <Dependent Role="LoginPrivilegiosCuentas">
-              <PropertyRef Name="log_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LoginPrivilegiosCuentas_PrivilegiosCuentas">
           <End Type="radixModel.PrivilegiosCuentas" Role="PrivilegiosCuentas" Multiplicity="0..1" />
           <End Type="radixModel.LoginPrivilegiosCuentas" Role="LoginPrivilegiosCuentas" Multiplicity="*" />
@@ -2550,6 +2500,8 @@
           <Property Name="plan_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="plan_nom" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="empresas" Relationship="radixModel.FK_empresas_PlanesEmpresas" FromRole="PlanesEmpresas" ToRole="empresas" />
+          <Property Name="plan_precio" Type="Double" />
+          <Property Name="plan_descuento" Type="Double" />
         </EntityType>
         <EntityType Name="empresas">
           <Key>
@@ -2566,8 +2518,8 @@
           <Property Name="plan_FechaFin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="empresa_cargo" Relationship="radixModel.empresa_cargo_empresa" FromRole="empresas" ToRole="empresa_cargo" />
           <NavigationProperty Name="PlanesEmpresas" Relationship="radixModel.FK_empresas_PlanesEmpresas" FromRole="empresas" ToRole="PlanesEmpresas" />
-          <NavigationProperty Name="login" Relationship="radixModel.login_fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
           <NavigationProperty Name="subempresas" Relationship="radixModel.subempresas_FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
+          <NavigationProperty Name="login" Relationship="radixModel.login_fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
         </EntityType>
         <Association Name="empresa_cargo_empresa">
           <End Type="radixModel.empresas" Role="empresas" Multiplicity="0..1" />
@@ -2593,6 +2545,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="subempresas_FK_subempresas_empresas">
+          <End Type="radixModel.empresas" Role="empresas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="Emp_Id" />
+            </Principal>
+            <Dependent Role="subempresas">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="log_id" />
+          </Key>
+          <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Id" Type="Int32" />
+          <NavigationProperty Name="AspNetUsers" Relationship="radixModel.FK_login_AspNetUsers" FromRole="login" ToRole="AspNetUsers" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.login_fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
+          <NavigationProperty Name="LoginPrivilegiosCuentas" Relationship="radixModel.FK_LoginPrivilegiosCuentas_login" FromRole="login" ToRole="LoginPrivilegiosCuentas" />
+          <NavigationProperty Name="personas" Relationship="radixModel.login_FK_login_Persona1" FromRole="login" ToRole="personas" />
+        </EntityType>
+        <Association Name="FK_login_AspNetUsers">
+          <End Type="radixModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="radixModel.login" Role="login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="login_fk_Login_Empresa1">
           <End Type="radixModel.empresas" Role="empresas" Multiplicity="1" />
           <End Type="radixModel.login" Role="login" Multiplicity="*" />
@@ -2605,17 +2597,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="subempresas_FK_subempresas_empresas">
-          <End Type="radixModel.empresas" Role="empresas" Multiplicity="1">
+        <Association Name="FK_LoginPrivilegiosCuentas_login">
+          <End Type="radixModel.login" Role="login" Multiplicity="0..1" />
+          <End Type="radixModel.LoginPrivilegiosCuentas" Role="LoginPrivilegiosCuentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="log_id" />
+            </Principal>
+            <Dependent Role="LoginPrivilegiosCuentas">
+              <PropertyRef Name="log_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="login_FK_login_Persona1">
+          <End Type="radixModel.personas" Role="personas" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="*" />
+          <End Type="radixModel.login" Role="login" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="empresas">
-              <PropertyRef Name="Emp_Id" />
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
             </Principal>
-            <Dependent Role="subempresas">
-              <PropertyRef Name="Emp_Id" />
+            <Dependent Role="login">
+              <PropertyRef Name="Per_Rut" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2718,16 +2722,6 @@
               <MappingFragment StoreEntitySet="generos">
                 <ScalarProperty Name="Gen_Id" ColumnName="Gen_Id" />
                 <ScalarProperty Name="Gen_Nom" ColumnName="Gen_Nom" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="login">
-            <EntityTypeMapping TypeName="radixModel.login">
-              <MappingFragment StoreEntitySet="login">
-                <ScalarProperty Name="log_id" ColumnName="log_id" />
-                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3060,6 +3054,8 @@
           <EntitySetMapping Name="PlanesEmpresas">
             <EntityTypeMapping TypeName="radixModel.PlanesEmpresas">
               <MappingFragment StoreEntitySet="PlanesEmpresas">
+                <ScalarProperty Name="plan_descuento" ColumnName="plan_descuento" />
+                <ScalarProperty Name="plan_precio" ColumnName="plan_precio" />
                 <ScalarProperty Name="plan_nom" ColumnName="plan_nom" />
                 <ScalarProperty Name="plan_id" ColumnName="plan_id" />
               </MappingFragment>
@@ -3077,6 +3073,17 @@
                 <ScalarProperty Name="Emp_Cant" ColumnName="Emp_Cant" />
                 <ScalarProperty Name="Emp_Nom" ColumnName="Emp_Nom" />
                 <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login">
+            <EntityTypeMapping TypeName="radixModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

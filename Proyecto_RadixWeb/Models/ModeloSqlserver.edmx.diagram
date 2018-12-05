@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="radixModel.fichadescuentos" Width="1.5" PointX="3.75" PointY="26.875" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.fichasasistencias" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.generos" Width="1.5" PointX="3.75" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="radixModel.login" Width="1.5" PointX="11.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.nacionalidades" Width="1.5" PointX="3.75" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.pago" Width="1.5" PointX="16.25" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.planillascontratos" Width="1.5" PointX="0.75" PointY="23.25" IsExpanded="true" />
@@ -46,7 +45,6 @@
         <EntityTypeShape EntityType="radixModel.AspNetUserRoles" Width="1.5" PointX="18.75" PointY="19.875" />
         <EntityTypeShape EntityType="radixModel.AspNetUsers" Width="1.5" PointX="16.5" PointY="18.75" />
         <AssociationConnector Association="radixModel.aspnetuserroles_ApplicationUser_Roles" />
-        <AssociationConnector Association="radixModel.login_fk_Login_CuentaAsp" />
         <EntityTypeShape EntityType="radixModel.AspNetRoles" Width="1.5" PointX="22.25" PointY="20.375" />
         <AssociationConnector Association="radixModel.AspNetRolesAspNetUserRoles" />
         <EntityTypeShape EntityType="radixModel.CuentasAndroid" Width="1.5" PointX="5.375" PointY="4.75" />
@@ -55,7 +53,6 @@
         <AssociationConnector Association="radixModel.personas_fk_personas_estadocivil" />
         <AssociationConnector Association="radixModel.personas_fk_personas_descuentos" />
         <AssociationConnector Association="radixModel.personas_fk_personas_sexo" />
-        <AssociationConnector Association="radixModel.login_FK_login_Persona1" />
         <AssociationConnector Association="radixModel.personas_fk_personas_nac" />
         <AssociationConnector Association="radixModel.personas_fk_personas_thora" />
         <AssociationConnector Association="radixModel.personas_fk_personas_tipoimpuesto" />
@@ -89,14 +86,17 @@
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_Cuarteles" />
         <EntityTypeShape EntityType="radixModel.LoginPrivilegiosCuentas" Width="1.5" PointX="16.5" PointY="7.25" />
         <EntityTypeShape EntityType="radixModel.PrivilegiosCuentas" Width="1.5" PointX="14.25" PointY="2.5" />
-        <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_login" />
         <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" />
         <EntityTypeShape EntityType="radixModel.PlanesEmpresas" Width="1.5" PointX="18.125" PointY="2" />
         <EntityTypeShape EntityType="radixModel.empresas" Width="1.5" PointX="20.375" PointY="1" />
         <AssociationConnector Association="radixModel.empresa_cargo_empresa" />
         <AssociationConnector Association="radixModel.FK_empresas_PlanesEmpresas" />
-        <AssociationConnector Association="radixModel.login_fk_Login_Empresa1" />
         <AssociationConnector Association="radixModel.subempresas_FK_subempresas_empresas" />
+        <EntityTypeShape EntityType="radixModel.login" Width="1.5" PointX="22.625" PointY="10.625" />
+        <AssociationConnector Association="radixModel.FK_login_AspNetUsers" />
+        <AssociationConnector Association="radixModel.login_fk_Login_Empresa1" />
+        <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_login" />
+        <AssociationConnector Association="radixModel.login_FK_login_Persona1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

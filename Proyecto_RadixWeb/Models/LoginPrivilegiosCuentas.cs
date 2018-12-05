@@ -18,7 +18,7 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<int> log_id { get; set; }
         public Nullable<int> pc_id { get; set; }
     
-        public virtual login login { get; set; }
         public virtual PrivilegiosCuentas PrivilegiosCuentas { get; set; }
+        public virtual login login { get; set; }
     }
 }

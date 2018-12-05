@@ -32,9 +32,7 @@ namespace IdentitySample.Controllers
         public ActionResult Index()
         {
 
-        
-
-            if (User.IsInRole("Radix"))
+          if (User.IsInRole("Radix"))
             {
                 string emp_nom = HttpContext.Session["Empresa"].ToString();
                 ViewBag.empresa = emp_nom;
@@ -81,11 +79,14 @@ namespace IdentitySample.Controllers
                     ViewBag.prob = "2";
                     return (ViewBag.prob);
                 }
-               
+
+            }else if (User.IsInRole("Secretaria"))
+            {
+                return View("DashBoardSucursal");
             }
 
 
-            return View();
+                return View();
         }
 
         public JsonResult ListarPlanes()

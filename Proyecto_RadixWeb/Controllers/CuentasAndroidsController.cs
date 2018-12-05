@@ -18,7 +18,8 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: CuentasAndroids
         public async Task<ActionResult> Index()
         {
-            return View(await db.CuentasAndroid.ToListAsync());
+            string subemp_nom = HttpContext.Session["SubEmpresa_nombre"].ToString();
+            return View(await db.CuentasAndroid.Where(c=>c.ca_subempresa==subemp_nom).ToListAsync());
         }
 
         // GET: CuentasAndroids/Details/5

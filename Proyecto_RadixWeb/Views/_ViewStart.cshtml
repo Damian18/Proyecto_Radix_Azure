@@ -10,12 +10,13 @@ else if (User.IsInRole("Administrador"))
 {
 
     //Layout = "~/Views/Shared/_LayoutEmpresa_v2.cshtml";
-   Layout = "~/Views/Shared/_LayoutSubEmpresa.cshtml";
-}
-else if (User.IsInRole("Administrador de sucursal"))
-{
-
     Layout = "~/Views/Shared/_LayoutSubEmpresa.cshtml";
+}
+else if (User.IsInRole("Administrador de sucursal") || User.IsInRole("Secretaria"))
+{
+    //Probando diferencia
+    
+    Layout = "~/Views/Shared/_LayoutSubEmpresa_v2.cshtml";
 
 }
 else
