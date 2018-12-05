@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Index PrivilegiosCuentas";
 }
-
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 <div id="contenido_vista" @*style="margin-top: 10%;margin-left:10%"*@>
     <article class="content responsive-tables-page">
         <div class="title-block">
@@ -48,10 +48,10 @@
                                                         @Html.DisplayFor(modelItem => item.pc_nom)
                                                     </td>
                                                     @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.pc_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.pc_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.pc_id })
-                </td>*@
+                                                            @Html.ActionLink("Edit", "Edit", new { id = item.pc_id }) |
+                                                            @Html.ActionLink("Details", "Details", new { id = item.pc_id }) |
+                                                            @Html.ActionLink("Delete", "Delete", new { id = item.pc_id })
+                                                        </td>*@
                                                     <td align="center">
 
                                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
@@ -73,74 +73,147 @@
                 </div>
             </section>
         </article>
-
-
-
-    </div>
-<!-- Create -->
-<div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        @using (Html.BeginForm("Create", "PrivilegiosCuentas", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Nuevo Sector</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!--Contenido del centro-->
-                <div class="modal-body">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.Label("Privilegio")
-                        @Html.EditorFor(model => model.ObjPrivilegiosCuentas.pc_nom, new { htmlAttributes = new { @class = "form-control" } })
+       
+        </div>
+    <!-- Create -->
+    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("Create", "PrivilegiosCuentas", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nuevo Sector</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+                    <div class="modal-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.Label("Privilegio")
+                            @Html.EditorFor(model => model.ObjPrivilegiosCuentas.pc_nom, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
-<!--Eliminar-->
-<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        @using (Html.BeginForm("Delete", "PrivilegiosCuentas", new { id = ViewBag   .pc_id }, FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Nuevo Sector</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <!--Eliminar-->
+    <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("Delete", "PrivilegiosCuentas", new { id = ViewBag.pc_id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nuevo Sector</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+                    <div class="modal-body">
+                        @Html.LabelFor(model => model.ObjPrivilegiosCuentas.pc_nom)
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
                 </div>
-                <!--Contenido del centro-->
-                <div class="modal-body">
-                    @Html.LabelFor(model => model.ObjPrivilegiosCuentas.pc_nom)
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            $('#contenido_vista').appendTo('#contenido_general');
+        });
+     
+    </script>
+
 <script>
-
     $(document).ready(function () {
-        $('#contenido_vista').appendTo('#contenido_general');
+        var oTable = $('#myDatatable').DataTable({
+            "ajax": {
+                "url": '/PrivilegiosCuentas/All',
+                "type": "get",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "pc_id", "autoWidth": true },
+                {
+                    "data": "pc_id", "width": "50px", "render": function (data) {
+                        return '<a class="popup" href="/PrivilegiosCuentas/Agregar/'+data+'">Edit</a>';
+                    }
+                },
+                {
+                    "data": "pc_id", "width": "50px", "render": function (data) {
+                        return '<a class="popup" href="/PrivilegiosCuentas/Eliminar/' + data + '">Eliminar</a>';
+                    }
+                }
+            ]
+        })
+
+        $('.tablecontainer').on('click', 'a.popup', function (e) {
+            e.preventDefault();
+            OpenPopup($(this).attr('href'));
+        })
+        function OpenPopup(pageUrl) {
+
+            var $pageContent = $('<div/>');
+            $pageContent.load(pageUrl, function () {
+                $('#popupForm', $pageContent).removeData('validator');
+                $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse('form');  
+            });
+
+            $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                .html($pageContent)
+                .dialog({
+                    draggable: false,
+                    autoOpen: false,
+                    resizable: false,
+                    modal: true,
+                    title: "Popup Dialog",
+                    height: 550,
+                    width: 600,
+                    close: function () {
+                        $dialog.dialog('destroy').remove();
+                    }
+                })
+            $('.popupWindow').on('sumbit', '#popupForm', function (e) {
+                var url = $('#popupForm')[0].action;
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $('#popupForm').serialize(),
+                    success: function (data) {
+                        if (data.status) {
+                            $dialog.dialog('close');
+                            oTable.ajax.reload();
+                        }
+                    }
+                })
+                e.preventDefault();
+            })
+            $dialog.dialog('open');
+        }
     });
-
 </script>
-

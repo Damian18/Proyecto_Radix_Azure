@@ -1,0 +1,22 @@
+﻿@model Proyecto_RadixWeb.Models.PrivilegiosCuentas
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Save</h2>
+
+@using (Html.BeginForm("Eliminar", "PrivilegiosCuentas", FormMethod.Post, new { id = "popupForm" }))
+{
+  
+        @Html.HiddenFor(a => a.pc_id)
+
+    <div class="form-group">
+        <label>Nombre</label>
+   <p>@Model.pc_nom</p>
+    </div>
+
+    <div>
+
+        <input type="submit" value="Delete" />
+    </div>
+}

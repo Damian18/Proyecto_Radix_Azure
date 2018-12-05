@@ -1294,7 +1294,7 @@ $(function () {
     function setThemeState() {
         // set theme type
         if (themeSettings.themeName) {
-            $styleLink.attr('href', 'Content/css/dashboard/app-green.css');
+            $styleLink.attr('href', 'Content/css/dashboard/app.css');
         }
         else {
             $styleLink.attr('href', 'Content/css/dashboard/app.css');
@@ -1321,7 +1321,14 @@ $(function () {
 
     function setThemeControlsState() {
         // set color switcher
-       
+        $customizeMenuColorBtns.each(function () {
+            if ($(this).data('theme') === themeSettings.themeName) {
+                $(this).addClass('active');
+            }
+            else {
+                $(this).removeClass('active');
+            }
+        });
 
         // set radio buttons
         $customizeMenuRadioBtns.each(function () {

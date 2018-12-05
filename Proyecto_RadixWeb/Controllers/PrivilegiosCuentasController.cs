@@ -13,9 +13,9 @@ namespace Proyecto_RadixWeb.Controllers
     public class PrivilegiosCuentasController : Controller
     {
         private radixEntities db = new radixEntities();
-
-        // GET: PrivilegiosCuentas
-        public ActionResult Index()
+     
+            // GET: PrivilegiosCuentas
+            public ActionResult Index()
         {
 
             ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
@@ -28,6 +28,89 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(multiples);
         }
+        public ActionResult All()
+        {
+            //List<PrivilegiosCuentas> pr = db.PrivilegiosCuentas.ToList();
+            //return Json(pr, JsonRequestBehavior.AllowGet);
+            var todos = db.PrivilegiosCuentas.OrderBy(a => a.pc_id).ToList();
+            return Json(new { data = todos }, JsonRequestBehavior.AllowGet);
+            
+        }
+        [HttpGet]
+        public ActionResult Agregar(int id)
+        {
+            //List<PrivilegiosCuentas> pr = db.PrivilegiosCuentas.ToList();
+            //return Json(pr, JsonRequestBehavior.AllowGet);
+            var s = db.PrivilegiosCuentas.Where(a => a.pc_id == id).FirstOrDefault(); ;
+            return View(s);
+
+        }
+        [HttpPost]
+        public ActionResult Agregar(PrivilegiosCuentas pc)
+        {
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                if (pc.pc_id > 0)
+                {
+                    //edit
+                    var ss = db.PrivilegiosCuentas.Where(a => a.pc_id == pc.pc_id).FirstOrDefault();
+                    if (ss != null)
+                    {
+                        ss.pc_nom = pc.pc_nom;
+                    }
+                }
+                else
+                {
+                    //save
+                    db.PrivilegiosCuentas.Add(pc);
+
+                }
+                db.SaveChanges();
+                status = true;
+            }
+            return new JsonResult { Data = new { status=status} };
+
+        }
+        [HttpGet]
+        public ActionResult Eliminar(int id)
+        {
+            var s = db.PrivilegiosCuentas.Where(a => a.pc_id == id).FirstOrDefault();
+
+            if (s != null)
+            {
+                return View(s);
+            }
+            else {
+                return HttpNotFound();
+            }
+        }
+        [HttpPost]
+        [ActionName("Eliminar")]
+        public ActionResult EliminarConfirmar(int id)
+        {
+
+            bool status = false;
+            var s = db.PrivilegiosCuentas.Where(a => a.pc_id == id).FirstOrDefault();
+
+            if (s != null)
+            {
+                db.PrivilegiosCuentas.Remove(s);
+                db.SaveChanges();
+                status = true;            }
+            else
+            {
+                return HttpNotFound();
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+
+
+
+
+
+
 
         // GET: PrivilegiosCuentas/Details/5
         public ActionResult Details(int? id)
