@@ -332,6 +332,16 @@ namespace Proyecto_RadixWeb.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", new { subemp_id });
         }
+        public ActionResult EliminarAll(contratos con)
+        {
+            int? id2 = con.Con_Id;
+            int id = Convert.ToInt32(id2);
+
+            contratos contratos = db.contratos.Find(id);
+            db.contratos.Remove(contratos);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

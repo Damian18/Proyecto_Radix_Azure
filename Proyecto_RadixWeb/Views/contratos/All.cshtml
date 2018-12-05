@@ -225,7 +225,7 @@
     <!--Eliminar-->
     <div class="modal fade" id="Mieliminar" tabindex="-1" role="dialog" aria-labelledby="Mieliminar" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            @using (Html.BeginForm("Eliminar", "Contratos", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
+            @using (Html.BeginForm("EliminarAll", "Contratos", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <!-- Modal content-->
@@ -267,16 +267,6 @@
         $(document).ready(function () {
             $('#contenido_vista').appendTo('#contenido_general');
         });
-
-        $(".documento").on("click", function () {
-
-            $("#Con_id").val($(this).attr("id"));
-
-        });
-        $(".cuenta").on("click", function () {
-
-            $("#ObjPersonas_Per_Rut").val($(this).attr("name"));
-            $("#ObjCargos_Car_Nom").val($(this).attr("id"));
-        });
+            
 
     </script>

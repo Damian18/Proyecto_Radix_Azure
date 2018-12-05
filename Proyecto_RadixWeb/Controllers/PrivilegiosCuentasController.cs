@@ -126,6 +126,7 @@ namespace Proyecto_RadixWeb.Controllers
         
             //db.PrivilegiosCuentas.Remove(multiples.ObjPrivilegiosCuentas);
         }
+        [HttpPost]
         public ActionResult Eliminar(PrivilegiosCuentas pc)
         {
             int? id2 = pc.pc_id;

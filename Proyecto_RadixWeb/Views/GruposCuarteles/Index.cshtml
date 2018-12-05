@@ -68,13 +68,13 @@
                                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                     <td align="center">
-                                                        <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                                        <a class="btn btn-danger sectoreliminar" id="@item.gc_id" name="@item.Cuarteles.cuar_nom" href="#" data-toggle="modal" data-target="#Misectoreliminar"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
                                                     @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.gc_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.gc_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.gc_id })
-                </td>*@
+                                                            @Html.ActionLink("Edit", "Edit", new { id = item.gc_id }) |
+                                                            @Html.ActionLink("Details", "Details", new { id = item.gc_id }) |
+                                                            @Html.ActionLink("Delete", "Delete", new { id = item.gc_id })
+                                                        </td>*@
                                                 </tr>
                                             }
 
@@ -93,12 +93,46 @@
 
 
     </div>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
+    <!--Eliminar-->
+    <div class="modal fade" id="Misectoreliminar" tabindex="-1" role="dialog" aria-labelledby="Misectoreliminar" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("Eliminar", "GruposCuarteles", new { cuar_id = ViewBag.cuar_id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title col-sm-11 col-md-11 col-lg-11 col-xl-11">¿Desea Eliminar El Sector <label id="nombresector"></label> ?</h4>
+                        <button type="button" class="close col-sm-1 col-md-1 col-lg-1 col-xl-1" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
 
-    $(document).ready(function () {
-        $('#contenido_vista').appendTo('#contenido_general');
-    });
+                    @Html.Hidden("gc_id")
 
-</script>
+                    <div class="modal-footer">
+                        @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#contenido_vista').appendTo('#contenido_general');
+        });
+        $(".sectoreliminar").on("click", function () {
+
+            $("#gc_id").val($(this).attr("id"));
+            var nom = $(this).attr("name");
+            document.getElementById("nombresector").innerHTML = nom;
+            //$("#nombresector").val($(this).attr("name"));
+        });
+    </script>
