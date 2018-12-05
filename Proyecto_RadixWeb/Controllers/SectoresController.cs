@@ -29,7 +29,21 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(multiples);
         }
+        public ActionResult All()
+        {
 
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
+            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+            ViewBag.empresa = emp_nom;
+
+            var sec = db.Sectores.Include(c => c.subempresas);
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjESectores = sec.Where(s => s.subempresas.empresas.Emp_Nom == emp_nom).ToList()
+            };
+
+            return View(multiples);
+        }
         // GET: Sectores/Details/5
         public ActionResult Details(int? id)
         {

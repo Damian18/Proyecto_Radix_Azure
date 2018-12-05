@@ -28,90 +28,7 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(multiples);
         }
-        public ActionResult All()
-        {
-            //List<PrivilegiosCuentas> pr = db.PrivilegiosCuentas.ToList();
-            //return Json(pr, JsonRequestBehavior.AllowGet);
-            var todos = db.PrivilegiosCuentas.OrderBy(a => a.pc_id).ToList();
-            return Json(new { data = todos }, JsonRequestBehavior.AllowGet);
-            
-        }
-        [HttpGet]
-        public ActionResult Agregar(int id)
-        {
-            //List<PrivilegiosCuentas> pr = db.PrivilegiosCuentas.ToList();
-            //return Json(pr, JsonRequestBehavior.AllowGet);
-            var s = db.PrivilegiosCuentas.Where(a => a.pc_id == id).FirstOrDefault(); ;
-            return View(s);
-
-        }
-        [HttpPost]
-        public ActionResult Agregar(PrivilegiosCuentas pc)
-        {
-            bool status = false;
-            if (ModelState.IsValid)
-            {
-                if (pc.pc_id > 0)
-                {
-                    //edit
-                    var ss = db.PrivilegiosCuentas.Where(a => a.pc_id == pc.pc_id).FirstOrDefault();
-                    if (ss != null)
-                    {
-                        ss.pc_nom = pc.pc_nom;
-                    }
-                }
-                else
-                {
-                    //save
-                    db.PrivilegiosCuentas.Add(pc);
-
-                }
-                db.SaveChanges();
-                status = true;
-            }
-            return new JsonResult { Data = new { status=status} };
-
-        }
-        [HttpGet]
-        public ActionResult Eliminar(int id)
-        {
-            var s = db.PrivilegiosCuentas.Where(a => a.pc_id == id).FirstOrDefault();
-
-            if (s != null)
-            {
-                return View(s);
-            }
-            else {
-                return HttpNotFound();
-            }
-        }
-        [HttpPost]
-        [ActionName("Eliminar")]
-        public ActionResult EliminarConfirmar(int id)
-        {
-
-            bool status = false;
-            var s = db.PrivilegiosCuentas.Where(a => a.pc_id == id).FirstOrDefault();
-
-            if (s != null)
-            {
-                db.PrivilegiosCuentas.Remove(s);
-                db.SaveChanges();
-                status = true;            }
-            else
-            {
-                return HttpNotFound();
-            }
-            return new JsonResult { Data = new { status = status } };
-        }
-
-
-
-
-
-
-
-
+     
         // GET: PrivilegiosCuentas/Details/5
         public ActionResult Details(int? id)
         {
@@ -183,40 +100,42 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         // GET: PrivilegiosCuentas/Delete/5
-        public ActionResult Delete(MultiplesClases multiples, string id)
+        public ActionResult Delete(int? id)
         {
-            multiples.ObjPrivilegiosCuentas.pc_id = Convert.ToInt32(id);
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                multiples.ObjPrivilegiosCuentas = db.PrivilegiosCuentas.Find(id);
-                db.PrivilegiosCuentas.Remove(multiples.ObjPrivilegiosCuentas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(multiples);
+            PrivilegiosCuentas priv = db.PrivilegiosCuentas.Find(id);
+            if (priv == null)
+            {
+                return HttpNotFound();
+            }
+            return View(priv);
         }
 
         // POST: PrivilegiosCuentas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(MultiplesClases multiples,string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            multiples.ObjPrivilegiosCuentas.pc_id = Convert.ToInt32(id);
-            if (id == null)
-            {
-                return View(multiples);
-            }
-            if (ModelState.IsValid)
-            {
-                multiples.ObjPrivilegiosCuentas = db.PrivilegiosCuentas.Find(id);
-                db.PrivilegiosCuentas.Remove(multiples.ObjPrivilegiosCuentas);
-                db.SaveChanges();
+            PrivilegiosCuentas priv = db.PrivilegiosCuentas.Find(id);
+            db.PrivilegiosCuentas.Remove(priv);
+            db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            return View(multiples);
+        
             //db.PrivilegiosCuentas.Remove(multiples.ObjPrivilegiosCuentas);
         }
-
+        [HttpPost]
+        public ActionResult Eliminar(PrivilegiosCuentas pc)
+        {
+            int? id2 = pc.pc_id;
+            int id = Convert.ToInt32(id2);
+            PrivilegiosCuentas privilegios = db.PrivilegiosCuentas.Find(id);
+            db.PrivilegiosCuentas.Remove(privilegios);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

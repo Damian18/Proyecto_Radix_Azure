@@ -38,7 +38,7 @@ namespace Proyecto_RadixWeb.Controllers
             return PartialView(model);
         }
 
-       
+      
         public ActionResult verTodos()
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();
@@ -58,7 +58,21 @@ namespace Proyecto_RadixWeb.Controllers
 
             return View(multiples);
         }
+        public ActionResult All()
+        {
 
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
+            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+            ViewBag.empresa = emp_nom;
+
+            var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+            MultiplesClases multiples = new MultiplesClases
+            {
+                ObjEContrato = contratos.Where(s => s.subempresas.empresas.Emp_Nom == emp_nom).ToList()
+            };
+
+            return View(multiples);
+        }
         // GET: contratos
         public ActionResult Index(int? subemp_id)
         {
@@ -308,7 +322,26 @@ namespace Proyecto_RadixWeb.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult Eliminar(contratos con, string subemp_id)
+        {
+            int? id2 = con.Con_Id;
+            int id = Convert.ToInt32(id2);
 
+            contratos contratos = db.contratos.Find(id);
+            db.contratos.Remove(contratos);
+            db.SaveChanges();
+            return RedirectToAction("Index", new { subemp_id });
+        }
+        public ActionResult EliminarAll(contratos con)
+        {
+            int? id2 = con.Con_Id;
+            int id = Convert.ToInt32(id2);
+
+            contratos contratos = db.contratos.Find(id);
+            db.contratos.Remove(contratos);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

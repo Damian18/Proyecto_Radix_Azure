@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index Sectores";
 }
-
+<link href="~/Content/css/dashboard/app.css" rel="stylesheet" />
 
 <div id="contenido_vista" @*style="margin-top: 10%;margin-left:10%"*@>
     <article class="content responsive-tables-page">
@@ -12,9 +12,9 @@
             </div>
             <div class="col col-xs-12 col-md-9 col-lg-9">
                 <h1 class="title" style="text-align:center"><i class="fas fa-map-marked-alt"></i>   Sectores de la empresa @ViewBag.empresa </h1>
-            </div>
+            </div> 
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
-                <a class="btn btn-primary text-white" data-toggle="modal" data-target="#MiModal"><i class="fas fa-user-plus"></i> Agregar Cuenta </a>
+                <a class="btn btn-primary text-white" data-toggle="modal" data-target="#MiModal"><i class="fas fa-user-plus"></i> Agregar Sector</a>
 
             </div>
         </div>
@@ -38,7 +38,6 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
-                                             
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,10 +52,10 @@
                                                         @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom)
                                                     </td>
                                                     @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.pc_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.pc_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.pc_id })
-                </td>*@
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.pc_id }) |
+                                                        @Html.ActionLink("Details", "Details", new { id = item.pc_id }) |
+                                                        @Html.ActionLink("Delete", "Delete", new { id = item.pc_id })
+                                                    </td>*@
                                                     <td align="center">
 
                                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
@@ -73,7 +72,7 @@
                                                         </a>
                                                     </th>*@
                                                 </tr>
-                                                }
+                                            }
 
 
                                             </tbody>
@@ -123,7 +122,7 @@
     <!--Eliminar-->
     <div class="modal fade" id="Misectoreliminar" tabindex="-1" role="dialog" aria-labelledby="Misectoreliminar" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            @using (Html.BeginForm("Eliminar", "Sectores", new { subemp_id= ViewBag.subemp_id }, FormMethod.Post))
+            @using (Html.BeginForm("Eliminar", "Sectores", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <!-- Modal content-->
@@ -135,11 +134,11 @@
                         </button>
                     </div>
                     <!--Contenido del centro-->
-                
-                        @Html.Hidden("sect_id")
-                    
+
+                    @Html.Hidden("sect_id")
+
                     <div class="modal-footer">
-                       @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                        @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                     </div>
                 </div>
@@ -149,8 +148,9 @@
 
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script> 
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+
     $(document).ready(function () {
 
         $('#contenido_vista').appendTo('#contenido_general');
@@ -162,4 +162,4 @@
         document.getElementById("nombresector").innerHTML = nom;
         //$("#nombresector").val($(this).attr("name"));
     });
-</script>
+    </script>

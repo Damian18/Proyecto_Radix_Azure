@@ -133,7 +133,17 @@ namespace Proyecto_RadixWeb.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult Eliminar(GruposCuarteles grup, string cuar_id)
+        {
+            int? id2 = grup.gc_id;
+            int id = Convert.ToInt32(id2);
 
+            GruposCuarteles gc = db.GruposCuarteles.Find(id);
+            db.GruposCuarteles.Remove(gc);
+            db.SaveChanges();
+            return RedirectToAction("Index", new { cuar_id });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
