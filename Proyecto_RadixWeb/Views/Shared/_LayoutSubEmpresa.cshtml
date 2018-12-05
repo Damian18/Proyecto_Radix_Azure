@@ -12,18 +12,7 @@
     <!-- Place favicon.ico in the root directory -->
     <link rel="stylesheet" href="~/Content/css/dashboard/vendor.css">
     <!-- Theme initialization -->
-    <script>
-        var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
-            {};
-        var themeName = themeSettings.themeName || '';
-        if (themeName) {
-            document.write('<link rel="stylesheet" id="theme-style" href="Content/css/dashboard/app-green.css">');
-        }
-     
-        else {
-            document.write('<link rel="stylesheet" id="theme-style" href="~/Content/css/dashboard/app.css">');
-        }
-    </script>
+    <link rel="stylesheet" id="theme-style" href="~/Content/css/dashboard/app.css">
 
    
     <style>
@@ -328,8 +317,8 @@
                     <!--perzonalizar-->
                     <footer class="sidebar-footer">
                         <ul class="nav metismenu" id="customize-menu">
-                            <li class="open">
-                                <ul class="collapse in" style="">
+                            <li>
+                                <ul>
                                     <li class="customize">
                                         <div class="customize-item">
                                             <div class="row customize-header">
@@ -338,7 +327,7 @@
                                                 <div class="col-xs-4"> <label class="title">static</label> </div>
                                             </div>
                                             <div class="row hidden-md-down">
-                                                <div class="col-xs-4"> <label class="title">Barra:</label> </div>
+                                                <div class="col-xs-4"> <label class="title">Sidebar:</label> </div>
                                                 <div class="col-xs-4">
                                                     <label>
                                                         <input class="radio" type="radio" name="sidebarPosition" value="sidebar-fixed">
@@ -353,7 +342,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-4"> <label class="title">Cabecera:</label> </div>
+                                                <div class="col-xs-4"> <label class="title">Header:</label> </div>
                                                 <div class="col-xs-4">
                                                     <label>
                                                         <input class="radio" type="radio" name="headerPosition" value="header-fixed">
@@ -383,11 +372,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                      
+                                       
                                     </li>
                                 </ul> <a href="">
-    <i class="fa fa-cog"></i> Personalizar
-</a>
+                                    <i class="fa fa-cog"></i> Perzonalizar
+                                </a>
                             </li>
                         </ul>
                     </footer>
@@ -404,7 +393,6 @@
             </div>
             <!--FOOTER-->
             <footer class="footer">
-                <div class="footer-block buttons"> <iframe class="footer-github-btn" src="" frameborder="0" scrolling="0" width="140px" height="20px"></iframe> </div>
                 <div class="footer-block author">
                     <ul>
                         <li> created by <a href="">ModularCode</a> </li>

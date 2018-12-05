@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,800,700,600);
+
 /*************************************************************
 *						App Variables
 **************************************************************/
@@ -1102,7 +1102,7 @@ pre {
 
     .card .card-header {
         background-image: none;
-        background-color: #85CE36;
+        background-color: #ffffff;
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
@@ -1264,7 +1264,7 @@ pre {
 .card .title-block,
 .card .card-title-block {
     padding-bottom: 0;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     border: none;
 }
 

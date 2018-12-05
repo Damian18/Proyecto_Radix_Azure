@@ -1169,6 +1169,7 @@
     <Content Include="Views\GruposCuarteles\Details.cshtml" />
     <Content Include="Views\GruposCuarteles\Edit.cshtml" />
     <Content Include="Views\GruposCuarteles\Index.cshtml" />
+    <Content Include="Views\SubEmpresas\ViewPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

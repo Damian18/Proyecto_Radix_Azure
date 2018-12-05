@@ -1,9 +1,27 @@
-﻿
+﻿/*!
+ * jQuery JavaScript Library v2.1.4
+ * http://jquery.com/
+ *
+ * Includes Sizzle.js
+ * http://sizzlejs.com/
+ *
+ * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
+ *
+ * Date: 2015-04-28T16:01Z
+ */
 
 (function (global, factory) {
 
     if (typeof module === "object" && typeof module.exports === "object") {
-
+        // For CommonJS and CommonJS-like environments where a proper `window`
+        // is present, execute the factory and get jQuery.
+        // For environments that do not have a `window` with a `document`
+        // (such as Node.js), expose a factory as module.exports.
+        // This accentuates the need for the creation of a real `window`.
+        // e.g. var jQuery = require("jquery")(window);
+        // See ticket #14549 for more info.
         module.exports = global.document ?
             factory(global, true) :
             function (w) {
@@ -16,7 +34,14 @@
         factory(global);
     }
 
+    // Pass this if window is not defined yet
 }(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
+
+    // Support: Firefox 18+
+    // Can't be in strict mode, several libs including ASP.NET trace
+    // the stack via arguments.caller.callee and Firefox dies if
+    // you try to trace through "use strict" call chains. (#13335)
+    //
 
     var arr = [];
 
@@ -141,6 +166,9 @@
         end: function () {
             return this.prevObject || this.constructor(null);
         },
+
+        // For internal use only.
+        // Behaves like an Array's method, not like a jQuery method.
         push: push,
         sort: arr.sort,
         splice: arr.splice
@@ -235,12 +263,18 @@
         },
 
         isNumeric: function (obj) {
-         
+            // parseFloat NaNs numeric-cast false positives (null|true|false|"")
+            // ...but misinterprets leading-number strings, particularly hex literals ("0x...")
+            // subtraction forces infinities to NaN
+            // adding 1 corrects loss of precision from parseFloat (#15100)
             return !jQuery.isArray(obj) && (obj - parseFloat(obj) + 1) >= 0;
         },
 
         isPlainObject: function (obj) {
-    
+            // Not plain objects:
+            // - Any object or value whose internal [[Class]] property is not "[object Object]"
+            // - DOM nodes
+            // - window
             if (jQuery.type(obj) !== "object" || obj.nodeType || jQuery.isWindow(obj)) {
                 return false;
             }
@@ -249,7 +283,9 @@
                 !hasOwn.call(obj.constructor.prototype, "isPrototypeOf")) {
                 return false;
             }
-            
+
+            // If the function hasn't returned already, we're confident that
+            // |obj| is a plain object, created by {} or constructed with new Object
             return true;
         },
 
@@ -279,6 +315,9 @@
             code = jQuery.trim(code);
 
             if (code) {
+                // If the code includes a valid, prologue position
+                // strict mode pragma, execute code by injecting a
+                // script tag into the document.
                 if (code.indexOf("use strict") === 1) {
                     script = document.createElement("script");
                     script.text = code;
@@ -291,7 +330,9 @@
             }
         },
 
-      
+        // Convert dashed to camelCase; used by the css and data modules
+        // Support: IE9-11+
+        // Microsoft forgot to hump their vendor prefix (#9572)
         camelCase: function (string) {
             return string.replace(rmsPrefix, "ms-").replace(rdashAlpha, fcamelCase);
         },
@@ -491,7 +532,10 @@
 
     function isArraylike(obj) {
 
-     
+        // Support: iOS 8.2 (not reproducible in simulator)
+        // `in` check used to prevent JIT error (gh-2145)
+        // hasOwn isn't used here due to false negatives
+        // regarding Nodelist length in IE
         var length = "length" in obj && obj.length,
             type = jQuery.type(obj);
 
@@ -507,7 +551,16 @@
             typeof length === "number" && length > 0 && (length - 1) in obj;
     }
     var Sizzle =
-    
+        /*!
+         * Sizzle CSS Selector Engine v2.2.0-pre
+         * http://sizzlejs.com/
+         *
+         * Copyright 2008, 2014 jQuery Foundation, Inc. and other contributors
+         * Released under the MIT license
+         * http://jquery.org/license
+         *
+         * Date: 2014-12-16
+         */
         (function (window) {
 
             var i,
@@ -572,24 +625,37 @@
 
                 booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
 
+                // Regular expressions
+
+                // Whitespace characters http://www.w3.org/TR/css3-selectors/#whitespace
                 whitespace = "[\\x20\\t\\r\\n\\f]",
+                // http://www.w3.org/TR/css3-syntax/#characters
                 characterEncoding = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",
+
+                // Loosely modeled on CSS identifier characters
+                // An unquoted value should be a CSS identifier http://www.w3.org/TR/css3-selectors/#attribute-selectors
+                // Proper syntax: http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
                 identifier = characterEncoding.replace("w", "w#"),
+
+                // Attribute selectors: http://www.w3.org/TR/selectors/#attribute-selectors
                 attributes = "\\[" + whitespace + "*(" + characterEncoding + ")(?:" + whitespace +
-               
+                    // Operator (capture 2)
                     "*([*^$|!~]?=)" + whitespace +
-                   
+                    // "Attribute values must be CSS identifiers [capture 5] or strings [capture 3 or capture 4]"
                     "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + identifier + "))|)" + whitespace +
                     "*\\]",
 
                 pseudos = ":(" + characterEncoding + ")(?:\\((" +
-               
+                    // To reduce the number of selectors needing tokenize in the preFilter, prefer arguments:
+                    // 1. quoted (capture 3; capture 4 or capture 5)
                     "('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|" +
-                   
+                    // 2. simple (capture 6)
                     "((?:\\\\.|[^\\\\()[\\]]|" + attributes + ")*)|" +
-                    
+                    // 3. anything else (capture 2)
                     ".*" +
                     ")\\)|)",
+
+                // Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
                 rwhitespace = new RegExp(whitespace + "+", "g"),
                 rtrim = new RegExp("^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$", "g"),
 
@@ -611,6 +677,8 @@
                         "*(even|odd|(([+-]|)(\\d*)n|)" + whitespace + "*(?:([+-]|)" + whitespace +
                         "*(\\d+)|))" + whitespace + "*\\)|)", "i"),
                     "bool": new RegExp("^(?:" + booleans + ")$", "i"),
+                    // For use in libraries implementing .is()
+                    // We use this for POS matching in `select`
                     "needsContext": new RegExp("^" + whitespace + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" +
                         whitespace + "*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i")
                 },
@@ -619,42 +687,61 @@
                 rheader = /^h\d$/i,
 
                 rnative = /^[^{]+\{\s*\[native \w/,
+
+                // Easily-parseable/retrievable ID or TAG or CLASS selectors
                 rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,
 
                 rsibling = /[+~]/,
                 rescape = /'|\\/g,
+
+                // CSS escapes http://www.w3.org/TR/CSS21/syndata.html#escaped-characters
                 runescape = new RegExp("\\\\([\\da-f]{1,6}" + whitespace + "?|(" + whitespace + ")|.)", "ig"),
                 funescape = function (_, escaped, escapedWhitespace) {
                     var high = "0x" + escaped - 0x10000;
+                    // NaN means non-codepoint
+                    // Support: Firefox<24
+                    // Workaround erroneous numeric interpretation of +"0x"
                     return high !== high || escapedWhitespace ?
                         escaped :
                         high < 0 ?
+                            // BMP codepoint
                             String.fromCharCode(high + 0x10000) :
+                            // Supplemental Plane codepoint (surrogate pair)
                             String.fromCharCode(high >> 10 | 0xD800, high & 0x3FF | 0xDC00);
                 },
-                
+
+                // Used for iframes
+                // See setDocument()
+                // Removing the function wrapper causes a "Permission Denied"
+                // error in IE
                 unloadHandler = function () {
                     setDocument();
                 };
+
+            // Optimize for push.apply( _, NodeList )
             try {
                 push.apply(
                     (arr = slice.call(preferredDoc.childNodes)),
                     preferredDoc.childNodes
                 );
-               
+                // Support: Android<4.0
+                // Detect silently failing push.apply
                 arr[preferredDoc.childNodes.length].nodeType;
             } catch (e) {
                 push = {
                     apply: arr.length ?
-                    
+
+                        // Leverage slice if possible
                         function (target, els) {
                             push_native.apply(target, slice.call(els));
                         } :
-                        
+
+                        // Support: IE<9
+                        // Otherwise append directly
                         function (target, els) {
                             var j = target.length,
                                 i = 0;
-                            
+                            // Can't trust NodeList.length
                             while ((target[j++] = els[i++])) { }
                             target.length = j - 1;
                         }
@@ -663,7 +750,7 @@
 
             function Sizzle(selector, context, results, seed) {
                 var match, elem, m, nodeType,
-                   
+                    // QSA vars
                     i, groups, old, nid, newContext, newSelector;
 
                 if ((context ? context.ownerDocument || context : preferredDoc) !== document) {
@@ -688,8 +775,11 @@
                         if ((m = match[1])) {
                             if (nodeType === 9) {
                                 elem = context.getElementById(m);
+                                // Check parentNode to catch when Blackberry 4.6 returns
+                                // nodes that are no longer in the document (jQuery #6963)
                                 if (elem && elem.parentNode) {
-                                   
+                                    // Handle the case where IE, Opera, and Webkit return items
+                                    // by name instead of ID
                                     if (elem.id === m) {
                                         results.push(elem);
                                         return results;
@@ -723,7 +813,11 @@
                         nid = old = expando;
                         newContext = context;
                         newSelector = nodeType !== 1 && selector;
-                        
+
+                        // qSA works strangely on Element-rooted queries
+                        // We can work around this by specifying an extra ID on the root
+                        // and working up from there (Thanks to Andrew Dupont for the technique)
+                        // IE 8 doesn't work on object elements
                         if (nodeType === 1 && context.nodeName.toLowerCase() !== "object") {
                             groups = tokenize(selector);
 
@@ -762,14 +856,19 @@
                 return select(selector.replace(rtrim, "$1"), context, results, seed);
             }
 
-        
+            /**
+             * Create key-value caches of limited size
+             * @returns {Function(string, Object)} Returns the Object data after storing it on itself with
+             *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
+             *	deleting the oldest entry
+             */
             function createCache() {
                 var keys = [];
 
                 function cache(key, value) {
-                 
+                    // Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
                     if (keys.push(key + " ") > Expr.cacheLength) {
-                       
+                        // Only keep the most recent entries
                         delete cache[keys.shift()];
                     }
                     return (cache[key + " "] = value);
@@ -777,11 +876,19 @@
                 return cache;
             }
 
-      
+            /**
+             * Mark a function for special use by Sizzle
+             * @param {Function} fn The function to mark
+             */
             function markFunction(fn) {
                 fn[expando] = true;
                 return fn;
             }
+
+            /**
+             * Support testing using an element
+             * @param {Function} fn Passed the created div and expects a boolean result
+             */
             function assert(fn) {
                 var div = document.createElement("div");
 
@@ -790,14 +897,20 @@
                 } catch (e) {
                     return false;
                 } finally {
-                    
+                    // Remove from its parent by default
                     if (div.parentNode) {
                         div.parentNode.removeChild(div);
                     }
-                   
+                    // release memory in IE
                     div = null;
                 }
             }
+
+            /**
+             * Adds the same handler for all of the specified attrs
+             * @param {String} attrs Pipe-separated list of attributes
+             * @param {Function} handler The method that will be applied
+             */
             function addHandle(attrs, handler) {
                 var arr = attrs.split("|"),
                     i = attrs.length;
@@ -806,14 +919,25 @@
                     Expr.attrHandle[arr[i]] = handler;
                 }
             }
+
+            /**
+             * Checks document order of two siblings
+             * @param {Element} a
+             * @param {Element} b
+             * @returns {Number} Returns less than 0 if a precedes b, greater than 0 if a follows b
+             */
             function siblingCheck(a, b) {
                 var cur = b && a,
                     diff = cur && a.nodeType === 1 && b.nodeType === 1 &&
                         (~b.sourceIndex || MAX_NEGATIVE) -
                         (~a.sourceIndex || MAX_NEGATIVE);
+
+                // Use IE sourceIndex if available on both nodes
                 if (diff) {
                     return diff;
                 }
+
+                // Check if b follows a
                 if (cur) {
                     while ((cur = cur.nextSibling)) {
                         if (cur === b) {
@@ -824,6 +948,11 @@
 
                 return a ? 1 : -1;
             }
+
+            /**
+             * Returns a function to use in pseudos for input types
+             * @param {String} type
+             */
             function createInputPseudo(type) {
                 return function (elem) {
                     var name = elem.nodeName.toLowerCase();
@@ -831,7 +960,10 @@
                 };
             }
 
-          
+            /**
+             * Returns a function to use in pseudos for buttons
+             * @param {String} type
+             */
             function createButtonPseudo(type) {
                 return function (elem) {
                     var name = elem.nodeName.toLowerCase();
@@ -839,7 +971,10 @@
                 };
             }
 
-          
+            /**
+             * Returns a function to use in pseudos for positionals
+             * @param {Function} fn
+             */
             function createPositionalPseudo(fn) {
                 return markFunction(function (argument) {
                     argument = +argument;
@@ -858,6 +993,11 @@
                 });
             }
 
+            /**
+             * Checks a node for validity as a Sizzle context
+             * @param {Element|Object=} context
+             * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
+             */
             function testContext(context) {
                 return context && typeof context.getElementsByTagName !== "undefined" && context;
             }
@@ -865,6 +1005,11 @@
             // Expose support vars for convenience
             support = Sizzle.support = {};
 
+            /**
+             * Detects XML nodes
+             * @param {Element|Object} elem An element or a document
+             * @returns {Boolean} True iff elem is a non-HTML XML node
+             */
             isXML = Sizzle.isXML = function (elem) {
                 // documentElement is verified for cases where it doesn't yet exist
                 // (such as loading iframes in IE - #4833)
@@ -872,6 +1017,11 @@
                 return documentElement ? documentElement.nodeName !== "HTML" : false;
             };
 
+            /**
+             * Sets document-related variables once based on the current document
+             * @param {Element|Object} [doc] An element or document object to use to set the document
+             * @returns {Object} Returns the current document
+             */
             setDocument = Sizzle.setDocument = function (node) {
                 var hasCompare, parent,
                     doc = node ? node.ownerDocument || node : preferredDoc;
@@ -885,7 +1035,11 @@
                 document = doc;
                 docElem = doc.documentElement;
                 parent = doc.defaultView;
-                
+
+                // Support: IE>8
+                // If iframe document is assigned to "document" variable and if iframe has been reloaded,
+                // IE will throw "permission denied" error when accessing "document" variable, see jQuery #13936
+                // IE6-8 do not support the defaultView property so parent will be undefined
                 if (parent && parent !== parent.top) {
                     // IE11 does not have attachEvent, so all must suffer
                     if (parent.addEventListener) {

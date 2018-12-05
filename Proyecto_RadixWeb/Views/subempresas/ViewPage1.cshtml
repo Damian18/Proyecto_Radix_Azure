@@ -1,0 +1,73 @@
+﻿<div id="contenido_vista" style="margin-top: 10%">
+
+    <div class="container">
+        <div class="text-lg-right text-md-right text-xs-center" style="margin-top:15%">
+            <a class="btn btn-danger ml-2" href="#" data-toggle="modal" data-target="#MiModal"><i class="fas fa-plus"> Nueva Sucursal</i></a>
+        </div>
+        <div class="row active-with-click" style="margin-left:5%;margin-top:1%;">
+
+            @foreach (var item in Model.ObjESubEmpresas)
+            {
+                <div class="container">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="col-md-9 col-sm-6 col-xs-12  col-lg-5">
+
+                                <article class="material-card Red">
+
+                                    <h2>
+                                        <span>@Html.DisplayFor(modelItem => item.Sub_Nom)</span>
+                                        <strong>
+                                            <i class="fas fa-apple-alt"></i>
+                                            Ubicado en @Html.DisplayFor(modelItem => item.comunas.Com_Nom)
+                                        </strong>
+                                    </h2>
+                                    <div class="mc-content">
+                                        <div class="img-container">
+                                            <img class="img-responsive" src="https://image.freepik.com/vector-gratis/elegante-fondo-verde-poligono-geometrico_1035-13146.jpg">
+                                        </div>
+                                        <div class="mc-description">
+                                            Informacion sobre esta sucursal: dirección @Html.DisplayFor(modelItem => item.Sub_Dir)
+                                        </div>
+
+                                    </div>
+                                    <a class="mc-btn-action">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                    <div class="mc-footer">
+                                        <h4>
+                                            Opciones
+                                        </h4>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
+                                                    <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                                                </div>
+                                                <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
+
+                                                    <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </article>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12 col-sm-12 col-lg-3 mt-5" style="margin-top: 5%;padding-right: 50%;">
+                                <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })" class="mt-2"><i class="fas fa-info-circle btn btn-lg btn-info" style="margin-left: 25%;"> Informacion sobre sucursal</i></a>
+                                <a href="@Url.Action("Index", "SubEmpresa_Cargos", new { subemp_id = item.Sub_Id })" class="mt-2"><i class="fas fa-user-tag btn btn-lg btn-info" style="margin-left: 25%;"> Cargos Especificos</i></a>
+                                <a href="@Url.Action("Index", "Sectores", new { subemp_id = item.Sub_Id })" class="mt-2"><i class="fas fa-map-marker-alt btn btn-lg btn-info" style="margin-left: 25%;"> Sectores de la sucursal</i></a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
