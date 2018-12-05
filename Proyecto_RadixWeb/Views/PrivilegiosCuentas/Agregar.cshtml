@@ -1,0 +1,24 @@
+﻿@model Proyecto_RadixWeb.Models.PrivilegiosCuentas
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Save</h2>
+
+@using (Html.BeginForm("Agregar","PrivilegiosCuentas",FormMethod.Post, new { id= "popupForm" }))
+{
+    if (Model != null && Model.pc_id>0)
+    {
+        @Html.HiddenFor(a=>a.pc_id)
+    }
+    <div class="form-group">
+        <label>Nombre</label>
+        @Html.TextBoxFor(a=>a.pc_nom, new { @class="form-control"})
+        @Html.ValidationMessageFor(a=>a.pc_nom)
+    </div>
+
+    <div>
+
+        <input type="submit" value="Guardar"/>
+    </div>
+}

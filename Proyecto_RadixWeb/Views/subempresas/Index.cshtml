@@ -23,27 +23,23 @@
                 {
                     <!-- /.col-xl-4 -->
                     <div class="col-xl-6 col-lg-6 col-md-4 col-sm-4">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <div class="header-block">
+                        <div class="card card-primary" >
+                            <div class="card-header" >
+                                <div class="header-block" style=" margin-left: 25%;">
                                     <i class="fas fa-industry"></i>  <p class="title">  @Html.DisplayFor(modelItem => item.Sub_Nom) </p>
                                 </div>
                             </div>
-                            <div class="card-block">
+                            <div class="card-block" style="text-align:center">
                                 <p>Ubicado en @Html.DisplayFor(modelItem => item.comunas.Com_Nom)</p>
                                 <p>Dirección @Html.DisplayFor(modelItem => item.Sub_Dir)</p>
                             </div>
-                            <div class="card-footer">
-                                <div class="col col-sm-3 col-md-3 col-lg-3 col-xs-3">
+                            <div class="card-footer"  style="text-align:center">
+                                <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
                                     <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
                                 </div>
                                 <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
 
                                     <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                                <div class="col col-sm-3 col-md-3 col-lg-3 col-xs-3">
-
-                                    <a class="btn btn-outline-secondary" href="@Url.Action("Index","Sectores",new {subemp_id=item.Sub_Id })"><i class="fas fa-list"></i></a>
                                 </div>
                             </div>
                         </div>
