@@ -24,7 +24,7 @@ namespace Proyecto_RadixWeb.Controllers
 
             MultiplesClases multiples = new MultiplesClases
             {
-                ObjESectores = sectores.Where(e => e.Sub_Id == sub).ToList()
+                ObjESectores = sectores.Where(e => e.Sub_Id == sub).OrderBy(s=>s.sect_nom).ToList()
             };
 
             return View(multiples);
@@ -141,7 +141,34 @@ namespace Proyecto_RadixWeb.Controllers
         [HttpPost]
         public ActionResult Eliminar(Sectores sect, string subemp_id)
         {
-            int id = sect.sect_id;
+            int? id2 = sect.sect_id;
+            int id = Convert.ToInt32(id2);
+
+            var cuarteles = db.Cuarteles.Where(c => c.sect_id == id);
+
+            foreach (var item in cuarteles)
+            {
+                var grupos = db.GruposCuarteles.Where(gc => gc.cuar_id == item.cuar_id);
+
+
+                if (grupos != null)
+                {
+
+                    foreach (var item2 in grupos)
+                    {
+                        GruposCuarteles gc = db.GruposCuarteles.Find(item2.gc_id);
+                        db.GruposCuarteles.Remove(gc);
+                    }
+                  
+                }
+
+                Cuarteles ca = db.Cuarteles.Find(item.cuar_id);
+                db.Cuarteles.Remove(ca);
+            }
+            db.SaveChanges();
+
+
+
 
             Sectores sectores = db.Sectores.Find(id);
             db.Sectores.Remove(sectores);
