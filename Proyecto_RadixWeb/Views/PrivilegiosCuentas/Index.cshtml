@@ -57,7 +57,7 @@
                                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                     <td align="center">
-                                                        <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                                        <a class="btn btn-danger eliminado" id="@item.pc_id" name="@item.pc_nom" href="#" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
                                                 </tr>
                                             }
@@ -108,24 +108,24 @@
     <!--Eliminar-->
     <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            @using (Html.BeginForm("Delete", "PrivilegiosCuentas", new { id = ViewBag.pc_id }, FormMethod.Post))
-            {
+            @using (Html.BeginForm("Eliminar", "PrivilegiosCuentas", FormMethod.Post))
+            { 
                 @Html.AntiForgeryToken()
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nuevo Sector</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h4 class="modal-title col-sm-11 col-md-11 col-lg-11 col-xl-11">¿Desea Eliminar <label id="nombre"></label> ?</h4>
+                        <button type="button" class="close col-sm-1 col-md-1 col-lg-1 col-xl-1" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <!--Contenido del centro-->
-                    <div class="modal-body">
-                        @Html.LabelFor(model => model.ObjPrivilegiosCuentas.pc_nom)
-                    </div>
+
+                    @Html.Hidden("pc_id")
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
                     </div>
                 </div>
             }
@@ -134,16 +134,19 @@
 
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
     <script>
 
 
         $(document).ready(function () {
             $('#contenido_vista').appendTo('#contenido_general');
         });
-     
+        $(".eliminado").on("click", function () {
+
+            $("#pc_id").val($(this).attr("id"));
+            var nom = $(this).attr("name");
+            document.getElementById("nombre").innerHTML = nom;
+            //$("#nombresector").val($(this).attr("name"));
+        });
     </script>
 
