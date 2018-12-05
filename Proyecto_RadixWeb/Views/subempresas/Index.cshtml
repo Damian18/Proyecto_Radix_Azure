@@ -32,17 +32,29 @@
                             <div class="card-block" style="text-align:center">
                                 <p>Ubicado en @Html.DisplayFor(modelItem => item.comunas.Com_Nom)</p>
                                 <p>Dirección @Html.DisplayFor(modelItem => item.Sub_Dir)</p>
-                            </div>
-                            <div class="card-footer"  style="text-align:center">
-                                <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
-                                    <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                                <div class="col-md-4  col-xs-12 col-sm-12 col-lg-4 mt-2">
+                                    <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })"class="btn btn-oval btn-secondary"><i class="fas fa-info-circle"> Detalles</i></a>
                                 </div>
-                                <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                                <div class="col-md-4  col-xs-12 col-sm-12 col-lg-4 mt-2">
 
-                                    <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="@Url.Action("Index", "SubEmpresa_Cargos", new { subemp_id = item.Sub_Id })" class="btn btn-oval btn-secondary"><i class="fas fa-user-tag"> Cargos</i></a>
+                                </div>
+                                <div class="col-md-4  col-xs-12 col-sm-12 col-lg-4 mt-2">
+
+                                    <a href="@Url.Action("Index", "Sectores", new { subemp_id = item.Sub_Id })" class="btn btn-oval btn-secondary"><i class="fas fa-map-marker-alt"> Sectores</i></a>
+
                                 </div>
                             </div>
-                        </div>
+                                <div class="card-footer" style="text-align:center">
+                                    <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
+                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                                    </div>
+                                    <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
+
+                                        <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 }
             </div>
