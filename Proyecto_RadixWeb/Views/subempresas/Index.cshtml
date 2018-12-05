@@ -34,12 +34,16 @@
                                 <p>Dirección @Html.DisplayFor(modelItem => item.Sub_Dir)</p>
                             </div>
                             <div class="card-footer">
-                                <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
+                                <div class="col col-sm-3 col-md-3 col-lg-3 col-xs-3">
                                     <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
                                 </div>
                                 <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
 
                                     <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                                <div class="col col-sm-3 col-md-3 col-lg-3 col-xs-3">
+
+                                    <a class="btn btn-outline-secondary" href="@Url.Action("Index","Sectores",new {subemp_id=item.Sub_Id })"><i class="fas fa-list"></i></a>
                                 </div>
                             </div>
                         </div>

@@ -80,7 +80,7 @@
                                                         }
                                                         @if (item.Doc_Id == null)
                                                         {
-                                                            <a class="btn btn-outline-success btn-sm m-0" id="@item.Con_Id" href="#" data-toggle="modal" data-target="#MiDoc">
+                                                            <a class="btn btn-outline-success btn-sm m-0 documento" id="@item.Con_Id" href="#" data-toggle="modal" data-target="#MiDoc">
                                                                 Agregar Contrato
                                                             </a>
                                                         }
@@ -126,7 +126,7 @@
 
 
     </div>
-<!-- Modal -->
+<!-- Modal Agregar Documento Contrato-->
 <div class="modal fade" id="MiDoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 10%;margin-left:20%">
     <div class="modal-dialog" role="document">
         @using (Html.BeginForm("Index", "Contratos", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -169,6 +169,7 @@
         }
     </div>
 </div>
+
 <div class="modal fade bd-example-modal" id="NewCuenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         @using (Html.BeginForm("CuentaPersonas", "Account", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))

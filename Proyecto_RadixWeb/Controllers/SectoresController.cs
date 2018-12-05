@@ -138,6 +138,17 @@ namespace Proyecto_RadixWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Eliminar(Sectores sect, string subemp_id)
+        {
+            int id = sect.sect_id;
+
+            Sectores sectores = db.Sectores.Find(id);
+            db.Sectores.Remove(sectores);
+            db.SaveChanges();
+            return RedirectToAction("Index",new { subemp_id });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
