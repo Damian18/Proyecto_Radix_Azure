@@ -1172,6 +1172,7 @@
     <Content Include="Views\SubEmpresas\ViewPage1.cshtml" />
     <Content Include="Views\PrivilegiosCuentas\Agregar.cshtml" />
     <Content Include="Views\PrivilegiosCuentas\Eliminar.cshtml" />
+    <Content Include="Views\Contratos\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

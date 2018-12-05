@@ -3,7 +3,7 @@
     ViewBag.Title = "Index Contratos";
 }
 
-
+<link href="~/Content/css/dashboard/app.css" rel="stylesheet" />
 <div id="contenido_vista" @*style="margin-top: 10%;margin-left:10%"*@>
     <article class="content responsive-tables-page">
         <div class="title-block">
@@ -220,184 +220,7 @@
             }
         </div>
     </div>
-    <div class="modal fade bd-example-modal-lg" id="NewPersona" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            @using (Html.BeginForm("AddPersonas", "Contratos", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
-            {
-
-                @Html.AntiForgeryToken()
-
-                <!-- Modal content-->
-                <div class="modal-content" style="margin-top: 10%;
-    margin-left: 20%;">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Nuevo Trabajador</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Contenido del centro-->
-                    <div class="modal-body">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="container">
-                            <div class="row">
-                                <div class=""></div>
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Per_Rut, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.ObjPersonas.Per_Rut, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Per_Nom, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.ObjPersonas.Per_Nom, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Per_ApePat, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.ObjPersonas.Per_ApePat, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Per_ApeMat, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.ObjPersonas.Per_ApeMat, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Per_Dir, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.ObjPersonas.Per_Dir, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Per_Tel, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.ObjPersonas.Per_Tel, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Car_Id, "Car_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.DropDownList("Car_Id", null, htmlAttributes: new { @class = "form-control" })
-                                </div>
-                                <div class="form-group col-sm-5 col-md-5">
-                                    @Html.LabelFor(model => model.ObjPersonas.Per_Suel, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.ObjPersonas.Per_Suel, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="col-sm-1 col-md-1"></div>
-                                <div class="form-group col-sm-3 col-md-3">
-                                    @Html.LabelFor(model => model.ObjPersonas.Nac_Id, "Nac_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.DropDownList("Nac_Id", null, htmlAttributes: new { @class = "form-control" })
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4">
-                                    @Html.LabelFor(model => model.ObjPersonas.Gen_Id, "Gen_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.DropDownList("Gen_Id", null, htmlAttributes: new { @class = "form-control" })
-                                </div>
-                                <div class="form-group col-sm-3 col-md-3">
-                                    @Html.LabelFor(model => model.ObjPersonas.EC_Id, "EC_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.DropDownList("EC_Id", null, htmlAttributes: new { @class = "form-control" })
-                                </div>
-                                <div class="col-sm-1 col-md-1"></div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-    <!--EDITAR-->
-    <div class="modal fade bd-example-modal-lg" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            @using (Html.BeginForm("AddPersonas", "Contratos", new { subemp_id = ViewBag.subemp_id }, FormMethod.Post))
-            {
-
-                @Html.AntiForgeryToken()
-
-                <!-- Modal content-->
-                <div class="modal-content" style="margin-top: 10%;
-    margin-left: 20%;">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Nuevo Trabajador</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Contenido del centro-->
-                    <div class="modal-body">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                        <div class="row">
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Per_Rut, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.ObjPersonas.Per_Rut, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Per_Nom, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.ObjPersonas.Per_Nom, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Per_ApePat, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.ObjPersonas.Per_ApePat, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Per_ApeMat, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.ObjPersonas.Per_ApeMat, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Per_Dir, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.ObjPersonas.Per_Dir, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Per_Tel, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.ObjPersonas.Per_Tel, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Car_Id, "Car_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.DropDownList("Car_Id", null, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                            <div class="form-group col-sm-5 col-md-5">
-                                @Html.LabelFor(model => model.ObjPersonas.Per_Suel, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.EditorFor(model => model.ObjPersonas.Per_Suel, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="col-sm-1 col-md-1"></div>
-                            <div class="form-group col-sm-3 col-md-3">
-                                @Html.LabelFor(model => model.ObjPersonas.Nac_Id, "Nac_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.DropDownList("Nac_Id", null, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                            <div class="form-group col-sm-4 col-md-4">
-                                @Html.LabelFor(model => model.ObjPersonas.Gen_Id, "Gen_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.DropDownList("Gen_Id", null, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                            <div class="form-group col-sm-3 col-md-3">
-                                @Html.LabelFor(model => model.ObjPersonas.EC_Id, "EC_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.DropDownList("EC_Id", null, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                            <div class="col-sm-1 col-md-1"></div>
-
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
+  
   
     <!--Eliminar-->
     <div class="modal fade" id="Mieliminar" tabindex="-1" role="dialog" aria-labelledby="Mieliminar" aria-hidden="true">
@@ -431,13 +254,13 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function () {
-        $(".eliminar").on("click", function () {
+            $(".eliminar").on("click", function () {
 
-            $("#Con_Id").val($(this).attr("id"));
-            var nom = $(this).attr("name");
-            document.getElementById("nombre").innerHTML = nom;
-            //$("#nombresector").val($(this).attr("name"));
-        });
+                $("#Con_Id").val($(this).attr("id"));
+                var nom = $(this).attr("name");
+                document.getElementById("nombre").innerHTML = nom;
+                //$("#nombresector").val($(this).attr("name"));
+            });
     </script>
     <script>
 
