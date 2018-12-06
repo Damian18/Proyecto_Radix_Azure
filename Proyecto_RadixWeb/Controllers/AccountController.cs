@@ -363,7 +363,8 @@ namespace IdentitySample.Controllers
                 {
                     Emp_Id = empresa_id,
                     Id = idcuenta,
-                    Per_Rut = per_rut
+                    Per_Rut = per_rut,
+                    Sub_Id=Convert.ToInt32(subemp_id)
 
                 };
 
