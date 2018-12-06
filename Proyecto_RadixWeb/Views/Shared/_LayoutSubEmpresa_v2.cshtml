@@ -180,7 +180,7 @@
             </header>
             <div class="row">
                 <!--BARRA-->
-                <aside class="sidebar">
+                <aside class="sidebar col-sm-12 col-md-3 col-lg-1">
                     <div class="sidebar-container">
                         <div class="sidebar-header">
                             <div class="brand">
@@ -199,14 +199,14 @@
                                         <i class="fa fa-th-large"></i> Sectores
                                         <i class="fa arrow"></i>
                                     </a>
-                             
+
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Index", "Contratos",new {subemp_id= Session["SubEmpresa"].ToString() })">
                                         <i class="fa fa-table"></i> Mis Trabajadores
                                         <i class="fa arrow"></i>
                                     </a>
-                            
+
                                 </li>
                                 <li>
                                     <a href="">
@@ -242,6 +242,20 @@
                                         <li>
                                             <a href="@Url.Action("Index", "PrivilegiosCuentas")">
                                                 Privilegios
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa fa-user"></i> Mis Horario
+                                        <i class="fa arrow"></i>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li>
+                                            <a href="@Url.Action("Index", "SubEmpresa_Cargos",new {subemp_id=Session["SubEmpresa"].ToString() })">
+                                                Horario
                                             </a>
                                         </li>
 
@@ -355,7 +369,7 @@
 
                                     </li>
                                 </ul> <a href="">
-                                    <i class="fa fa-cog"></i> Perzonalizar
+                                    <i class="fa fa-cog"></i> Personalizar
                                 </a>
                             </li>
                         </ul>
@@ -363,21 +377,19 @@
                 </aside>
                 <div id="contenido_general" class="col-sm-12 col-md-9 col-lg-11 mt-5">
                     <!--CONTENIDO GENERAL-->
-                    <div class="sidebar-overlay" id="sidebar-overlay">
-
-
-
-                    </div>
+                  @*<div class="sidebar-overlay" id="sidebar-overlay">
+                      
+                    </div>*@
 
                 </div>
             </div>
             <!--FOOTER-->
             <footer class="footer">
                 <div class="footer-block author">
-                    <ul>
+                    @*<ul>
                         <li> created by <a href="">ModularCode</a> </li>
                         <li> <a href="">get in touch</a> </li>
-                    </ul>
+                    </ul>*@
                 </div>
             </footer>
             <!--ADD NEW ITEM CON DROPZONE-->
@@ -501,24 +513,24 @@
     <div class="jqvmap-label" style="display: none;"></div>
 
     <script>
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                $("#modal_css").modal("show");
-            });
+            $("#modal_css").modal("show");
+        });
 
-            $(document).ready(function () {
-                $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
-                    e.preventDefault();
-                    $(this).siblings('a.active').removeClass("active");
-                    $(this).addClass("active");
-                    var index = $(this).index();
-                    $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
-                    $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
-                });
+        $(document).ready(function () {
+            $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
+                e.preventDefault();
+                $(this).siblings('a.active').removeClass("active");
+                $(this).addClass("active");
+                var index = $(this).index();
+                $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+                $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
             });
+        });
     </script>
 
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
 

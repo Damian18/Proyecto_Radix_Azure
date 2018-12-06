@@ -5,11 +5,11 @@
 }
 
 
-<<div id="contenido_vista">
+<div id="contenido_vista" style="margin-top: 90px; margin-left: 50px;">
     <div class="card mb-3">
      
         <div class="card-body">
-            <div class="table-responsive">
+            @*<div class="table-responsive">*@
 
 
                 @*<div>
@@ -21,9 +21,9 @@
                 <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><span id="eventTitle"></span></h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal-header ">
+                                <h4 class="modal-title col-sm-11 col-md-11 col-lg-11 col-xl-11"><span id="eventTitle"></span></h4>
+                                <button type="button" class="modal-title close col-sm-1 col-md-1 col-lg-1 col-xl-1" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
 
@@ -31,10 +31,10 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                                <button id="btnDelete" class="btn btn-default ">
                                     <span class="glyphicon glyphicon-remove"></span> Eliminar
                                 </button>
-                                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                                <button id="btnEdit" class="btn btn-default " style="margin-right:5px;">
                                     <span class="glyphicon glyphicon-pencil"></span> Editar
                                 </button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -47,8 +47,8 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Guardar</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title col-sm-11 col-md-11 col-lg-11 col-xl-11">Guardar</h4>
+                                <button type="button" class="modal-title close col-sm-1 col-md-1 col-lg-1 col-xl-1" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
                                 <form class="form-horizontal">
@@ -116,12 +116,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            @*</div>*@
         </div>
       
     </div>
 </div>
-
+ <link href="~/Content/css/dashboard/app.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet" media="print" />
@@ -131,9 +131,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 @section Scripts{
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 
     <script src="~/Scripts/locale-all.js"></script>
