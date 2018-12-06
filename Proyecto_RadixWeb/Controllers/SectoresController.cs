@@ -39,7 +39,7 @@ namespace Proyecto_RadixWeb.Controllers
             var sec = db.Sectores.Include(c => c.subempresas);
             MultiplesClases multiples = new MultiplesClases
             {
-                ObjESectores = sec.Where(s => s.subempresas.empresas.Emp_Nom == emp_nom).ToList()
+                ObjESectores = sec.Where(s => s.subempresas.empresas.Emp_Nom == emp_nom).OrderBy(c=>c.sect_nom).ToList()
             };
 
             return View(multiples);
@@ -180,9 +180,6 @@ namespace Proyecto_RadixWeb.Controllers
                 db.Cuarteles.Remove(ca);
             }
             db.SaveChanges();
-
-
-
 
             Sectores sectores = db.Sectores.Find(id);
             db.Sectores.Remove(sectores);
