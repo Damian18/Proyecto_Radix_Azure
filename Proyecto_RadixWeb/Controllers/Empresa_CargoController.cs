@@ -31,6 +31,8 @@ namespace Proyecto_RadixWeb.Controllers
                 ViewBag.empresa = emp_nom;
                 var empresa_cargo = db.empresa_cargo.Include(e => e.cargos).Include(e => e.empresas);
 
+               
+                ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
                 MultiplesClases multiples = new MultiplesClases
                 {
                     ObjEEmpresa_Cargo = empresa_cargo.Where(e => e.Emp_Id == emp_id).ToList()
@@ -135,8 +137,12 @@ namespace Proyecto_RadixWeb.Controllers
 
             int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
             ViewBag.empresa = emp_nom;
-            ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
-        
+            
+            //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+
+
+            ViewBag.Car_Id = new SelectList(db.empresa_cargo.Where(ec => ec.Emp_Id == emp_id), "Car_Id", "cargos.Car_Nom");
+
             return View();
         }
 

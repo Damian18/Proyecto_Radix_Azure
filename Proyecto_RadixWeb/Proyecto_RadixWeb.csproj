@@ -1174,6 +1174,7 @@
     <Content Include="Views\PrivilegiosCuentas\Eliminar.cshtml" />
     <Content Include="Views\Shared\_LayoutSubEmpresa_v2.cshtml" />
     <Content Include="Views\Home\DashBoardSucursal.cshtml" />
+    <Content Include="Views\Sectores\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
