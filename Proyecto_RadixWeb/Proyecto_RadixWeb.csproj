@@ -795,6 +795,7 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings3.pubxml" />
     <None Include="Properties\PublishProfiles\ProyectoRadixWeb - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
