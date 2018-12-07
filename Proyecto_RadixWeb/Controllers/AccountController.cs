@@ -161,6 +161,7 @@ namespace IdentitySample.Controllers
                         HttpContext.Session.Add("Rut", log.Per_Rut);
                         HttpContext.Session.Add("Emp_id", emp.Emp_Id);
                         HttpContext.Session.Add("Empresa", emp.Emp_Nom);
+                        HttpContext.Session.Add("Plan_Nombre", emp.PlanesEmpresas.plan_nom);
                         HttpContext.Session.Add("Correo", log.Id);
                         if (log.Sub_Id!=null)
                         {
