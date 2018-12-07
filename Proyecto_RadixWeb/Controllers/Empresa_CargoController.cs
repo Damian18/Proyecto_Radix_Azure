@@ -29,9 +29,11 @@ namespace Proyecto_RadixWeb.Controllers
 
                 int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
                 ViewBag.empresa = emp_nom;
+       
                 var empresa_cargo = db.empresa_cargo.Include(e => e.cargos).Include(e => e.empresas);
+                int contar3 = db.empresa_cargo.Count(s => s.empresas.Emp_Id == emp_id);
+                ViewBag.contarcargos = contar3;
 
-               
                 ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
                 MultiplesClases multiples = new MultiplesClases
                 {

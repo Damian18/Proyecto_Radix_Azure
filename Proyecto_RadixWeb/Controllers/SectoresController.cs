@@ -33,9 +33,11 @@ namespace Proyecto_RadixWeb.Controllers
         {
 
             string emp_nom = HttpContext.Session["Empresa"].ToString();
-            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
+            int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
             ViewBag.empresa = emp_nom;
-
+          
+            int contar4 = db.Sectores.Count(s => s.subempresas.empresas.Emp_Id == emp_id);
+            ViewBag.contarsectores = contar4;
             var sec = db.Sectores.Include(c => c.subempresas);
             MultiplesClases multiples = new MultiplesClases
             {

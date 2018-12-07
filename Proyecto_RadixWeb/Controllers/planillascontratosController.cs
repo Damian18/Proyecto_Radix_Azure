@@ -37,6 +37,8 @@ namespace Proyecto_RadixWeb.Controllers
         {
             ViewBag.emp_id = Convert.ToInt32(emp_id);
             ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+            int emp_id2 = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+            
 
             try
             {

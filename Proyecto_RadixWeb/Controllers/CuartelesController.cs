@@ -17,10 +17,15 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: Cuarteles
         public ActionResult Index(string sect_id)
         {
-         
+            int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+
+            int contar4 = db.Cuarteles.Count(s => s.Sectores.subempresas.empresas.Emp_Id == emp_id);
+            ViewBag.contarcuad = contar4;
+
             ViewBag.sect_id = sect_id;
             int sec = Convert.ToInt32(sect_id.ToString());
             var cuarteles = db.Cuarteles.Include(c => c.Sectores).Include(c => c.VariedadesFrutas);
+          
             MultiplesClases multiples = new MultiplesClases
             {
                 ObjECuarteles = cuarteles.Where(e => e.sect_id == sec).ToList()
