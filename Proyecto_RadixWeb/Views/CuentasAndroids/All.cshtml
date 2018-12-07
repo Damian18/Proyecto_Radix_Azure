@@ -1,0 +1,169 @@
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
+@{
+    ViewBag.Title = "Index CunetasAndroids";
+}
+
+<div id="contenido_vista" @*style="margin-top: 10%;margin-left:10%"*@>
+    <article class="content responsive-tables-page">
+        <div class="title-block">
+            <div class="">
+            </div>
+            <div class="col col-xs-12 col-md-9 col-lg-9">
+                <h1 class="title" style="text-align:center"><i class="fab fa-android"></i>   Cuentas Android de la empresa @ViewBag.empresa </h1>
+            </div>
+            <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
+                <a class="btn btn-primary text-white" data-toggle="modal" data-target="#crear"><i class="fas fa-user-plus"></i> Agregar Cuenta </a>
+
+            </div>
+        </div>
+        <section class="section">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="card-title-block">
+
+                            </div>
+                            <section class="example">
+                                <div class="table-flip-scroll">
+                                    <table class="table table-striped table-bordered table-hover flip-content">
+                                        <thead class=" thead-inverse">
+                                            <tr>
+                                                <th>
+                                                    Empresa
+                                                </th>
+                                                <th>
+                                                    Usuario
+                                                </th>
+                                                <th>
+                                                    Contraseña
+                                                </th>
+                                                <th>
+                                                    Sucursal
+                                                </th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX">
+                                                @foreach (var item in Model.ObjECuentasAndroid)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ca_empresa)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ca_usuario)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ca_password)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ca_subempresa)
+                                                    </td>
+                                                    @*<td>
+                                                            @Html.ActionLink("Edit", "Edit", new { id = item.ca_id }) |
+                                                            @Html.ActionLink("Details", "Details", new { id = item.ca_id }) |
+                                                            @Html.ActionLink("Delete", "Delete", new { id = item.ca_id })
+                                                        </td>*@
+                                                    <td align="center">
+
+                                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                                                    </td>
+                                                    <td align="center">
+                                                        <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+
+
+    </div>
+
+    <!--Crear-->
+    <div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-labelledby="crear" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--editar-->
+    <!-- Modal -->
+    <div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--eliminar--><!-- Modal -->
+    <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#contenido_vista').appendTo('#contenido_general');
+        });
+
+    </script>

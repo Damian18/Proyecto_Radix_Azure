@@ -18,6 +18,7 @@ namespace Proyecto_RadixWeb.Controllers
         public ActionResult MenuSubempresa(string subemp_id)
         {
             ViewBag.subemp_id = subemp_id;
+          
             return View();
         }
 
@@ -148,12 +149,14 @@ namespace Proyecto_RadixWeb.Controllers
         public ActionResult Index()
         {
 
-            string emp_nom= HttpContext.Session["Empresa"].ToString();
-
-            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
-
+        
+            string emp_nom = HttpContext.Session["Empresa"].ToString();
             ViewBag.empresa = emp_nom;
+            string id2 = HttpContext.Session["Emp_id"].ToString();
+            int id = Convert.ToInt32(id2);
 
+            int contar = db.subempresas.Count(s => s.Emp_Id == id);
+            ViewBag.contar = contar;
 
             List<regiones> listaregiones = db.regiones.ToList();
             ViewBag.regiones = new SelectList(listaregiones, "Reg_Id", "Reg_Nom");
@@ -176,6 +179,14 @@ namespace Proyecto_RadixWeb.Controllers
             {
                 string emp_id = HttpContext.Session["Emp_id"].ToString();
                 string empresa = HttpContext.Session["Empresa"].ToString();
+                ViewBag.emp_id = emp_id;
+
+                var lista_empresa = db.subempresas.ToList();
+                foreach (var item in lista_empresa)
+                {
+                    int contar = db.subempresas.Count(s => s.Emp_Id == item.Emp_Id);
+                    ViewBag.contar = contar;
+                }
 
                 subempresas.Emp_Id = Convert.ToInt32(emp_id);
                 db.subempresas.Add(subempresas);
@@ -356,6 +367,69 @@ namespace Proyecto_RadixWeb.Controllers
         {
             subempresas subempresas = db.subempresas.Find(id);
             db.subempresas.Remove(subempresas);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(subempresas sub)
+        {
+            int? id2 = sub.Sub_Id;
+            int id = Convert.ToInt32(id2);
+            //elminar sectores
+            var sectores = db.Sectores.Where(s=>s.Sub_Id==id);
+
+            foreach (var item3 in sectores)
+            {
+                //elminar cuarteles
+
+                var cuarteles = db.Cuarteles.Where(c => c.sect_id == item3.sect_id);
+
+                foreach (var item in cuarteles)
+                {
+                    //elminar grupos
+                    var grupos = db.GruposCuarteles.Where(gc => gc.cuar_id == item.cuar_id);
+
+
+                    if (grupos != null)
+                    {
+
+                        foreach (var item2 in grupos)
+                        {
+                            GruposCuarteles gc = db.GruposCuarteles.Find(item2.gc_id);
+                            db.GruposCuarteles.Remove(gc);
+                        }
+
+                    }
+
+                    Cuarteles ca = db.Cuarteles.Find(item.cuar_id);
+                    db.Cuarteles.Remove(ca);
+                }
+                Sectores se = db.Sectores.Find(item3.sect_id);
+                db.Sectores.Remove(se);
+            }
+            db.SaveChanges();
+            //elminar cargos
+            var car = db.subempresa_cargo.Where(s => s.Sub_Id == id);
+
+            foreach (var item4 in car)
+            {
+                subempresa_cargo sc = db.subempresa_cargo.Find(item4.Subempcar_id);
+                db.subempresa_cargo.Remove(sc);
+            }
+            db.SaveChanges();
+            //elminar personas
+            var per = db.contratos.Where(s => s.Sub_Id == id);
+
+            foreach (var item5 in per)
+            {
+                contratos con = db.contratos.Find(item5.Con_Id);
+                db.contratos.Remove(con);
+            }
+            db.SaveChanges();
+
+            subempresas sube = db.subempresas.Find(id);
+            db.subempresas.Remove(sube);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
