@@ -82,7 +82,7 @@ namespace IdentitySample.Controllers
                             HttpContext.Session.Add("Emp_id", emp.Emp_Id);
                             HttpContext.Session.Add("Empresa", emp.Emp_Nom);
                             HttpContext.Session.Add("Correo", log.Id);
-
+                      
                             return RedirectToLocal(returnUrl);
 
                         case SignInStatus.LockedOut:

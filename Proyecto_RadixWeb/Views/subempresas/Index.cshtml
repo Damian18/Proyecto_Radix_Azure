@@ -9,7 +9,7 @@
             <div class="">
             </div>
             <div class="col col-xs-12 col-md-9 col-lg-9">
-                <h1 class="title" style="text-align:center"><i class="fas fa-building"></i>   Sucursales de la empresa @ViewBag.empresa </h1>
+                <h1 class="title" style="text-align:center"><i class="fas fa-building"></i> @ViewBag.contar  Sucursales de la empresa @ViewBag.empresa </h1>
             </div>
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
                 <a class="btn btn-danger text-white" data-toggle="modal" data-target="#MiModal"><i class="fas fa-plus"></i> Agregar Sucursal </a>
@@ -23,8 +23,8 @@
                 {
                     <!-- /.col-xl-4 -->
                     <div class="col-xl-6 col-lg-6 col-md-4 col-sm-4">
-                        <div class="card card-primary" >
-                            <div class="card-header" >
+                        <div class="card card-primary">
+                            <div class="card-header">
                                 <div class="header-block" style=" margin-left: 25%;">
                                     <i class="fas fa-industry"></i>  <p class="title">  @Html.DisplayFor(modelItem => item.Sub_Nom) </p>
                                 </div>
@@ -33,7 +33,7 @@
                                 <p>Ubicado en @Html.DisplayFor(modelItem => item.comunas.Com_Nom)</p>
                                 <p>Dirección @Html.DisplayFor(modelItem => item.Sub_Dir)</p>
                                 <div class="col-md-4  col-xs-12 col-sm-12 col-lg-4 mt-2">
-                                    <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })"class="btn btn-oval btn-secondary"><i class="fas fa-info-circle"> Empleados</i></a>
+                                    <a href="@Url.Action("Index", "Contratos", new { subemp_id = item.Sub_Id })" class="btn btn-oval btn-secondary"><i class="fas fa-info-circle"> Empleados</i></a>
                                 </div>
                                 <div class="col-md-4  col-xs-12 col-sm-12 col-lg-4 mt-2">
 
@@ -45,205 +45,212 @@
 
                                 </div>
                             </div>
-                                <div class="card-footer" style="text-align:center">
-                                    <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
-                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                    <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
+                            <div class="card-footer" style="text-align:center">
+                                <div class="col col-sm-6 col-md-3 col-lg-6 col-xs-6">
+                                    <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
+                                </div>
+                                <div class="col col-sm-6 col-md-6 col-lg-6 col-xs-6">
 
-                                        <a class="btn btn-danger ml-1" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
+                                    <a class="btn btn-danger ml-1 sectoreliminar" id="@item.Sub_Id" name="@item.Sub_Nom" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 }
             </div>
- </section>
+        </section>
     </article>
 
 
 
-    </div>
+</div>
 
 
- 
-
-    <!-- Modal -->
-    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            @using (Html.BeginForm())
-            {
-
-                @Html.AntiForgeryToken()
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Nueva Sucursal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Contenido del centro-->
-                    <div class="modal-body">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.Label("Sucursal")
-                            @Html.Editor("Sub_Nom", new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
 
 
-                        <div class="form-group">
-                            @Html.Label("Dirección")
-                            @Html.Editor("Sub_Dir", new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
+<!-- Modal -->
+<div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
 
-                        <div class="form-group">
-                            @Html.Label("Región")
-                            @if (ViewBag.regiones != null)
-                            {
-                                @Html.DropDownListFor(model => model.ObjRegiones.Reg_Id, ViewBag.regiones as SelectList, "--- Seleccionar Región ---", new { @class = "form-control" })
+            @Html.AntiForgeryToken()
 
-                            }
-                        </div>
-                        <div class="form-group">
-                            @Html.Label("Provincia")
-                            @Html.DropDownListFor(model => model.ObjProvincias.Prov_Id, new SelectList(" "), "--- Seleccionar Provincia ---", new { @class = "form-control" })
-
-                        </div>
-                        <div class="form-group">
-                            @Html.Label("Comuna")
-                            @Html.DropDownList("Com_Id", new SelectList(" "), "--- Seleccionar Comuna ---", new { @class = "form-control" })
-
-                        </div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva Sucursal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Contenido del centro-->
+                <div class="modal-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.Label("Sucursal")
+                        @Html.Editor("Sub_Nom", new { htmlAttributes = new { @class = "form-control" } })
                     </div>
 
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="form-group">
+                        @Html.Label("Dirección")
+                        @Html.Editor("Sub_Dir", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Región")
+                        @if (ViewBag.regiones != null)
+                        {
+                            @Html.DropDownListFor(model => model.ObjRegiones.Reg_Id, ViewBag.regiones as SelectList, "--- Seleccionar Región ---", new { @class = "form-control" })
+
+                        }
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Provincia")
+                        @Html.DropDownListFor(model => model.ObjProvincias.Prov_Id, new SelectList(" "), "--- Seleccionar Provincia ---", new { @class = "form-control" })
+
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Comuna")
+                        @Html.DropDownList("Com_Id", new SelectList(" "), "--- Seleccionar Comuna ---", new { @class = "form-control" })
+
                     </div>
                 </div>
-            }
-        </div>
-    </div>
-    <!--EDITAR-->
-    <div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            @using (Html.BeginForm())
-            {
-
-                @Html.AntiForgeryToken()
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Editar sucursal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Contenido del centro-->
-                    <div class="modal-body">
-
-                    </div>
 
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
-    <!--ELIMINAR-->
-    <div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            @using (Html.BeginForm())
-            {
+</div>
+<!--EDITAR-->
+<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
 
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Quieres eliminar esta sucursal?</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Contenido del centro-->
-                    <div class="modal-body">
-
-                    </div>
-
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Eliminar</button>
-                    </div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar sucursal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            }
-        </div>
+                <!--Contenido del centro-->
+                <div class="modal-body">
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        }
     </div>
+</div>
+<!--Eliminar-->
+<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm("Eliminar", "SubEmpresas", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title col-sm-11 col-md-11 col-lg-11 col-xl-11">¿Desea Eliminar a : <label id="nombresector"></label> ?</h4>
+                    <button type="button" class="modal-title close col-sm-1 col-md-1 col-lg-1 col-xl-1" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--Contenido del centro-->
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script>
+                @Html.Hidden("Sub_Id")
 
-        $(document).ready(function () {
+                <div class="modal-footer">
+                    @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-            $('#contenido_vista').appendTo('#contenido_general');
 
-            $("#ObjRegiones_Reg_Id").change(function () {
-                $.get("/SubEmpresas/ObtenerProvincia", { Reg_Id: $("#ObjRegiones_Reg_Id").val() }, function (data) {
-                    $("#ObjProvincias_Prov_Id").empty();
-                    $.each(data, function (Create, row) {
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-                        $("#ObjProvincias_Prov_Id").append("<option value='" + row.Prov_Id + "'>" + row.Prov_Nom + "</option>")
-                    });
-                });
-            });
+<script>
+    $(".sectoreliminar").on("click", function () {
 
-            $("#ObjProvincias_Prov_Id").change(function () {
-                $.get("/SubEmpresas/ObtenerComuna", { Prov_Id: $("#ObjProvincias_Prov_Id").val() }, function (data) {
-                    $("#Com_Id").empty();
-                    $.each(data, function (Create, row) {
+        $("#Sub_Id").val($(this).attr("id"));
+        var nom = $(this).attr("name");
+        document.getElementById("nombresector").innerHTML = nom;
+        //$("#nombresector").val($(this).attr("name"));
+    });
+</script>
+<script>
 
-                        $("#Com_Id").append("<option value='" + row.Com_Id + "'>" + row.Com_Nom + "</option>")
-                    });
+    $(document).ready(function () {
+
+        $('#contenido_vista').appendTo('#contenido_general');
+
+        $("#ObjRegiones_Reg_Id").change(function () {
+            $.get("/SubEmpresas/ObtenerProvincia", { Reg_Id: $("#ObjRegiones_Reg_Id").val() }, function (data) {
+                $("#ObjProvincias_Prov_Id").empty();
+                $.each(data, function (Create, row) {
+
+                    $("#ObjProvincias_Prov_Id").append("<option value='" + row.Prov_Id + "'>" + row.Prov_Nom + "</option>")
                 });
             });
         });
 
+        $("#ObjProvincias_Prov_Id").change(function () {
+            $.get("/SubEmpresas/ObtenerComuna", { Prov_Id: $("#ObjProvincias_Prov_Id").val() }, function (data) {
+                $("#Com_Id").empty();
+                $.each(data, function (Create, row) {
 
-        $('.material-card > .mc-btn-action').click(function () {
-            var card = $(this).parent('.material-card');
-            var icon = $(this).children('i');
-            icon.addClass('fa-spin-fast');
-
-            if (card.hasClass('mc-active')) {
-                card.removeClass('mc-active');
-
-                window.setTimeout(function () {
-                    icon
-                        .removeClass('fa-arrow-left')
-                        .removeClass('fa-spin-fast')
-                        .addClass('fa-bars');
-
-                }, 800);
-            } else {
-                card.addClass('mc-active');
-
-                window.setTimeout(function () {
-                    icon
-                        .removeClass('fa-bars')
-                        .removeClass('fa-spin-fast')
-                        .addClass('fa-arrow-left');
-
-                }, 800);
-            }
+                    $("#Com_Id").append("<option value='" + row.Com_Id + "'>" + row.Com_Nom + "</option>")
+                });
+            });
         });
+    });
 
 
-    </script>
+    $('.material-card > .mc-btn-action').click(function () {
+        var card = $(this).parent('.material-card');
+        var icon = $(this).children('i');
+        icon.addClass('fa-spin-fast');
+
+        if (card.hasClass('mc-active')) {
+            card.removeClass('mc-active');
+
+            window.setTimeout(function () {
+                icon
+                    .removeClass('fa-arrow-left')
+                    .removeClass('fa-spin-fast')
+                    .addClass('fa-bars');
+
+            }, 800);
+        } else {
+            card.addClass('mc-active');
+
+            window.setTimeout(function () {
+                icon
+                    .removeClass('fa-bars')
+                    .removeClass('fa-spin-fast')
+                    .addClass('fa-arrow-left');
+
+            }, 800);
+        }
+    });
+
+
+</script>

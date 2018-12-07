@@ -46,8 +46,27 @@ namespace IdentitySample.Controllers
                 {
                     string emp_nom = HttpContext.Session["Empresa"].ToString();
                     ViewBag.empresa = emp_nom;
+                    string id2 = HttpContext.Session["Emp_id"].ToString();
+                    int id = Convert.ToInt32(id2);
+               
+                    int contar = db.subempresas.Count(s => s.Emp_Id == id);
+                    ViewBag.contar = contar;
+                    ViewBag.ressub = ViewBag.contar + 1;
+                    int contar2 = db.contratos.Count(s => s.subempresas.empresas.Emp_Id == id);
+                    ViewBag.contarcontratos = contar2;
+                    int contar3 = db.empresa_cargo.Count(s => s.empresas.Emp_Id == id);
+                    ViewBag.contarcargos = contar3;
+                    int contar4 = db.Sectores.Count(s => s.subempresas.empresas.Emp_Id == id);
+                    ViewBag.contarsectores = contar4;
+               
+                    int contar5 = db.Cuarteles.Count(s => s.Sectores.subempresas.empresas.Emp_Id == id);
+                    ViewBag.contarcuad = contar5;
+                    //var lista_empresa = db.subempresas.ToList();
+                    //foreach (var item in lista_empresa)
+                    //{
+                    //    int conta2r = db.subempresas.Count(s => s.Emp_Id == id);
 
-
+                    //}
 
                     string prob = "1";
                     ViewBag.prob = prob;

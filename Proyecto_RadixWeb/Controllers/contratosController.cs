@@ -60,11 +60,16 @@ namespace Proyecto_RadixWeb.Controllers
         }
         public ActionResult All()
         {
+      
+       
 
             string emp_nom = HttpContext.Session["Empresa"].ToString();
-            ViewBag.emp_id = HttpContext.Session["Emp_id"].ToString();
             ViewBag.empresa = emp_nom;
+            string id2 = HttpContext.Session["Emp_id"].ToString();
+            int id = Convert.ToInt32(id2);
 
+            int contar = db.contratos.Count(s => s.subempresas.empresas.Emp_Id == id);
+            ViewBag.contarcontratos = contar;
             var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
             MultiplesClases multiples = new MultiplesClases
             {
