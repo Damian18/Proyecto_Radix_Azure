@@ -1177,6 +1177,7 @@
     <Content Include="Views\Home\DashBoardSucursal.cshtml" />
     <Content Include="Views\Sectores\All.cshtml" />
     <Content Include="Views\Contratos\All.cshtml" />
+    <Content Include="Views\Empresa_Cargo\ListaPlantillas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
