@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5b7e565f2144440a9d530d2db3aa964f" Name="Diagram1" ZoomLevel="80">
+      <Diagram DiagramId="5b7e565f2144440a9d530d2db3aa964f" Name="Diagram1" ZoomLevel="90">
         <EntityTypeShape EntityType="radixModel.bancos" Width="1.5" PointX="11.75" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.bancostiposcuentas" Width="1.5" PointX="14" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.cargos" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
@@ -66,11 +66,8 @@
         <AssociationConnector Association="radixModel.contratos_fk_Contratos_Personas" />
         <AssociationConnector Association="radixModel.contratos_FK_contratos_subempresas" />
         <AssociationConnector Association="radixModel.contratos_fk_Contratos_TiposContratos1" />
-        <EntityTypeShape EntityType="radixModel.Cosechas" Width="1.5" PointX="14.5" PointY="15.25" />
         <EntityTypeShape EntityType="radixModel.Sectores" Width="1.5" PointX="3" PointY="1.25" />
         <EntityTypeShape EntityType="radixModel.TipoCosechas" Width="1.5" PointX="12.25" PointY="17.625" />
-        <AssociationConnector Association="radixModel.FK_Cosechas_contratos" />
-        <AssociationConnector Association="radixModel.FK_Cosechas_TipoCosechas" />
         <AssociationConnector Association="radixModel.FK_Sectores_subempresas" />
         <EntityTypeShape EntityType="radixModel.Cuarteles" Width="1.5" PointX="8.25" PointY="4" />
         <EntityTypeShape EntityType="radixModel.Frutas" Width="1.5" PointX="3.75" PointY="34.5" />
@@ -78,11 +75,9 @@
         <AssociationConnector Association="radixModel.FK_Cuarteles_Sectores1" />
         <AssociationConnector Association="radixModel.FK_Cuarteles_VariedadesFrutas" />
         <AssociationConnector Association="radixModel.FK_VariedadesFrutas_Frutas" />
-        <EntityTypeShape EntityType="radixModel.DetalleCosechas" Width="1.5" PointX="16.75" PointY="15.625" />
         <EntityTypeShape EntityType="radixModel.GruposCuarteles" Width="1.5" PointX="13.5" PointY="5.125" />
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos" />
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos1" />
-        <AssociationConnector Association="radixModel.FK_DetalleCosechas_Cosechas" />
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_Cuarteles" />
         <EntityTypeShape EntityType="radixModel.LoginPrivilegiosCuentas" Width="1.5" PointX="16.5" PointY="7.25" />
         <EntityTypeShape EntityType="radixModel.PrivilegiosCuentas" Width="1.5" PointX="14.25" PointY="2.5" />
@@ -97,6 +92,18 @@
         <AssociationConnector Association="radixModel.login_fk_Login_Empresa1" />
         <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_login" />
         <AssociationConnector Association="radixModel.login_FK_login_Persona1" />
+        <EntityTypeShape EntityType="radixModel.SolicitudDetalleQr" Width="1.5" PointX="10.5" PointY="24.25" />
+        <EntityTypeShape EntityType="radixModel.SolicitudesQr" Width="1.5" PointX="3" PointY="37.625" />
+        <AssociationConnector Association="radixModel.FK_SolicitudDetalleQr_contratos" />
+        <AssociationConnector Association="radixModel.FK_SolicitudDetalleQr_SolicitudesQr" />
+        <AssociationConnector Association="radixModel.FK_SolicitudesQr_subempresas" />
+        <EntityTypeShape EntityType="radixModel.Cosechas" Width="1.5" PointX="14.5" PointY="14.5" />
+        <EntityTypeShape EntityType="radixModel.DetalleCosechas" Width="1.5" PointX="16.75" PointY="14.75" />
+        <EntityTypeShape EntityType="radixModel.TipoEntrega" Width="1.5" PointX="14.5" PointY="24.125" />
+        <AssociationConnector Association="radixModel.FK_Cosechas_contratos" />
+        <AssociationConnector Association="radixModel.FK_Cosechas_TipoCosechas" />
+        <AssociationConnector Association="radixModel.FK_DetalleCosechas_Cosechas" />
+        <AssociationConnector Association="radixModel.FK_DetalleCosechas_TipoEntrega" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

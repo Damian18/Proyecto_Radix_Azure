@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.SolicitudDetalleQr>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="contenido_vista" style="margin-top: 10%;margin-left:20%;margin-right:2%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
+        <div class="ml-3 mt-3">
+            <h2><a class="btn btn-success" href="#">Generar QR</a></h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered table-condensed">
+
+                    <tr style="background-color:#d7d6d6">
+                        <th>
+                            @Html.DisplayNameFor(model => model.contratos.Per_Rut)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.contratos.personas.Per_Nom)
+                        </th>
+                        <th>Apellido</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.contratos.Per_Rut)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.contratos.personas.Per_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat) @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApeMat)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

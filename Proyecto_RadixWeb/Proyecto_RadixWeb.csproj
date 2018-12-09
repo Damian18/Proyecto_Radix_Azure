@@ -255,6 +255,8 @@
     <Compile Include="Controllers\PrivilegiosCuentasController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SectoresController.cs" />
+    <Compile Include="Controllers\SolicitudDetalleQrsController.cs" />
+    <Compile Include="Controllers\SolicitudesQrsController.cs" />
     <Compile Include="Controllers\SubEmpresasController.cs" />
     <Compile Include="Controllers\SubEmpresa_CargosController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -386,6 +388,12 @@
     <Compile Include="Models\Sectores.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SolicitudDetalleQr.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolicitudesQr.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\subempresas.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
@@ -393,6 +401,9 @@
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoCosechas.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEntrega.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipoformaspago.cs">
@@ -1178,6 +1189,18 @@
     <Content Include="Views\Sectores\All.cshtml" />
     <Content Include="Views\Contratos\All.cshtml" />
     <Content Include="Views\Empresa_Cargo\ListaPlantillas.cshtml" />
+    <Content Include="Views\SubEmpresas\ListaSolicitudSubEmpresa.cshtml" />
+    <Content Include="Views\SolicitudesQrs\Create.cshtml" />
+    <Content Include="Views\SolicitudesQrs\Delete.cshtml" />
+    <Content Include="Views\SolicitudesQrs\Details.cshtml" />
+    <Content Include="Views\SolicitudesQrs\Edit.cshtml" />
+    <Content Include="Views\SolicitudesQrs\Index.cshtml" />
+    <Content Include="Views\Contratos\ListaContratoSolicitar.cshtml" />
+    <Content Include="Views\SolicitudDetalleQrs\Create.cshtml" />
+    <Content Include="Views\SolicitudDetalleQrs\Delete.cshtml" />
+    <Content Include="Views\SolicitudDetalleQrs\Details.cshtml" />
+    <Content Include="Views\SolicitudDetalleQrs\Edit.cshtml" />
+    <Content Include="Views\SolicitudDetalleQrs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,21 +12,20 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class planillascontratos
+    public partial class SolicitudesQr
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public planillascontratos()
+        public SolicitudesQr()
         {
-            this.empresa_cargo = new HashSet<empresa_cargo>();
+            this.SolicitudDetalleQr = new HashSet<SolicitudDetalleQr>();
         }
     
-        public int PC_Id { get; set; }
-        public string PC_Nom { get; set; }
-        public string PC_Ext { get; set; }
-        public byte[] PC_Binario { get; set; }
-        public int empcar_id { get; set; }
-
+        public int sqr_id { get; set; }
+        public Nullable<int> Sub_id { get; set; }
+        public Nullable<bool> sqr_estado { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<empresa_cargo> empresa_cargo { get; set; }
+        public virtual ICollection<SolicitudDetalleQr> SolicitudDetalleQr { get; set; }
+        public virtual subempresas subempresas { get; set; }
     }
 }

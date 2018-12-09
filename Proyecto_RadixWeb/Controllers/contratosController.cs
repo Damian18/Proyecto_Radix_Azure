@@ -26,11 +26,11 @@ namespace Proyecto_RadixWeb.Controllers
 
             ViewBag.subemp_id = subemp_id;
 
-            var model = db.contratos.Where(p=>p.Sub_Id==subemp_id).ToList();
+            var model = db.contratos.Where(p => p.Sub_Id == subemp_id).ToList();
 
             MultiplesClases multiples = new MultiplesClases
             {
-                ObjEContrato=model
+                ObjEContrato = model
 
             };
 
@@ -38,7 +38,7 @@ namespace Proyecto_RadixWeb.Controllers
             return PartialView(model);
         }
 
-      
+
         public ActionResult verTodos()
         {
             string emp_nom = HttpContext.Session["Empresa"].ToString();
@@ -60,8 +60,8 @@ namespace Proyecto_RadixWeb.Controllers
         }
         public ActionResult All()
         {
-      
-       
+
+
 
             string emp_nom = HttpContext.Session["Empresa"].ToString();
             ViewBag.empresa = emp_nom;
@@ -87,11 +87,11 @@ namespace Proyecto_RadixWeb.Controllers
 
                 ViewBag.subemp_id = subemp_id;
 
-                int emp_id= Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+                int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
                 //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
 
 
-                ViewBag.Car_Id = new SelectList(db.empresa_cargo.Where(ec=>ec.Emp_Id== emp_id), "Car_Id", "cargos.Car_Nom");
+                ViewBag.Car_Id = new SelectList(db.empresa_cargo.Where(ec => ec.Emp_Id == emp_id), "Car_Id", "cargos.Car_Nom");
 
                 ViewBag.EC_Id = new SelectList(db.estadosciviles, "EC_Id", "EC_Nom");
                 ViewBag.Gen_Id = new SelectList(db.generos, "Gen_Id", "Gen_Nom");
@@ -111,18 +111,18 @@ namespace Proyecto_RadixWeb.Controllers
 
                 throw;
             }
-        
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Doc_Id,Doc_Nom,Con_id")] documentos documentos, HttpPostedFileBase plantilla,int subemp_id)
+        public ActionResult Index([Bind(Include = "Doc_Id,Doc_Nom,Con_id")] documentos documentos, HttpPostedFileBase plantilla, int subemp_id)
         {
             if (plantilla != null && plantilla.ContentLength > 0)
             {
-                var length = plantilla.InputStream.Length; 
+                var length = plantilla.InputStream.Length;
 
-                
+
 
                 byte[] datoplantilla = null;
                 using (var binarydoc = new BinaryReader(plantilla.InputStream))
@@ -144,7 +144,7 @@ namespace Proyecto_RadixWeb.Controllers
                 db.Entry(contrato).State = EntityState.Modified;
 
                 db.SaveChanges();
-                return RedirectToAction("Index",new { subemp_id });
+                return RedirectToAction("Index", new { subemp_id });
             }
 
 
@@ -153,7 +153,7 @@ namespace Proyecto_RadixWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPersonas(MultiplesClases multiples,personas personas,contratos contratos, int? subemp_id)
+        public ActionResult AddPersonas(MultiplesClases multiples, personas personas, contratos contratos, int? subemp_id)
         {
             if (ModelState.IsValid)
             {
@@ -168,7 +168,7 @@ namespace Proyecto_RadixWeb.Controllers
 
                 contratos.Per_Rut = multiples.ObjPersonas.Per_Rut;
 
-                contratos.Sub_Id =Convert.ToInt32( subemp_id);
+                contratos.Sub_Id = Convert.ToInt32(subemp_id);
                 contratos.Con_FechaInicio = DateTime.Now.ToShortDateString();
 
 
@@ -178,8 +178,86 @@ namespace Proyecto_RadixWeb.Controllers
                 return RedirectToAction("Index", new { subemp_id });
             }
 
-         
+
             return View(multiples);
+        }
+
+        //Lista de Contratos a Solicitar QR
+        public ActionResult ListaContratoSolicitar(int? subemp_id)
+        {
+            try
+            {
+                ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+                ViewBag.subemp_id = subemp_id;
+
+                int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+                //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+
+
+
+
+
+                var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+                MultiplesClases multiple = new MultiplesClases
+                {
+                    ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id && c.personas.Car_Id == 2).ToList()
+                };
+                return View(multiple);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        [HttpPost]
+        public JsonResult Guardar_Solicitud(List<SolicitudDetalleQr> listaSolicitud, string subemp_id)
+        {
+            var status = false;
+
+            if (listaSolicitud == null)
+            {
+                listaSolicitud = new List<SolicitudDetalleQr>();
+            }
+
+
+            SolicitudesQr solicitudesQr = new SolicitudesQr();
+            solicitudesQr.sqr_estado = false;
+            solicitudesQr.Sub_id = Convert.ToInt32(subemp_id);
+            db.SolicitudesQr.Add(solicitudesQr);
+            db.SaveChanges();
+            int sqr_id = solicitudesQr.sqr_id;
+            //  
+            foreach (SolicitudDetalleQr item in listaSolicitud)
+            {
+                if (item.estado == true)
+                {
+
+
+                    var qr = new SolicitudDetalleQr
+                    {
+
+                        Con_id = item.Con_id,
+                        sqr_id = sqr_id
+                    };
+
+                    //item.sqr_id = sqr_id;
+
+                    db.SolicitudDetalleQr.Add(qr);
+                    db.SaveChanges();
+                    status = true;
+                }
+
+            }
+            //db.SaveChanges();
+
+
+
+
+            return new JsonResult { Data = new { status } };
         }
 
 
@@ -218,7 +296,7 @@ namespace Proyecto_RadixWeb.Controllers
             return RedirectToAction("Create", "Personas", new { subemp_id });
         }
 
-        public ActionResult RedirecionarCuenta(string subemp_id, string per_rut,string car_nom)
+        public ActionResult RedirecionarCuenta(string subemp_id, string per_rut, string car_nom)
         {
             return RedirectToAction("CuentaPersonas", "Account", new { subemp_id, per_rut, car_nom });
         }

@@ -23,8 +23,9 @@ namespace Proyecto_RadixWeb.Models
         public int cosec_id { get; set; }
         public string cosec_fecha { get; set; }
         public Nullable<int> Con_Id { get; set; }
-        public Nullable<int> cosec_preciodia { get; set; }
+        public Nullable<int> cosec_precio_normal { get; set; }
         public Nullable<int> tc_id { get; set; }
+        public string cosec_precio_comercia { get; set; }
     
         public virtual contratos contratos { get; set; }
         public virtual TipoCosechas TipoCosechas { get; set; }

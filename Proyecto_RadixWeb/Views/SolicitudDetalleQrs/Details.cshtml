@@ -1,0 +1,34 @@
+﻿@model Proyecto_RadixWeb.Models.SolicitudDetalleQr
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SolicitudDetalleQr</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.contratos.Per_Rut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contratos.Per_Rut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SolicitudesQr.sqr_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SolicitudesQr.sqr_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.sdqr_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

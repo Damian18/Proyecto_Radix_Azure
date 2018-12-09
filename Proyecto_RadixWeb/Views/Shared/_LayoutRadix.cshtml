@@ -31,9 +31,16 @@
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "subempresas", new { emp_nom = ViewBag.empresa, emp_id = ViewBag.emp_id })">
+                    <a class="nav-link" href="@Url.Action("Index", "Empresas")">
                         <span data-feather="home"></span>
-                        Sucursales<span class="sr-only">(current)</span>
+                        Empresas<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link" href="@Url.Action("Index", "SolicitudesQrs", new { emp_nom = ViewBag.empresa, emp_id = ViewBag.emp_id })">
+                        <span data-feather="file"></span>
+                        Solicitudes QR
                     </a>
                 </li>
                 <li class="nav-item">

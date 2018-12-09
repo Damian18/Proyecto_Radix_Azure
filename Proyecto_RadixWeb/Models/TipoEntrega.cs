@@ -12,14 +12,18 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleCosechas
+    public partial class TipoEntrega
     {
-        public int dc_id { get; set; }
-        public Nullable<int> cosec_id { get; set; }
-        public Nullable<double> dc_peso { get; set; }
-        public Nullable<int> te_id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoEntrega()
+        {
+            this.DetalleCosechas = new HashSet<DetalleCosechas>();
+        }
     
-        public virtual Cosechas Cosechas { get; set; }
-        public virtual TipoEntrega TipoEntrega { get; set; }
+        public int te_id { get; set; }
+        public string te_nom { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleCosechas> DetalleCosechas { get; set; }
     }
 }

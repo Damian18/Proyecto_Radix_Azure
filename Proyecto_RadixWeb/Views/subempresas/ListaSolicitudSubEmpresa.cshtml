@@ -1,0 +1,52 @@
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
+@{
+    ViewBag.Title = "ListaSolicitudSubEmpresa";
+}
+
+<div id="contenido_vista" style="margin-top: 90px; margin-left: 50px;">
+    <div class="card mb-3 mt-2">
+        <div class="card-body">
+            <div class="table-responsive">
+
+
+                <h2>Lista</h2>
+
+
+
+                <table class="table">
+
+                    <thead>
+                    <tbody>
+
+                        @foreach (var item in Model.ObjESubEmpresas)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Sub_Nom)
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action("ListaContratoSolicitar","Contratos",new { subemp_id=item.Sub_Id })" class="btn btn-success">Lista</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<link href="~/Content/css/dashboard/app.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#contenido_vista').appendTo('#contenido_general');
+    });
+
+</script>

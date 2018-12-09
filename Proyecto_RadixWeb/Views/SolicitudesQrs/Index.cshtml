@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.SolicitudesQr>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="contenido_vista" style="margin-top: 10%;margin-left:20%;margin-right:2%">
+    <div class="card mb-3 mt-2" style="border: 1px solid;">
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered table-condensed">
+
+                    <tr style="background-color:#d7d6d6">
+                        <th>
+                            @Html.DisplayNameFor(model => model.subempresas.empresas.Emp_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.subempresas.Sub_Nom)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.sqr_estado)
+                        </th>
+
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.subempresas.empresas.Emp_Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.subempresas.Sub_Nom)
+                            </td>
+                            <td>
+                                @if (item.sqr_estado == true)
+                                {
+                                <label> Completado</label>
+                                }
+                                else if (item.sqr_estado == false)
+                                {
+                                <label> Pendiente </label>
+                                }
+                                @*@Html.DisplayFor(modelItem => item.sqr_estado)*@
+                            </td>
+
+                            <td>
+                                <a class="btn btn-success" href="@Url.Action("Index","SolicitudDetalleQrs",new {sol_id=item.sqr_id })">Ver Lista</a>
+                                <a class="btn btn-success" href="#">Generar QR</a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

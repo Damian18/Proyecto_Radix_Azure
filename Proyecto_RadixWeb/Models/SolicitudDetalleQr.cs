@@ -12,14 +12,14 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleCosechas
+    public partial class SolicitudDetalleQr
     {
-        public int dc_id { get; set; }
-        public Nullable<int> cosec_id { get; set; }
-        public Nullable<double> dc_peso { get; set; }
-        public Nullable<int> te_id { get; set; }
-    
-        public virtual Cosechas Cosechas { get; set; }
-        public virtual TipoEntrega TipoEntrega { get; set; }
+        public int sdqr_id { get; set; }
+        public Nullable<int> sqr_id { get; set; }
+        public Nullable<int> Con_id { get; set; }
+        public bool estado { get; set; }
+
+        public virtual contratos contratos { get; set; }
+        public virtual SolicitudesQr SolicitudesQr { get; set; }
     }
 }
