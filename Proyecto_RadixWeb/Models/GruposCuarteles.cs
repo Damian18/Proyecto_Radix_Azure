@@ -14,13 +14,20 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class GruposCuarteles
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GruposCuarteles()
+        {
+            this.GrupoCuartelesDetalle = new HashSet<GrupoCuartelesDetalle>();
+        }
+    
         public int gc_id { get; set; }
         public Nullable<int> cuar_id { get; set; }
-        public Nullable<int> Con_id { get; set; }
+        public Nullable<int> gc_nom { get; set; }
         public Nullable<int> ConJefe_id { get; set; }
     
         public virtual contratos contratos { get; set; }
-        public virtual contratos contratos1 { get; set; }
         public virtual Cuarteles Cuarteles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GrupoCuartelesDetalle> GrupoCuartelesDetalle { get; set; }
     }
 }

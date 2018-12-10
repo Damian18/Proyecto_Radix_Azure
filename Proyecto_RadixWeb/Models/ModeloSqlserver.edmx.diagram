@@ -75,10 +75,6 @@
         <AssociationConnector Association="radixModel.FK_Cuarteles_Sectores1" />
         <AssociationConnector Association="radixModel.FK_Cuarteles_VariedadesFrutas" />
         <AssociationConnector Association="radixModel.FK_VariedadesFrutas_Frutas" />
-        <EntityTypeShape EntityType="radixModel.GruposCuarteles" Width="1.5" PointX="13.5" PointY="5.125" />
-        <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos" />
-        <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos1" />
-        <AssociationConnector Association="radixModel.FK_GruposCuarteles_Cuarteles" />
         <EntityTypeShape EntityType="radixModel.LoginPrivilegiosCuentas" Width="1.5" PointX="16.5" PointY="7.25" />
         <EntityTypeShape EntityType="radixModel.PrivilegiosCuentas" Width="1.5" PointX="14.25" PointY="2.5" />
         <AssociationConnector Association="radixModel.FK_LoginPrivilegiosCuentas_PrivilegiosCuentas" />
@@ -104,6 +100,12 @@
         <AssociationConnector Association="radixModel.FK_Cosechas_TipoCosechas" />
         <AssociationConnector Association="radixModel.FK_DetalleCosechas_Cosechas" />
         <AssociationConnector Association="radixModel.FK_DetalleCosechas_TipoEntrega" />
+        <EntityTypeShape EntityType="radixModel.GrupoCuartelesDetalle" Width="1.5" PointX="12.75" PointY="5.5" />
+        <EntityTypeShape EntityType="radixModel.GruposCuarteles" Width="1.5" PointX="10.5" PointY="8.25" />
+        <AssociationConnector Association="radixModel.FK_GrupoCuartelesDetalle_contratos" />
+        <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos2" />
+        <AssociationConnector Association="radixModel.FK_GruposCuarteles_Cuarteles" />
+        <AssociationConnector Association="radixModel.FK_GrupoCuartelesDetalle_GruposCuarteles" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

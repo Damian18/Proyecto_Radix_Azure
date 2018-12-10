@@ -25,6 +25,7 @@ namespace Proyecto_RadixWeb.Models
         public string Doc_Ext { get; set; }
         public byte[] Doc_Binario { get; set; }
         public int Con_Id { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contratos> contratos { get; set; }
     }

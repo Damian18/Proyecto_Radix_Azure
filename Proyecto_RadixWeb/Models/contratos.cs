@@ -18,10 +18,10 @@ namespace Proyecto_RadixWeb.Models
         public contratos()
         {
             this.asistencias = new HashSet<asistencias>();
-            this.GruposCuarteles = new HashSet<GruposCuarteles>();
-            this.GruposCuarteles1 = new HashSet<GruposCuarteles>();
             this.SolicitudDetalleQr = new HashSet<SolicitudDetalleQr>();
             this.Cosechas = new HashSet<Cosechas>();
+            this.GrupoCuartelesDetalle = new HashSet<GrupoCuartelesDetalle>();
+            this.GruposCuarteles = new HashSet<GruposCuarteles>();
         }
     
         public int Con_Id { get; set; }
@@ -40,12 +40,12 @@ namespace Proyecto_RadixWeb.Models
         public virtual subempresas subempresas { get; set; }
         public virtual tiposcontratos tiposcontratos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GruposCuarteles> GruposCuarteles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GruposCuarteles> GruposCuarteles1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitudDetalleQr> SolicitudDetalleQr { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cosechas> Cosechas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GrupoCuartelesDetalle> GrupoCuartelesDetalle { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GruposCuarteles> GruposCuarteles { get; set; }
     }
 }

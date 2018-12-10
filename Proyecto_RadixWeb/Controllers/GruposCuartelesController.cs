@@ -65,7 +65,7 @@ namespace Proyecto_RadixWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Con_id = new SelectList(db.contratos, "Con_Id", "Per_Rut", gruposCuarteles.Con_id);
+           
             ViewBag.ConJefe_id = new SelectList(db.contratos, "Con_Id", "Per_Rut", gruposCuarteles.ConJefe_id);
             ViewBag.cuar_id = new SelectList(db.Cuarteles, "cuar_id", "cuar_nom", gruposCuarteles.cuar_id);
             return View(gruposCuarteles);
@@ -83,7 +83,7 @@ namespace Proyecto_RadixWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Con_id = new SelectList(db.contratos, "Con_Id", "Per_Rut", gruposCuarteles.Con_id);
+         
             ViewBag.ConJefe_id = new SelectList(db.contratos, "Con_Id", "Per_Rut", gruposCuarteles.ConJefe_id);
             ViewBag.cuar_id = new SelectList(db.Cuarteles, "cuar_id", "cuar_nom", gruposCuarteles.cuar_id);
             return View(gruposCuarteles);
@@ -102,7 +102,7 @@ namespace Proyecto_RadixWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Con_id = new SelectList(db.contratos, "Con_Id", "Per_Rut", gruposCuarteles.Con_id);
+          
             ViewBag.ConJefe_id = new SelectList(db.contratos, "Con_Id", "Per_Rut", gruposCuarteles.ConJefe_id);
             ViewBag.cuar_id = new SelectList(db.Cuarteles, "cuar_id", "cuar_nom", gruposCuarteles.cuar_id);
             return View(gruposCuarteles);

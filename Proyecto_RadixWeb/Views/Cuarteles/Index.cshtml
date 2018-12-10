@@ -14,7 +14,7 @@
                 <h1 class="title" style="text-align:center"><i class="fas fa-network-wired"></i>   Cuadrillas de la empresa @ViewBag.empresa </h1>
             </div>
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
-                <a class="btn btn-primary text-white" data-toggle="modal" data-target="#MiModal"><i class="fas fa-user-plus"></i> Agregar Cuadrilla</a>
+                <a class="btn btn-primary text-white addcuadrilla" data-toggle="modal" data-target="#MiModal"><i class="fas fa-user-plus"></i> Agregar Cuadrilla</a>
 
             </div>
         </div>
@@ -58,7 +58,7 @@
                                                         @Html.DisplayFor(modelItem => item.Sectores.sect_nom)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.VariedadesFrutas.var_nom)
+                                                        @Html.DisplayFor(modelItem => item.VariedadesFrutas.Frutas.frut_nom) @Html.DisplayFor(modelItem => item.VariedadesFrutas.var_nom)
                                                     </td>
 
                                                     <td align="center">
@@ -66,7 +66,7 @@
                                                         <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                     <td align="center">
-                                                        <a class="btn btn-danger" data-toggle="modal" data-target="#modaleliminar"><i class="fas fa-trash-alt"></i></a>
+                                                        <a class="btn btn-danger cuarteleliminar" id="@item.cuar_id" name="@item.cuar_nom" href="#" data-toggle="modal" data-target="#MiCuarteleliminar"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
                                                     <th>
                                                         <a href="@Url.Action("Index", "GruposCuarteles", new { cuar_id = item.cuar_id })" class="mt-2"><i class="fas fa-map-marker-alt btn btn-warning" style="margin-left: 25%;"> Grupos</i></a>
@@ -74,10 +74,10 @@
 
                                                     </th>
                                                     @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.cuar_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.cuar_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.cuar_id })
-                </td>*@
+                                                            @Html.ActionLink("Edit", "Edit", new { id = item.cuar_id }) |
+                                                            @Html.ActionLink("Details", "Details", new { id = item.cuar_id }) |
+                                                            @Html.ActionLink("Delete", "Delete", new { id = item.cuar_id })
+                                                        </td>*@
                                                 </tr>
                                             }
 
@@ -99,87 +99,110 @@
 
 
 
-<!-- Create -->
-<div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        @using (Html.BeginForm("Create", "Cuarteles", new { sect_id = ViewBag.sect_id }, FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <!-- Modal content-->
+    <!-- Create -->
+    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("Create", "Cuarteles", new { sect_id = ViewBag.sect_id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nueva Cuadrilla</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+                    <div class="modal-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.Label("Cuadrilla")
+                            @Html.EditorFor(model => model.ObjCuarteles.cuar_nom, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Fruta", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownList("ObjCuarteles_varfrut_id", null, htmlAttributes: new { @class = "form-control", @name = "ObjCuarteles_Var_id" })
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!--editar-->
+    <!-- Modal -->
+    <div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Nueva Cuadrilla</h4>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <!--Contenido del centro-->
                 <div class="modal-body">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.Label("Cadrilla")
-                        @Html.EditorFor(model => model.ObjCuarteles.cuar_nom, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
+                    ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
-        }
-    </div>
-</div>
-<!--editar-->
-<!-- Modal -->
-<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modaleditar" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Editar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
-</div>
 
-<!--eliminar--><!-- Modal -->
-<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="modaleliminar" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+    <!--Eliminar-->
+    <div class="modal fade" id="MiCuarteleliminar" tabindex="-1" role="dialog" aria-labelledby="MiCuarteleliminar" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("Eliminar", "Cuarteles", new { sect_id = ViewBag.sect_id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title col-sm-11 col-md-11 col-lg-11 col-xl-11">¿Desea Eliminar El Sector <label id="nombrecuartel"></label> ?</h4>
+                        <button type="button" class="modal-title close col-sm-1 col-md-1 col-lg-1 col-xl-1" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+
+                    @Html.Hidden("cuar_id")
+
+                    <div class="modal-footer">
+                        @* <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>*@
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-</div>
 
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
 
-    $(document).ready(function () {
-        $('#contenido_vista').appendTo('#contenido_general');
-    });
+        $(document).ready(function () {
+            $('#contenido_vista').appendTo('#contenido_general');
+        });
 
-</script>
+        $(".addcuadrilla").on("click", function () {
+
+            $("#ObjCuarteles_varfrut_id").attr("name", "ObjCuarteles.varfrut_id");
+
+        });
+        $(".cuarteleliminar").on("click", function () {
+
+            $("#cuar_id").val($(this).attr("id"));
+            var nom = $(this).attr("name");
+            document.getElementById("nombrecuartel").innerHTML = nom;
+            //$("#nombresector").val($(this).attr("name"));
+        });
+    </script>
 

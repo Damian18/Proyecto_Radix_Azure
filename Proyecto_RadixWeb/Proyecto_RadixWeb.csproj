@@ -341,6 +341,9 @@
     <Compile Include="Models\generos.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GrupoCuartelesDetalle.cs">
+      <DependentUpon>ModeloSqlserver.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GruposCuarteles.cs">
       <DependentUpon>ModeloSqlserver.tt</DependentUpon>
     </Compile>

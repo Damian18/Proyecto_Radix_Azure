@@ -34,11 +34,9 @@
                                         <thead class=" thead-inverse">
                                             <tr>
                                                 <th>
-                                                    Responsable
+                                                    Encargado
                                                 </th>
-                                                <th>
-                                                    Agricola Asiganado
-                                                </th>
+
                                                 <th>
                                                     Cuadrilla
                                                 </th>
@@ -56,10 +54,10 @@
                                                         @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat)
 
                                                     </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.contratos1.personas.Per_Nom)
-                                                        @Html.DisplayFor(modelItem => item.contratos1.personas.Per_ApePat)
-                                                    </td>
+                                                    @*<td>
+                                                            @Html.DisplayFor(modelItem => item.contratos1.personas.Per_Nom)
+                                                            @Html.DisplayFor(modelItem => item.contratos1.personas.Per_ApePat)
+                                                        </td>*@
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Cuarteles.cuar_nom)
                                                     </td>
@@ -93,6 +91,40 @@
 
 
     </div>
+
+    <!-- Create -->
+    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("Create", "GruposCuarteles", new { cuar_id = ViewBag.cuar_id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nueva Cuadrilla</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Contenido del centro-->
+                    <div class="modal-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                       
+                        <div class="form-group">
+                            @Html.Label("Fruta", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownList("ObjCuarteles_varfrut_id", null, htmlAttributes: new { @class = "form-control"})
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
     <!--Eliminar-->
     <div class="modal fade" id="Misectoreliminar" tabindex="-1" role="dialog" aria-labelledby="Misectoreliminar" aria-hidden="true">
         <div class="modal-dialog" role="document">

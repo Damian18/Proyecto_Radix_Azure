@@ -25,7 +25,17 @@ namespace Proyecto_RadixWeb.Controllers
             ViewBag.sect_id = sect_id;
             int sec = Convert.ToInt32(sect_id.ToString());
             var cuarteles = db.Cuarteles.Include(c => c.Sectores).Include(c => c.VariedadesFrutas);
-          
+
+
+            var listavariedad = db.VariedadesFrutas.Select(v => new {
+                varfrut_id=v.varfrut_id,
+                NombreVariedad=v.Frutas.frut_nom+" "+v.var_nom
+            });
+            ViewBag.ObjCuarteles_varfrut_id = new SelectList(listavariedad, "varfrut_id", "NombreVariedad");
+
+
+            // ViewBag.Var_id = new SelectList(db.VariedadesFrutas, "varfrut_id", "var_nom");
+
             MultiplesClases multiples = new MultiplesClases
             {
                 ObjECuarteles = cuarteles.Where(e => e.sect_id == sec).ToList()
@@ -66,6 +76,7 @@ namespace Proyecto_RadixWeb.Controllers
             if (ModelState.IsValid)
             {
                 multiples.ObjCuarteles.sect_id = Convert.ToInt32(sect_id);
+                
                 db.Cuarteles.Add(multiples.ObjCuarteles);
                 db.SaveChanges();
                 return RedirectToAction("Index", new { sect_id });
@@ -111,6 +122,34 @@ namespace Proyecto_RadixWeb.Controllers
             ViewBag.sect_id = new SelectList(db.Sectores, "sect_id", "sect_nom", cuarteles.sect_id);
             ViewBag.varfrut_id = new SelectList(db.VariedadesFrutas, "varfrut_id", "var_nom", cuarteles.varfrut_id);
             return View(cuarteles);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(Cuarteles cuart, string sect_id)
+        {
+            int? id2 = cuart.cuar_id;
+            int id = Convert.ToInt32(id2);
+
+                var grupos = db.GruposCuarteles.Where(gc => gc.cuar_id == id);
+
+
+                if (grupos != null)
+                {
+
+                    foreach (var item in grupos)
+                    {
+                        GruposCuarteles gc = db.GruposCuarteles.Find(item.gc_id);
+                        db.GruposCuarteles.Remove(gc);
+                    }
+
+                }
+
+                Cuarteles ca = db.Cuarteles.Find(id);
+                db.Cuarteles.Remove(ca);
+          
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { sect_id });
         }
 
         // GET: Cuarteles/Delete/5
