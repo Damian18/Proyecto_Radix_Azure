@@ -37,10 +37,10 @@ namespace Proyecto_RadixWeb.Controllers
             {
                 int id = Convert.ToInt32(sqr_id);
 
-                var Solicitud = db.SolicitudesQr.FirstOrDefault(s=>s.sqr_id==id);
+                var solicitud = db.SolicitudesQr.FirstOrDefault(s=>s.sqr_id==id);
 
-                string subempresa_nombre = Solicitud.subempresas.Sub_Nom;
-
+                string subempresa_nombre = solicitud.subempresas.Sub_Nom;
+                string subempresa_direccion = solicitud.subempresas.Sub_Dir;
                 var listaSolicitudes = db.SolicitudDetalleQr.Where(s=>s.sqr_id==id);
 
                 
@@ -72,6 +72,7 @@ namespace Proyecto_RadixWeb.Controllers
                         //  zip.AddEntry("qr2.png", conver2.ToArray());
 
                     }
+                    zip.AddEntry("Detalle.txt",subempresa_direccion);
                     zip.Save(outputStream);
                 }
                 outputStream.Position = 0;
