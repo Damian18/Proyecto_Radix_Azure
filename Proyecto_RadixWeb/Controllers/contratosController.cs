@@ -416,8 +416,9 @@ namespace Proyecto_RadixWeb.Controllers
             int? id2 = con.Con_Id;
             int id = Convert.ToInt32(id2);
 
-            contratos contratos = db.contratos.Find(id);
-            db.contratos.Remove(contratos);
+            var contratos = db.contratos.Where(c => c.Con_Id == id);
+            contratos contra = db.contratos.Find(id);
+            db.contratos.Remove(contra);
             db.SaveChanges();
             return RedirectToAction("Index", new { subemp_id });
         }
