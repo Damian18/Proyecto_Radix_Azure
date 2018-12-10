@@ -22,7 +22,7 @@ namespace Proyecto_RadixWeb.Models
     
         public int gc_id { get; set; }
         public Nullable<int> cuar_id { get; set; }
-        public Nullable<int> gc_nom { get; set; }
+        public string gc_nom { get; set; }
         public Nullable<int> ConJefe_id { get; set; }
     
         public virtual contratos contratos { get; set; }

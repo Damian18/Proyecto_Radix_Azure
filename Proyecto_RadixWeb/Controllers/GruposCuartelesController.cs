@@ -19,6 +19,22 @@ namespace Proyecto_RadixWeb.Controllers
         {
             ViewBag.cuar_id = cuar_id;
             int cuar = Convert.ToInt32(cuar_id.ToString());
+
+            var listacuar = db.Cuarteles.FirstOrDefault(c=>c.cuar_id== cuar);
+
+            int? subemp = listacuar.Sectores.Sub_Id;
+
+            int sub_id =Convert.ToInt32(subemp);
+
+
+            var listajefes = db.contratos.Where(c=>c.personas.cargos.Car_Nom== "Jefe Cuadrilla").Select(v => new {
+                Con_id = v.Con_Id,
+                NombreJefe = v.personas.Per_Nom + " " + v.personas.Per_ApePat
+            });
+
+            ViewBag.ObjGruposCuarteles_ConJefe_id = new SelectList(listajefes, "Con_id", "NombreJefe");
+
+
             var grupos = db.GruposCuarteles.Include(c => c.Cuarteles).Include(p=>p.contratos);
             MultiplesClases multiples = new MultiplesClases
             {
@@ -56,19 +72,20 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "gc_id,cuar_id,Con_id,ConJefe_id")] GruposCuarteles gruposCuarteles)
+        public ActionResult Create(MultiplesClases multiples,string cuar_id)
         {
             if (ModelState.IsValid)
             {
-                db.GruposCuarteles.Add(gruposCuarteles);
+                multiples.ObjGruposCuarteles.cuar_id = Convert.ToInt32(cuar_id);
+
+
+                db.GruposCuarteles.Add(multiples.ObjGruposCuarteles);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { cuar_id});
             }
 
-           
-            ViewBag.ConJefe_id = new SelectList(db.contratos, "Con_Id", "Per_Rut", gruposCuarteles.ConJefe_id);
-            ViewBag.cuar_id = new SelectList(db.Cuarteles, "cuar_id", "cuar_nom", gruposCuarteles.cuar_id);
-            return View(gruposCuarteles);
+        
+            return View(multiples);
         }
 
         // GET: GruposCuarteles/Edit/5

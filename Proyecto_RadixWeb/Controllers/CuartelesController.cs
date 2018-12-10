@@ -138,7 +138,18 @@ namespace Proyecto_RadixWeb.Controllers
 
                     foreach (var item in grupos)
                     {
-                        GruposCuarteles gc = db.GruposCuarteles.Find(item.gc_id);
+                    var grupodetalle = db.GrupoCuartelesDetalle.Where(gd => gd.gc_id == item.gc_id);
+
+                    if (grupodetalle != null)
+                    {
+                        foreach (var item2 in grupodetalle)
+                        {
+                            GrupoCuartelesDetalle detalle = db.GrupoCuartelesDetalle.Find(item2.gc_id);
+                            db.GrupoCuartelesDetalle.Remove(detalle);
+                        }
+
+                    }
+                    GruposCuarteles gc = db.GruposCuarteles.Find(item.gc_id);
                         db.GruposCuarteles.Remove(gc);
                     }
 
