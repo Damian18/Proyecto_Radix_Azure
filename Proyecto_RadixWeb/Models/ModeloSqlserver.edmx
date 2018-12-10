@@ -219,7 +219,7 @@
           </Key>
           <Property Name="gc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cuar_id" Type="int" />
-          <Property Name="gc_nom" Type="int" />
+          <Property Name="gc_nom" Type="varchar" MaxLength="20" />
           <Property Name="ConJefe_id" Type="int" />
         </EntityType>
         <EntityType Name="horario_laboral">
@@ -2046,11 +2046,11 @@
             <End Role="DetalleCosechas" EntitySet="DetalleCosechas" />
           </AssociationSet>
           <EntitySet Name="GrupoCuartelesDetalle" EntityType="radixModel.GrupoCuartelesDetalle" />
-          <EntitySet Name="GruposCuarteles" EntityType="radixModel.GruposCuarteles" />
           <AssociationSet Name="FK_GrupoCuartelesDetalle_contratos" Association="radixModel.FK_GrupoCuartelesDetalle_contratos">
             <End Role="contratos" EntitySet="contratos" />
             <End Role="GrupoCuartelesDetalle" EntitySet="GrupoCuartelesDetalle" />
           </AssociationSet>
+          <EntitySet Name="GruposCuarteles" EntityType="radixModel.GruposCuarteles" />
           <AssociationSet Name="FK_GruposCuarteles_contratos2" Association="radixModel.FK_GruposCuarteles_contratos2">
             <End Role="contratos" EntitySet="contratos" />
             <End Role="GruposCuarteles" EntitySet="GruposCuarteles" />
@@ -2807,18 +2807,6 @@
           <NavigationProperty Name="contratos" Relationship="radixModel.FK_GrupoCuartelesDetalle_contratos" FromRole="GrupoCuartelesDetalle" ToRole="contratos" />
           <NavigationProperty Name="GruposCuarteles" Relationship="radixModel.FK_GrupoCuartelesDetalle_GruposCuarteles" FromRole="GrupoCuartelesDetalle" ToRole="GruposCuarteles" />
         </EntityType>
-        <EntityType Name="GruposCuarteles">
-          <Key>
-            <PropertyRef Name="gc_id" />
-          </Key>
-          <Property Name="gc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cuar_id" Type="Int32" />
-          <Property Name="gc_nom" Type="Int32" />
-          <Property Name="ConJefe_id" Type="Int32" />
-          <NavigationProperty Name="contratos" Relationship="radixModel.FK_GruposCuarteles_contratos2" FromRole="GruposCuarteles" ToRole="contratos" />
-          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="GruposCuarteles" ToRole="Cuarteles" />
-          <NavigationProperty Name="GrupoCuartelesDetalle" Relationship="radixModel.FK_GrupoCuartelesDetalle_GruposCuarteles" FromRole="GruposCuarteles" ToRole="GrupoCuartelesDetalle" />
-        </EntityType>
         <Association Name="FK_GrupoCuartelesDetalle_contratos">
           <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
           <End Type="radixModel.GrupoCuartelesDetalle" Role="GrupoCuartelesDetalle" Multiplicity="*" />
@@ -2831,6 +2819,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GruposCuarteles">
+          <Key>
+            <PropertyRef Name="gc_id" />
+          </Key>
+          <Property Name="gc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cuar_id" Type="Int32" />
+          <Property Name="gc_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ConJefe_id" Type="Int32" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.FK_GruposCuarteles_contratos2" FromRole="GruposCuarteles" ToRole="contratos" />
+          <NavigationProperty Name="Cuarteles" Relationship="radixModel.FK_GruposCuarteles_Cuarteles" FromRole="GruposCuarteles" ToRole="Cuarteles" />
+          <NavigationProperty Name="GrupoCuartelesDetalle" Relationship="radixModel.FK_GrupoCuartelesDetalle_GruposCuarteles" FromRole="GruposCuarteles" ToRole="GrupoCuartelesDetalle" />
+        </EntityType>
         <Association Name="FK_GruposCuarteles_contratos2">
           <End Type="radixModel.contratos" Role="contratos" Multiplicity="0..1" />
           <End Type="radixModel.GruposCuarteles" Role="GruposCuarteles" Multiplicity="*" />

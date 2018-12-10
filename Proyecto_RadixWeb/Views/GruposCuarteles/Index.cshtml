@@ -16,7 +16,7 @@
                 <h1 class="title" style="text-align:center"><i class="fas fa-user-friends"></i>  Grupos de trabajadores de la empresa @ViewBag.empresa </h1>
             </div>
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
-                <a class="btn btn-primary text-white" data-toggle="modal" data-target="#MiModal"><i class="fas fa-user-plus"></i> Crear Grupo </a>
+                <a class="btn btn-primary text-white addGrupos" data-toggle="modal" data-target="#MiaddGrupo"><i class="fas fa-user-plus"></i> Crear Grupo </a>
 
             </div>
         </div>
@@ -91,9 +91,8 @@
 
 
     </div>
-
     <!-- Create -->
-    <div class="modal fade" id="MiModal" tabindex="-1" role="dialog" aria-labelledby="MiModal" aria-hidden="true">
+    <div class="modal fade" id="MiaddGrupo" tabindex="-1" role="dialog" aria-labelledby="MiaddGrupo" aria-hidden="true">
         <div class="modal-dialog" role="document">
             @using (Html.BeginForm("Create", "GruposCuarteles", new { cuar_id = ViewBag.cuar_id }, FormMethod.Post))
             {
@@ -101,7 +100,7 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nueva Cuadrilla</h4>
+                        <h4 class="modal-title">Nuevo Grupo</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -109,10 +108,13 @@
                     <!--Contenido del centro-->
                     <div class="modal-body">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                       
                         <div class="form-group">
-                            @Html.Label("Fruta", htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.DropDownList("ObjCuarteles_varfrut_id", null, htmlAttributes: new { @class = "form-control"})
+                            @Html.Label("Grupo")
+                            @Html.EditorFor(model => model.ObjGruposCuarteles.gc_nom, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Encargado", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownList("ObjGruposCuarteles_ConJefe_id", null, htmlAttributes: new { @class = "form-control" })
                         </div>
 
                     </div>
@@ -159,6 +161,13 @@
         $(document).ready(function () {
 
             $('#contenido_vista').appendTo('#contenido_general');
+        });
+
+
+        $(".addGrupos").on("click", function () {
+
+            $("#ObjGruposCuarteles_ConJefe_id").attr("name", "ObjGruposCuarteles.ConJefe_id");
+
         });
         $(".sectoreliminar").on("click", function () {
 

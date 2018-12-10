@@ -11,17 +11,15 @@ namespace Proyecto_RadixWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class SolicitudDetalleQr
     {
         public int sdqr_id { get; set; }
         public Nullable<int> sqr_id { get; set; }
         public Nullable<int> Con_id { get; set; }
-        public bool estado { get; set; }
         public string nombre { get; set; }
         public byte[] formato { get; set; }
-
-
+        public bool estado { get; set; }
 
         public virtual contratos contratos { get; set; }
         public virtual SolicitudesQr SolicitudesQr { get; set; }

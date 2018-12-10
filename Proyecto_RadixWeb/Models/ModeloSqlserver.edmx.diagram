@@ -101,8 +101,8 @@
         <AssociationConnector Association="radixModel.FK_DetalleCosechas_Cosechas" />
         <AssociationConnector Association="radixModel.FK_DetalleCosechas_TipoEntrega" />
         <EntityTypeShape EntityType="radixModel.GrupoCuartelesDetalle" Width="1.5" PointX="12.75" PointY="5.5" />
-        <EntityTypeShape EntityType="radixModel.GruposCuarteles" Width="1.5" PointX="10.5" PointY="8.25" />
         <AssociationConnector Association="radixModel.FK_GrupoCuartelesDetalle_contratos" />
+        <EntityTypeShape EntityType="radixModel.GruposCuarteles" Width="1.5" PointX="10.5" PointY="8.25" />
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_contratos2" />
         <AssociationConnector Association="radixModel.FK_GruposCuarteles_Cuarteles" />
         <AssociationConnector Association="radixModel.FK_GrupoCuartelesDetalle_GruposCuarteles" />
