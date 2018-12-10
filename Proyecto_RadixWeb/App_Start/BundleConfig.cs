@@ -9,8 +9,9 @@ namespace IdentitySample
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                   "~/Content/vendor/bootstrap/css/bootstrap.min.css",
-                   "~/Content/vendor/font-awesome/css/font-awesome.min.css",
+                   "~/Content/css/bootstrap.min.css",
+                   "~/Content/css/font-awesome.min.css",
+                         "~/Content/css/dashboard/app.css",
                    "~/Content/vendor/datatables/dataTables.bootstrap4.css",
                    "~/Content/css/sb-admin.css",
                    "~/Content/estilo.css",
@@ -21,15 +22,11 @@ namespace IdentitySample
 
 
             bundles.Add(new StyleBundle("~/bundles/js").Include(
-                "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js",
-                "~/Content/vendor/jquery/jquery.min.js",
-                  "~/Content/vendor/jquery-easing/jquery.easing.min.js",
-                  "~/Content/vendor/chart.js/Chart.min.js",
-                  "~/Content/vendor/datatables/jquery.dataTables.js",
-                  "~/Content/vendor/datatables/dataTables.bootstrap4.js",
-                  "~/Content/js/sb-admin.min.js",
-                  "~/Content/js/sb-admin-datatables.min.js",
-                  "~/Content/js/sb-admin-charts.min.js"
+                "~/Scripts/bootstrap.bundle.min.js",
+                "~/Scripts/dashboard/app.js",
+                  "~/Scripts/dashboard/vendor.js",
+                    "~/Scripts/dashboard/sucursales.js"
+ 
                   ));
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",

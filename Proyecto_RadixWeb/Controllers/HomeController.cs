@@ -82,7 +82,7 @@ namespace IdentitySample.Controllers
              
                         cook.Value = "Usuario Activo";
                   
-                        cook.Expires = DateTime.Now.AddMonths(1);
+                        cook.Expires = DateTime.Now.AddMinutes(5);
                 
                         Response.Cookies.Add(cook);
              
