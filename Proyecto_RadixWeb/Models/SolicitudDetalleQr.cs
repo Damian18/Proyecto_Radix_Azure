@@ -18,6 +18,8 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<int> sqr_id { get; set; }
         public Nullable<int> Con_id { get; set; }
         public bool estado { get; set; }
+        public byte[] formato { get; set; }
+        public string nombre { get; set; }
 
         public virtual contratos contratos { get; set; }
         public virtual SolicitudesQr SolicitudesQr { get; set; }

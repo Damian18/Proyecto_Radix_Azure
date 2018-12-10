@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
+using Ionic.Zip;
 using Proyecto_RadixWeb.Models;
 
 namespace Proyecto_RadixWeb.Controllers
@@ -17,10 +23,94 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: SolicitudDetalleQrs
         public ActionResult Index(string sol_id)
         {
+            ViewBag.sol_id = sol_id;
             int id= Convert.ToInt32(sol_id);
 
             var solicitudDetalleQr = db.SolicitudDetalleQr.Include(s => s.contratos).Include(s => s.SolicitudesQr);
             return View(solicitudDetalleQr.Where(s=>s.sqr_id==id).ToList());
+        }
+
+        [HttpPost]
+        public ActionResult DescargarQr(string sqr_id)
+        {
+            try
+            {
+                int id = Convert.ToInt32(sqr_id);
+
+                var Solicitud = db.SolicitudesQr.FirstOrDefault(s=>s.sqr_id==id);
+
+                string subempresa_nombre = Solicitud.subempresas.Sub_Nom;
+
+                var listaSolicitudes = db.SolicitudDetalleQr.Where(s=>s.sqr_id==id);
+
+                
+                List<SolicitudDetalleQr> listadetalle = new List<SolicitudDetalleQr>();
+                foreach (var item in listaSolicitudes)
+                {
+                    var con = GenerarQr(item.contratos.Per_Rut);
+                    item.formato = BitmapToBytes(con);
+
+                    listadetalle.Add(new SolicitudDetalleQr
+                    {   formato =BitmapToBytes(con),
+                        nombre =item.contratos.personas.Per_Nom+""+item.contratos.personas.Per_ApePat });
+
+                }
+  
+
+                var outputStream = new MemoryStream();
+
+
+                using (var zip = new ZipFile())
+                {
+                    foreach (var item in listadetalle)
+                    {
+                        zip.AddEntry(item.nombre + ".png", item.formato.ToArray());
+
+
+
+                        //  zip.AddEntry("qr.png", conver1.ToArray());
+                        //  zip.AddEntry("qr2.png", conver2.ToArray());
+
+                    }
+                    zip.Save(outputStream);
+                }
+                outputStream.Position = 0;
+                return File(outputStream, "application/zip", subempresa_nombre+".zip");
+
+
+            }
+            catch (Exception e)
+            {
+
+
+            }
+
+
+            return View();
+        }
+
+        private Bitmap GenerarQr(string texto)
+        {
+            QrEncoder qrEncoder = new QrEncoder(ErrorCorrectionLevel.H);
+            QrCode qrCode = new QrCode();
+            qrEncoder.TryEncode(texto, out qrCode);
+            GraphicsRenderer renderer = new GraphicsRenderer(new FixedCodeSize(400, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+            MemoryStream ms = new MemoryStream();
+            renderer.WriteToStream(qrCode.Matrix, ImageFormat.Png, ms);
+            var imageTemporal = new Bitmap(ms);
+            var image = new Bitmap(imageTemporal, new Size(new Point(200, 200)));
+
+            return image;
+        }
+
+
+        private byte[] BitmapToBytes(Bitmap img)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                img.Save(stream, ImageFormat.Png);
+                return stream.ToArray();
+            }
         }
 
         // GET: SolicitudDetalleQrs/Details/5

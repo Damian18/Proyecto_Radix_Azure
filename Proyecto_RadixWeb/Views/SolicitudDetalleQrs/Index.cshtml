@@ -3,11 +3,24 @@
 @{
     ViewBag.Title = "Index";
 }
+  @using (Html.BeginForm("DescargarQr", "SolicitudDetalleQrs", new { sqr_id = ViewBag.sol_id }, FormMethod.Post))
+  {
+                        @Html.AntiForgeryToken()
+                      
 
+                        <button class="btn btn-success text-white mt-2" type="submit"><i class="fas fa-user-plus"></i>Generar Qr</button>
+   }
 <div id="contenido_vista" style="margin-top: 10%;margin-left:20%;margin-right:2%">
     <div class="card mb-3 mt-2" style="border: 1px solid;">
         <div class="ml-3 mt-3">
-            <h2><a class="btn btn-success" href="#">Generar QR</a></h2>
+            @using (Html.BeginForm("DescargarQr", "SolicitudDetalleQrs", new { sqr_id = ViewBag.sol_id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+
+                <button class="btn btn-success text-white mt-2" type="submit"><i class="fas fa-user-plus"></i>Generar Qr</button>
+            }
+            @*<h2><a class="btn btn-success" href="@Url.Action("DescargarQr","SolicitudDetalleQrs",new {sqr_id= ViewBag.sol_id})">Generar QR</a></h2>*@
         </div>
         <div class="card-body">
             <div class="table-responsive">
