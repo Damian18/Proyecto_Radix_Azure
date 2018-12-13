@@ -17,7 +17,7 @@ namespace Proyecto_RadixWeb.Models
         public int gcd_id { get; set; }
         public Nullable<int> gc_id { get; set; }
         public Nullable<int> Con_id { get; set; }
-    
+          public bool estado { get; set; }
         public virtual contratos contratos { get; set; }
         public virtual GruposCuarteles GruposCuarteles { get; set; }
     }

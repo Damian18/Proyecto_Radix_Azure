@@ -257,6 +257,7 @@
     <Compile Include="Controllers\CuentasAndroidsController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\Empresa_CargoController.cs" />
+    <Compile Include="Controllers\GrupoCuartelesDetallesController.cs" />
     <Compile Include="Controllers\GruposCuartelesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Horario_laboralController.cs" />
@@ -1216,6 +1217,12 @@
     <Content Include="Views\SolicitudDetalleQrs\Details.cshtml" />
     <Content Include="Views\SolicitudDetalleQrs\Edit.cshtml" />
     <Content Include="Views\SolicitudDetalleQrs\Index.cshtml" />
+    <Content Include="Views\GrupoCuartelesDetalles\Create.cshtml" />
+    <Content Include="Views\GrupoCuartelesDetalles\Delete.cshtml" />
+    <Content Include="Views\GrupoCuartelesDetalles\Details.cshtml" />
+    <Content Include="Views\GrupoCuartelesDetalles\Edit.cshtml" />
+    <Content Include="Views\GrupoCuartelesDetalles\Index.cshtml" />
+    <Content Include="Views\Contratos\ListaContratoGrupos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

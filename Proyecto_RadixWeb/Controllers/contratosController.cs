@@ -35,7 +35,7 @@ namespace Proyecto_RadixWeb.Controllers
             };
 
 
-            return PartialView(model);
+            return PartialView(multiples);
         }
 
 
@@ -261,6 +261,75 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
 
+        public ActionResult ListaContratoGrupos(int? subemp_id)
+        {
+            try
+            {
+                ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+                ViewBag.subemp_id = subemp_id;
+
+                int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+                //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+
+
+
+
+
+                var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+                MultiplesClases multiple = new MultiplesClases
+                {
+                    ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id && c.personas.Car_Id == 2).ToList()
+                };
+                return View(multiple);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        [HttpPost]
+        public JsonResult Agregar_ListaGrupo(List<GrupoCuartelesDetalle> listaGrupo, string subemp_id)
+        {
+            var status = false;
+
+            if (listaGrupo == null)
+            {
+                listaGrupo = new List<GrupoCuartelesDetalle>();
+            }
+
+                      
+            foreach (GrupoCuartelesDetalle item in listaGrupo)
+            {
+                if (item.estado == true)
+                {
+
+
+                    var gcd = new GrupoCuartelesDetalle
+                    {
+
+                        Con_id = item.Con_id,
+                        gc_id = 2
+                    };
+
+                    //item.sqr_id = sqr_id;
+
+                    db.GrupoCuartelesDetalle.Add(gcd);
+                    db.SaveChanges();
+                    status = true;
+                }
+
+            }
+            //db.SaveChanges();
+
+
+
+
+            return new JsonResult { Data = new { status } };
+        }
         public FileResult ViewPdf(int? id)
         {
             var archivo = db.documentos.Where(dp => dp.Doc_Id == id).FirstOrDefault();

@@ -243,13 +243,18 @@
                                         </li>
                                     </ul>
                                 </li>
-                        
+
                                 <li>
                                     <a href="@Url.Action("ListaSolicitudSubEmpresa", "subempresas")">
                                         <i class="fa fa-pencil-square-o"></i> Solicitud de QRs
                                     </a>
                                 </li>
 
+                                <li>
+                                    <a href="#" id="parcial">
+                                        <i class="fa fa-pencil-square-o"></i> Test
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
 
@@ -459,12 +464,31 @@
     <div class="jqvmap-label" style="display: none;"></div>
     <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
     <div class="jqvmap-label" style="display: none;"></div>
-
+    
     <script>
         $(document).ready(function () {
 
             $("#modal_css").modal("show");
+
+             $('#parcial').click(function () {
+
+                 $.ajax({
+                     url: '@Url.Action("VistaParcial", "Contratos",new { subemp_id=2 })',
+                     type: "get",
+
+                     success: function (c) {
+                         $('#contenido_general').html(c);
+
+                     }
+                 });
+
+             });
         });
+
+       
+     
+
+
 
         $(document).ready(function () {
             $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {

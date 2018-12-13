@@ -1,0 +1,183 @@
+﻿@model Proyecto_RadixWeb.Models.MultiplesClases
+
+@{
+    ViewBag.Title = "ListaContratoSolicitar";
+}
+
+<div id="contenido_vista" style="margin-top: 90px; margin-left: 50px;">
+    <div class="card mb-3 mt-2">
+        <div class="card-body">
+            <div class="table-responsive">
+
+
+                <h2>Lista Agregar al Grupo</h2>
+
+                <h2><button id="btn_aplicar" class="btn btn-outline-success btn-sm m-0"> Aplicar </button></h2>
+
+
+
+                <table class="table" id="solicitud">
+
+                    <thead>
+                        <tr>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.ObjContrato.personas.Per_Nom)
+                            </th>
+                            <th>
+                                Apellido
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ObjContrato.personas.cargos.Car_Nom)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ObjEContrato)
+                        {
+                            <tr>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.personas.Per_Nom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.personas.Per_ApePat)  @Html.DisplayFor(modelItem => item.personas.Per_ApeMat)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.personas.cargos.Car_Nom)
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox" id="checkbox" value="@item.Con_Id" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<link href="~/Content/css/dashboard/app.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#contenido_vista').appendTo('#contenido_general');
+
+        $('#btn_aplicar').on('click', function () {
+
+
+            var listaGrupo = [];
+
+            $('#solicitud tbody tr').each(function () {
+
+                var lista = {};
+                var switchStatus = '';
+                var contrato = '';
+
+                var rows = $('#solicitud tbody tr').length;
+                for (var i = 0; i < rows; i++) {
+                    var row = $(this);
+
+                    if (row.find("TD #checkbox").is(':checked')) {
+
+                        switchStatus = row.find("td #checkbox").is(':checked');
+                    }
+                    else {
+                        switchStatus = row.find("td #checkbox").is(':checked');
+                    }
+
+                    if (switchStatus == true) {
+                        contrato = row.find("td #checkbox").val();
+                    }
+                    lista.Con_Id = contrato;
+                    lista.estado = switchStatus;
+                }
+
+
+                listaGrupo.push(lista);
+
+            });
+
+             $.ajax({
+                type: "POST",
+                url: "@Url.Action("Guardar_Solicitud", "Contratos",new { subemp_id= ViewBag.subemp_id })",
+                 data: { 'listaGrupo': listaGrupo },
+                success: function (data) {
+                    if (data.status) {
+
+                        window.location.href = "@Url.Action("ListaContratoSolicitar", "Contratos", new { subemp_id = ViewBag.subemp_id })";
+                    }
+                    alert('Almacenado');
+                },
+                error: function () {
+                    alert('Error');
+                }
+
+            });
+
+        });
+
+    });
+</script>
+
+
+<style>
+    .switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+    }
+
+        .switch input {
+            display: none;
+        }
+
+    .slider {
+        background-color: #ccc;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .4s;
+    }
+
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+        }
+
+    input:checked + .slider {
+        background-color: #66bb6a;
+    }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
