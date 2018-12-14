@@ -261,14 +261,14 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
 
-        public ActionResult ListaContratoGrupos(int? subemp_id)
+        public ActionResult ListaContratoGrupos(string gc_id, int? subemp_id)
         {
             try
             {
                 ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
 
                 ViewBag.subemp_id = subemp_id;
-
+                ViewBag.gc_id = gc_id;
                 int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
                 //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
 
@@ -292,9 +292,11 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
         [HttpPost]
-        public JsonResult Agregar_ListaGrupo(List<GrupoCuartelesDetalle> listaGrupo, string subemp_id)
+        public JsonResult Agregar_ListaGrupo(List<GrupoCuartelesDetalle> listaGrupo, string gc_id)
         {
             var status = false;
+
+            int grupoCuartel_id =Convert.ToInt32(gc_id);
 
             if (listaGrupo == null)
             {
@@ -312,7 +314,7 @@ namespace Proyecto_RadixWeb.Controllers
                     {
 
                         Con_id = item.Con_id,
-                        gc_id = 2
+                        gc_id = grupoCuartel_id
                     };
 
                     //item.sqr_id = sqr_id;

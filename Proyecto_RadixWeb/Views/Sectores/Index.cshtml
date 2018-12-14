@@ -65,7 +65,7 @@
                                                         <a class="btn btn-danger sectoreliminar" id="@item.sect_id" name="@item.sect_nom" href="#" data-toggle="modal" data-target="#Misectoreliminar"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
                                                     <th>
-                                                        <a href="@Url.Action("Index", "Cuarteles", new { sect_id = item.sect_id })" class="mt-2"><i class="fas fa-map-marker-alt btn btn-warning" style="margin-left: 25%;"> Cuadrillas</i></a>
+                                                        <a href="@Url.Action("Index", "Cuarteles", new { sect_id = item.sect_id,subemp_id=ViewBag.subemp_id })" class="mt-2"><i class="fas fa-map-marker-alt btn btn-warning" style="margin-left: 25%;"> Cuadrillas</i></a>
                                                     </th>
                                                     @*<th>
                                                         <a class="btn btn-outline-success btn-sm m-0 sectoreliminar" id="@item.sect_id" href="#" data-toggle="modal" data-target="#Misectoreliminar">

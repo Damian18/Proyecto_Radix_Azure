@@ -70,7 +70,7 @@
                                                         <a class="btn btn-danger sectoreliminar" id="@item.gc_id" name="@item.Cuarteles.cuar_nom" href="#" data-toggle="modal" data-target="#Misectoreliminar"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
                                                     <td align="center">
-                                                        <a class="btn btn-primary" href="@Url.Action("Index","GrupoCuartelesDetalles",new { gc_id=item.gc_id })">Mi Grupo</a>
+                                                        <a class="btn btn-primary" href="@Url.Action("Index","GrupoCuartelesDetalles",new { gc_id=item.gc_id,subemp_id=ViewBag.subemp_id })">Mi Grupo</a>
                                                     </td>
                                                     @*<td>
                                                             @Html.ActionLink("Edit", "Edit", new { id = item.gc_id }) |

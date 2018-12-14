@@ -15,8 +15,9 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: GruposCuarteles
-        public ActionResult Index(string cuar_id)
+        public ActionResult Index(string cuar_id,string subemp_id)
         {
+            ViewBag.subemp_id = subemp_id;
             ViewBag.cuar_id = cuar_id;
             int cuar = Convert.ToInt32(cuar_id.ToString());
 

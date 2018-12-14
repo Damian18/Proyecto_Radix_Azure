@@ -110,12 +110,12 @@
 
              $.ajax({
                 type: "POST",
-                url: "@Url.Action("Guardar_Solicitud", "Contratos",new { subemp_id= ViewBag.subemp_id })",
+                url: "@Url.Action("Agregar_ListaGrupo", "Contratos",new { gc_id = ViewBag.gc_id })",
                  data: { 'listaGrupo': listaGrupo },
                 success: function (data) {
                     if (data.status) {
 
-                        window.location.href = "@Url.Action("ListaContratoSolicitar", "Contratos", new { subemp_id = ViewBag.subemp_id })";
+                        window.location.href = "@Url.Action("Index", "GrupoCuartelesDetalles", new { gc_id = ViewBag.gc_id,subemp_id = ViewBag.subemp_id})";
                     }
                     alert('Almacenado');
                 },

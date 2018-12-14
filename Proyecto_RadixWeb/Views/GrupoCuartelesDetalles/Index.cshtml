@@ -12,10 +12,10 @@
             <div class="">
             </div>
             <div class="col col-xs-12 col-md-9 col-lg-9">
-                <h1 class="title" style="text-align:center"><i class="fas fa-user-friends"></i>  Encargados de Grupos de trabajadores de la empresa @ViewBag.empresa </h1>
+                <h1 class="title" style="text-align:center"><i class="fas fa-user-friends"></i>  Lista Trabajadores </h1>
             </div>
             <div class="col col-xs-3 col-md-3 col-lg-3 text-right">
-                <a class="btn btn-primary text-white addGrupos" data-toggle="modal" data-target="#MiaddGrupo"><i class="fas fa-user-plus"></i> Crear Grupo </a>
+                <a class="btn btn-primary text-white" href="@Url.Action("ListaContratoGrupos","Contratos",new {gc_id=ViewBag.gc_id,subemp_id=ViewBag.subemp_id })"> Agregar Trabajadores </a>
 
             </div>
         </div>
@@ -43,8 +43,7 @@
                                                 </th>
 
                                                 <th></th>
-                                                <th></th>
-                                                <th></th>
+                                              
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,8 +52,10 @@
                                                 {
                                                 <tr>
                                                     <td>
+                                                        @Html.DisplayFor(modelItem => item.contratos.personas.Per_Rut)
+                                                    </td>
+                                                    <td>
                                                         @Html.DisplayFor(modelItem => item.contratos.personas.Per_Nom)
-
 
                                                     </td>
                                                     <td>
@@ -62,16 +63,11 @@
                                                         @Html.DisplayFor(modelItem => item.contratos.personas.Per_ApePat)
                                                     </td>
                                            
-                                                    <td align="center">
-
-                                                        <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modaleditar"><i class="fas fa-edit"></i></a>
-                                                    </td>
+                                             
                                                     <td align="center">
                                                         <a class="btn btn-danger sectoreliminar" id="" name="" href="#" data-toggle="modal" data-target="#Misectoreliminar"><i class="fas fa-trash-alt"></i></a>
                                                     </td>
-                                                    <td align="center">
-                                                        <a class="btn btn-primary" href="@Url.Action("Index","GrupoCuartelesDetalles",new { gc_id=item.gc_id })">Mis Grupos</a>
-                                                    </td>
+                                               
                                               
                                                 </tr>
                                             }
@@ -89,6 +85,10 @@
         </article>
 
     </div>
+
+
+
+
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>

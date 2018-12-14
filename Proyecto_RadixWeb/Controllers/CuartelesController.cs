@@ -15,8 +15,9 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: Cuarteles
-        public ActionResult Index(string sect_id)
+        public ActionResult Index(string sect_id, string subemp_id)
         {
+            ViewBag.subemp_id = subemp_id;
             int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
 
             int contar4 = db.Cuarteles.Count(s => s.Sectores.subempresas.empresas.Emp_Id == emp_id);
