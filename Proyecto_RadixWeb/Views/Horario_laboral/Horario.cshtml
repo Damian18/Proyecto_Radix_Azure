@@ -357,7 +357,7 @@
                 function SaveEvent(data) {
                     $.ajax({
                         type: "POST",
-                        url: '@Url.Action(" ", "Horario_laboral", new { Subempcar_id = ViewBag.Subempcar_id })',
+                        url: '@Url.Action("GuardarEvento", "Horario_laboral", new { Subempcar_id = ViewBag.Subempcar_id })',
                         //url: '/Horario_laboral/SaveEvent',
                         data: data,
                         success: function (data) {
