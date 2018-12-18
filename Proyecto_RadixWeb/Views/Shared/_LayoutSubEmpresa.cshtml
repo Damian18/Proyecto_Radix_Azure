@@ -10,11 +10,14 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- Place favicon.ico in the root directory -->
+
+    <link href="~/PaginaHome/tour2/css/hopscotch.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/css/dashboard/vendor.css">
+
     <!-- Theme initialization -->
     <link rel="stylesheet" id="theme-style" href="~/Content/css/dashboard/app.css">
 
-   
+
 
 </head>
 <body class="loaded">
@@ -37,16 +40,16 @@
                     </form>
                 </div>
                 <div class="header-block header-block-buttons">
-                  
-                        <a href="#" class="btn btn-sm header-btn">
-                           
-                            <span>Plan @Session["Plan_Nombre"].ToString()</span>
-                        </a>
+
+                    <a href="#" class="btn btn-sm header-btn">
+
+                        <span>Plan @Session["Plan_Nombre"].ToString()</span>
+                    </a>
                 </div>
                 <div class="header-block header-block-buttons">
                     @if (ViewBag.idcookie == "Usuario no activo")
                     {
-                        <a href="#" class="btn btn-sm header-btn">
+                        <a id="startTourBtn" href="#" class="btn btn-sm header-btn">
                             <i class="fas fa-chalkboard-teacher"></i>
                             <span>Empezar Tutorial</span>
                         </a>}
@@ -107,7 +110,7 @@
                         </li>
                         <!--OPCIONES DE PROFILE-->
                         <li class="profile dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a  id="paso1" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <div class="img" style="background-image: url('../../PaginaHome/images/avatars/1.png')"> </div>
                                 @ViewBag.prob
 
@@ -124,8 +127,8 @@
                                     <i class="fa fa-gear icon"></i>
                                     Configuracion
                                 </a>
-                                <div class="dropdown-divider"></div> <a class="dropdown-item" data-toggle="modal" data-target="#modal_cs" href="javascript:document.getElementById('logoutForm').submit()">
-                                    <i class="fa fa-power-off icon"></i>
+                                <div class="dropdown-divider"></div> <a  class="dropdown-item" data-toggle="modal" data-target="#modal_cs" href="javascript:document.getElementById('logoutForm').submit()">
+                                    <i  class="fa fa-power-off icon"></i>
                                     Cerrar Sesion
                                 </a>
                             </div>
@@ -145,18 +148,18 @@
                         <nav class="menu">
                             <ul class="nav metismenu" id="sidebar-menu">
                                 <li class="active">
-                                    <a href="@Url.Action("index", "Home")">
+                                    <a id="paso4" href="@Url.Action("index", "Home")">
                                         <i class="fa fa-home"></i> Inicio
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="@Url.Action("Index", "subempresas")">
+                                    <a id="paso5" href="@Url.Action("Index", "subempresas")">
                                         <i class="fa fa-th-large"></i> Sucursales
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a id="paso6" href="">
                                         <i class="fa fa-group"></i> Cuentas
                                         <i class="fa arrow"></i>
                                     </a>
@@ -174,21 +177,21 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("All", "Contratos")">
+                                    <a id="paso7" href="@Url.Action("All", "Contratos")">
                                         <i class="fa fa-group"></i>Mis Trabajadores
 
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("All", "Sectores")">
+                                    <a id="paso8" href="@Url.Action("All", "Sectores")">
                                         <i class="fa fa-map-marker"></i> Mis Sectores
 
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a id="paso9" href="">
                                         <i class="fa fa-user"></i> Cargos
                                         <i class="fa arrow"></i>
                                     </a>
@@ -231,7 +234,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a id="paso10" href="">
                                         <i class="fa fa-file"></i> Documentos Generales
                                         <i class="fa arrow"></i>
                                     </a>
@@ -245,7 +248,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="@Url.Action("ListaSolicitudSubEmpresa", "subempresas")">
+                                    <a id="paso11" href="@Url.Action("ListaSolicitudSubEmpresa", "subempresas")">
                                         <i class="fa fa-pencil-square-o"></i> Solicitud de QRs
                                     </a>
                                 </li>
@@ -340,9 +343,9 @@
             <footer class="footer">
                 <div class="footer-block author">
                     @*<ul>
-                        <li> created by <a href="">ModularCode</a> </li>
-                        <li> <a href="">get in touch</a> </li>
-                    </ul>*@
+                            <li> created by <a href="">ModularCode</a> </li>
+                            <li> <a href="">get in touch</a> </li>
+                        </ul>*@
                 </div>
             </footer>
             <!--ADD NEW ITEM CON DROPZONE-->
@@ -453,7 +456,8 @@
     <script src="~/Scripts/dashboard/vendor.js"></script>
     <script src="~/Scripts/dashboard/app.js"></script>
     @*<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>*@
-
+    <script src="~/PaginaHome/tour2/js/hopscotch.min.js"></script>
+    <script src="~/PaginaHome/tour2/js/my_first_tour.js"></script>
     <div class="responsive-bootstrap-toolkit">
         <div class="device-xs hidden-sm-up"></div>
         <div class="device-sm hidden-xs-down hidden-md-up"></div>
@@ -464,7 +468,7 @@
     <div class="jqvmap-label" style="display: none;"></div>
     <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
     <div class="jqvmap-label" style="display: none;"></div>
-    
+
     <script>
         $(document).ready(function () {
 
@@ -485,8 +489,8 @@
              });
         });
 
-       
-     
+
+
 
 
 
