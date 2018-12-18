@@ -1223,6 +1223,7 @@
     <Content Include="Views\GrupoCuartelesDetalles\Edit.cshtml" />
     <Content Include="Views\GrupoCuartelesDetalles\Index.cshtml" />
     <Content Include="Views\Contratos\ListaContratoGrupos.cshtml" />
+    <Content Include="Views\Contratos\ListaProduccion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

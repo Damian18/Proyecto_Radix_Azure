@@ -182,6 +182,36 @@ namespace Proyecto_RadixWeb.Controllers
             return View(multiples);
         }
 
+        //Lista Trabajadores Agricolas Cosechas
+        public ActionResult ListaProduccion(int? subemp_id)
+        {
+            try
+            {
+                ViewBag.empresa = HttpContext.Session["Empresa"].ToString();
+
+                ViewBag.subemp_id = subemp_id;
+
+                int emp_id = Convert.ToInt32(HttpContext.Session["Emp_id"].ToString());
+                //ViewBag.Car_Id = new SelectList(db.cargos, "Car_Id", "Car_Nom");
+
+
+
+
+
+                var contratos = db.contratos.Include(c => c.personas).Include(c => c.subempresas).Include(c => c.tiposcontratos);
+                MultiplesClases multiple = new MultiplesClases
+                {
+                    ObjEContrato = contratos.Where(c => c.Sub_Id == subemp_id && c.personas.Car_Id == 2).ToList()
+                };
+                return View(multiple);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //Lista de Contratos a Solicitar QR
         public ActionResult ListaContratoSolicitar(int? subemp_id)
         {
