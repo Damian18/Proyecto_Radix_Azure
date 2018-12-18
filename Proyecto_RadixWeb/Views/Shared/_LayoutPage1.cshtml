@@ -1,24 +1,9 @@
-﻿<!doctype html>
-<html lang="es-cl">
+﻿<!DOCTYPE html>
 
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> Radix-Administrador de sucursal </title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <!-- Place favicon.ico in the root directory -->
-
-    <link href="~/PaginaHome/tour2/css/hopscotch.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/css/dashboard/vendor.css">
-
-    <!-- Theme initialization -->
-    <link rel="stylesheet" id="theme-style" href="~/Content/css/dashboard/app.css">
-
-
-
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
 </head>
 <body class="loaded">
     @RenderBody()
@@ -49,7 +34,7 @@
                 <div class="header-block header-block-buttons">
                     @if (ViewBag.idcookie == "Usuario no activo")
                     {
-                        <a id="startTourBtn" href="#" class="btn btn-sm header-btn">
+                        <a href="#" class="btn btn-sm header-btn">
                             <i class="fas fa-chalkboard-teacher"></i>
                             <span>Empezar Tutorial</span>
                         </a>}
@@ -110,7 +95,7 @@
                         </li>
                         <!--OPCIONES DE PROFILE-->
                         <li class="profile dropdown">
-                            <a  id="paso1" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <div class="img" style="background-image: url('../../PaginaHome/images/avatars/1.png')"> </div>
                                 @ViewBag.prob
 
@@ -127,8 +112,8 @@
                                     <i class="fa fa-gear icon"></i>
                                     Configuracion
                                 </a>
-                                <div class="dropdown-divider"></div> <a  class="dropdown-item" data-toggle="modal" data-target="#modal_cs" href="javascript:document.getElementById('logoutForm').submit()">
-                                    <i  class="fa fa-power-off icon"></i>
+                                <div class="dropdown-divider"></div> <a class="dropdown-item" data-toggle="modal" data-target="#modal_cs" href="javascript:document.getElementById('logoutForm').submit()">
+                                    <i class="fa fa-power-off icon"></i>
                                     Cerrar Sesion
                                 </a>
                             </div>
@@ -148,18 +133,18 @@
                         <nav class="menu">
                             <ul class="nav metismenu" id="sidebar-menu">
                                 <li class="active">
-                                    <a id="paso4" href="@Url.Action("index", "Home")">
+                                    <a href="@Url.Action("index", "Home")">
                                         <i class="fa fa-home"></i> Inicio
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a id="paso5" href="@Url.Action("Index", "subempresas")">
+                                    <a href="@Url.Action("Index", "subempresas")">
                                         <i class="fa fa-th-large"></i> Sucursales
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a id="paso6" href="">
+                                    <a href="">
                                         <i class="fa fa-group"></i> Cuentas
                                         <i class="fa arrow"></i>
                                     </a>
@@ -177,21 +162,21 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a id="paso7" href="@Url.Action("All", "Contratos")">
+                                    <a href="@Url.Action("All", "Contratos")">
                                         <i class="fa fa-group"></i>Mis Trabajadores
 
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a id="paso8" href="@Url.Action("All", "Sectores")">
+                                    <a href="@Url.Action("All", "Sectores")">
                                         <i class="fa fa-map-marker"></i> Mis Sectores
 
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a id="paso9" href="">
+                                    <a href="">
                                         <i class="fa fa-user"></i> Cargos
                                         <i class="fa arrow"></i>
                                     </a>
@@ -234,7 +219,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a id="paso10" href="">
+                                    <a href="">
                                         <i class="fa fa-file"></i> Documentos Generales
                                         <i class="fa arrow"></i>
                                     </a>
@@ -248,16 +233,11 @@
                                 </li>
 
                                 <li>
-                                    <a id="paso11" href="@Url.Action("ListaSolicitudSubEmpresa", "subempresas")">
+                                    <a href="@Url.Action("ListaSolicitudSubEmpresa", "subempresas")">
                                         <i class="fa fa-pencil-square-o"></i> Solicitud de QRs
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a href="#" id="parcial">
-                                        <i class="fa fa-pencil-square-o"></i> Test
-                                    </a>
-                                </li>
                             </ul>
                         </nav>
 
@@ -348,47 +328,7 @@
                         </ul>*@
                 </div>
             </footer>
-            <!--ADD NEW ITEM CON DROPZONE-->
-            <div class="modal fade" id="modal-media">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                                <span class="sr-only">Close</span>
-                            </button>
-                            <h4 class="modal-title">Media Library</h4>
-                        </div>
-                        <div class="modal-body modal-tab-container">
-                            <ul class="nav nav-tabs modal-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link" href="#gallery" data-toggle="tab" role="tab">Gallery</a> </li>
-                                <li class="nav-item"> <a class="nav-link active" href="#upload" data-toggle="tab" role="tab">Upload</a> </li>
-                            </ul>
-                            <div class="tab-content modal-tab-content">
-                                <div class="tab-pane fade" id="gallery" role="tabpanel">
-                                    <div class="images-container">
-                                        <div class="row"> </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade active in" id="upload" role="tabpanel">
-                                    <div class="upload-container">
-                                        <div id="dropzone">
-                                            <form action="/" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="demo-upload">
-                                                <div class="dz-message-block">
-                                                    <div class="dz-message needsclick"> Drop files here or click to upload. </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Insert Selected</button> </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
+
             <!-- /.modal -->
             <div class="modal fade" id="confirm-modal">
                 <div class="modal-dialog" role="document">
@@ -456,8 +396,7 @@
     <script src="~/Scripts/dashboard/vendor.js"></script>
     <script src="~/Scripts/dashboard/app.js"></script>
     @*<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>*@
-    <script src="~/PaginaHome/tour2/js/hopscotch.min.js"></script>
-    <script src="~/PaginaHome/tour2/js/my_first_tour.js"></script>
+
     <div class="responsive-bootstrap-toolkit">
         <div class="device-xs hidden-sm-up"></div>
         <div class="device-sm hidden-xs-down hidden-md-up"></div>
@@ -473,26 +412,7 @@
         $(document).ready(function () {
 
             $("#modal_css").modal("show");
-
-             $('#parcial').click(function () {
-
-                 $.ajax({
-                     url: '@Url.Action("VistaParcial", "Contratos",new { subemp_id=2 })',
-                     type: "get",
-
-                     success: function (c) {
-                         $('#contenido_general').html(c);
-
-                     }
-                 });
-
-             });
         });
-
-
-
-
-
 
         $(document).ready(function () {
             $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
@@ -509,6 +429,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-
-
-

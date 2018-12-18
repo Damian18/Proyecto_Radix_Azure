@@ -3,59 +3,83 @@
     steps: [
         {
             target: 'paso1',
-            title: 'Esto es el cerrar sesion',
-            content: 'Hey there! This is an example Hopscotch tour. There will be plenty of time to read documentation and sample code, but let\'s just take some time to see how Hopscotch actually works.',
+            title: 'Opciones de perfil',
+            content: 'Aqui por ejemplo puede encontrar el boton para cerrar tu sesion',
             placement: 'left',
             yOffset: 1,
             arrowOffset: 1
-          
+         
 
         },
         {
             target: 'paso2',
-            title: 'Notificaciones',
-            content: 'At the very least, you\'ll need to include these two files in your project to get started.',
-            placement: 'left',
-            yOffset: 1,
+            title: 'El estado actual de tu empresa',
+            content: 'En esta seccion puedes ver los recursos que posees hasta el momento',
+            placement: 'bottom',
+            xOffset: 350,
+            yOffset: 20,
             arrowOffset: 1
         },
         {
             target: 'paso3',
-            placement: 'bottom',
-            title: 'Tus sucursales',
-            content: 'Once you have Hopscotch on your page, you\'re ready to start making your tour! The biggest part of your tour definition will probably be the tour steps.'
+            placement: 'right',
+            title: 'Tu informacion',
+            content: 'Un resumen rapido de lo que tienes en tu empresa'
         },
         {
             target: 'paso4',
             placement: 'right',
-            title: 'Otras Sucursales',
-            content: 'After you\'ve created your tour, pass it in to the startTour() method to start it.',
+            title: 'Home',
+            content: 'Puedes volver a la pagina de inicio solo presionando este boton',
             yOffset: -25
         },
         {
             target: 'paso5',
-            placement: 'top',
-            title: 'Basic step options',
-            content: 'These are the most basic step options: <b>target</b>, <b>placement</b>, <b>title</b>, and <b>content</b>. For some steps, they may be all you need.',
-            arrowOffset: 100
+            placement: 'right',
+            title: 'Tus Sucursales',
+            content: 'Puedes ver todas las sucursales que estas administrando',
         },
         {
             target: 'paso6',
-            placement: 'top',
-            title: 'Hopscotch API methods',
-            content: 'Control your tour programmatically using these methods.',
+            placement: 'right',
+            title: 'Tus Cuentas',
+            content: 'Controla todas las cuentas que tienen tus trabajadores',
         },
         {
             target: 'paso7',
-            placement: 'top',
-            title: 'This tour\'s code',
-            content: 'This is the JSON for the current tour! Pretty simple, right?',
+            placement: 'right',
+            title: 'Tus Trabajadores',
+            content: 'Puedes ver todos los trabajadores que pertenecen a tu empresa o sucursales.',
+        },
+        {
+            target: 'paso8',
+            placement: 'right',
+            title: 'Tus Sectores',
+            content: 'Puedes ver todos los sectores independiente la sucursal al que pertenezca',
+        },
+        {
+            target: 'paso9',
+            placement: 'right',
+            title: 'Todos los Cargos',
+            content: 'Ingresa cargos generales.',
+        },
+        {
+            target: 'paso10',
+            placement: 'right',
+            title: 'Documentos',
+            content: 'Puedes subir documentos siempre y cuando consideres el limite que tiene tu plan.',
+        },
+        {
+            target: 'paso11',
+            placement: 'right',
+            title: 'Solicitudes QR',
+            content: 'Debes utilizar esta funcion siempre y cuando quieras incoporar codigos qr a tus trabajadores',
         },
         {
             target: 'paso1',
             placement: 'bottom',
             title: 'Estas listo!!',
-            content: 'Now go and build some great tours!',
+            content: 'Ahora ya sabes lo basico, disfruta de RADIX!!',
             yOffset: 50,
             xOffset: -550,
             arrowOffset: 'center'
